@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+	<Operation Class="PatchOperationAdd">
+	  <xpath>/Defs/BiomeDef[defName = "TemperateForest"]/wildAnimals</xpath>
+	  <value>
+		<TKKN_giantsnail>0.04</TKKN_giantsnail>
+	  </value>
+	</Operation> 
+	
+	<Operation Class="PatchOperationAdd">
+	  <xpath>/Defs/BiomeDef[defName = "TropicalRainforest"]/wildAnimals</xpath>
+	  <value>
+		<TKKN_giantsnail>0.04</TKKN_giantsnail>
+	  </value>
+	</Operation> 
+
+	<Operation Class="PatchOperationAdd">
+	  <xpath>/Defs/BiomeDef[defName = "TropicalSwamp"]/wildAnimals</xpath>
+	  <value>
+		<TKKN_giantsnail>0.04</TKKN_giantsnail>
+		<TKKN_crab>0.04</TKKN_crab>
+	  </value>
+	</Operation> 
+	
+		<Operation Class="PatchOperationAdd">
+	  <xpath>/Defs/BiomeDef[defName = "AridShrubland"]/baseWeatherCommonalities</xpath>
+	  <value>
+		  <TKKN_DryDustStorm>1</TKKN_DryDustStorm>
+		  <TKKN_DustStorm>1</TKKN_DustStorm>
+	  </value>
+	</Operation> 
+
+	<Operation Class="PatchOperationAdd">
+	  <xpath>/Defs/BiomeDef[defName = "Desert"]/baseWeatherCommonalities</xpath>
+	  <value>
+		  <TKKN_DryDustStorm>2</TKKN_DryDustStorm>
+		  <TKKN_DustStorm>2</TKKN_DustStorm>
+	  </value>
+	</Operation> 
+
+	<Operation Class="PatchOperationAdd">
+	  <xpath>/Defs/BiomeDef[defName = "ExtremeDesert"]/baseWeatherCommonalities</xpath>
+	  <value>
+		  <TKKN_DryDustStorm>4</TKKN_DryDustStorm>
+		  <TKKN_DustStorm>2</TKKN_DustStorm>
+	  </value>
+	</Operation> 
+	
+	
+</Patch>

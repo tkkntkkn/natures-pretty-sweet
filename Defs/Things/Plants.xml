@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+   <ThingDef ParentName="TreeBase">
+      <defName>TKKN_PlantTreeRedwood</defName>
+      <label>redwood</label>
+      <description>A huge, very slow growing tree. Its roots are shallow, and when it gets too large, it topples over. \n\n Yields red wood, which is valuable and rare.</description>
+      <graphicData>
+         <texPath>TKKN_NPS/Things/Plant/Redwoods</texPath>
+         <graphicClass>Graphic_Random</graphicClass>
+         <shadowData>
+            <volume>(0.55, 0.2, 0.2)</volume>
+            <offset>(0,0,-0.25)</offset>
+         </shadowData>
+      </graphicData>
+      <altitudeLayer>BuildingOnTop</altitudeLayer>
+      <statBases>
+         <Beauty>15</Beauty>
+      </statBases>
+      <blockLight>true</blockLight>
+      <plant>
+         <sowTags />
+         <fertilityMin>0.8</fertilityMin>
+         <harvestedThingDef>RedWoodLog</harvestedThingDef>
+         <fertilitySensitivity>0.8</fertilitySensitivity>
+         <growDays>300</growDays>
+         <harvestWork>3000</harvestWork>
+         <harvestYield>225</harvestYield>
+         <wildClusterSizeRange>
+            <min>2</min>
+            <max>4</max>
+         </wildClusterSizeRange>
+         <wildClusterRadius>10</wildClusterRadius>
+         <visualSizeRange>
+            <min>8</min>
+            <max>12</max>
+         </visualSizeRange>
+      </plant>
+   </ThingDef>
+   <ThingDef ParentName="TreeBase">
+      <defName>TKKN_OldGrowth_PlantTreeOak</defName>
+      <label>old growth oak tree</label>
+      <description>A strong hardwood tree. Slow-going, but its wood is very strong.</description>
+      <graphicData>
+         <texPath>Things/Plant/TreeOak</texPath>
+         <graphicClass>Graphic_Random</graphicClass>
+      </graphicData>
+      <statBases>
+         <Beauty>2</Beauty>
+      </statBases>
+      <plant>
+         <sowTags />
+         <fertilityMin>0.4</fertilityMin>
+         <growDays>60</growDays>
+         <leaflessGraphicPath>Things/Plant/TreeOak_Leafless</leaflessGraphicPath>
+         <harvestWork>1000</harvestWork>
+         <harvestYield>75</harvestYield>
+         <wildClusterSizeRange>
+            <min>2</min>
+            <max>4</max>
+         </wildClusterSizeRange>
+         <wildClusterRadius>5</wildClusterRadius>
+         <visualSizeRange>
+            <min>2</min>
+            <max>4</max>
+         </visualSizeRange>
+      </plant>
+   </ThingDef>
+   <ThingDef ParentName="TreeBase">
+      <defName>TKKN_OldGrowth_PlantTreeHazelnut</defName>
+      <label>old growth hazelnut tree</label>
+      <description>A multi-stemmed woodland shrub with soft, saw-toothed, velvety leaves.</description>
+      <graphicData>
+         <texPath>TKKN_NPS/Things/Plant/HazelOldGrowth</texPath>
+         <graphicClass>Graphic_Random</graphicClass>
+      </graphicData>
+      <statBases>
+         <Beauty>2</Beauty>
+      </statBases>
+      <plant>
+         <sowTags />
+         <growDays>60</growDays>
+         <harvestWork>1000</harvestWork>
+         <harvestYield>75</harvestYield>
+         <wildClusterSizeRange>
+            <min>2</min>
+            <max>4</max>
+         </wildClusterSizeRange>
+         <wildClusterRadius>5</wildClusterRadius>
+         <visualSizeRange>
+            <min>2</min>
+            <max>4</max>
+         </visualSizeRange>
+      </plant>
+   </ThingDef>
+   <ThingDef ParentName="TreeBase">
+      <defName>TKKN_PlantTreeHazelnut</defName>
+      <label>hazelnut tree</label>
+      <description>A multi-stemmed woodland shrub with soft, saw-toothed, velvety leaves.</description>
+      <graphicData>
+         <texPath>TKKN_NPS/Things/Plant/Hazel</texPath>
+         <graphicClass>Graphic_Random</graphicClass>
+      </graphicData>
+      <statBases>
+         <Beauty>2</Beauty>
+      </statBases>
+      <plant>
+         <growDays>60</growDays>
+         <harvestWork>1000</harvestWork>
+         <harvestYield>75</harvestYield>
+         <wildClusterSizeRange>
+            <min>2</min>
+            <max>4</max>
+         </wildClusterSizeRange>
+         <wildClusterRadius>5</wildClusterRadius>
+      </plant>
+   </ThingDef>
+   <ThingDef ParentName="TreeBase">
+      <defName>TKKN_PlantTreeRedwoodDead</defName>
+      <label>redwood</label>
+      <description>A huge, very slow growing tree. Its roots are shallow, and when it gets too large, it topples over. \n\n Yeilds red wood, which is valuable and rare.</description>
+      <graphicData>
+         <texPath>TKKN_NPS/Things/Plant/RedwoodDead</texPath>
+         <graphicClass>Graphic_Random</graphicClass>
+         <shadowData>
+            <volume>(0.55, 0.2, 0.2)</volume>
+            <offset>(0,0,-0.25)</offset>
+         </shadowData>
+      </graphicData>
+      <statBases>
+         <Beauty>15</Beauty>
+      </statBases>
+      <plant>
+         <sowTags />
+         <fertilityMin>0.7</fertilityMin>
+         <fertilitySensitivity>0.7</fertilitySensitivity>
+         <growDays>0</growDays>
+         <harvestedThingDef>RedWoodLog</harvestedThingDef>
+         <harvestWork>10000</harvestWork>
+         <harvestYield>250</harvestYield>
+         <wildClusterSizeRange>
+            <min>1</min>
+            <max>2</max>
+         </wildClusterSizeRange>
+         <wildClusterRadius>3</wildClusterRadius>
+         <visualSizeRange>
+            <min>7</min>
+            <max>9</max>
+         </visualSizeRange>
+         <topWindExposure>0</topWindExposure>
+      </plant>
+   </ThingDef>
+   <ThingDef ParentName="PlantBase">
+      <defName>TKKN_PlantFern</defName>
+      <label>fern</label>
+      <description>A soft, leafy plant that reproduces using spores.</description>
+      <statBases>
+         <MaxHitPoints>90</MaxHitPoints>
+      </statBases>
+      <pathCost>18</pathCost>
+      <graphicData>
+         <texPath>TKKN_NPS/Things/Plant/Ferns</texPath>
+         <graphicClass>Graphic_Random</graphicClass>
+      </graphicData>
+      <hideAtSnowDepth>0.5</hideAtSnowDepth>
+      <ingestible>
+         <nutrition>0.20</nutrition>
+      </ingestible>
+      <plant>
+         <fertilityMin>0.5</fertilityMin>
+         <fertilitySensitivity>0.7</fertilitySensitivity>
+         <growDays>3</growDays>
+         <reproduceMtbDays>3</reproduceMtbDays>
+         <harvestWork>60</harvestWork>
+         <maxMeshCount>9</maxMeshCount>
+         <visualSizeRange>
+            <min>0.7</min>
+            <max>0.85</max>
+         </visualSizeRange>
+         <topWindExposure>0.4</topWindExposure>
+      </plant>
+   </ThingDef>
+   <!--
+  <ThingDef ParentName="PlantBase">
+	<defName>TKKN_PlantMoss</defName>
+	<label>moss</label>
+	<description>Small, flowerless plants that grow in dense mats in shady and wet areas.</description>
+	 <statBases>
+      <MaxHitPoints>90</MaxHitPoints>
+    </statBases>
+    <pathCost>18</pathCost>
+    <graphicData>
+      <texPath>TKKN_NPS/Things/Plant/Moss</texPath>
+      <graphicClass>Graphic_Random</graphicClass>
+    </graphicData>
+    <hideAtSnowDepth>0.5</hideAtSnowDepth>
+    <ingestible>
+      <nutrition>0.20</nutrition>
+    </ingestible>
+    <plant>
+        <fertilityMin>0.5</fertilityMin>
+        <fertilitySensitivity>0.7</fertilitySensitivity>
+        <growDays>3</growDays>
+        <reproduceMtbDays>3</reproduceMtbDays>
+        <harvestWork>60</harvestWork>
+        <maxMeshCount>9</maxMeshCount>
+        <visualSizeRange>
+            <min>0.2</min>
+            <max>0.5</max>
+        </visualSizeRange>
+        <topWindExposure>0.4</topWindExposure>
+    </plant>
+  </ThingDef>
+  -->
+   <!-- ============== BASES ============ -->   
+</Defs>

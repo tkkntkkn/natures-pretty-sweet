@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+	<Operation Class="PatchOperationReplace">
+	  <xpath>/Defs/ThingDef[defName = "PlantTallGrass"]/graphicData/texPath</xpath>
+	  <value>
+		<texPath>TKKN_NPS/Things/Plant/Grass</texPath>
+	  </value>
+	</Operation> 
+    <Operation Class="PatchOperationAddModExtension">
+      <xpath>/Defs/ThingDef[defName = "PlantTallGrass"]</xpath>
+	   <value>
+         <li Class="TKKN_NPS.ThingWeatherReaction">
+          <frostGraphicPath>TKKN_NPS/Things/Plant/Frosted/GrassFrost</frostGraphicPath>
+         </li>
+      </value>
+	</Operation> 
+	
+	<Operation Class="PatchOperationReplace">
+	  <xpath>/Defs/ThingDef[defName = "PlantGrass"]/graphicData/texPath</xpath>
+	  <value>
+		<texPath>TKKN_NPS/Things/Plant/Grass</texPath>
+	  </value>
+	</Operation> 
+    <Operation Class="PatchOperationAddModExtension">
+      <xpath>/Defs/ThingDef[defName = "PlantGrass"]</xpath>
+	   <value>
+         <li Class="TKKN_NPS.ThingWeatherReaction">
+          <frostGraphicPath>TKKN_NPS/Things/Plant/Frosted/GrassFrost</frostGraphicPath>
+         </li>
+      </value>
+	</Operation> 
+
+</Patch>

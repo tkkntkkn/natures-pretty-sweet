@@ -1,0 +1,23 @@
+﻿Fix log (unpublished):
+
+Fixed not building on wet sand
+Fixed redwoods being hard to tell where to click
+Steam vents only spawn on volcanic fields
+Fixed redwood/petrified wood floors using bad material
+
+Fixed issue where tiles might turn grey
+Fixed issue where tiles might not change right
+
+
+Patch: 
+Rainbeau's bridges - boardwalks work on river deposits and around springs
+Bridges work on springs
+
+
+bridges can be built over spring water and on river deposit and beaches
+
+To Do:
+
+Bugs:
+
+Future plans/ideas:
