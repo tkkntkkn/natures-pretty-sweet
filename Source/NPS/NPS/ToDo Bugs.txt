@@ -21,3 +21,30 @@ To Do:
 Bugs:
 
 Future plans/ideas:
+
+
+
+
+
+			/* MAKE THIS A WEATHER
+			#region heat
+			Thing overlayHeat = (Thing)(from t in c.GetThingList(this.map)
+										where t.def.defName == "TKKN_HeatWaver"
+										select t).FirstOrDefault<Thing>();
+			if (this.checkIfHot(c))
+			{
+				if (overlayHeat == null && Settings.showHot)
+				{
+					Thing heat = ThingMaker.MakeThing(ThingDefOf.TKKN_HeatWaver, null);
+					GenSpawn.Spawn(heat, c, map);
+				}
+			}
+			else
+			{
+				if (overlayHeat != null)
+				{
+					overlayHeat.Destroy();
+				}
+			}
+			#endregion
+			*/

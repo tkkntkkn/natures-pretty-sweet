@@ -42,6 +42,7 @@ namespace TKKN_NPS
 		
 
 		public static HashSet<string> modsPatched = new HashSet<string>();
+		public static ModuleBase frostNoise;
 
 
 		/* STANDARD STUFF */
@@ -62,7 +63,7 @@ namespace TKKN_NPS
 			//environmental changes
 			if (Settings.doWeather)
 			{
-				this.checkRandomTerrain();
+				// this.checkRandomTerrain(); triggering on atmosphere affects
 				this.doTides();
 				this.doFloods();
 			}
@@ -316,23 +317,31 @@ namespace TKKN_NPS
 			TerrainDef terrain = c.GetTerrain(map);
 			foreach (ElementSpawnDef element in DefDatabase<ElementSpawnDef>.AllDefs)
 			{
+				bool canSpawn = true;
 				foreach (string biome in element.forbiddenBiomes)
 				{
 					if (map.Biome.defName == biome)
 					{
-						continue;
+						canSpawn = false;
+						break;
 					}
 				}
 
+				
 				foreach (string biome in element.allowedBiomes)
 				{
 					if (map.Biome.defName != biome)
 					{
-						continue;
+						canSpawn = false;
+						break;
 					}
 				}
+				if (!canSpawn)
+				{
+					continue;
+				}
+				Log.Error(element.thingDef.defName + " " +map.Biome.defName);
 
-				bool canSpawn = false;
 
 				foreach (string allowed in element.terrainValidationAllowed)
 				{
@@ -497,6 +506,8 @@ namespace TKKN_NPS
 
 
 		#region effect by terrain
+		/*
+		 * //MOVED TO STEADYATMOSPHEREEFFECTS
 		public void checkRandomTerrain() {
 			int num = Mathf.RoundToInt((float)this.map.Area * 0.0001f);
 			int area = this.map.Area;
@@ -513,9 +524,14 @@ namespace TKKN_NPS
 			}
 
 		}
+		*/
 
 		public void doCellEnvironment(IntVec3 c)
 		{
+			if (!Watcher.cellWeatherAffects.ContainsKey(c))
+			{
+				return;
+			}
 			cellData cell = Watcher.cellWeatherAffects[c];
 
 			TerrainDef currentTerrain = c.GetTerrain(this.map);
@@ -603,11 +619,20 @@ namespace TKKN_NPS
 			#region Frost
 			if (isCold)
 			{
-				
+				//handle frost based on snowing
+				if (!roofed && this.map.weatherManager.SnowRate > 0.001f)
+				{
+					this.map.GetComponent<FrostGrid>().AddDepth(c, this.map.weatherManager.SnowRate * -.3f);
+				}
+				else
+				{
+					CreepFrostAt(c, 0.46f * .3f, map);
+				}
 			}
 			else
 			{
-
+				float frosty = this.map.mapTemperature.OutdoorTemp * -.03f;
+				this.map.GetComponent<FrostGrid>().AddDepth(c, frosty);
 			}
 
 
@@ -752,6 +777,40 @@ namespace TKKN_NPS
 
 			return isHot;
 		}
+
+		public static void CreepFrostAt(IntVec3 c, float baseAmount, Map map)
+		{
+			if (frostNoise == null)
+			{
+				frostNoise = new Perlin(0.039999999105930328, 2.0, 0.5, 5, Rand.Range(0, 651431), QualityMode.Medium);
+			}
+			float num = frostNoise.GetValue(c);
+			num += 1f;
+			num *= 0.5f;
+			if (num < 0.5f)
+			{
+				num = 0.5f;
+			}
+			float depthToAdd = baseAmount * num;
+
+			map.GetComponent<FrostGrid>().AddDepth(c, depthToAdd);
+		}
+
+		/*
+		public static float MeltAmountAt(float temperature)
+		{
+			if (temperature < 0f)
+			{
+				return 0f;
+			}
+			if (temperature < 10f)
+			{
+				return temperature * temperature * 0.0058f * 0.1f;
+			}
+			return temperature * 0.0058f;
+		}
+		*/
+
 
 		public string getFloodType()
 		{

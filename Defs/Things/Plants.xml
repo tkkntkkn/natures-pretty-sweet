@@ -117,7 +117,7 @@
    <ThingDef ParentName="TreeBase">
       <defName>TKKN_PlantTreeRedwoodDead</defName>
       <label>redwood</label>
-      <description>A huge, very slow growing tree. Its roots are shallow, and when it gets too large, it topples over. \n\n Yeilds red wood, which is valuable and rare.</description>
+      <description>A huge, very slow growing tree. This one has toppled over due to its weight. \n\n Yeilds red wood, which is valuable and rare.</description>
       <graphicData>
          <texPath>TKKN_NPS/Things/Plant/RedwoodDead</texPath>
          <graphicClass>Graphic_Random</graphicClass>
