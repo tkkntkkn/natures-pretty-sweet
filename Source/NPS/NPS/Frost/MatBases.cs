@@ -13,8 +13,9 @@ namespace TKKN_NPS
 			get {
 				Material frost = new Material(Verse.MatBases.Snow);
 				frost.mainTexture = MatBases.frostTexture;
+				Log.Error(frost.shader.name);
 				/*
-				Log.ErrorOnce(frost.shader.name, 123);
+				
 				Color col = frost.color;
 				col.a = .5f;
 				frost.color = col;
@@ -23,15 +24,15 @@ namespace TKKN_NPS
 				/*
 				Material frost = new Material(Verse.MatBases.Snow);
 				//			subMesh.material.SetTexture("_TKKNFrostTex", ContentFinder<Texture2D>.Get(GenFilePaths.TexturesFolder+"TKKN_NPS/Surfaces/Ice.png", true));
-				frost.mainTexture = ContentFinder<Texture2D>.Get("TKKN_NPS/Temperature/Frost");
+				frost.mainTexture = Content/Finder<Texture2D>.Get("TKKN_NPS/Temperature/Frost");
 				frost.shader = Shader.Find(Verse.ShaderType.Transparent);
 			//	Color col = frost.mainTexture.color;
 			//	col.a = .5f;
 			//	frost.mainTexture.color = col;
 
-	*/
-			return frost;
+			*/
+				return frost;
+			}
 		}
-	}
 	}
 }

@@ -17,7 +17,6 @@ namespace TKKN_NPS
 			harmony.PatchAll(Assembly.GetExecutingAssembly());
 
 			MapFieldInfo = typeof(SteadyAtmosphereEffects).GetField("map", BindingFlags.NonPublic | BindingFlags.Instance);
-			MapFieldInfoPlant = typeof(Plant).GetField("map", BindingFlags.NonPublic | BindingFlags.Instance);
 		}
 	}
 }

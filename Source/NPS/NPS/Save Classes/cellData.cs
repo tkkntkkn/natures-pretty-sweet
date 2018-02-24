@@ -12,7 +12,7 @@ namespace TKKN_NPS
 	{
 		public IntVec3 location;
 		public Map map;
-		public int howWet = -1;
+		public int howWet = 0;
 		public float temperature = -9999;
 		public float frostLevel = 0;
 		public TerrainDef baseTerrain;
@@ -219,7 +219,23 @@ namespace TKKN_NPS
 				this.leaveLoot();
 			}
 		}
+		public void doFrostOverlay(string action)
+		{
+			//KEEPING TO REMOVE OLD WAY OF DOING FROST
+			Thing overlayIce = (Thing)(from t in location.GetThingList(this.map)
+									   where t.def.defName == "TKKN_IceOverlay"
+									   select t).FirstOrDefault<Thing>();
+			if (overlayIce != null)
+			{
+				if (isFrozen)
+				{
+					isMelt = true;
+				}
+				overlayIce.Destroy();
+			}
 
+		}
+		/*
 		public void doFrostOverlay(string action) {
 			if (action == "add")
 			{
@@ -251,6 +267,7 @@ namespace TKKN_NPS
 
 			}
 		}
+		*/
 
 		private void changeTerrain(TerrainDef terrain)
 		{

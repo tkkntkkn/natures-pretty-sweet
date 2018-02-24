@@ -19,31 +19,71 @@ namespace TKKN_NPS
 			[HarmonyPostfix]
 			public static void Postfix(Plant __instance, ref Graphic __result)
 			{
-				string id = __instance.def.defName + "frost";
+				//return;
+				if (!Settings.showCold)
+				{
+					return;
+				}
+				string id = __instance.def.defName;
+
 				if (!__instance.def.HasModExtension<ThingWeatherReaction>())
 				{
 					return;
 				}
+
 				ThingWeatherReaction mod = __instance.def.GetModExtension<ThingWeatherReaction>();
 
-				if (__instance.Map.GetComponent<FrostGrid>().GetDepth(__instance.Position) <= 0.4f)
+				string path = "";
+
+				//get snow graphic
+				if (__instance.Map.snowGrid.GetDepth(__instance.Position) >= 0.5f)
 				{
+					if (!String.IsNullOrEmpty(mod.snowGraphicPath))
+					{
+						id += "snow";
+						path = mod.snowGraphicPath;
+					}
+				} else if (__instance.Map.GetComponent<FrostGrid>().GetDepth(__instance.Position) >= 0.6f)
+				{
+					if (!String.IsNullOrEmpty(mod.frostGraphicPath))
+					{
+						id += "frost";
+						path = mod.frostGraphicPath;
+					}
+				}
+
+				if (String.IsNullOrEmpty(path)) {
 					return;
 				}
-				//if it's not leafless
-				if (__instance.def.plant.leaflessGraphic != __result)
+				//if it's leafless
+				if (__instance.def.plant.leaflessGraphic == __result)
 				{
-					if (Watcher.graphicHolder.ContainsKey(id))
-					{
-						//only load the image once.
-						__result = Watcher.graphicHolder[id];
-					}
-					else
-					{
-						Watcher.graphicHolder.Add(id, GraphicDatabase.Get(__instance.def.graphicData.graphicClass, mod.frostGraphicPath, __instance.def.graphic.Shader, __instance.def.graphicData.drawSize, __instance.def.graphicData.color, __instance.def.graphicData.colorTwo));
-					}
+					id += "leafless";
+					path = path.Replace("Frosted", "Frosted/Leafless");
+					path = path.Replace("Snow", "Snow/Leafless");
+					path += "_Leafless";
 				}
+				else if(__instance.def.blockWind)
+				{
+					//make it so snow doesn't fall under the tree until it's leafless.
+				//	__instance.Map.snowGrid.AddDepth(__instance.Position, -.05f);
+						
+				}
+
+
+				if (!Watcher.graphicHolder.ContainsKey(id))
+				{
+					//only load the image once.
+					Watcher.graphicHolder.Add(id, GraphicDatabase.Get(__instance.def.graphicData.graphicClass, path, __instance.def.graphic.Shader, __instance.def.graphicData.drawSize, __instance.def.graphicData.color, __instance.def.graphicData.colorTwo));
+				}
+				if (Watcher.graphicHolder.ContainsKey(id))
+				{
+					//only load the image once.
+					__result = Watcher.graphicHolder[id];
+				}
+
 			}
+
 		}
 	}
 

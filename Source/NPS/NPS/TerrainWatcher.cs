@@ -39,11 +39,12 @@ namespace TKKN_NPS
 		public int totalPuddles = 0;
 
 		public static Dictionary<string, Graphic> graphicHolder = new Dictionary<string, Graphic>();
-		
+		public static float[] frostGrid;
 
 		public static HashSet<string> modsPatched = new HashSet<string>();
 		public static ModuleBase frostNoise;
 
+		public static Map mapRef;
 
 		/* STANDARD STUFF */
 		public Watcher(Map map) : base(map)
@@ -55,6 +56,7 @@ namespace TKKN_NPS
 		{
 			this.ticks++;
 			base.MapComponentTick();
+			Watcher.mapRef = this.map;
 			//run through saved terrain and check it
 			this.checkThingsforLava();
 			//run through pawns and effect them
@@ -69,6 +71,7 @@ namespace TKKN_NPS
 			}
 		}
 
+	
 		public override void ExposeData()
 		{
 			base.ExposeData();
@@ -89,6 +92,8 @@ namespace TKKN_NPS
 
 		}
 
+
+
 		public override void FinalizeInit()
 		{
 			
@@ -106,22 +111,19 @@ namespace TKKN_NPS
 		public void rebuildCellLists()
 		{
 
-
-
 			if (Settings.regenCells == true)
 			{
 				Watcher.regenCellLists = Settings.regenCells;
 			}
 
 
-			#region devonly
 			/*
+			#region devonly
 			Watcher.regenCellLists = true;
 			Log.Error("DEV STUFF IS ON");
 			Watcher.cellWeatherAffects = new Dictionary<IntVec3, cellData>();
-			// */
 			#endregion
-
+			*/
 
 			if (Watcher.regenCellLists)
 			{
@@ -340,7 +342,7 @@ namespace TKKN_NPS
 				{
 					continue;
 				}
-				Log.Error(element.thingDef.defName + " " +map.Biome.defName);
+//				Log.Error(element.thingDef.defName + " " +map.Biome.defName);
 
 
 				foreach (string allowed in element.terrainValidationAllowed)
@@ -586,7 +588,7 @@ namespace TKKN_NPS
 
 			#region Rain
 
-			if (Settings.showRain && !roofed && this.map.weatherManager.curWeather.rainRate > 0f)
+			if (Settings.showRain && !roofed && this.map.weatherManager.curWeather.rainRate > .001f)
 			{
 				if (Watcher.floodThreat < 1090000) {
 					Watcher.floodThreat += 1 + 2 * (int)Math.Round(this.map.weatherManager.curWeather.rainRate);
@@ -617,12 +619,18 @@ namespace TKKN_NPS
 			}
 
 			#region Frost
+
+//			if (c.x == 140)
+//			{
+			//	Log.Error("Cell temp " + cell.temperature.ToString() + " frosty: " + (cell.temperature + -.025f).ToString() + " current depth" +this.map.GetComponent<FrostGrid>().GetDepth(c).ToString());
+//			}
+//			Log.Error(c.ToString() + " ...... roofed:" + roofed.ToString() + " isCold:" + isCold.ToString() + " temp: " + this.map.mapTemperature.OutdoorTemp.ToString());
 			if (isCold)
 			{
 				//handle frost based on snowing
 				if (!roofed && this.map.weatherManager.SnowRate > 0.001f)
 				{
-					this.map.GetComponent<FrostGrid>().AddDepth(c, this.map.weatherManager.SnowRate * -.3f);
+					this.map.GetComponent<FrostGrid>().AddDepth(c, this.map.weatherManager.SnowRate * -.01f);
 				}
 				else
 				{
@@ -631,8 +639,12 @@ namespace TKKN_NPS
 			}
 			else
 			{
-				float frosty = this.map.mapTemperature.OutdoorTemp * -.03f;
+				float frosty = cell.temperature  * -.025f;
+//				float frosty = this.map.mapTemperature.OutdoorTemp * -.03f;
 				this.map.GetComponent<FrostGrid>().AddDepth(c, frosty);
+				if (this.map.GetComponent<FrostGrid>().GetDepth(c) > .3f) {
+					cell.isMelt = true;
+				}
 			}
 
 
@@ -712,7 +724,10 @@ namespace TKKN_NPS
 			if (!Settings.showCold) {
 				return false;
 			}
-
+			if (!Watcher.cellWeatherAffects.ContainsKey(c))
+			{
+				return false;
+			}
 			cellData cell = Watcher.cellWeatherAffects[c];
 			Room room = c.GetRoom(this.map, RegionType.Set_All);
 			bool flag2 = room != null && room.UsesOutdoorTemperature;
@@ -1072,6 +1087,7 @@ namespace TKKN_NPS
 				n++;
 			}
 		}
+	
 
 		private void checkPawns()
 		{
@@ -1083,6 +1099,27 @@ namespace TKKN_NPS
 				{
 					continue;
 				}
+
+				#region paths
+				if (pawn.Position.InBounds(map))
+				{
+					//damage plants and remove snow/frost where they are. This will hopefully generate paths as pawns walk :)
+					if (this.checkIfCold(pawn.Position))
+					{
+						map.GetComponent<FrostGrid>().AddDepth(pawn.Position, (float)-.05);
+						map.snowGrid.AddDepth(pawn.Position, (float)-.2);
+					}
+
+					List<Thing> things = pawn.Position.GetThingList(map);
+					foreach (Thing thing in things.ToList())
+					{
+						if (thing.def.category == ThingCategory.Plant && thing.def.altitudeLayer == AltitudeLayer.LowPlant)
+						{
+							thing.TakeDamage(new DamageInfo(DamageDefOf.Rotting, 99999, -1f, null, null, null, DamageInfo.SourceCategory.ThingOrUnknown));
+						}
+					}
+				}
+				#endregion
 
 				TerrainDef terrain = pawn.Position.GetTerrain(map);
 				if ((terrain.defName == "TKKN_SaltField" || terrain.defName == "TKKN_Salted_Earth") && pawn.def.defName == "TKKN_giantsnail")

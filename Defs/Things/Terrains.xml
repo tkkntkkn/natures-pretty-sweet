@@ -320,6 +320,7 @@
       <scatterType>SoftDry</scatterType>
       <terrainFilthDef />
       <fertility>0</fertility>
+      <holdSnow>false</holdSnow>
       <takeFootprints>False</takeFootprints>
       <tags>
          <li>Frozen</li>

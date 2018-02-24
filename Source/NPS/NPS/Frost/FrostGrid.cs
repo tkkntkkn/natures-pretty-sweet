@@ -8,7 +8,7 @@ namespace TKKN_NPS
 	{
 		private Map map;
 
-		private float[] depthGrid;
+		public float[] depthGrid;
 
 		private double totalDepth;
 
@@ -37,25 +37,6 @@ namespace TKKN_NPS
 			this.depthGrid = new float[map.cellIndices.NumGridCells];
 		}
 
-		public void ExposeData()
-		{
-			MapExposeUtility.ExposeUshort(this.map, (IntVec3 c) => FrostGrid.FrostFloatToShort(this.GetDepth(c)), delegate (IntVec3 c, ushort val)
-			{
-				this.depthGrid[this.map.cellIndices.CellToIndex(c)] = FrostGrid.FrostShortToFloat(val);
-			}, "depthGrid");
-		}
-
-		private static ushort FrostFloatToShort(float depth)
-		{
-			depth = Mathf.Clamp(depth, 0f, 1f);
-			depth *= 65535f;
-			return (ushort)Mathf.RoundToInt(depth);
-		}
-
-		private static float FrostShortToFloat(ushort depth)
-		{
-			return (float)depth / 65535f;
-		}
 
 		private bool CanHaveFrost(int ind)
 		{

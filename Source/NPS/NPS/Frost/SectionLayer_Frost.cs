@@ -34,14 +34,13 @@ namespace TKKN_NPS
 
 		public override void Regenerate()
 		{
-			LayerSubMesh subMesh = base.GetSubMesh(Verse.MatBases.Snow);
-			//LayerSubMesh subMesh = base.GetSubMesh(MatBases.Frost); // for some reason the custom one was causing a huge memory issue :(
+	    	LayerSubMesh subMesh = base.GetSubMesh(Verse.MatBases.Snow);
+	//		LayerSubMesh subMesh = base.GetSubMesh(MatBases.Frost); // for some reason the custom one was causing a huge memory issue and rendering in giant squares :(
+
 			if (subMesh.mesh.vertexCount == 0)
 			{
-
 //				SectionLayerGeometryMaker_Solid.MakeBaseGeometry(this.section, subMesh, AltitudeLayer.MoteLow);
-				SectionLayerGeometryMaker_Solid.MakeBaseGeometry(this.section, subMesh, AltitudeLayer.ItemImportant); //so frost forms over items/plants
-
+				SectionLayerGeometryMaker_Solid.MakeBaseGeometry(this.section, subMesh, AltitudeLayer.LayingPawn); //so frost forms over items/plants
 			}
 			subMesh.Clear(MeshParts.Colors);
 

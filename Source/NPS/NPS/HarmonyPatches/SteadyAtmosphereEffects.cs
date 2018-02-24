@@ -21,11 +21,14 @@ namespace TKKN_NPS
 			{
 				return;
 			}
+
 			Map map = HarmonyMain.MapFieldInfo.GetValue(__instance) as Map;
 			if (map == null)
 			{
-				return;
+				map = Watcher.mapRef; // fix because for some reason the above method wasn't returning the whole map
 			}
+
+
 			Watcher watcher = map.GetComponent<Watcher>();
 			watcher.doCellEnvironment(c);
 
