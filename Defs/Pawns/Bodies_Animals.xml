@@ -23,7 +23,7 @@
       <label>head</label>
       <hitPoints>200</hitPoints>
       <oldInjuryBaseChance>0</oldInjuryBaseChance>
-      <skinCovered>false</skinCovered>
+      <skinCovered>true</skinCovered>
       <tags>
          <li>BreathingPathway</li>
          <li>EatingPathway</li>
@@ -36,7 +36,7 @@
       <hitPoints>3000</hitPoints>
       <oldInjuryBaseChance>0</oldInjuryBaseChance>
       <skinCovered>false</skinCovered>
-      <isAlive>false</isAlive>
+      <isAlive>true</isAlive>
       <bleedingRateMultiplier>0</bleedingRateMultiplier>
    </BodyPartDef>
    <BodyPartDef>
@@ -207,6 +207,7 @@
             <li>
                <def>Snailhead</def>
                <height>Top</height>
+			   <depth>Outside</depth>
                <coverage>0.65</coverage>
                <groups>
                   <li>HeadAttackTool</li>
@@ -220,18 +221,22 @@
                   <li>
                      <def>LeftEye</def>
                      <coverage>0.15</coverage>
+					 <depth>Outside</depth>
                   </li>
                   <li>
                      <def>RightEye</def>
                      <coverage>0.15</coverage>
+					 <depth>Outside</depth>
                   </li>
                   <li>
                      <def>LeftTentacle</def>
                      <coverage>0.10</coverage>
+					 <depth>Outside</depth>
                   </li>
                   <li>
                      <def>RightTentacle</def>
                      <coverage>0.10</coverage>
+					 <depth>Outside</depth>
                   </li>
                   <li>
                      <def>InsectMouth</def>
@@ -239,10 +244,17 @@
                      <groups>
                         <li>Mouth</li>
                      </groups>
+					 <depth>Outside</depth>
                   </li>
                </parts>
             </li>
          </parts>
       </corePart>
    </BodyDef>
-</Defs>
+   
+   
+
+   
+  
+   
+   </Defs>

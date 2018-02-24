@@ -444,25 +444,35 @@
    </PawnKindDef>
    <ThingDef ParentName="AnimalThingBase">
       <defName>TKKN_giantsnail</defName>
-      <label>giant snail</label>
+      <label>giant snail s</label>
       <description>Slow moving, armoured herbivores. Salt is deadly to them.</description>
-      <statBases>
-         <MoveSpeed>.1</MoveSpeed>
-         <ComfyTemperatureMin>5</ComfyTemperatureMin>
-         <MarketValue>3275</MarketValue>
-         <LeatherAmount>0</LeatherAmount>
-      </statBases>
+	   <statBases>
+		  <MoveSpeed>.1</MoveSpeed>
+		  <ArmorRating_Blunt>0.1</ArmorRating_Blunt>
+		  <ArmorRating_Sharp>0.4</ArmorRating_Sharp>
+		  <ComfyTemperatureMin>0</ComfyTemperatureMin>
+		  <MarketValue>100</MarketValue>
+		  <LeatherAmount>0</LeatherAmount>
+		</statBases>
       <tools>
-         <li>
-            <label>head</label>
-            <capacities>
-               <li>Blunt</li>
-            </capacities>
-            <power>1</power>
-            <cooldownTime>3</cooldownTime>
-            <linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
-            <commonality>0.2</commonality>
-         </li>
+           <li>
+        <capacities>
+          <li>Bite</li>
+        </capacities>
+        <power>7</power>
+        <cooldownTime>2.5</cooldownTime>
+        <linkedBodyPartsGroup>Mouth</linkedBodyPartsGroup>
+      </li>
+      <li>
+        <label>head</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>4</power>
+        <cooldownTime>1.65</cooldownTime>
+        <linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+        <commonality>0.2</commonality>
+      </li>
       </tools>
       <comps>
          <li Class="CompProperties_EggLayer">
@@ -473,49 +483,51 @@
             <eggCountRange>10</eggCountRange>
          </li>
       </comps>
-      <race>
-         <body>Snail</body>
-         <baseHungerRate>0.1</baseHungerRate>
-         <baseBodySize>1.5</baseBodySize>
-         <baseHealthScale>0</baseHealthScale>
-         <foodType>VegetarianRoughAnimal</foodType>
-         <trainableIntelligence>None</trainableIntelligence>
-         <wildness>0</wildness>
-         <gestationPeriodDays>7</gestationPeriodDays>
-         <mateMtbHours>8</mateMtbHours>
-         <litterSizeCurve>
-            <points>
-               <li>(0.99, 0)</li>
-               <li>(1, 1)</li>
-               <li>(1.01, 0)</li>
-            </points>
-         </litterSizeCurve>
-         <lifeExpectancy>30</lifeExpectancy>
-         <lifeStageAges>
-            <li>
-               <def>AnimalBabyTiny</def>
-               <minAge>0</minAge>
-            </li>
-            <li>
-               <def>AnimalJuvenile</def>
-               <minAge>0.12</minAge>
-            </li>
-            <li>
-               <def>AnimalAdult</def>
-               <minAge>0.3</minAge>
-               <soundWounded>Pawn_Cobra_Wounded</soundWounded>
-               <soundDeath>Pawn_Cobra_Wounded</soundDeath>
-               <soundCall>Pawn_Cobra_Wounded</soundCall>
-               <soundAngry>Pawn_Cobra_Wounded</soundAngry>
-            </li>
-         </lifeStageAges>
-         <soundMeleeHitPawn>Pawn_Melee_SmallScratch_HitPawn</soundMeleeHitPawn>
-         <soundMeleeHitBuilding>Pawn_Melee_SmallScratch_HitBuilding</soundMeleeHitBuilding>
-         <soundMeleeMiss>Pawn_Melee_SmallScratch_Miss</soundMeleeMiss>
-      </race>
-      <tradeTags>
-         <li>StandardAnimal</li>
-      </tradeTags>
+        <race>
+      <body>Snail</body>
+      <baseBodySize>0.2</baseBodySize>
+      <baseHungerRate>0.10</baseHungerRate>
+      <baseHealthScale>0.4</baseHealthScale>
+	  
+	 <foodType>VegetarianRoughAnimal</foodType>
+	 <trainableIntelligence>None</trainableIntelligence>
+	 <wildness>0.95</wildness>
+	 <gestationPeriodDays>7</gestationPeriodDays>
+	 <mateMtbHours>8</mateMtbHours>
+	 <litterSizeCurve>
+		<points>
+		   <li>(0.99, 0)</li>
+		   <li>(1, 1)</li>
+		   <li>(1.01, 0)</li>
+		</points>
+	 </litterSizeCurve>
+	 <lifeExpectancy>30</lifeExpectancy>
+
+      <lifeStageAges>
+        <li>
+          <def>EusocialInsectLarva</def>
+          <minAge>0</minAge>
+        </li>
+        <li>
+          <def>EusocialInsectJuvenile</def>
+          <minAge>0.03</minAge>
+        </li>
+        <li>
+          <def>EusocialInsectAdult</def>
+          <minAge>0.4</minAge>
+          <soundWounded>Pawn_Megascarab_Wounded</soundWounded>
+          <soundDeath>Pawn_Megascarab_Death</soundDeath>
+          <soundCall>Pawn_Megascarab_Call</soundCall>
+          <soundAngry>Pawn_Megascarab_Angry</soundAngry>
+        </li>
+      </lifeStageAges>
+      <soundMeleeHitPawn>Pawn_Melee_SmallScratch_HitPawn</soundMeleeHitPawn>
+      <soundMeleeHitBuilding>Pawn_Melee_SmallScratch_HitBuilding</soundMeleeHitBuilding>
+      <soundMeleeMiss>Pawn_Melee_SmallScratch_Miss</soundMeleeMiss>
+    </race>
+    <tradeTags>
+      <li>Insectoid</li>
+    </tradeTags>
    </ThingDef>
    <PawnKindDef ParentName="AnimalKindBase">
       <defName>TKKN_giantsnail</defName>
