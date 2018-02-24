@@ -185,22 +185,6 @@
       </tags>
    </TerrainDef>   
    
-   <TerrainDef ParentName="FloorBase">
-      <defName>TKKN_Salted_Earth</defName>
-      <label>salted earth</label>
-      <description>Dirt with salt mixed in. Nothing will grow here for a long time.</description>
-      <texturePath>TKKN_NPS/Surfaces/Saltedearth</texturePath>
-      <edgeType>FadeRough</edgeType>
-      <renderPrecedence>70</renderPrecedence>
-      <statBases>
-         <Beauty>-1</Beauty>
-         <WorkToBuild>100</WorkToBuild>
-      </statBases>
-      <costList>
-         <TKKN_Salt>2</TKKN_Salt>
-      </costList>
-      <designationHotKey>Misc6</designationHotKey>
-   </TerrainDef>
    <TerrainDef>
       <defName>TKKN_SoilWet</defName>
       <label>Wet Soil</label>
@@ -345,6 +329,34 @@
          <li>Frozen</li>
       </tags>
    </TerrainDef>
+      <TerrainDef>
+      <defName>TKKN_WetMossyTerrain</defName>
+      <label>wet lichen-covered dirt</label>
+      <texturePath>TKKN_NPS/Surfaces/wetMossy</texturePath>
+      <edgeType>FadeRough</edgeType>
+      <renderPrecedence>350</renderPrecedence>
+      <pathCost>4</pathCost>
+      <statBases>
+         <Beauty>-1</Beauty>
+         <Cleanliness>-1</Cleanliness>
+      </statBases>
+      <scatterType>SoftDry</scatterType>
+      <tags>
+         <li>Wet</li>
+      </tags>
+      <affordances>
+         <li>Light</li>
+         <li>Heavy</li>
+         <li>GrowSoil</li>
+         <li>Diggable</li>
+      </affordances>
+      <terrainFilthDef>FilthDirt</terrainFilthDef>
+      <fertility>1.8</fertility>
+      <takeFootprints>True</takeFootprints>
+      <acceptFilth>false</acceptFilth>
+      <avoidWander>true</avoidWander>
+      <driesTo>MossyTerrain</driesTo>
+   </TerrainDef>
    <TerrainDef>
       <defName>TKKN_RiverDeposit</defName>
       <label>river deposit</label>
@@ -375,17 +387,18 @@
       <driesTo>SoilRich</driesTo>
    </TerrainDef>
    <!-- FLOORS -->
-   <TerrainDef ParentName="TileStoneBase">
-      <defName>TKKN_TileBasalt</defName>
-      <label>basalt tile</label>
+      <TerrainDef ParentName="FlagstoneBase">
+      <defName>TKKN_FlagstoneBasalt</defName>
+      <label>basalt flagstone</label>
       <color>(50,50,50)</color>
       <costList>
          <TKKN_BlockLava>4</TKKN_BlockLava>
       </costList>
    </TerrainDef>
-   <TerrainDef ParentName="FlagstoneBase">
-      <defName>TKKN_FlagstoneBasalt</defName>
-      <label>basalt flagstone</label>
+
+   <TerrainDef ParentName="TileStoneBase">
+      <defName>TKKN_TileBasalt</defName>
+      <label>basalt tile</label>
       <color>(50,50,50)</color>
       <costList>
          <TKKN_BlockLava>4</TKKN_BlockLava>
@@ -416,6 +429,22 @@
       <costList>
          <TKKN_Amber>4</TKKN_Amber>
       </costList>
+   </TerrainDef>
+   <TerrainDef ParentName="FloorBase">
+      <defName>TKKN_Salted_Earth</defName>
+      <label>salted earth</label>
+      <description>Dirt with salt mixed in. Nothing will grow here for a long time.</description>
+      <texturePath>TKKN_NPS/Surfaces/Saltedearth</texturePath>
+      <edgeType>FadeRough</edgeType>
+      <renderPrecedence>70</renderPrecedence>
+      <statBases>
+         <Beauty>-1</Beauty>
+         <WorkToBuild>100</WorkToBuild>
+      </statBases>
+      <costList>
+         <TKKN_Salt>2</TKKN_Salt>
+      </costList>
+      <designationHotKey>Misc6</designationHotKey>
    </TerrainDef>
 
    </Defs>

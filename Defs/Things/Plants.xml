@@ -137,7 +137,7 @@
          <fertilitySensitivity>0.7</fertilitySensitivity>
          <growDays>0</growDays>
          <harvestedThingDef>RedWoodLog</harvestedThingDef>
-         <harvestWork>10000</harvestWork>
+         <harvestWork>4000</harvestWork>
          <harvestYield>250</harvestYield>
          <wildClusterSizeRange>
             <min>1</min>

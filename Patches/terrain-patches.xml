@@ -267,7 +267,7 @@
             <alertOnLoad>False</alertOnLoad>
             <tideTerrain />
             <floodTerrain />
-            <wetTerrain />
+            <wetTerrain>TKKN_WetMossyTerrain</wetTerrain>
             <freezeTerrain />
             <freezeAt />
 			<wetAt></wetAt>
