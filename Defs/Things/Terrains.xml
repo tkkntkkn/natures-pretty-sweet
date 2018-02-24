@@ -223,7 +223,7 @@
          <Cleanliness>-2</Cleanliness>
       </statBases>
       <terrainFilthDef>FilthDirt</terrainFilthDef>
-      <fertility>2.0</fertility>
+      <fertility>1.8</fertility>
       <takeFootprints>True</takeFootprints>
       <acceptFilth>True</acceptFilth>
       <avoidWander>True</avoidWander>
@@ -250,7 +250,7 @@
          <Cleanliness>-2</Cleanliness>
       </statBases>
       <terrainFilthDef>FilthDirt</terrainFilthDef>
-      <fertility>1.8</fertility>
+      <fertility>2.2</fertility>
       <takeFootprints>True</takeFootprints>
       <acceptFilth>True</acceptFilth>
       <avoidWander>True</avoidWander>
