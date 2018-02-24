@@ -35,7 +35,7 @@
   <ThingDef ParentName="BuildingBase">
     <defName>TKKN_RedwoodDead</defName>
     <label>redwood</label>
-    <description>A huge, very slow growing tree. Its roots are shallow, and when it gets too large, it topples over. \n\n Yeilds red wood, which is valuable and rare.</description>
+    <description>A huge, dead tree. Its roots are shallow, and when it gets too large, it topples over. \n\n Yeilds red wood, which is valuable and rare.</description>
       <graphicData>
          <texPath>TKKN_NPS/Things/Plant/RedwoodDead</texPath>
          <graphicClass>Graphic_Random</graphicClass>
@@ -59,14 +59,15 @@
    </costList>    
    <statBases>
       <MaxHitPoints>3000</MaxHitPoints>
-      <WorkToBuild>0</WorkToBuild>
+      <WorkToBuild>4000</WorkToBuild>
       <Flammability>0</Flammability>
       <Beauty>15</Beauty>
     </statBases>
     <fillPercent>0.15</fillPercent>
-		<building>
-			<ai_chillDestination>true</ai_chillDestination>
-		</building>
+	<building>
+		<ai_chillDestination>true</ai_chillDestination>
+		<deconstructible>true</deconstructible>
+	</building>
     <rotatable>false</rotatable>
   </ThingDef>
   
@@ -268,7 +269,7 @@
       <drawSize>(1,1)</drawSize>
     </graphicData>
     <altitudeLayer>Floor</altitudeLayer>
-		<rotatable>true</rotatable>
+	<rotatable>true</rotatable>
     <destroyable>true</destroyable>
     <useHitPoints>false</useHitPoints>
     <tickerType>Normal</tickerType>
