@@ -25,6 +25,7 @@
          <growDays>300</growDays>
          <harvestWork>3000</harvestWork>
          <harvestYield>225</harvestYield>
+         <reproduceMtbDays>30</reproduceMtbDays>
          <wildClusterSizeRange>
             <min>2</min>
             <max>4</max>
@@ -54,6 +55,7 @@
          <leaflessGraphicPath>Things/Plant/TreeOak_Leafless</leaflessGraphicPath>
          <harvestWork>1000</harvestWork>
          <harvestYield>75</harvestYield>
+         <reproduceMtbDays>20</reproduceMtbDays>
          <wildClusterSizeRange>
             <min>2</min>
             <max>4</max>
@@ -82,6 +84,7 @@
          <growDays>60</growDays>
          <harvestWork>1000</harvestWork>
          <harvestYield>75</harvestYield>
+         <reproduceMtbDays>20</reproduceMtbDays>
          <wildClusterSizeRange>
             <min>2</min>
             <max>4</max>
