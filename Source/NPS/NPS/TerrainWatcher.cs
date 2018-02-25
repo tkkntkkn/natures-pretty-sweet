@@ -643,7 +643,7 @@ namespace TKKN_NPS
 //				float frosty = this.map.mapTemperature.OutdoorTemp * -.03f;
 				this.map.GetComponent<FrostGrid>().AddDepth(c, frosty);
 				if (this.map.GetComponent<FrostGrid>().GetDepth(c) > .3f) {
-					cell.isMelt = true;
+					// cell.isMelt = true;
 				}
 			}
 
