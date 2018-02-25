@@ -1107,15 +1107,18 @@ namespace TKKN_NPS
 					if (this.checkIfCold(pawn.Position))
 					{
 						map.GetComponent<FrostGrid>().AddDepth(pawn.Position, (float)-.05);
-						map.snowGrid.AddDepth(pawn.Position, (float)-.2);
+						map.snowGrid.AddDepth(pawn.Position, (float)-.05);
 					}
 
-					List<Thing> things = pawn.Position.GetThingList(map);
-					foreach (Thing thing in things.ToList())
+					if (pawn.RaceProps.Humanlike)
 					{
-						if (thing.def.category == ThingCategory.Plant && thing.def.altitudeLayer == AltitudeLayer.LowPlant && thing.def.plant.harvestTag != "Standard")
+						List<Thing> things = pawn.Position.GetThingList(map);
+						foreach (Thing thing in things.ToList())
 						{
-							thing.TakeDamage(new DamageInfo(DamageDefOf.Rotting, 99999, -.05f, null, null, null, DamageInfo.SourceCategory.ThingOrUnknown));
+							if (thing.def.category == ThingCategory.Plant && thing.def.altitudeLayer == AltitudeLayer.LowPlant && thing.def.plant.harvestTag != "Standard")
+							{
+								thing.TakeDamage(new DamageInfo(DamageDefOf.Rotting, 99999, -.05f, null, null, null, DamageInfo.SourceCategory.ThingOrUnknown));
+							}
 						}
 					}
 				}
