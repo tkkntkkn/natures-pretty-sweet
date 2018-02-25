@@ -25,7 +25,7 @@
       <xpath>/Defs/ThingDef[defName = "PlantGrass"]</xpath>
 	   <value>
          <li Class="TKKN_NPS.ThingWeatherReaction">
-          <frostGraphicPath>TKKN_NPS/Things/Plant/Frosted/GrassFrost</frostGraphicPath>
+          <frostGraphicPath>TKKN_NPS/Things/Plant/Frosted/Grass</frostGraphicPath>
          </li>
       </value>
 	</Operation> 
