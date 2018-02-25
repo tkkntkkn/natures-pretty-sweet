@@ -1113,9 +1113,9 @@ namespace TKKN_NPS
 					List<Thing> things = pawn.Position.GetThingList(map);
 					foreach (Thing thing in things.ToList())
 					{
-						if (thing.def.category == ThingCategory.Plant && thing.def.altitudeLayer == AltitudeLayer.LowPlant)
+						if (thing.def.category == ThingCategory.Plant && thing.def.altitudeLayer == AltitudeLayer.LowPlant && thing.def.plant.harvestTag != "Standard")
 						{
-							thing.TakeDamage(new DamageInfo(DamageDefOf.Rotting, 99999, -1f, null, null, null, DamageInfo.SourceCategory.ThingOrUnknown));
+							thing.TakeDamage(new DamageInfo(DamageDefOf.Rotting, 99999, -.05f, null, null, null, DamageInfo.SourceCategory.ThingOrUnknown));
 						}
 					}
 				}
