@@ -40,6 +40,9 @@
   <TKKN_doTides_title>Do Tides</TKKN_doTides_title>
   <TKKN_doTides_text>Oceans will rise and fall</TKKN_doTides_text>
 
+  <TKKN_showTempReadout_title>Show temperature readout</TKKN_showTempReadout_title>
+  <TKKN_showTempReadout_text>Show temperature readout in the bottom left</TKKN_showTempReadout_text>
+  
   
   <TKKN_regen_title>LEAVE ALONE: Regen cell lists</TKKN_regen_title>
   <TKKN_regen_text>Regenerates terrain on the currently loaded map so you can get flooding, tides, and/or an oasis in a save made before this mod was added. After saving this setting, make a new save file for your game (in case things go badly), then reload the game. Once you reload, UNCHECK THIS BOX.</TKKN_regen_text>
