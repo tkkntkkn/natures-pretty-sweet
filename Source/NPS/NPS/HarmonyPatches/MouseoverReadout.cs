@@ -63,21 +63,23 @@ namespace TKKN_NPS
 			}
 			*/
 
+			/*
 			rect = new Rect(BotLeft.x, (float)UI.screenHeight - BotLeft.y - num, 999f, 999f);
 			string label3 = "C: x-" + c.x.ToString() + " y-" + c.y.ToString() + " z-" + c.z.ToString();
 			Widgets.Label(rect, label3);
 			num += 19f;
+			*/
 			
 			depth = Find.VisibleMap.GetComponent<FrostGrid>().GetDepth(c);
-	//		if (depth > 0.01f)
-	//		{
+			if (depth > 0.01f)
+			{
 				rect = new Rect(BotLeft.x, (float)UI.screenHeight - BotLeft.y - num, 999f, 999f);
 				FrostCategory frostCategory = FrostUtility.GetFrostCategory(depth);
 				string label2 = FrostUtility.GetDescription(frostCategory);
-			//	Widgets.Label(rect, label2);
-				Widgets.Label(rect, label2 + " " + depth.ToString());
+				Widgets.Label(rect, label2);
+			//	Widgets.Label(rect, label2 + " " + depth.ToString());
 				num += 19f;
-	//		}
+			}
 
 		}
 	}
