@@ -16,7 +16,7 @@ namespace TKKN_NPS
 			{
 				if (activeMod.Active == true && activeMod.Name == mod)
 				{
-					Watcher.modsPatched.Add(mod);
+					TKKN_Holder.modsPatched.Add(mod);
 					hasMod = true;
 					break;
 				}

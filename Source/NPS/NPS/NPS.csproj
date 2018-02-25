@@ -82,6 +82,7 @@
     <Compile Include="Elements\ThingDefOf.cs" />
     <Compile Include="TerrainWeatherReactions.cs" />
     <Compile Include="ThingWeatherReaction.cs" />
+    <Compile Include="TKKN_Holder.cs" />
     <Compile Include="WeatherOverlay.cs" />
   </ItemGroup>
   <ItemGroup>

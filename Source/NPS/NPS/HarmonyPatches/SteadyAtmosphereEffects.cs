@@ -23,10 +23,7 @@ namespace TKKN_NPS
 			}
 
 			Map map = HarmonyMain.MapFieldInfo.GetValue(__instance) as Map;
-			if (map == null)
-			{
-				map = Watcher.mapRef; // fix because for some reason the above method wasn't returning the whole map
-			}
+	
 
 
 			Watcher watcher = map.GetComponent<Watcher>();

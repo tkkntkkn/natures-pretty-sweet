@@ -23,7 +23,7 @@ namespace TKKN_NPS
 					Log.Error(id);
 					LongEventHandler.ExecuteWhenFinished(delegate
 					{
-						Watcher.graphicHolder.Add(id, GraphicDatabase.Get(parentDef.graphicData.graphicClass, mod.frostGraphicPath, parentDef.graphic.Shader, parentDef.graphicData.drawSize, parentDef.graphicData.color, parentDef.graphicData.colorTwo));
+						__instance.Map.GetComponent<Watcher>().graphicHolder.Add(id, GraphicDatabase.Get(parentDef.graphicData.graphicClass, mod.frostGraphicPath, parentDef.graphic.Shader, parentDef.graphicData.drawSize, parentDef.graphicData.color, parentDef.graphicData.colorTwo));
 					});
 				}
 			}

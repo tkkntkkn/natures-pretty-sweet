@@ -67,7 +67,9 @@ namespace TKKN_NPS
 
 		public void AddDepth(IntVec3 c, float depthToAdd)
 		{
-
+			if (!c.InBounds(this.map)) {
+				return;
+			}
 			int num = this.map.cellIndices.CellToIndex(c);
 			float num2 = this.depthGrid[num];
 			if (num2 <= 0f && depthToAdd < 0f)
@@ -91,12 +93,15 @@ namespace TKKN_NPS
 			{
 				this.depthGrid[num] = num3;
 				this.CheckVisualOrPathCostChange(c, num2, num3);
-				Watcher.cellWeatherAffects[c].frostLevel = (float)this.totalDepth;				
+								
 			}
 		}
 
 		public void SetDepth(IntVec3 c, float newDepth)
 		{
+			if (!c.InBounds(this.map)){
+				return;
+			}
 			int num = this.map.cellIndices.CellToIndex(c);
 			if (!this.CanHaveFrost(num))
 			{
@@ -113,6 +118,7 @@ namespace TKKN_NPS
 
 		private void CheckVisualOrPathCostChange(IntVec3 c, float oldDepth, float newDepth)
 		{
+			this.map.GetComponent<Watcher>().cellWeatherAffects[c].frostLevel = newDepth;
 			if (!Mathf.Approximately(oldDepth, newDepth))
 			{
 				if (Mathf.Abs(oldDepth - newDepth) > 0.15f || Rand.Value < 0.0125f)

@@ -108,7 +108,7 @@ namespace TKKN_NPS
 			this.makeAnotherAt = this.Props.howOftenToChange * 4000;
 			if (respawningAfterLoad)
 			{
-				springData savedData = Watcher.activeSprings[this.getID()];
+				springData savedData = this.parent.Map.GetComponent<Watcher>().activeSprings[this.getID()];
 				if (savedData != null)
 				{
 					this.biomeName = savedData.biomeName;
@@ -132,7 +132,7 @@ namespace TKKN_NPS
 				savedData.status = this.status;
 				savedData.width = this.width;
 
-				Watcher.activeSprings.Add(this.getID(), savedData);
+				this.parent.Map.GetComponent<Watcher>().activeSprings.Add(this.getID(), savedData);
 			}
 			this.changeShape();
 			this.CompTickRare();
@@ -211,7 +211,7 @@ namespace TKKN_NPS
 
 			if (this.Props.canReproduce && this.status == "despawn")
 			{
-				Watcher.activeSprings.Remove(this.getID());
+				this.parent.Map.GetComponent<Watcher>().activeSprings.Remove(this.getID());
 				this.parent.Destroy();
 				return;
 			}
@@ -270,7 +270,7 @@ namespace TKKN_NPS
 
 		public void saveValues()
 		{
-			springData savedData = Watcher.activeSprings[this.getID()];
+			springData savedData = this.parent.Map.GetComponent<Watcher>().activeSprings[this.getID()];
 			if (savedData != null)
 			{
 				savedData.biomeName = this.biomeName;
@@ -446,9 +446,9 @@ namespace TKKN_NPS
 				this.status = "stable";
 			}
 
-			if (Watcher.cellWeatherAffects.ContainsKey(c))
+			if (this.parent.Map.GetComponent<Watcher>().cellWeatherAffects.ContainsKey(c))
 			{
-				Watcher.cellWeatherAffects[c].baseTerrain = c.GetTerrain(this.parent.Map);
+				this.parent.Map.GetComponent<Watcher>().cellWeatherAffects[c].baseTerrain = c.GetTerrain(this.parent.Map);
 			}
 
 			this.terrainType = "";
@@ -515,11 +515,11 @@ namespace TKKN_NPS
 			base.specialCellAffects(c);
 			if (this.terrainType == "wet")
 			{
-				Watcher.lavaCellsList.Add(c);
+				this.parent.Map.GetComponent<Watcher>().lavaCellsList.Add(c);
 			}
 			else
 			{
-				Watcher.lavaCellsList.Remove(c);
+				this.parent.Map.GetComponent<Watcher>().lavaCellsList.Remove(c);
 
 			}
 		}

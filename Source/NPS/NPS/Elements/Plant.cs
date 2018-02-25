@@ -71,15 +71,15 @@ namespace TKKN_NPS
 				}
 
 
-				if (!Watcher.graphicHolder.ContainsKey(id))
+				if (!__instance.Map.GetComponent<Watcher>().graphicHolder.ContainsKey(id))
 				{
 					//only load the image once.
-					Watcher.graphicHolder.Add(id, GraphicDatabase.Get(__instance.def.graphicData.graphicClass, path, __instance.def.graphic.Shader, __instance.def.graphicData.drawSize, __instance.def.graphicData.color, __instance.def.graphicData.colorTwo));
+					__instance.Map.GetComponent<Watcher>().graphicHolder.Add(id, GraphicDatabase.Get(__instance.def.graphicData.graphicClass, path, __instance.def.graphic.Shader, __instance.def.graphicData.drawSize, __instance.def.graphicData.color, __instance.def.graphicData.colorTwo));
 				}
-				if (Watcher.graphicHolder.ContainsKey(id))
+				if (__instance.Map.GetComponent<Watcher>().graphicHolder.ContainsKey(id))
 				{
 					//only load the image once.
-					__result = Watcher.graphicHolder[id];
+					__result = __instance.Map.GetComponent<Watcher>().graphicHolder[id];
 				}
 
 			}

@@ -113,7 +113,7 @@ namespace TKKN_NPS
 
 				if (baseTerrain.defName == "TKKN_Lava")
 				{
-					Watcher.lavaCellsList.Remove(location);
+					this.map.GetComponent<Watcher>().lavaCellsList.Remove(location);
 				}
 				isWet = true;
 				rainSpawns();
@@ -123,7 +123,7 @@ namespace TKKN_NPS
 				changeTerrain(baseTerrain);
 				if (baseTerrain.defName == "TKKN_Lava")
 				{
-					Watcher.lavaCellsList.Add(location);
+					this.map.GetComponent<Watcher>().lavaCellsList.Add(location);
 				}
 				isWet = false;
 				howWet = -1;
@@ -151,7 +151,7 @@ namespace TKKN_NPS
 				changeTerrain(weather.freezeTerrain);
 				if (baseTerrain.defName == "TKKN_Lava")
 				{
-					Watcher.lavaCellsList.Remove(location);
+					this.map.GetComponent<Watcher>().lavaCellsList.Remove(location);
 				}
 			}
 			else  if (temperature > 0)
@@ -160,7 +160,7 @@ namespace TKKN_NPS
 				{
 					if (baseTerrain.defName == "TKKN_Lava")
 					{
-						Watcher.lavaCellsList.Add(location);
+						this.map.GetComponent<Watcher>().lavaCellsList.Add(location);
 					}
 					isFrozen = false;
 					isThawed = true;
@@ -221,8 +221,12 @@ namespace TKKN_NPS
 		}
 		public void doFrostOverlay(string action)
 		{
+			if (!location.InBounds(this.map))
+			{
+				return;
+			}
 			//KEEPING TO REMOVE OLD WAY OF DOING FROST
-			Thing overlayIce = (Thing)(from t in location.GetThingList(this.map)
+				Thing overlayIce = (Thing)(from t in location.GetThingList(this.map)
 									   where t.def.defName == "TKKN_IceOverlay"
 									   select t).FirstOrDefault<Thing>();
 			if (overlayIce != null)
