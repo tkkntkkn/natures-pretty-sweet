@@ -27,6 +27,7 @@
 			<wetAt></wetAt>
             <isSalty>False</isSalty>
 			<holdFrost>False</holdFrost>
+			<temperatureAdjust>-5</temperatureAdjust>
          </li>
       </value>
    </Operation>
@@ -42,6 +43,7 @@
 			<wetAt></wetAt>
             <isSalty>False</isSalty>
 			<holdFrost>False</holdFrost>
+			<temperatureAdjust>-5</temperatureAdjust>
          </li>
       </value>
    </Operation>
@@ -72,6 +74,7 @@
 			<wetAt></wetAt>
             <isSalty>False</isSalty>
 			<holdFrost>False</holdFrost>
+			<temperatureAdjust>-10</temperatureAdjust>
          </li>
       </value>
    </Operation>
@@ -87,6 +90,7 @@
 			<wetAt></wetAt>
             <isSalty>False</isSalty>
 			<holdFrost>False</holdFrost>
+			<temperatureAdjust>5</temperatureAdjust>
          </li>
       </value>
    </Operation>
@@ -102,6 +106,7 @@
 			<wetAt></wetAt>
             <isSalty>True</isSalty>
 			<holdFrost>False</holdFrost>
+			<temperatureAdjust>-5</temperatureAdjust>
          </li>
       </value>
    </Operation>

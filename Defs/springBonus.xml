@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>
 
-  <ChemicalDef>
+  <!-- ChemicalDef>
     <defName>TKKN_hotspring_chill</defName>
     <label>relaxing in hot spring</label>
 	<onGeneratedAddictedToleranceChance>0</onGeneratedAddictedToleranceChance>
-	</ChemicalDef>
-	
+</ChemicalDef -->
+
  <HediffDef>
     <defName>TKKN_hotspring_chill_out</defName>
     <hediffClass>HediffWithComps</hediffClass>

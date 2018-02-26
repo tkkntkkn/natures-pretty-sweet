@@ -733,6 +733,7 @@ namespace TKKN_NPS
 			bool isCold = false;
 			if (room == null || flag2)
 			{
+				
 				cell.temperature = this.map.mapTemperature.OutdoorTemp;
 				if (this.map.mapTemperature.OutdoorTemp < 0f)
 				{
@@ -1128,16 +1129,19 @@ namespace TKKN_NPS
 					this.burnSnails(pawn);
 					continue;
 				}
-				if (terrain.defName == "TKKN_HotSprings" || terrain.defName == "TKKN_ColdSprings" && this.ticks % 250 == 0)
+				if (this.ticks % 250 == 0 && (terrain.defName == "TKKN_HotSpringsWater" || terrain.defName == "TKKN_ColdSpringsWater"))
 				{
 					if (pawn.RaceProps.Humanlike && pawn.needs == null)
 					{
 						continue;
 					}
 					HediffDef hediffDef = new HediffDef();
-					if (terrain.defName == "TKKN_HotSprings")
+					if (terrain.defName == "TKKN_HotSpringsWater")
 					{
-						pawn.needs.rest.CurLevel++;
+						if (pawn.needs.comfort != null)
+						{
+							pawn.needs.comfort.lastComfortUseTick--;
+						}
 						hediffDef = HediffDefOf.TKKN_hotspring_chill_out;
 						if (pawn.health.hediffSet.GetFirstHediffOfDef(hediffDef) == null)
 						{
@@ -1145,14 +1149,11 @@ namespace TKKN_NPS
 							pawn.health.AddHediff(hediff, null, null);
 						}
 					}
-					if (terrain.defName == "TKKN_ColdSprings" || terrain.defName == "TKKN_OasisSpring")
+					if (terrain.defName == "TKKN_ColdSpringsWater")
 					{
-						if (pawn.needs.comfort != null)
-						{
-							pawn.needs.comfort.lastComfortUseTick--;
-						}
+						pawn.needs.rest.CurLevel++;
 						hediffDef = HediffDefOf.TKKN_coldspring_chill_out;
-						if (pawn.health.hediffSet.GetFirstHediffOfDef(hediffDef) == null)
+						if (pawn.health.hediffSet.GetFirstHediffOfDef(hediffDef, false) == null)
 						{
 							Hediff hediff = HediffMaker.MakeHediff(hediffDef, pawn, null);
 							pawn.health.AddHediff(hediff, null, null);
