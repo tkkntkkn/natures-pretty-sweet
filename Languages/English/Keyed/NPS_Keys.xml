@@ -40,8 +40,8 @@
   <TKKN_doTides_title>Do Tides</TKKN_doTides_title>
   <TKKN_doTides_text>Oceans will rise and fall</TKKN_doTides_text>
 
-  <TKKN_showTempReadout_title>Show temperature readout</TKKN_showTempReadout_title>
-  <TKKN_showTempReadout_text>Show temperature readout in the bottom left</TKKN_showTempReadout_text>
+  <TKKN_showTempReadout_title>Hide temperature readout</TKKN_showTempReadout_title>
+  <TKKN_showTempReadout_text>Hide temperature readout for cells in the bottom left</TKKN_showTempReadout_text>
   
   
   <TKKN_regen_title>LEAVE ALONE: Regen cell lists</TKKN_regen_title>

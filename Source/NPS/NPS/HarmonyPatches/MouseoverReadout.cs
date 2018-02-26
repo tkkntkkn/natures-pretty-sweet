@@ -48,27 +48,19 @@ namespace TKKN_NPS
 			{
 				num += 19f;
 			}
-			/*
-			if (Settings.showTempReadout)
+			if (!Settings.showTempReadout)
 			{
-				depth = Find.VisibleMap.GetComponent<FrostGrid>().GetDepth(c);
-				if (depth > 0.03f)
-				{
-					cellData cell = Watcher.cellWeatherAffects[c];
-					rect = new Rect(BotLeft.x, (float)UI.screenHeight - BotLeft.y - num, 999f, 999f);
-					string label2 = "Temperature: " + cell.temperature;
-					Widgets.Label(rect, label2);
-					num += 19f;
-				}
+				cellData cell = Find.VisibleMap.GetComponent<Watcher>().cellWeatherAffects[c];
+				rect = new Rect(BotLeft.x, (float)UI.screenHeight - BotLeft.y - num, 999f, 999f);
+				string label2 = "Temperature: " + cell.location.GetTemperature(Find.VisibleMap);
+				Widgets.Label(rect, label2);
+				num += 19f;
 			}
-			*/
 
-			/*
 			rect = new Rect(BotLeft.x, (float)UI.screenHeight - BotLeft.y - num, 999f, 999f);
 			string label3 = "C: x-" + c.x.ToString() + " y-" + c.y.ToString() + " z-" + c.z.ToString();
 			Widgets.Label(rect, label3);
 			num += 19f;
-			*/
 			
 			depth = Find.VisibleMap.GetComponent<FrostGrid>().GetDepth(c);
 			if (depth > 0.01f)

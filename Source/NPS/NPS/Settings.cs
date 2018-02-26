@@ -31,7 +31,7 @@ namespace TKKN_NPS
 		public static bool doWeather = true;
 		public static bool regenCells = false;
 		public static bool doTides = true;		
-		public static bool showTempReadout = true;
+		public static bool showTempReadout = true; // THIS IS BACKWARDS IT REALLY HIDES THE TEMP READOUT
 
 
 		public static bool showTempOverlay {
