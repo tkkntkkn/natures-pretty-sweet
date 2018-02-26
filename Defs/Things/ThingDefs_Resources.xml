@@ -311,7 +311,7 @@
       <soundImpactStuff>BulletImpactGround</soundImpactStuff>
       <soundMeleeHitSharp>MeleeHit_Stone</soundMeleeHitSharp>
       <soundMeleeHitBlunt>MeleeHit_Stone</soundMeleeHitBlunt>
-      <stuffAdjective>lava rock</stuffAdjective>
+      <stuffAdjective>basalt</stuffAdjective>
       <statFactors>
         <Beauty>2</Beauty>  
         <MarketValue>0.48</MarketValue>
