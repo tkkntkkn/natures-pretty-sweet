@@ -18,7 +18,7 @@ namespace TKKN_NPS
 		public bool isSalty;
 		public bool holdFrost;
 		public bool alertOnLoad;
-		
+		public float temperatureAdjust;
 
 	}
 }
