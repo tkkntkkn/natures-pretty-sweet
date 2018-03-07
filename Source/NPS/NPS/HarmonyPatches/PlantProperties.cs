@@ -12,7 +12,6 @@ namespace TKKN_NPS
 		[HarmonyPostfix]
 		public static void Postfix(Plant __instance, ThingDef parentDef)
 		{
-			Log.Error("HEREAGAIN");
 			if (parentDef.HasModExtension<ThingWeatherReaction>())
 			{
 				ThingWeatherReaction mod = parentDef.GetModExtension<ThingWeatherReaction>();
@@ -20,7 +19,6 @@ namespace TKKN_NPS
 				if (!mod.frostGraphicPath.NullOrEmpty())
 				{
 					string id = parentDef.defName + "frost";
-					Log.Error(id);
 					LongEventHandler.ExecuteWhenFinished(delegate
 					{
 						__instance.Map.GetComponent<Watcher>().graphicHolder.Add(id, GraphicDatabase.Get(parentDef.graphicData.graphicClass, mod.frostGraphicPath, parentDef.graphic.Shader, parentDef.graphicData.drawSize, parentDef.graphicData.color, parentDef.graphicData.colorTwo));
@@ -31,4 +29,3 @@ namespace TKKN_NPS
 		}
 	}
 }
-
