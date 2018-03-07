@@ -159,22 +159,23 @@
       <label>fern</label>
       <description>A soft, leafy plant that reproduces using spores.</description>
       <statBases>
-         <MaxHitPoints>90</MaxHitPoints>
+         <MaxHitPoints>85</MaxHitPoints>
       </statBases>
       <pathCost>18</pathCost>
       <graphicData>
          <texPath>TKKN_NPS/Things/Plant/Ferns</texPath>
          <graphicClass>Graphic_Random</graphicClass>
       </graphicData>
-      <hideAtSnowDepth>0.5</hideAtSnowDepth>
+      <hideAtSnowDepth>0.6</hideAtSnowDepth>
       <ingestible>
-         <nutrition>0.20</nutrition>
+         <nutrition>0.40</nutrition>
       </ingestible>
       <plant>
          <fertilityMin>0.5</fertilityMin>
          <fertilitySensitivity>0.7</fertilitySensitivity>
          <growDays>3</growDays>
          <reproduceMtbDays>3</reproduceMtbDays>
+		 <dieIfLeafless>true</dieIfLeafless>
          <harvestWork>60</harvestWork>
          <maxMeshCount>9</maxMeshCount>
          <visualSizeRange>
