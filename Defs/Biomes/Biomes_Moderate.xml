@@ -103,7 +103,8 @@
       <TKKN_ThickFog>3</TKKN_ThickFog>
     </baseWeatherCommonalities>
     <wildPlants>
-			<PlantTallGrass>2.0</PlantTallGrass>
+			<PlantGrass>1.0</PlantGrass>
+			<PlantTallGrass>1.0</PlantTallGrass>
 			<TKKN_PlantFern>0.5</TKKN_PlantFern>
 			<PlantBush>0.5</PlantBush>
 			<PlantTreeOak>0.4</PlantTreeOak>
