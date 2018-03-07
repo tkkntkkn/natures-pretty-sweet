@@ -55,8 +55,7 @@
     <Compile Include="Elements\ElementSpawnDefOf.cs" />
     <Compile Include="Elements\ElementSpawnDef.cs" />
     <Compile Include="Elements\Building_SteamVent.cs" />
-    <Compile Include="Elements\Plant.cs" />
-    <Compile Include="Elements\PlantProperties.cs" />
+    <Compile Include="HarmonyPatches\Plant.cs" />
     <Compile Include="Frost\FrostCategory.cs" />
     <Compile Include="Frost\FrostGrid.cs" />
     <Compile Include="Frost\FrostUtility.cs" />
@@ -64,6 +63,8 @@
     <Compile Include="Frost\SectionLayer_Frost.cs" />
     <Compile Include="Generation\SectionLayerGeometryMaker_Solid.cs" />
     <Compile Include="HarmonyPatches\HarmonyPatch.cs" />
+    <Compile Include="HarmonyPatches\Thing.cs" />
+    <Compile Include="HarmonyPatches\PlantProperties.cs" />
     <Compile Include="HediffDefOf.cs" />
     <Compile Include="Compatability\PatchOperationFindModByName.cs" />
     <Compile Include="HarmonyPatches\MouseoverReadout.cs" />
