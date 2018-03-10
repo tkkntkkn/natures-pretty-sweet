@@ -180,7 +180,7 @@
   </BiomeDef>
   
   
-  <!-- BiomeDef>
+  <BiomeDef>
     <defName>TKKN_Grasslands</defName>
     <label>Temperate Grasslands</label>
     <description>Extensive grasslands, high winds and bright sun. The soil is rich but there is little protection from the elements, and seasonal droughts, storms and tornados are punishing.</description>
@@ -286,7 +286,7 @@
       <li>Elephant</li>
       <li>Alpaca</li>
     </allowedPackAnimals>
-  </BiomeDef -->
+  </BiomeDef>
  
 
 </Defs>
