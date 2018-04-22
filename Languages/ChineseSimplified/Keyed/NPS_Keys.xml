@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<LanguageData>
+  <TKKN_NPS_LavaHasEruptedNearby>岩浆爆发！</TKKN_NPS_LavaHasEruptedNearby>
+  <TKKN_NPS_LavaHasEruptedNearbyTxt>熔岩的表面在冒泡！在熔岩被破坏之前把你的东西移走。</TKKN_NPS_LavaHasEruptedNearbyTxt>
+
+  <TKKN_NPS_TreasureWashedUpText>宝藏已经冲到海滩上了！</TKKN_NPS_TreasureWashedUpText>
+  <TKKN_NPS_TreasureFloodedUpText>最近的洪水已经留下了宝藏！</TKKN_NPS_TreasureFloodedUpText>
+  <TKKN_NPS_UltraRareWashedUpText>超稀有的宝藏已经冲上海滩！</TKKN_NPS_UltraRareWashedUpText>
+  <TKKN_NPS_UltraRareFloodedUpText>最近的洪水已经留下了超稀有的宝藏！</TKKN_NPS_UltraRareFloodedUpText>
+
+  <!-- Frost -->
+  <FrostNone>无霜</FrostNone>
+  <FrostDusting>霜 (降霜)</FrostDusting>
+  <FrostThin>霜（稀薄）</FrostThin>
+  <FrostMedium>霜（中等）</FrostMedium>
+  <FrostThick>霜（厚实）</FrostThick>
+
+  <!-- Titles -->
+
+  <TKKN_Birdwatching>正在看鸟</TKKN_Birdwatching>
+
+  <!-- Error Messages -->
+  <TKKN_NPS_MustPlaceOnSteamVent>你必须把它放在蒸汽喷泉上。</TKKN_NPS_MustPlaceOnSteamVent>
+
+
+  <!-- Settings: -->
+  <TKKN_spawnLavaOnlyInBiome_title>全球岩浆喷发</TKKN_spawnLavaOnlyInBiome_title>
+  <TKKN_spawnLavaOnlyInBiome_text>允许岩浆在所有地区喷发。取消这个选项岩浆只会在火山区喷发。</TKKN_spawnLavaOnlyInBiome_text>
+  <TKKN_allowLavaEruption_title>岩浆喷发</TKKN_allowLavaEruption_title>
+  <TKKN_allowLavaEruption_text>允许岩浆喷发。取消则删除随机喷发事件。</TKKN_allowLavaEruption_text>
+  <TKKN_showHot_title>显示热效应</TKKN_showHot_title>
+  <TKKN_showHot_text>当温度很高时，会有视觉指标。</TKKN_showHot_text>
+  <TKKN_showCold_title>显示冷效应</TKKN_showCold_title>
+  <TKKN_showCold_text>当温度很低时，会有视觉指标。</TKKN_showCold_text>
+  <TKKN_showRain_title>显示降雨效果</TKKN_showRain_title>
+  <TKKN_showRain_text>下雨时，地面会淋湿而变暗。</TKKN_showRain_text>
+  <TKKN_doWeather_title>显示天气影响（最高优先级）</TKKN_doWeather_title>
+  <TKKN_doWeather_text>如果不选中，下面的任何一个选项都不会生效。 如果选中，只有下面选中的项目会生效。 任何有效的天气变化都将继续有效。</TKKN_doWeather_text>
+  <TKKN_doTides_title>潮汐</TKKN_doTides_title>
+  <TKKN_doTides_text>海平面将会提升和降低。</TKKN_doTides_text>
+
+  <TKKN_showTempReadout_title>显示温度读数</TKKN_showTempReadout_title>
+  <TKKN_showTempReadout_text>在左下角显示温度读数</TKKN_showTempReadout_text>
+
+
+  <TKKN_regen_title>重新生成地形单元格分布（不要管这个！！！）</TKKN_regen_title>
+  <TKKN_regen_text>在存档时重新生成地图的地形，在你的地图上添加洪水、潮汐或者绿洲。选择这个选项后，请为你的游戏保存一个新的存档以防万一。然后重新加载这个存档，完成以上操作后请务必【取消】这个选项。（译者注：这个功能是给之前未加载此mod的旧档用的，有风险，不要作死。）</TKKN_regen_text>
+
+
+</LanguageData>

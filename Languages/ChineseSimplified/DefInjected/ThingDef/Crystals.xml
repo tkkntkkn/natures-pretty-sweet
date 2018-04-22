@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <TKKN_SaltCrystal.label>盐草</TKKN_SaltCrystal.label>
+  <TKKN_SaltCrystal.description>一种特殊的植物，能够从水中过滤盐，盐沉积在其枝叶上。\n\n盐草是闪耀世界的人造产物，它在边缘世界极其稀少和重要，能够延迟肉类的保存时间并阻止巨型蜗牛的攻击。</TKKN_SaltCrystal.description>
+
+  <TKKN_Salt.label>盐</TKKN_Salt.label>
+  <TKKN_Salt.description>有助于保存肉类和驱离蛞蝓。自身的营养价值并不高。</TKKN_Salt.description>
+
+  <TKKN_PreservedMeat.label>腌肉</TKKN_PreservedMeat.label>
+  <TKKN_PreservedMeat.description>用盐腌制的肉。 它无需冷藏。</TKKN_PreservedMeat.description>
+
+
+</LanguageData>

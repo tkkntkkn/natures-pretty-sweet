@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- LAVA ROCK -->
+
+  <MakeStoneBlocksLavaRock.label>制作做熔岩石砖</MakeStoneBlocksLavaRock.label>
+  <MakeStoneBlocksLavaRock.description>将熔岩石切割成可用的石块。</MakeStoneBlocksLavaRock.description>
+  <MakeStoneBlocksLavaRock.jobString>正在制作做熔岩石砖。</MakeStoneBlocksLavaRock.jobString>
+
+
+</LanguageData>

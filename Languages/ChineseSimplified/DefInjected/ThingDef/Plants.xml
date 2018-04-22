@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <TKKN_PlantTreeRedwood.label>红木</TKKN_PlantTreeRedwood.label>
+  <TKKN_PlantTreeRedwood.description>一棵巨大的，非常缓慢生长的树。它的根很浅，当它长得太大时，它颠覆了。\n\n产生红木，这是珍贵的稀有木材。</TKKN_PlantTreeRedwood.description>
+
+  <TKKN_OldGrowth_PlantTreeOak.label>老橡树</TKKN_OldGrowth_PlantTreeOak.label>
+  <TKKN_OldGrowth_PlantTreeOak.description>一种非常健壮的硬木树。生长缓慢但是非常坚硬。</TKKN_OldGrowth_PlantTreeOak.description>
+
+  <TKKN_OldGrowth_PlantTreeHazelnut.label>老榛子树</TKKN_OldGrowth_PlantTreeHazelnut.label>
+  <TKKN_OldGrowth_PlantTreeHazelnut.description>一种多生的林地灌木，有柔软、锯齿状、天鹅绒般的叶子。</TKKN_OldGrowth_PlantTreeHazelnut.description>
+
+  <TKKN_PlantTreeHazelnut.label>榛子树</TKKN_PlantTreeHazelnut.label>
+  <TKKN_PlantTreeHazelnut.description>一种多生的林地灌木，有柔软、锯齿状、天鹅绒般的叶子。</TKKN_PlantTreeHazelnut.description>
+
+  <TKKN_PlantTreeRedwoodDead.label>红木</TKKN_PlantTreeRedwoodDead.label>
+  <TKKN_PlantTreeRedwoodDead.description>一棵巨大的，非常缓慢生长的树。它的根很浅，当它长得太大时，它颠覆了。\n\n产生红木，这是珍贵的稀有木材。</TKKN_PlantTreeRedwoodDead.description>
+
+  <TKKN_PlantFern.label>蕨类</TKKN_PlantFern.label>
+  <TKKN_PlantFern.description>用孢子繁殖的柔软多叶植物。</TKKN_PlantFern.description>
+
+
+  <!--[Core] <PlantTallGrass.label>高草</PlantTallGrass.label>-->
+  <!--[Core] <PlantTallGrass.description>野生的高草。从上面走过时速度会明显变慢。</PlantTallGrass.description>-->
+  <!--[Core] <PlantGrass.label>草</PlantGrass.label>-->
+  <!--[Core] <PlantGrass.description>野草，在稍微有点光线和土地的地方就会长出来。</PlantGrass.description>-->
+
+</LanguageData>

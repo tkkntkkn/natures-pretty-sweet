@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- SPECIAL: Terrains from natural stones -->
+
+  <TKKN_LavaRock_Rough.label>粗糙的熔岩石地面</TKKN_LavaRock_Rough.label>
+  <TKKN_LavaRock_Rough.description>粗糙的自然的熔岩岩石地面。</TKKN_LavaRock_Rough.description>
+  <TKKN_LavaRock_RoughHewn.label>粗糙的熔岩石地面</TKKN_LavaRock_RoughHewn.label>
+  <TKKN_LavaRock_RoughHewn.description>粗切天然的熔岩石地面。</TKKN_LavaRock_RoughHewn.description>
+  <TKKN_LavaRock_Smooth.label>光滑的熔岩石地面</TKKN_LavaRock_Smooth.label>
+  <TKKN_LavaRock_Smooth.description>光滑的天然熔岩石地面</TKKN_LavaRock_Smooth.description>
+
+
+</LanguageData>

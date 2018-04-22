@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <RedWoodLog.label>红木</RedWoodLog.label>
+  <RedWoodLog.description>红木和红杉树或其他纤维植物的木材。红色，比普通木材更有价值，防火性更强。用于建筑结构，武器，甚至简单的假肢。一根未经加工的红木可以在紧要关头用作武器。</RedWoodLog.description>
+  <RedWoodLog.stuffProps.stuffAdjective>红木</RedWoodLog.stuffProps.stuffAdjective>
+
+
+  <!-- AMBER -->
+
+  <TKKN_MinableAmber.label>琥珀</TKKN_MinableAmber.label>
+  <TKKN_MinableAmber.description>被保存下来的远古的树脂。</TKKN_MinableAmber.description>
+
+  <TKKN_Amber.label>琥珀</TKKN_Amber.label>
+  <TKKN_Amber.description>被保存下来的远古的树脂。有时会有一些小型生物在里面，美丽而光滑。</TKKN_Amber.description>
+  <TKKN_Amber.stuffProps.stuffAdjective>琥珀</TKKN_Amber.stuffProps.stuffAdjective>
+
+
+  <!-- PETRIFIED WOOD -->
+
+  <TKKN_MinablePetrifiedWood.label>木化石</TKKN_MinablePetrifiedWood.label>
+  <TKKN_MinablePetrifiedWood.description>含有木化石碎片的岩石。</TKKN_MinablePetrifiedWood.description>
+
+  <TKKN_PetrifiedWood.label>木化石</TKKN_PetrifiedWood.label>
+  <TKKN_PetrifiedWood.description>远古时代保存下来的木材，感觉像石头，很稀少。</TKKN_PetrifiedWood.description>
+  <TKKN_PetrifiedWood.stuffProps.stuffAdjective>木化石</TKKN_PetrifiedWood.stuffProps.stuffAdjective>
+
+
+  <!-- LAVA ROCK -->
+
+  <TKKN_LavaRock.label>熔岩石</TKKN_LavaRock.label>
+  <TKKN_LavaRock.description>熔岩冷却成的一个有熔岩玻璃斑点的黑色岩石。</TKKN_LavaRock.description>
+
+  <TKKN_ChunkLava.label>熔岩石块</TKKN_ChunkLava.label>
+  <TKKN_ChunkLava.description>一块岩石。 可以从中切割出可用的石砖。</TKKN_ChunkLava.description>
+
+  <TKKN_BlockLava.label>熔岩石石砖</TKKN_BlockLava.label>
+  <TKKN_BlockLava.description>坚实的熔岩石石砖。 黑色的岩石上闪耀着条纹的熔岩玻璃。</TKKN_BlockLava.description>
+  <TKKN_BlockLava.stuffProps.stuffAdjective>熔岩石</TKKN_BlockLava.stuffProps.stuffAdjective>
+
+
+  <!-- eggs -->
+
+  <EggSnailUnfertilized.label>巨型蜗牛卵（未受精）</EggSnailUnfertilized.label>
+  <EggSnailUnfertilized.description>未受精的巨型蜗牛卵。美味可口。（译者注：蜗牛不是雌雄同体吗？）</EggSnailUnfertilized.description>
+
+  <EggSnailFertilized.label>巨型蜗牛卵（已受精）</EggSnailFertilized.label>
+  <EggSnailFertilized.description>已受精的巨型蜗牛卵。如果一切顺利可以孵化出巨型蜗牛。美味可口。</EggSnailFertilized.description>
+
+  <EggRoeUnfertilized.label>鱼卵（未受精）</EggRoeUnfertilized.label>
+  <EggRoeUnfertilized.description>来自海洋动物的未受精卵。</EggRoeUnfertilized.description>
+
+  <EggRoeFertilized.label>鱼卵（已受精）</EggRoeFertilized.label>
+  <EggRoeFertilized.description>已受精的鱼卵。如果一切顺利将会孵化。</EggRoeFertilized.description>
+
+
+  <!-- Chicken -->
+
+</LanguageData>

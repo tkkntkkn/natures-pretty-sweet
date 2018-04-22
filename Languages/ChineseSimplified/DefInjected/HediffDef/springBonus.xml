@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- ChemicalDef>
+    <defName>TKKN_hotspring_chill</defName>
+    <label>relaxing in hot spring</label>
+	<onGeneratedAddictedToleranceChance>0</onGeneratedAddictedToleranceChance>
+</ChemicalDef -->
+
+  <TKKN_hotspring_chill_out.label>去温泉放松</TKKN_hotspring_chill_out.label>
+  <TKKN_hotspring_chill_out.labelNoun>正在温泉放松</TKKN_hotspring_chill_out.labelNoun>
+
+  <TKKN_coldspring_chill_out.label>去冷泉放松</TKKN_coldspring_chill_out.label>
+  <TKKN_coldspring_chill_out.labelNoun>正在冷泉放松</TKKN_coldspring_chill_out.labelNoun>
+
+
+</LanguageData>

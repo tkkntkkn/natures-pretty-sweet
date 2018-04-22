@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <TKKN_SaltField.label>盐区</TKKN_SaltField.label>
+  <TKKN_Lava.label>岩浆</TKKN_Lava.label>
+  <TKKN_LavaDeep.label>岩浆（深）</TKKN_LavaDeep.label>
+  <TKKN_ColdSpringsWater.label>冷泉</TKKN_ColdSpringsWater.label>
+  <TKKN_HotSpringsWater.label>温泉</TKKN_HotSpringsWater.label>
+
+
+  <!-- compatability stuff, remove later -->
+
+  <TKKN_ColdSprings.label>冷泉（旧的不再使用）</TKKN_ColdSprings.label>
+  <TKKN_HotSprings.label>温泉（旧的不再使用）</TKKN_HotSprings.label>
+  <BridgeTKKN_SpringsWater.label>泉水（桥梁下）</BridgeTKKN_SpringsWater.label>
+  <TKKN_SoilWet.label>湿润的土壤</TKKN_SoilWet.label>
+  <TKKN_SoilWetRich.label>湿润的肥沃土壤</TKKN_SoilWetRich.label>
+  <TKKN_SandWet.label>湿润的沙子</TKKN_SandWet.label>
+  <TKKN_SandBeachWetSalt.label>湿润的沙滩 (盐)</TKKN_SandBeachWetSalt.label>
+  <TKKN_Ice.label>冰
+</TKKN_Ice.label>
+  <TKKN_MuddyIce.label>冰</TKKN_MuddyIce.label>
+  <TKKN_WetMossyTerrain.label>湿苔</TKKN_WetMossyTerrain.label>
+  <TKKN_RiverDeposit.label>河流矿床</TKKN_RiverDeposit.label>
+
+
+  <!-- FLOORS -->
+
+  <TKKN_FlagstoneBasalt.label>玄武岩石板</TKKN_FlagstoneBasalt.label>
+  <TKKN_FlagstoneBasalt.description>粗糙切割的岩石地砖。不太好看，但是非常适合铺设道路和室外走道。拆除石板无法回收资源。</TKKN_FlagstoneBasalt.description>
+
+  <TKKN_TileBasalt.label>玄武岩地砖</TKKN_TileBasalt.label>
+  <TKKN_TileBasalt.description>坚固的石质地砖给人以城堡一样的感觉。看起来很漂亮，就是铺设速度较慢。</TKKN_TileBasalt.description>
+
+  <TKKN_FloorRedWood.label>红木地板</TKKN_FloorRedWood.label>
+
+  <TKKN_FloorPertrifiedWood.label>石化木地板</TKKN_FloorPertrifiedWood.label>
+  <TKKN_FloorPertrifiedWood.description>坚固的石质地砖给人以城堡一样的感觉。看起来很漂亮，就是铺设速度较慢。</TKKN_FloorPertrifiedWood.description>
+
+  <TKKN_FloorAmber.label>琥珀地板</TKKN_FloorAmber.label>
+
+  <TKKN_Salted_Earth.label>盐渍土</TKKN_Salted_Earth.label>
+  <TKKN_Salted_Earth.description>掺入盐的土壤在很长时间内都无法生长植物。</TKKN_Salted_Earth.description>
+
+
+  <!--<TKKN_ColdSprings.label>冷泉</TKKN_ColdSprings.label>-->
+  <!--<TKKN_HotSprings.label>温泉</TKKN_HotSprings.label>-->
+  <!--<TKKN_TileLavaRock.label>熔岩石地砖</TKKN_TileLavaRock.label>-->
+  <!--<TKKN_TileLavaRock.description>坚固的石质地砖给人以城堡一样的感觉。看起来很漂亮，就是铺设速度较慢。</TKKN_TileLavaRock.description>-->
+  <!--<TKKN_FlagstoneLavaRock.label>熔岩石石板</TKKN_FlagstoneLavaRock.label>-->
+  <!--<TKKN_FlagstoneLavaRock.description>粗糙切割的岩石地砖。不太好看，但非常适合铺设道路和室外的走道。拆除石板无法回收资源。</TKKN_FlagstoneLavaRock.description>-->
+
+</LanguageData>
