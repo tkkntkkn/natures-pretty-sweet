@@ -526,6 +526,7 @@ namespace TKKN_NPS
 			bool flag2 = room != null && room.UsesOutdoorTemperature;
 
 			bool gettingWet = false;
+			cell.gettingWet = false;
 			bool isMelt = false;
 
 			//check if the terrain has been floored
@@ -659,28 +660,36 @@ namespace TKKN_NPS
 			*/
 
 			#region Puddles
-
-			if (cell.howWet < 3 && Settings.showRain && (cell.isMelt || gettingWet))
+			if (Settings.showRain && (cell.isMelt || gettingWet))
 			{
-				cell.howWet +=2;
 				cell.howWetPlants += this.map.weatherManager.curWeather.rainRate;
 			}
-			else if (cell.howWet > -1)
+			else
 			{
 				if (this.map.mapTemperature.OutdoorTemp > 20)
 				{
-					cell.howWetPlants += -1 * (this.map.mapTemperature.OutdoorTemp/10);
+					cell.howWetPlants += -1 * (this.map.mapTemperature.OutdoorTemp / 100);
 				}
 				else
 				{
-					cell.howWetPlants += -(float) .1;
+					cell.howWetPlants += -(float).01;
 				}
+			}
+			if (cell.howWet < 3 && Settings.showRain && (cell.isMelt || gettingWet))
+			{
+				cell.howWet +=2;
+				
+			}
+			else if (cell.howWet > -1)
+			{
 				cell.howWet--;
 			}
 
-			if (cell.howWetPlants > (float) 5)
+		
+
+			if (cell.howWetPlants > (float) 100)
 			{
-				cell.howWetPlants = (float) 5;
+				cell.howWetPlants = (float) 100;
 			}
 			else if (cell.howWetPlants < (float) 0)
 			{
@@ -1126,7 +1135,7 @@ namespace TKKN_NPS
 							{
 								if (thing.def.category == ThingCategory.Plant && thing.def.altitudeLayer == AltitudeLayer.LowPlant && thing.def.plant.harvestTag != "Standard")
 								{
-									thing.TakeDamage(new DamageInfo(DamageDefOf.Rotting, 99999, -.05f, null, null, null, DamageInfo.SourceCategory.ThingOrUnknown));
+									thing.TakeDamage(new DamageInfo(DamageDefOf.Rotting, 99999, -.005f, null, null, null, DamageInfo.SourceCategory.ThingOrUnknown));
 								}
 							}
 						}
