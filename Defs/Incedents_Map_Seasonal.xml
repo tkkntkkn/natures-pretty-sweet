@@ -20,7 +20,7 @@
 				<min>0.125</min>
 				<max>0.35</max>
 			</durationDays>
-		<tale>WildFlowerBloom</tale>
+		<tale>TKKN_WildFlowerBloom</tale>
 	</IncidentDef>
 	
 	<IncidentDef>
@@ -31,7 +31,7 @@
 		  <li>MapPlayerHome</li>
 		</targetTypes>
 			<workerClass>TKKN_NPS.IncidentWorker_Superbloom</workerClass>
-			<gameCondition>Superbloom</gameCondition>
+			<gameCondition>TKKN_Superbloom</gameCondition>
 			<letterLabel>Superbloom</letterLabel>
 			<letterText>A massive blooming of wild flowers and plants are blooming! \n\nThis will boost the mood of anyone outside to see them, and might trigger allergies.</letterText>
 			<letterDef>PositiveEvent</letterDef>
@@ -41,6 +41,6 @@
 				<min>0.125</min>
 				<max>0.35</max>
 			</durationDays>
-		<tale>Superbloom</tale>
+		<tale>TKKN_Superbloom</tale>
 	</IncidentDef>
 </Defs>

@@ -3,7 +3,7 @@ using RimWorld;
 
 namespace TKKN_NPS
 {
-    class TKKN_WildFlowerBloom : ThoughtWorker
+    class ThoughtWorker_WildFlowerBloom : ThoughtWorker
     {
 
         protected override ThoughtState CurrentStateInternal(Pawn p)
