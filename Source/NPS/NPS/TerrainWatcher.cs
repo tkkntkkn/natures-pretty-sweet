@@ -135,6 +135,7 @@ namespace TKKN_NPS
 				this.cellWeatherAffects = new Dictionary<IntVec3, cellData>();
 				foreach (IntVec3 cell in tmpTerrain)
 				{
+
 					TerrainDef terrain = cell.GetTerrain(map);
 
 					if (!cell.InBounds(map))
@@ -146,10 +147,14 @@ namespace TKKN_NPS
 					thiscell.location = cell;
 					thiscell.baseTerrain = terrain;
 
+					if (thiscell.originalTerrain != null)
+					{
+						thiscell.originalTerrain = terrain;
+					}
 
 					if (terrain.defName == "TKKN_Lava")
 					{
-						//fix for lava pathing. If lava is near not!lava, make it impassable.
+						//fix for lava pathing. If lava is near lava, make it impassable.
 						bool edgeLava = false;
 						int num = GenRadial.NumCellsInRadius(1);
 						for (int i = 0; i < num; i++)
@@ -477,7 +482,7 @@ namespace TKKN_NPS
 				{
 					IntVec3 c = makeWater[j];
 					cellData cell = this.cellWeatherAffects[c];
-					if (!cell.baseTerrain.HasTag("Water"))
+					if (!cell.baseTerrain.HasTag("Water") && cell.baseTerrain.defName != "Marsh")
 					{
 						cell.baseTerrain = TerrainDefOf.TKKN_RiverDeposit;
 					}
@@ -506,26 +511,7 @@ namespace TKKN_NPS
 
 
 		#region effect by terrain
-		/*
-		 * //MOVED TO STEADYATMOSPHEREEFFECTS
-		public void checkRandomTerrain() {
-			int num = Mathf.RoundToInt((float)this.map.Area * 0.0001f);
-			int area = this.map.Area;
-			for (int i = 0; i < num; i++)
-			{
-				if (this.cycleIndex >= area)
-				{
-					this.cycleIndex = 0;
-				}
-				IntVec3 c = this.map.cellsInRandomOrder.Get(this.cycleIndex);
-				this.doCellEnvironment(c);
-
-				this.cycleIndex++;
-			}
-
-		}
-		*/
-
+		
 		public void doCellEnvironment(IntVec3 c)
 		{
 			if (!this.cellWeatherAffects.ContainsKey(c))
@@ -592,6 +578,7 @@ namespace TKKN_NPS
 					this.floodThreat += 1 + 2 * (int)Math.Round(this.map.weatherManager.curWeather.rainRate);
 				}
 				gettingWet = true;
+				cell.gettingWet = true;
 				cell.setTerrain("wet");
 			}
 			else
@@ -675,16 +662,36 @@ namespace TKKN_NPS
 
 			if (cell.howWet < 3 && Settings.showRain && (cell.isMelt || gettingWet))
 			{
-				cell.howWet +=2;				 
+				cell.howWet +=2;
+				cell.howWetPlants += this.map.weatherManager.curWeather.rainRate;
 			}
 			else if (cell.howWet > -1)
 			{
+				if (this.map.mapTemperature.OutdoorTemp > 20)
+				{
+					cell.howWetPlants += -1 * (this.map.mapTemperature.OutdoorTemp/10);
+				}
+				else
+				{
+					cell.howWetPlants += -(float) .1;
+				}
 				cell.howWet--;
 			}
 
+			if (cell.howWetPlants > (float) 5)
+			{
+				cell.howWetPlants = (float) 5;
+			}
+			else if (cell.howWetPlants < (float) 0)
+			{
+				cell.howWetPlants = (float) 0;
+				this.hurtPlants(c);
+			}
 
+
+			
 			//PUDDLES
-			Thing puddle = (Thing)(from t in c.GetThingList(this.map)
+				Thing puddle = (Thing)(from t in c.GetThingList(this.map)
 								   where t.def.defName == "TKKN_FilthPuddle"
 								   select t).FirstOrDefault<Thing>();
 
@@ -809,22 +816,6 @@ namespace TKKN_NPS
 
 			map.GetComponent<FrostGrid>().AddDepth(c, depthToAdd);
 		}
-
-		/*
-		public static float MeltAmountAt(float temperature)
-		{
-			if (temperature < 0f)
-			{
-				return 0f;
-			}
-			if (temperature < 10f)
-			{
-				return temperature * temperature * 0.0058f * 0.1f;
-			}
-			return temperature * 0.0058f;
-		}
-		*/
-
 
 		public string getFloodType()
 		{
@@ -993,6 +984,23 @@ namespace TKKN_NPS
 			}
 		}
 
+		private void hurtPlants(IntVec3 c)
+		{
+
+			if (!Settings.allowPlantEffects)
+			{
+				return;
+			}
+			List<Thing> things = c.GetThingList(this.map);
+			foreach (Thing thing in things.ToList())
+			{
+				if (thing.def.category == ThingCategory.Plant && thing.def.altitudeLayer == AltitudeLayer.LowPlant && thing.def.plant.harvestTag != "Standard")
+				{
+					thing.TakeDamage(new DamageInfo(DamageDefOf.Rotting, 99999, -.05f, null, null, null, DamageInfo.SourceCategory.ThingOrUnknown));
+				}
+			}
+		}
+
 		#endregion
 
 		#endregion
@@ -1111,12 +1119,15 @@ namespace TKKN_NPS
 
 					if (pawn.RaceProps.Humanlike)
 					{
-						List<Thing> things = pawn.Position.GetThingList(map);
-						foreach (Thing thing in things.ToList())
+						if (Settings.allowPlantEffects)
 						{
-							if (thing.def.category == ThingCategory.Plant && thing.def.altitudeLayer == AltitudeLayer.LowPlant && thing.def.plant.harvestTag != "Standard")
+							List<Thing> things = pawn.Position.GetThingList(map);
+							foreach (Thing thing in things.ToList())
 							{
-								thing.TakeDamage(new DamageInfo(DamageDefOf.Rotting, 99999, -.05f, null, null, null, DamageInfo.SourceCategory.ThingOrUnknown));
+								if (thing.def.category == ThingCategory.Plant && thing.def.altitudeLayer == AltitudeLayer.LowPlant && thing.def.plant.harvestTag != "Standard")
+								{
+									thing.TakeDamage(new DamageInfo(DamageDefOf.Rotting, 99999, -.05f, null, null, null, DamageInfo.SourceCategory.ThingOrUnknown));
+								}
 							}
 						}
 					}
