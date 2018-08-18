@@ -3,10 +3,6 @@
 <LanguageData>
   <TKKN_NPS_LavaHasEruptedNearby>Lava Eruption!</TKKN_NPS_LavaHasEruptedNearby>
   <TKKN_NPS_LavaHasEruptedNearbyTxt>Lava is bubbling to the surface! Move your stuff away from the lava before it's damaged.</TKKN_NPS_LavaHasEruptedNearbyTxt>
-  <TKKN_NPS_WildFlowerBloom>Wildflowers are Blooming!</TKKN_NPS_WildFlowerBloom>
-  <TKKN_NPS_WildFlowerBloomTxt>A ton of wildflowers are blooming! Get outside and enjoy them - but watch out for allergies.</TKKN_NPS_WildFlowerBloomTxt>
-  <TKKN_NPS_Superbloom>A Superbloom is Happening!</TKKN_NPS_Superbloom>
-  <TKKN_NPS_SuperbloomTxt>A massive amount of wildflowers are blooming! Get outside and enjoy them - but watch out for allergies.</TKKN_NPS_SuperbloomTxt>
 
   <TKKN_NPS_TreasureWashedUpText>Treasure has washed up on the beach! Get it before it washes away.</TKKN_NPS_TreasureWashedUpText>
   <TKKN_NPS_TreasureFloodedUpText>Recent flooding has left behind treasure! Get it before it washes away.</TKKN_NPS_TreasureFloodedUpText>
@@ -29,9 +25,6 @@
 
   
 <!-- Settings: -->  
-
-  <TKKN_allowPlantEffects_title>Do plant effects</TKKN_allowPlantEffects_title>
-  <TKKN_allowPlantEffects_text>Plants are harmed when walked on, die without water, have special blooms, etc.</TKKN_allowPlantEffects_text>
   <TKKN_spawnLavaOnlyInBiome_title>Lava eruptions outside of volcanic fields</TKKN_spawnLavaOnlyInBiome_title>
   <TKKN_spawnLavaOnlyInBiome_text>Allow lava to erupt in almost every biome. Uncheck to make it so lava is only in the Volcanic Fields biome</TKKN_spawnLavaOnlyInBiome_text>
   <TKKN_allowLavaEruption_title>Lava can erupt</TKKN_allowLavaEruption_title>
