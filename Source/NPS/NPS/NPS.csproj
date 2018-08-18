@@ -51,10 +51,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BiomeSeasonalSettings.cs" />
     <Compile Include="Controller.cs" />
     <Compile Include="Elements\ElementSpawnDefOf.cs" />
     <Compile Include="Elements\ElementSpawnDef.cs" />
     <Compile Include="Elements\Building_SteamVent.cs" />
+    <Compile Include="GameCondition_Seasonal.cs" />
     <Compile Include="HarmonyPatches\Plant.cs" />
     <Compile Include="Frost\FrostCategory.cs" />
     <Compile Include="Frost\FrostGrid.cs" />
@@ -68,12 +70,14 @@
     <Compile Include="HediffDefOf.cs" />
     <Compile Include="Compatability\PatchOperationFindModByName.cs" />
     <Compile Include="HarmonyPatches\MouseoverReadout.cs" />
+    <Compile Include="IncidentWorker\IncidentWorker_Seasonal.cs" />
     <Compile Include="Pawn Stuff\CompProperties_Heater.cs" />
+    <Compile Include="Pawn Stuff\ThoughtWorkers_Seasonal.cs" />
     <Compile Include="Save Classes\cellData.cs" />
     <Compile Include="Save Classes\springData.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Pawn Stuff\ThoughtWorker_AweOfNature.cs" />
-    <Compile Include="IncidentWorker_LavaFlow.cs" />
+    <Compile Include="IncidentWorker\IncidentWorker_LavaFlow.cs" />
     <Compile Include="Elements\SpringClasses.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Generation\BiomeWorker.cs" />

@@ -17,23 +17,23 @@
          </li>
       </value>
    </Operation>
-   <Operation Class="PatchOperationAddModExtension">
-      <xpath>*/TerrainDef[defName = "TKKN_SoilWet"]</xpath>
-      <value>
-         <li Class="TKKN_NPS.TerrainWeatherReactions">
-            <alertOnLoad>False</alertOnLoad>
-            <tideTerrain />
-            <floodTerrain />
-            <wetTerrain></wetTerrain>
-            <freezeTerrain />
-            <freezeAt />
-            <baseOverride>Soil</baseOverride>
-			<wetAt>0</wetAt>
-            <isSalty>False</isSalty>
-			<holdFrost>True</holdFrost>
-         </li>
-      </value>
-   </Operation>
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>*/TerrainDef[defName = "TKKN_SoilWet"]</xpath>
+		<value>
+			<li Class="TKKN_NPS.TerrainWeatherReactions">
+				<alertOnLoad>False</alertOnLoad>
+				<tideTerrain />
+				<floodTerrain />
+				<wetTerrain></wetTerrain>
+				<freezeTerrain />
+				<freezeAt />
+				<baseOverride>Soil</baseOverride>
+				<wetAt>0</wetAt>
+				<isSalty>False</isSalty>
+				<holdFrost>True</holdFrost>
+			</li>
+		</value>
+	</Operation>
    <Operation Class="PatchOperationAddModExtension">
       <xpath>*/TerrainDef[defName = "TKKN_SoilWetRich"]</xpath>
       <value>
@@ -219,7 +219,7 @@
             <alertOnLoad>False</alertOnLoad>
             <tideTerrain />
             <floodTerrain>WaterShallow</floodTerrain>
-            <wetTerrain>WaterShallow</wetTerrain>
+            <wetTerrain></wetTerrain>
             <freezeTerrain>TKKN_MuddyIce</freezeTerrain>
             <freezeAt>0</freezeAt>
 			<wetAt>1</wetAt>
@@ -235,7 +235,7 @@
             <alertOnLoad>False</alertOnLoad>
             <tideTerrain />
             <floodTerrain>WaterShallow</floodTerrain>
-            <wetTerrain>WaterShallow</wetTerrain>
+            <wetTerrain></wetTerrain>
             <freezeTerrain>TKKN_MuddyIce</freezeTerrain>
             <freezeAt>0</freezeAt>
 			<wetAt>0</wetAt>

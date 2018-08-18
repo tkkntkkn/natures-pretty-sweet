@@ -4,6 +4,12 @@
   <TKKN_NPS_LavaHasEruptedNearby>Lava Eruption!</TKKN_NPS_LavaHasEruptedNearby>
   <TKKN_NPS_LavaHasEruptedNearbyTxt>Lava is bubbling to the surface! Move your stuff away from the lava before it's damaged.</TKKN_NPS_LavaHasEruptedNearbyTxt>
 
+  <TKKN_NPS_WildFlowerBloom>Wildflowers are blooming!</TKKN_NPS_WildFlowerBloom>
+  <TKKN_NPS_WildFlowerBloom>An unusual amount of wildflowers are blooming! Make sure you go outside to see it. Watch out for allergies!</TKKN_NPS_WildFlowerBloom>
+  <TKKN_NPS_Superbloom>Superbloom!</TKKN_NPS_Superbloom>
+  <TKKN_NPS_Superbloom>An record setting amount of wildflowers are blooming! Make sure you go outside to see it. Watch out for allergies!</TKKN_NPS_Superbloom>
+  
+  
   <TKKN_NPS_TreasureWashedUpText>Treasure has washed up on the beach! Get it before it washes away.</TKKN_NPS_TreasureWashedUpText>
   <TKKN_NPS_TreasureFloodedUpText>Recent flooding has left behind treasure! Get it before it washes away.</TKKN_NPS_TreasureFloodedUpText>
   <TKKN_NPS_UltraRareWashedUpText>Ultra rare treasure has washed up on the beach! Get it before it washes away.</TKKN_NPS_UltraRareWashedUpText>
@@ -25,6 +31,8 @@
 
   
 <!-- Settings: -->  
+  <TKKN_allowPlantEffects_title>Allow Plant Effects</TKKN_allowPlantEffects_title>
+  <TKKN_allowPlantEffects_text>Plants will die when walked on, super bloom and wildflower blooms will happen, plants will die without water, plants will get snow on them in winter.</TKKN_allowPlantEffects_text>
   <TKKN_spawnLavaOnlyInBiome_title>Lava eruptions outside of volcanic fields</TKKN_spawnLavaOnlyInBiome_title>
   <TKKN_spawnLavaOnlyInBiome_text>Allow lava to erupt in almost every biome. Uncheck to make it so lava is only in the Volcanic Fields biome</TKKN_spawnLavaOnlyInBiome_text>
   <TKKN_allowLavaEruption_title>Lava can erupt</TKKN_allowLavaEruption_title>
