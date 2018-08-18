@@ -25,6 +25,7 @@ namespace TKKN_NPS
 
 		public static bool spawnLavaOnlyInBiome = true;
 		public static bool allowLavaEruption = true;
+		public static bool allowPlantEffects = true;
 		public static bool showCold = true;
 		public static bool showHot = true;
 		public static bool showRain = true;
@@ -78,6 +79,10 @@ namespace TKKN_NPS
 				"TKKN_doTides_title".Translate(),
 				ref Settings.doTides,
 				"TKKN_doTides_text".Translate());
+			list.CheckboxLabeled(
+				"TKKN_allowPlantEffects_title".Translate(),
+				ref Settings.allowPlantEffects,
+				"TKKN_allowPlantEffects_text".Translate());
 
 			list.Gap(30f);
 			list.CheckboxLabeled(
@@ -102,6 +107,7 @@ namespace TKKN_NPS
 
 			Scribe_Values.Look(ref Settings.showHot, "showHot", true, true);
 			Scribe_Values.Look(ref Settings.showCold, "showCold", true, true);
+			Scribe_Values.Look(ref Settings.showHot, "allowPlantEffects", true, true);
 			Scribe_Values.Look(ref Settings.showRain, "showRain", true, true);
 			Scribe_Values.Look(ref Settings.doTides, "doTides", true, true);
 			Scribe_Values.Look(ref Settings.showTempReadout, "showTempReadout", true, true);

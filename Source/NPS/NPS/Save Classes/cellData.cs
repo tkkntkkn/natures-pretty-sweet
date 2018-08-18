@@ -13,13 +13,15 @@ namespace TKKN_NPS
 		public IntVec3 location;
 		public Map map;
 		public int howWet = 0;
+		public float howWetPlants = 0;
 		public float temperature = -9999;
 		public float frostLevel = 0;
 		public TerrainDef baseTerrain;
+		public TerrainDef originalTerrain;
 
 		public string overrideType = "";
 
-
+		public bool gettingWet = false;
 		public bool isWet = false;
 		public bool isMelt = false;
 		public bool isFlooded = false;
@@ -144,11 +146,11 @@ namespace TKKN_NPS
 				return;
 			}
 
-			if (temperature < 0 && !isFrozen && temperature < weather.freezeAt && weather.freezeTerrain != null)
+			if (this.temperature < 0 && !this.isFrozen && this.temperature < this.weather.freezeAt && this.weather.freezeTerrain != null)
 			{
-				isFrozen = true;
-				isThawed = false;
-				changeTerrain(weather.freezeTerrain);
+				this.isFrozen = true;
+				this.isThawed = false;
+				this.changeTerrain(weather.freezeTerrain);
 				if (baseTerrain.defName == "TKKN_Lava")
 				{
 					this.map.GetComponent<Watcher>().lavaCellsList.Remove(location);
@@ -156,15 +158,15 @@ namespace TKKN_NPS
 			}
 			else  if (temperature > 0)
 			{
-				if (!isThawed)
+				if (!this.isThawed)
 				{
-					if (baseTerrain.defName == "TKKN_Lava")
+					if (this.baseTerrain.defName == "TKKN_Lava")
 					{
 						this.map.GetComponent<Watcher>().lavaCellsList.Add(location);
 					}
-					isFrozen = false;
-					isThawed = true;
-					changeTerrain(baseTerrain);
+					this.isFrozen = false;
+					this.isThawed = true;
+					this.changeTerrain(baseTerrain);
 				}
 			}
 		}
@@ -464,7 +466,11 @@ namespace TKKN_NPS
 			Scribe_Values.Look<float>(ref this.temperature, "temperature", -999, true);
 			Scribe_Defs.Look<TerrainDef>(ref this.baseTerrain, "baseTerrain");
 
+			Scribe_Defs.Look<TerrainDef>(ref this.originalTerrain, "originalTerrain");
 			
+
+
+
 		}
 
 	}
