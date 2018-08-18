@@ -22,7 +22,7 @@
 	  </value>
 	</Operation> 
 	
-	<Operation Class="PatchOperationAdd">
+		<Operation Class="PatchOperationAdd">
 	  <xpath>/Defs/BiomeDef[defName = "AridShrubland"]/baseWeatherCommonalities</xpath>
 	  <value>
 		  <TKKN_DryDustStorm>1</TKKN_DryDustStorm>
@@ -46,37 +46,5 @@
 	  </value>
 	</Operation> 
 	
-	
-	<!-- Wildflowers allowed -->
-	<Operation Class="PatchOperationAddModExtension">
-      <xpath>/Defs/BiomeDef[defName = "ExtremeDesert"]</xpath>
-	   <value>
-         <li Class="TKKN_NPS.BiomeSeasonalSettings">
-          <bloomPlants>
-			<li>PlantAgave</li>
-			<li>PlantDandelion</li>
-		  </bloomPlants>
-          <bloomSeasons>
-			<li>Spring</li>
-		  </bloomSeasons>
-         </li>
-      </value>
-	</Operation> 	
-	<Operation Class="PatchOperationAddModExtension">
-      <xpath>/Defs/BiomeDef[defName = "Desert"]</xpath>
-	   <value>
-         <li Class="TKKN_NPS.BiomeSeasonalSettings">
-          <bloomPlants>
-			<li>PlantPincushionCactus</li>
-			<li>PlantDandelion</li>
-			<li>PlantAgave</li>
-		  </bloomPlants>
-          <bloomSeasons>
-			<li>Spring</li>
-		  </bloomSeasons>
-         </li>
-      </value>
-	</Operation> 	
-
 	
 </Patch>
