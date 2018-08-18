@@ -48,28 +48,29 @@ namespace TKKN_NPS
 			{
 				num += 19f;
 			}
-			/*
 			if (Settings.showTempReadout)
 			{
-				depth = Find.VisibleMap.GetComponent<FrostGrid>().GetDepth(c);
-				if (depth > 0.03f)
-				{
-					cellData cell = Watcher.cellWeatherAffects[c];
-					rect = new Rect(BotLeft.x, (float)UI.screenHeight - BotLeft.y - num, 999f, 999f);
-					string label2 = "Temperature: " + cell.temperature;
-					Widgets.Label(rect, label2);
-					num += 19f;
-				}
-			}
-			*/
+				rect = new Rect(BotLeft.x, (float)UI.screenHeight - BotLeft.y - num, 999f, 999f);
+				string label3 = "C: x-" + c.x.ToString() + " y-" + c.y.ToString() + " z-" + c.z.ToString();
+				Widgets.Label(rect, label3);
+				num += 19f;
 
-			/*
-			rect = new Rect(BotLeft.x, (float)UI.screenHeight - BotLeft.y - num, 999f, 999f);
-			string label3 = "C: x-" + c.x.ToString() + " y-" + c.y.ToString() + " z-" + c.z.ToString();
-			Widgets.Label(rect, label3);
-			num += 19f;
-			*/
-			
+				Map map = Find.VisibleMap;
+				Watcher watcher = map.GetComponent<Watcher>();
+				cellData cell = watcher.cellWeatherAffects[c];
+				rect = new Rect(BotLeft.x, (float)UI.screenHeight - BotLeft.y - num, 999f, 999f);
+				string label2 = "Temperature: " + cell.temperature;
+				Widgets.Label(rect, label2);
+				num += 19f;
+
+				rect = new Rect(BotLeft.x, (float)UI.screenHeight - BotLeft.y - num, 999f, 999f);
+				string label4 = "Cell Info: Base Terrain " + cell.baseTerrain.defName + " | Wet " + cell.isWet.ToString() + " | Melt " + cell.isMelt.ToString() + " | Flooded " + cell.isFlooded.ToString() + " | Frozen " + cell.isFrozen.ToString() + " | Thawed " + cell.isThawed.ToString() + " | How Wet (Plants) " + cell.howWetPlants.ToString() + " | Getting Wet? " + cell.gettingWet.ToString() ;
+				Widgets.Label(rect, label4);
+				num += 19f;
+
+			}
+
+
 			depth = Find.VisibleMap.GetComponent<FrostGrid>().GetDepth(c);
 			if (depth > 0.01f)
 			{
