@@ -64,14 +64,14 @@ namespace TKKN_NPS
 			}
 
 			//change the terrain
-			if (type == "wet") {
-				this.setWetTerrain();
+			if (type == "frozen") {
+				this.setFrozenTerrain();
 			} else if (type == "dry")
 			{
 				this.setWetTerrain();
-			} else if (type == "frozen")
+			} else if (type == "wet")
 			{
-				this.setFrozenTerrain();
+				this.setWetTerrain();
 			}
 			else if (type == "thaw")
 			{
@@ -144,6 +144,13 @@ namespace TKKN_NPS
 		public void setFrozenTerrain() {
 			if (!Settings.showCold) {
 				return;
+			}
+
+			if (this.isFlooded && this.weather.freezeTerrain != currentTerrain) {
+				if (currentTerrain.HasModExtension<TerrainWeatherReactions>()) {
+					TerrainWeatherReactions curWeather = currentTerrain.GetModExtension<TerrainWeatherReactions>();
+					this.changeTerrain(curWeather.freezeTerrain);
+				}
 			}
 
 			if (this.temperature < 0 && !this.isFrozen && this.temperature < this.weather.freezeAt && this.weather.freezeTerrain != null)
