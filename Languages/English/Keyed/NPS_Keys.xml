@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 
 <LanguageData>
+	<TKKN_NPS_RelaxHotSpring>Relaxing in a hot spring.</TKKN_NPS_RelaxHotSpring>
+	<TKKN_NPS_RelaxColdSpring>Chilling in a cold spring.</TKKN_NPS_RelaxColdSpring>
+
+
+
   <TKKN_NPS_LavaHasEruptedNearby>Lava Eruption!</TKKN_NPS_LavaHasEruptedNearby>
   <TKKN_NPS_LavaHasEruptedNearbyTxt>Lava is bubbling to the surface! Move your stuff away from the lava before it's damaged.</TKKN_NPS_LavaHasEruptedNearbyTxt>
 
