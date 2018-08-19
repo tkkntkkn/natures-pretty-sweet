@@ -58,19 +58,6 @@ namespace TKKN_NPS
 			{
 				return false;
 			}
-			List<Season> allowedSeasons = biomeSettings.bloomSeasons.ToList<Season>();
-			Vector2 location = Find.WorldGrid.LongLatOf(Find.VisibleMap.Tile);
-			Season season = GenDate.Season((long)Find.TickManager.TicksAbs, location);
-
-			for (int j = 0; j < allowedSeasons.Count; j++)
-			{
-
-				if (season != allowedSeasons[j])
-				{
-					canBloomHere = false;
-					break;
-				}
-			}
 
 			if (!canBloomHere)
 			{
