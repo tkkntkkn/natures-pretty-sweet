@@ -84,7 +84,7 @@ namespace TKKN_NPS
 				return;
 			}
 
-			if (canBloomHere && Rand.Value < 0.00065f * base.Map.fertilityGrid.FertilityAt(c) * this.howManyBlooms)
+			if (canBloomHere && Rand.Value < 0.065f * base.Map.fertilityGrid.FertilityAt(c) * this.howManyBlooms)
 			{
 				if (c.GetEdifice(base.Map) == null && c.GetCover(base.Map) == null)
 				{
