@@ -670,10 +670,6 @@ namespace TKKN_NPS
 				{
 					cell.howWetPlants += -1 * (this.map.mapTemperature.OutdoorTemp / 100);
 				}
-				else
-				{
-					cell.howWetPlants += -(float).01;
-				}
 			}
 			if (cell.howWet < 3 && Settings.showRain && (cell.isMelt || gettingWet))
 			{
@@ -694,7 +690,7 @@ namespace TKKN_NPS
 			else if (cell.howWetPlants < (float) 0)
 			{
 				cell.howWetPlants = (float) 0;
-				this.hurtPlants(c);
+				this.hurtPlants(c, false, true);
 			}
 
 
@@ -993,19 +989,36 @@ namespace TKKN_NPS
 			}
 		}
 
-		private void hurtPlants(IntVec3 c)
+		private void hurtPlants(IntVec3 c, bool onlyLow, bool saveHarvest)
 		{
 
 			if (!Settings.allowPlantEffects)
 			{
 				return;
 			}
+			
 			List<Thing> things = c.GetThingList(this.map);
 			foreach (Thing thing in things.ToList())
 			{
-				if (thing.def.category == ThingCategory.Plant && thing.def.altitudeLayer == AltitudeLayer.LowPlant && thing.def.plant.harvestTag != "Standard")
+				Plant plant = thing as Plant;
+				if (plant == null)
 				{
-					thing.TakeDamage(new DamageInfo(DamageDefOf.Rotting, 99999, -.05f, null, null, null, DamageInfo.SourceCategory.ThingOrUnknown));
+					continue;
+				}
+				bool isLow = true;
+				if (onlyLow)
+				{
+					isLow = (thing.def.altitudeLayer == AltitudeLayer.LowPlant);
+				}
+				bool isHarvestable = true;
+				if (saveHarvest)
+				{
+					isHarvestable = (thing.def.plant.harvestTag != "Standard");
+				}
+
+				if (thing.def.category == ThingCategory.Plant && isLow && isHarvestable)
+				{
+					thing.TakeDamage(new DamageInfo(DamageDefOf.Rotting, 99999, -.01f, null, null, null, DamageInfo.SourceCategory.ThingOrUnknown));
 				}
 			}
 		}
@@ -1120,7 +1133,7 @@ namespace TKKN_NPS
 				if (pawn.Position.InBounds(map))
 				{
 					//damage plants and remove snow/frost where they are. This will hopefully generate paths as pawns walk :)
-					if (this.checkIfCold(pawn.Position))
+					if (this.checkIfCold(pawn.Position) && pawn.RaceProps.Humanlike)
 					{
 						map.GetComponent<FrostGrid>().AddDepth(pawn.Position, (float)-.05);
 						map.snowGrid.AddDepth(pawn.Position, (float)-.05);
@@ -1128,16 +1141,13 @@ namespace TKKN_NPS
 
 					if (pawn.RaceProps.Humanlike)
 					{
+						//pack down the soil.
+						cellData cell = this.cellWeatherAffects[pawn.Position];
+						cell.doPack();
 						if (Settings.allowPlantEffects)
 						{
-							List<Thing> things = pawn.Position.GetThingList(map);
-							foreach (Thing thing in things.ToList())
-							{
-								if (thing.def.category == ThingCategory.Plant && thing.def.altitudeLayer == AltitudeLayer.LowPlant && thing.def.plant.harvestTag != "Standard")
-								{
-									thing.TakeDamage(new DamageInfo(DamageDefOf.Rotting, 99999, -.005f, null, null, null, DamageInfo.SourceCategory.ThingOrUnknown));
-								}
-							}
+							this.hurtPlants(pawn.Position, true, true);
+							
 						}
 					}
 				}

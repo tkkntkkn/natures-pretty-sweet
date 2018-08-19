@@ -12,6 +12,7 @@ namespace TKKN_NPS
 	{
 		public IntVec3 location;
 		public Map map;
+		public int howPacked = 0;
 		public int howWet = 0;
 		public float howWetPlants = 0;
 		public float temperature = -9999;
@@ -248,6 +249,21 @@ namespace TKKN_NPS
 				overlayIce.Destroy();
 			}
 
+		}
+
+		public void doPack()
+		{
+			//only pack dirt right now. TO DO: Add sand.
+			//don't pack if there's a growing zone.
+			if (baseTerrain.defName == "Dirt") {
+				this.howPacked++;
+			}
+
+			if (this.howPacked > 50)
+			{
+				TerrainDef packed = TerrainDef.Named("PackedDirt");
+				this.changeTerrain(packed);
+			}
 		}
 		/*
 		public void doFrostOverlay(string action) {
