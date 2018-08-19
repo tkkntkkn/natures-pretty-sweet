@@ -1,8 +1,9 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Collections.Generic;
 using Verse;
 using RimWorld;
+using RimWorld.Planet;
+using UnityEngine;
 
 namespace TKKN_NPS
 {
@@ -29,6 +30,31 @@ namespace TKKN_NPS
 		{
 			bool canBloomHere = true;
 			//must be outdoors.
+
+			BiomeSeasonalSettings biomeSettings = base.Map.Biome.GetModExtension<BiomeSeasonalSettings>();
+			List<ThingDef> bloomPlants = biomeSettings.bloomPlants.ToList<ThingDef>();
+			if (bloomPlants.Count == 0)
+			{
+				return;
+			}
+			List<Season> allowedSeasons = biomeSettings.bloomSeasons.ToList<Season>();
+			Vector2 location = Find.WorldGrid.LongLatOf(Find.VisibleMap.Tile);
+			Season season = GenDate.Season((long)Find.TickManager.TicksAbs, location);
+
+			for (int j = 0; j < allowedSeasons.Count; j++)
+			{
+
+				if (season != allowedSeasons[j])
+				{
+					canBloomHere = false;
+					break;
+				}
+			}
+
+			if (!canBloomHere)
+			{
+				return;
+			}
 
 			Room room = c.GetRoom(base.Map, RegionType.Set_All);
 			if (room != null)
@@ -73,7 +99,6 @@ namespace TKKN_NPS
 
 			if (canBloomHere && Rand.Value < 0.00065f * base.Map.fertilityGrid.FertilityAt(c) * this.howManyBlooms)
 			{
-				List<ThingDef> bloomPlants = base.Map.Biome.GetModExtension<BiomeSeasonalSettings>().bloomPlants.ToList<ThingDef>();
 				if (c.GetEdifice(base.Map) == null && c.GetCover(base.Map) == null)
 				{
 					IEnumerable<ThingDef> source = from def in bloomPlants
