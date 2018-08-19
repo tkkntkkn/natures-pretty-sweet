@@ -8,12 +8,12 @@
             <tideTerrain />
             <floodTerrain />
             <wetTerrain />
-            <baseOverride />
             <freezeTerrain />
             <freezeAt />
 			<wetAt></wetAt>
             <isSalty>True</isSalty>
 			<holdFrost>True</holdFrost>
+			<dryTerrain />
          </li>
       </value>
    </Operation>
@@ -27,10 +27,10 @@
 				<wetTerrain></wetTerrain>
 				<freezeTerrain />
 				<freezeAt />
-				<baseOverride>Soil</baseOverride>
 				<wetAt>0</wetAt>
 				<isSalty>False</isSalty>
 				<holdFrost>True</holdFrost>
+				<dryTerrain>Soil</dryTerrain>
 			</li>
 		</value>
 	</Operation>
@@ -42,12 +42,12 @@
             <tideTerrain />
             <floodTerrain />
             <wetTerrain></wetTerrain>
-            <baseOverride>SoilRich</baseOverride>
             <freezeTerrain />
             <freezeAt />
 			<wetAt>0</wetAt>
             <isSalty>False</isSalty>
 			<holdFrost>True</holdFrost>
+		    <dryTerrain>SoilRich</dryTerrain>
          </li>
       </value>
    </Operation>
@@ -64,6 +64,7 @@
 			<wetAt>0</wetAt>
             <isSalty>False</isSalty>
 			<holdFrost>True</holdFrost>
+			<dryTerrain />
          </li>
       </value>
    </Operation>
@@ -75,12 +76,12 @@
             <tideTerrain />
             <floodTerrain />
             <wetTerrain></wetTerrain>
-            <baseOverride>Sand</baseOverride>
             <freezeTerrain />
             <freezeAt />
 			<wetAt>0</wetAt>
             <isSalty>False</isSalty>
 			<holdFrost>True</holdFrost>
+	        <dryTerrain>Sand</dryTerrain>
          </li>
       </value>
    </Operation>
@@ -97,6 +98,7 @@
 			<wetAt>0</wetAt>
             <isSalty>False</isSalty>
 			<holdFrost>True</holdFrost>
+			<dryTerrain />
          </li>
       </value>
    </Operation>
@@ -113,6 +115,7 @@
 			<wetAt>1</wetAt>
             <isSalty>False</isSalty>
 			<holdFrost>True</holdFrost>
+			<dryTerrain />
          </li>
       </value>
    </Operation>
@@ -129,6 +132,7 @@
 			<wetAt>0</wetAt>
             <isSalty>False</isSalty>
 			<holdFrost>True</holdFrost>
+			<dryTerrain />
          </li>
       </value>
    </Operation>
@@ -145,6 +149,7 @@
 			<wetAt>0</wetAt>
             <isSalty>False</isSalty>
 			<holdFrost>True</holdFrost>
+			<dryTerrain />
          </li>
       </value>
    </Operation>
@@ -161,6 +166,7 @@
 			<wetAt>2</wetAt>
             <isSalty>False</isSalty>
 			<holdFrost>False</holdFrost>
+			<dryTerrain />
          </li>
       </value>
    </Operation>
@@ -177,6 +183,7 @@
 			<wetAt></wetAt>
             <isSalty>False</isSalty>
 			<holdFrost>False</holdFrost>
+			<dryTerrain />
          </li>
       </value>
    </Operation>
@@ -190,9 +197,10 @@
             <wetTerrain />
             <freezeTerrain>TKKN_MuddyIce</freezeTerrain>
             <freezeAt>0</freezeAt>
-			<wetAt>1</wetAt>
+			<wetAt>0</wetAt>
             <isSalty>False</isSalty>
 			<holdFrost>True</holdFrost>
+			<dryTerrain />
          </li>
       </value>
    </Operation>
@@ -209,6 +217,7 @@
 			<wetAt></wetAt>
             <isSalty>True</isSalty>
 			<holdFrost>False</holdFrost>
+			<dryTerrain />
          </li>
       </value>
    </Operation>
@@ -218,13 +227,31 @@
          <li Class="TKKN_NPS.TerrainWeatherReactions">
             <alertOnLoad>False</alertOnLoad>
             <tideTerrain />
-            <floodTerrain>WaterShallow</floodTerrain>
+            <floodTerrain>Marsh</floodTerrain>
             <wetTerrain></wetTerrain>
             <freezeTerrain>TKKN_MuddyIce</freezeTerrain>
             <freezeAt>0</freezeAt>
-			<wetAt>1</wetAt>
+			<wetAt>0</wetAt>
             <isSalty>False</isSalty>
 			<holdFrost>False</holdFrost>
+			<dryTerrain />
+         </li>
+      </value>
+   </Operation>
+   <Operation Class="PatchOperationAddModExtension">
+      <xpath>*/TerrainDef[defName = "TKKN_WetMossyTerrain"]</xpath>
+      <value>
+         <li Class="TKKN_NPS.TerrainWeatherReactions">
+            <alertOnLoad>False</alertOnLoad>
+            <tideTerrain />
+            <floodTerrain>Marsh</floodTerrain>
+            <wetTerrain></wetTerrain>
+            <freezeTerrain>TKKN_MuddyIce</freezeTerrain>
+            <freezeAt>0</freezeAt>
+			<wetAt>0</wetAt>
+            <isSalty>False</isSalty>
+			<holdFrost>False</holdFrost>
+			<dryTerrain>MossyTerrain</dryTerrain>
          </li>
       </value>
    </Operation>
@@ -241,6 +268,7 @@
 			<wetAt>0</wetAt>
             <isSalty>False</isSalty>
 			<holdFrost>False</holdFrost>
+			<dryTerrain />
          </li>
       </value>
    </Operation>
@@ -257,6 +285,7 @@
 			<wetAt></wetAt>
             <isSalty>False</isSalty>
 			<holdFrost>True</holdFrost>
+			<dryTerrain />
          </li>
       </value>
    </Operation>
@@ -273,6 +302,7 @@
 			<wetAt></wetAt>
             <isSalty>False</isSalty>
 			<holdFrost>True</holdFrost>
+			<dryTerrain />
          </li>
       </value>
    </Operation>
@@ -289,6 +319,7 @@
 			<wetAt></wetAt>
             <isSalty>False</isSalty>
 			<holdFrost>False</holdFrost>
+			<dryTerrain />
          </li>
       </value>
    </Operation>
@@ -305,6 +336,7 @@
 			<wetAt></wetAt>
             <isSalty>False</isSalty>
 			<holdFrost>False</holdFrost>
+			<dryTerrain />
          </li>
       </value>
    </Operation>
@@ -321,6 +353,7 @@
 			<wetAt></wetAt>
             <isSalty>False</isSalty>
 			<holdFrost>False</holdFrost>
+			<dryTerrain />
          </li>
       </value>
    </Operation>

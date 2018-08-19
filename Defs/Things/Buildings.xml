@@ -141,7 +141,7 @@
         <temperature>-20</temperature>
         <spawnProp>PlantAmbrosia</spawnProp>
 		<weight>2000</weight>
-		<howOftenToChange>8000</howOftenToChange>
+		<howOftenToChange>0</howOftenToChange>
 		<commonBiome></commonBiome>
 		<borderSize>3</borderSize>
 		<canReproduce>false</canReproduce>
@@ -186,10 +186,10 @@
         <temperature>-20</temperature>
         <spawnProp>PlantAmbrosia</spawnProp>
 		<weight>2000</weight>
-		<howOftenToChange>8000</howOftenToChange>
+		<howOftenToChange>0</howOftenToChange>
 		<commonBiome></commonBiome>
 		<canReproduce>false</canReproduce>
-		<borderSize>10</borderSize>
+		<borderSize>12</borderSize>
 		<startingRadius>14</startingRadius>
       </li>
     </comps>
@@ -233,7 +233,7 @@
         <temperature>20</temperature>
 		<weight>2000</weight>
 		<commonBiome></commonBiome>		
-		<howOftenToChange>8000</howOftenToChange>
+		<howOftenToChange>0</howOftenToChange>
 		<canReproduce>false</canReproduce>
 		<startingRadius>2</startingRadius>
 		<borderSize>3</borderSize>

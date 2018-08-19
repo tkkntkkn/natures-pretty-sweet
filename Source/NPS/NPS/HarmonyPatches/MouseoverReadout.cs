@@ -64,8 +64,32 @@ namespace TKKN_NPS
 				num += 19f;
 
 				rect = new Rect(BotLeft.x, (float)UI.screenHeight - BotLeft.y - num, 999f, 999f);
-				string label4 = "Cell Info: Base Terrain " + cell.baseTerrain.defName + " | Wet " + cell.isWet.ToString() + " | Melt " + cell.isMelt.ToString() + " | Flooded " + cell.isFlooded.ToString() + " | Frozen " + cell.isFrozen.ToString() + " | Thawed " + cell.isThawed.ToString() + " | How Wet (Plants) " + cell.howWetPlants.ToString() + " | Getting Wet? " + cell.gettingWet.ToString() ;
+				string label4 = "Cell Info: Base Terrain " + cell.baseTerrain.defName + " | Wet " + cell.isWet.ToString() + " | Melt " + cell.isMelt.ToString() + " | Flooded " + cell.isFlooded.ToString() + " | Frozen " + cell.isFrozen.ToString() + " | Thawed " + cell.isThawed.ToString() + " | Getting Wet? " + cell.gettingWet.ToString() ;
 				Widgets.Label(rect, label4);
+				num += 19f;
+
+				rect = new Rect(BotLeft.x, (float)UI.screenHeight - BotLeft.y - num, 999f, 999f);
+				string label5 = "Cell Info: howWet " + cell.howWet.ToString() +  " | How Wet (Plants) " + cell.howWetPlants.ToString();
+				if (cell.weather != null)
+				{
+					if (cell.weather.wetTerrain != null)
+					{
+						label5 += " | T Wet " + cell.weather.wetTerrain.defName;
+					}
+					if (cell.weather.dryTerrain != null)
+					{
+						label5 += " | T Dry " + cell.weather.dryTerrain.defName;
+					}
+					if (cell.weather.freezeTerrain != null)
+					{
+						label5 += " | T Freeze " + cell.weather.freezeTerrain.defName;
+					}
+				}
+				if (cell.originalTerrain != null)
+				{
+					label5 += " | Orig Terrain " + cell.originalTerrain.defName;
+				}
+				Widgets.Label(rect, label5);
 				num += 19f;
 
 			}

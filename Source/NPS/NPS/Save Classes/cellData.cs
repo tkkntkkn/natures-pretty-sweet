@@ -130,12 +130,13 @@ namespace TKKN_NPS
 				isWet = false;
 				howWet = -1;
 			}
-			else if (howWet == -1 && weather.baseOverride != null && !isFlooded) {
-				if (currentTerrain != weather.baseOverride || baseTerrain != weather.baseOverride)
+			else if (howWet == -1 && weather.dryTerrain != null && !isFlooded)
+			{
+				if (currentTerrain != weather.dryTerrain || baseTerrain != weather.dryTerrain)
 				{
 					isWet = false;
-					baseTerrain = weather.baseOverride;
-					changeTerrain(weather.baseOverride);
+					baseTerrain = weather.dryTerrain;
+					changeTerrain(weather.dryTerrain);
 				}
 			}
 //			*/

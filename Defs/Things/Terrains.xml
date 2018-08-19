@@ -355,7 +355,6 @@
       <takeFootprints>True</takeFootprints>
       <acceptFilth>false</acceptFilth>
       <avoidWander>true</avoidWander>
-      <driesTo>MossyTerrain</driesTo>
    </TerrainDef>
    <TerrainDef>
       <defName>TKKN_RiverDeposit</defName>
@@ -384,7 +383,6 @@
       <takeFootprints>True</takeFootprints>
       <acceptFilth>false</acceptFilth>
       <avoidWander>true</avoidWander>
-      <driesTo>SoilRich</driesTo>
    </TerrainDef>
    <!-- FLOORS -->
       <TerrainDef ParentName="FlagstoneBase">
