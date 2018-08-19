@@ -2,7 +2,7 @@
 <Defs>
   <JobDef>
     <defName>TKKN_RelaxSpring</defName>
-    <driverClass>TKKN_NPS.JobDriver_RelaxInSpring</driverClass>
+    <driverClass>TKKN_NPS.JobGiver_RelaxInSpring</driverClass>
     <reportString>relaxing in a spring.</reportString>
     <joyDuration>4000</joyDuration>
     <joyGainRate>1</joyGainRate>

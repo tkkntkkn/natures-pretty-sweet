@@ -4,46 +4,65 @@ using System.Collections.Generic;
 using UnityEngine;
 using Verse;
 using Verse.AI;
+using Verse.AI.Group;
 
 // NOTE: The job that puts pawns in springs when they're too hot is in harmonypatches/jobgiverspringspatch.cs
 
 namespace TKKN_NPS
 {
-	public class JobDriver_RelaxInSpring : JobDriver_VisitJoyThing
+	public class JobGiver_RelaxInSpring : ThinkNode_JobGiver
 	{
-		private Thing SpringThing
+		private float radius = 30f;
+
+		public override ThinkNode DeepCopy(bool resolve = true)
 		{
-			get
-			{
-				return this.job.GetTarget(TargetIndex.A).Thing;
-			}
+			JobGiver_RelaxInSpring jobGiver_RelaxInSpring = (JobGiver_RelaxInSpring)base.DeepCopy(resolve);
+			jobGiver_RelaxInSpring.radius = this.radius;
+			return jobGiver_RelaxInSpring;
 		}
 
-
-		public override bool TryMakePreToilReservations()
+		protected override Job TryGiveJob(Pawn pawn)
 		{
-			return true;
-		}
 
-		protected override Action GetWaitTickAction()
-		{
-			return delegate
+			Predicate<Thing> validator = delegate (Thing t)
 			{
-				Pawn pawn = this.pawn;
-				float extraJoyGainFactor = 1;
-				JoyUtility.JoyTickCheckEnd(pawn, JoyTickFullJoyAction.EndJob, extraJoyGainFactor);
+				if (t.def.defName == "TKKN_HotSpring" && t.AmbientTemperature < 26 && t.AmbientTemperature > 15)
+				{
+					return true;
+
+				}
+				if (t.def.defName == "TKKN_ColdSpring" && t.AmbientTemperature > 24)
+				{
+					return true;
+
+				}
+				return false;
 			};
+			Thing spring = GenClosest.ClosestThingReachable(pawn.GetLord().CurLordToil.FlagLoc, pawn.Map, ThingRequest.ForDef(TKKN_NPS.ThingDefOf.TKKN_ColdSpring), PathEndMode.Touch, TraverseParms.For(pawn, Danger.Deadly, TraverseMode.ByPawn, false), -1f, validator, null, 0, -1, false, RegionType.Set_Passable, false);
+			if (spring != null)
+			{
+				return new Job(RimWorld.JobDefOf.GotoSafeTemperature, this.getSpringCell(spring));
+			}
+			return null;
 		}
 
-		public override string GetReport()
+		private IntVec3 getSpringCell(Thing spring)
 		{
-			TerrainDef terrain = this.pawn.Position.GetTerrain(this.Map);
-			if (terrain.defName == "TKKN_HotSpringsWater")
+			Predicate<IntVec3> validator = delegate (IntVec3 pos)
 			{
-				return "TKKN_NPS_RelaxHotSpring".Translate();
-
-			}
-			return "TKKN_NPS_RelaxColdSpring".Translate();
+				if (spring.def.defName == "TKKN_HotSpring")
+				{
+					return pos.GetTerrain(spring.Map).defName == "TKKN_HotSpringsWater";
+				}
+				if (spring.def.defName == "TKKN_ColdSpring")
+				{
+					return pos.GetTerrain(spring.Map).defName == "TKKN_ColdSpringsWater";
+				}
+				return false;
+			};
+			IntVec3 c = new IntVec3();
+			CellFinder.TryFindRandomCellNear(spring.Position, spring.Map, 6, validator, out c);
+			return c;
 		}
 	}
 }

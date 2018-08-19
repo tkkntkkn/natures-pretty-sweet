@@ -39,7 +39,7 @@ namespace TKKN_NPS
 				TerrainDef terrain = pawn.Position.GetTerrain(Find.VisibleMap);
 				if (isHot && terrain.defName == "TKKN_ColdSpringsWater") 
 				{
-					__result = new Job(JobDefOf.WaitSafeTemperature, 500, true);
+					__result = new Job(RimWorld.JobDefOf.WaitSafeTemperature, 500, true);
 					return;
 				}
 
@@ -48,10 +48,9 @@ namespace TKKN_NPS
 				Thing thing = GenClosest.ClosestThingReachable(pawn.GetLord().CurLordToil.FlagLoc, pawn.Map, ThingRequest.ForDef(TKKN_NPS.ThingDefOf.TKKN_ColdSpring), PathEndMode.Touch, TraverseParms.For(pawn, Danger.Deadly, TraverseMode.ByPawn, false), -1f, null, null, 0, -1, false, RegionType.Set_Passable, false);
 				if (thing != null)
 				{
-					__result = new Job(JobDefOf.GotoSafeTemperature, thing.Position);
+					__result = new Job(RimWorld.JobDefOf.GotoSafeTemperature, thing.Position);
 					return;
 				}
-
 			}
 		}
 	}
