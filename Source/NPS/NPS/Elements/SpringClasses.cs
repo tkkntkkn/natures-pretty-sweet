@@ -283,6 +283,10 @@ namespace TKKN_NPS
 
 		public void changeShape()
 		{
+			if (this.Props.howOftenToChange == 0)
+			{
+				return;
+			}
 			ModuleBase moduleBase = new Perlin(1.1, 1, 5, 3, this.Props.radius, QualityMode.Medium);
 			moduleBase = new ScaleBias(0.2, 0.2, moduleBase);
 
