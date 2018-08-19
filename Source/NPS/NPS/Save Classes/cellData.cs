@@ -14,7 +14,7 @@ namespace TKKN_NPS
 		public Map map;
 		public int howPacked = 0;
 		public int howWet = 0;
-		public float howWetPlants = 0;
+		public float howWetPlants = 50;
 		public float temperature = -9999;
 		public float frostLevel = 0;
 		public TerrainDef baseTerrain;
@@ -95,6 +95,7 @@ namespace TKKN_NPS
 			{
 				this.setTidesTerrain();
 			}
+
 			this.overrideType = "";
 		}
 
@@ -140,7 +141,13 @@ namespace TKKN_NPS
 					changeTerrain(weather.dryTerrain);
 				}
 			}
-//			*/
+			else if (this.baseTerrain.HasTag("Water"))
+			{
+				changeTerrain(baseTerrain);
+				isWet = false;
+				howWet = 0;
+			}
+			//			*/
 		}
 	
 		public void setFrozenTerrain() {
@@ -148,18 +155,24 @@ namespace TKKN_NPS
 				return;
 			}
 
-			if (this.isFlooded && this.weather.freezeTerrain != currentTerrain) {
-				if (currentTerrain.HasModExtension<TerrainWeatherReactions>()) {
-					TerrainWeatherReactions curWeather = currentTerrain.GetModExtension<TerrainWeatherReactions>();
-					this.changeTerrain(curWeather.freezeTerrain);
-				}
-			}
 
 			if (this.temperature < 0 && !this.isFrozen && this.temperature < this.weather.freezeAt && this.weather.freezeTerrain != null)
 			{
 				this.isFrozen = true;
 				this.isThawed = false;
-				this.changeTerrain(weather.freezeTerrain);
+				if (this.isFlooded && this.weather.freezeTerrain != currentTerrain)
+				{
+					if (currentTerrain.HasModExtension<TerrainWeatherReactions>())
+					{
+						TerrainWeatherReactions curWeather = currentTerrain.GetModExtension<TerrainWeatherReactions>();
+						this.changeTerrain(curWeather.freezeTerrain);
+					}
+				}
+				else
+				{
+					this.changeTerrain(weather.freezeTerrain);
+
+				}
 				if (baseTerrain.defName == "TKKN_Lava")
 				{
 					this.map.GetComponent<Watcher>().lavaCellsList.Remove(location);

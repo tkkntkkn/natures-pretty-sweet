@@ -86,11 +86,11 @@
             <floodTerrain />
             <wetTerrain />
             <freezeTerrain>TKKN_Ice</freezeTerrain>
-            <freezeAt>-2</freezeAt>
+            <freezeAt>-4</freezeAt>
 			<wetAt></wetAt>
             <isSalty>False</isSalty>
 			<holdFrost>False</holdFrost>
-			<temperatureAdjust>5</temperatureAdjust>
+			<temperatureAdjust>10</temperatureAdjust>
          </li>
       </value>
    </Operation>
