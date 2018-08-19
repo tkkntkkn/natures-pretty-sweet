@@ -452,6 +452,7 @@ namespace TKKN_NPS
 			Scribe_Values.Look<int>(ref this.tideLevel, "tideLevel", this.tideLevel, true);
 			Scribe_Collections.Look<int>(ref this.floodLevel, "floodLevel", LookMode.Value);
 			Scribe_Values.Look<int>(ref this.howWet, "howWet", this.howWet, true);
+			Scribe_Values.Look<float>(ref this.howWetPlants, "howWetPlants", this.howWetPlants, true);
 			Scribe_Values.Look<float>(ref this.frostLevel, "frostLevel", this.frostLevel, true);
 			Scribe_Values.Look<bool>(ref this.isWet, "isWet", this.isWet, true);
 			Scribe_Values.Look<bool>(ref this.isFlooded, "isFlooded", this.isFlooded, true);
