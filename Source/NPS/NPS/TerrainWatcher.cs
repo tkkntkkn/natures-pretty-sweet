@@ -581,6 +581,11 @@ namespace TKKN_NPS
 				gettingWet = true;
 				cell.gettingWet = true;
 				cell.setTerrain("wet");
+			} else if (Settings.showRain && !roofed && this.map.weatherManager.curWeather.snowRate > .001f)
+			{
+				gettingWet = true;
+				cell.gettingWet = true;
+				cell.setTerrain("wet");
 			}
 			else
 			{
@@ -689,8 +694,21 @@ namespace TKKN_NPS
 			}
 			else if (cell.howWetPlants < (float) 0)
 			{
-				cell.howWetPlants = (float) 0;
-				this.hurtPlants(c, false, true);
+				if (cell.currentTerrain.HasModExtension<TerrainWeatherReactions>())
+				{
+					TerrainWeatherReactions weather = cell.currentTerrain.GetModExtension<TerrainWeatherReactions>();
+					if (weather.dryTerrain == null || cell.currentTerrain.defName == "MarshyTerrain" || cell.currentTerrain.defName == "RichSoil")
+					{
+						//don't hurt plants where the terrain is swampy.
+						cell.howWetPlants = (float)0;
+						this.hurtPlants(c, false, true);
+					}
+				}
+				else
+				{
+					cell.howWetPlants = (float)0;
+					this.hurtPlants(c, false, true);
+				}
 			}
 
 
@@ -996,7 +1014,14 @@ namespace TKKN_NPS
 			{
 				return;
 			}
-			
+
+			//don't hurt things in growing zone
+			Zone_Growing zone = this.map.zoneManager.ZoneAt(c) as Zone_Growing;
+			if (zone != null)
+			{
+				return;
+			}
+
 			List<Thing> things = c.GetThingList(this.map);
 			foreach (Thing thing in things.ToList())
 			{
