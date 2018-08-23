@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
+
+	<TerrainDef ParentName="FloorBase">
+		<defName>TKKN_DirtPath</defName>
+        <label>DirtPath</label>
+        <texturePath>Terrain/Surfaces/PackedDirt</texturePath>
+    </TerrainDef>
+	
+	
     <TerrainDef>
         <defName>TKKN_SaltField</defName>
         <label>salt field</label>

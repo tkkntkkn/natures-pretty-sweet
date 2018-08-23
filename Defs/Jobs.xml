@@ -8,4 +8,15 @@
     <joyGainRate>1</joyGainRate>
     <joyKind>Meditative</joyKind>
   </JobDef>
+  
+    <JobDef>
+		<defName>TKKN_GoSwimming</defName>
+		<driverClass>TKKN_NPS.JobGiver_GoSwimming</driverClass>
+		<reportString>going swimming.</reportString>
+		<joyDuration>4000</joyDuration>
+		<joyGainRate>1</joyGainRate>
+		<joyKind>Meditative</joyKind>
+	</JobDef>
+	
+	
   </Defs>

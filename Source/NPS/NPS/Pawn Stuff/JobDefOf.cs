@@ -8,5 +8,7 @@ namespace TKKN_NPS
 	public static class JobDefOf
 	{
 		public static JobDef TKKN_RelaxSpring;
+		public static JobDef TKKN_GoSwimming;
+		
 	}
 }

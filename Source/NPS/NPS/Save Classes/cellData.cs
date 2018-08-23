@@ -29,7 +29,10 @@ namespace TKKN_NPS
 		public bool isFrozen = false;
 		public bool isThawed = true;
 
-		
+		public int tideLevel = -1;
+		public HashSet<int> floodLevel = new HashSet<int>();
+
+
 
 		public TerrainWeatherReactions weather
 		{
@@ -114,7 +117,6 @@ namespace TKKN_NPS
 			if (weather.wetTerrain != null && currentTerrain != weather.wetTerrain && howWet > weather.wetAt)
 			{
 				changeTerrain(weather.wetTerrain);
-
 				if (baseTerrain.defName == "TKKN_Lava")
 				{
 					this.map.GetComponent<Watcher>().lavaCellsList.Remove(location);
@@ -122,8 +124,7 @@ namespace TKKN_NPS
 				isWet = true;
 				rainSpawns();
 			}
-			else if (howWet == 0 && currentTerrain != baseTerrain && isWet && !isFlooded)
-			{
+			else if (howWet == 0 && currentTerrain != baseTerrain && isWet && !isFlooded){
 				changeTerrain(baseTerrain);
 				if (baseTerrain.defName == "TKKN_Lava")
 				{
@@ -141,12 +142,6 @@ namespace TKKN_NPS
 					changeTerrain(weather.dryTerrain);
 				}
 			}
-			else if (this.baseTerrain.HasTag("Water"))
-			{
-				changeTerrain(baseTerrain);
-				isWet = false;
-				howWet = 0;
-			}
 			//			*/
 		}
 	
@@ -156,10 +151,8 @@ namespace TKKN_NPS
 			}
 
 
-			if (this.temperature < 0 && !this.isFrozen && this.temperature < this.weather.freezeAt && this.weather.freezeTerrain != null)
+			if (this.temperature < 0  && this.temperature < this.weather.freezeAt && this.weather.freezeTerrain != null)
 			{
-				this.isFrozen = true;
-				this.isThawed = false;
 				if (this.isFlooded && this.weather.freezeTerrain != currentTerrain)
 				{
 					if (currentTerrain.HasModExtension<TerrainWeatherReactions>())
@@ -168,15 +161,17 @@ namespace TKKN_NPS
 						this.changeTerrain(curWeather.freezeTerrain);
 					}
 				}
-				else
+				else if(!this.isFrozen)
 				{
 					this.changeTerrain(weather.freezeTerrain);
+					if (baseTerrain.defName == "TKKN_Lava")
+					{
+						this.map.GetComponent<Watcher>().lavaCellsList.Remove(location);
+					}
 
 				}
-				if (baseTerrain.defName == "TKKN_Lava")
-				{
-					this.map.GetComponent<Watcher>().lavaCellsList.Remove(location);
-				}
+				this.isFrozen = true;
+				this.isThawed = false;
 			}
 			else  if (temperature > 0)
 			{
@@ -263,19 +258,45 @@ namespace TKKN_NPS
 			}
 
 		}
+		
+
+		public void unpack()
+		{
+			//only pack dirt right now. TO DO: Add sand.
+			//don't pack if there's a growing zone.
+			if (this.howPacked > 0 && baseTerrain.defName == "Soil")
+			{
+				this.howPacked--;
+			}
+		}
 
 		public void doPack()
 		{
 			//only pack dirt right now. TO DO: Add sand.
+			//don't hurt things in growing zone
+			Zone_Growing zone = this.map.zoneManager.ZoneAt(this.location) as Zone_Growing;
+			if (zone != null)
+			{
+				return;
+			}           
 			//don't pack if there's a growing zone.
-			if (baseTerrain.defName == "Dirt") {
+			if (baseTerrain.defName == "Soil") {
 				this.howPacked++;
 			}
 
-			if (this.howPacked > 50)
+			if (currentTerrain.defName == "PackedDirt")
 			{
-				TerrainDef packed = TerrainDef.Named("PackedDirt");
+				TerrainDef packed1 = TerrainDef.Named("Soil");
+				this.changeTerrain(packed1);
+				this.baseTerrain = packed1;
+			}
+
+			if (this.howPacked > 100)
+			{
+				TerrainDef packed = TerrainDef.Named("TKKN_DirtPath");
 				this.changeTerrain(packed);
+				this.baseTerrain = packed;
+				this.howPacked = 0;
 			}
 		}
 		/*
@@ -480,14 +501,13 @@ namespace TKKN_NPS
 			}
 		}
 
-		public int tideLevel = -1;
-		public HashSet<int> floodLevel = new HashSet<int>();
 
 		public void ExposeData()
 		{
 			
 			Scribe_Values.Look<int>(ref this.tideLevel, "tideLevel", this.tideLevel, true);
 			Scribe_Collections.Look<int>(ref this.floodLevel, "floodLevel", LookMode.Value);
+			Scribe_Values.Look<int>(ref this.howPacked, "howPacked", this.howPacked, true);
 			Scribe_Values.Look<int>(ref this.howWet, "howWet", this.howWet, true);
 			Scribe_Values.Look<float>(ref this.howWetPlants, "howWetPlants", this.howWetPlants, true);
 			Scribe_Values.Look<float>(ref this.frostLevel, "frostLevel", this.frostLevel, true);

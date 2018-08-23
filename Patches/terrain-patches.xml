@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Patch>
+
    <Operation Class="PatchOperationAddModExtension">
       <xpath>*/TerrainDef[defName = "TKKN_SaltField"]</xpath>
       <value>
@@ -167,6 +168,7 @@
             <isSalty>False</isSalty>
 			<holdFrost>False</holdFrost>
 			<dryTerrain />
+			<temperatureAdjust>50</temperatureAdjust>
          </li>
       </value>
    </Operation>
@@ -184,6 +186,7 @@
             <isSalty>False</isSalty>
 			<holdFrost>False</holdFrost>
 			<dryTerrain />
+			<temperatureAdjust>50</temperatureAdjust>
          </li>
       </value>
    </Operation>
@@ -250,7 +253,7 @@
             <freezeAt>0</freezeAt>
 			<wetAt>0</wetAt>
             <isSalty>False</isSalty>
-			<holdFrost>False</holdFrost>
+			<holdFrost>True</holdFrost>
 			<dryTerrain>MossyTerrain</dryTerrain>
          </li>
       </value>
@@ -357,4 +360,20 @@
          </li>
       </value>
    </Operation>
+   
+   
+   
+   	<Operation Class="PatchOperationRemove">
+      <xpath>*/TerrainDef[defName = "WaterMovingDeep"]/passability</xpath>
+	</Operation> 
+	
+	<Operation Class="PatchOperationRemove">
+      <xpath>*/TerrainDef[defName = "WaterDeep"]/passability</xpath>
+	</Operation> 
+	
+	<Operation Class="PatchOperationRemove">
+      <xpath>*/TerrainDef[defName = "WaterOceanDeep"]/passability</xpath>
+	</Operation> 
+
+
 </Patch>
