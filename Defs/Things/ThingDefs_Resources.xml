@@ -349,8 +349,27 @@
 	</RecipeDef>
 <!-- END LAVA ROCK -->
   
-  
-  
+    
+    <ThingDef ParentName="PlantFoodRawBase">
+    <defName>TKKN_Cattails</defName>
+    <label>cattails</label>
+    <description>Raw cattail flowers.</description>
+    <graphicData>
+      <texPath>TKKN_NPS/Things/cattails</texPath>
+    </graphicData>
+    <statBases>
+      <MarketValue>.6</MarketValue>
+    </statBases>
+    <ingestible>
+      <foodType>Seed</foodType>
+    </ingestible>
+    <comps>
+      <li Class="CompProperties_Rottable">
+        <daysToRotStart>30</daysToRotStart>
+        <rotDestroys>true</rotDestroys>
+      </li>
+    </comps>
+  </ThingDef>
   
   
   

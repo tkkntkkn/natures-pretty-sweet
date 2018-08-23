@@ -185,6 +185,105 @@
          <topWindExposure>0.4</topWindExposure>
       </plant>
    </ThingDef>
+   
+   <ThingDef ParentName="PlantBase">
+      <defName>TKKN_PlantWildflowers</defName>
+      <label>wildflowers</label>
+      <description>Colorful, beautiful native plants.</description>
+      <statBases>
+         <MaxHitPoints>35</MaxHitPoints>
+      </statBases>
+      <pathCost>18</pathCost>
+      <graphicData>
+         <texPath>TKKN_NPS/Things/Plant/Wildflowers</texPath>
+         <graphicClass>Graphic_Random</graphicClass>
+      </graphicData>
+      <hideAtSnowDepth>0.1</hideAtSnowDepth>
+      <ingestible>
+         <nutrition>0.40</nutrition>
+      </ingestible>
+      <plant>
+         <fertilityMin>0.5</fertilityMin>
+         <fertilitySensitivity>0.7</fertilitySensitivity>
+         <growDays>3</growDays>
+         <reproduceMtbDays>3</reproduceMtbDays>
+		 <dieIfLeafless>true</dieIfLeafless>
+         <harvestWork>60</harvestWork>
+         <maxMeshCount>9</maxMeshCount>
+         <visualSizeRange>
+            <min>0.7</min>
+            <max>0.85</max>
+         </visualSizeRange>
+         <topWindExposure>0.4</topWindExposure>
+      </plant>
+   </ThingDef>
+   
+    <ThingDef ParentName="PlantBase">
+      <defName>TKKN_PlantLilypad</defName>
+      <label>lilypad</label>
+      <description>Aquatic herbs that live in temperate and tropical climates.</description>
+      <statBases>
+         <MaxHitPoints>35</MaxHitPoints>
+      </statBases>
+      <pathCost>18</pathCost>
+      <graphicData>
+         <texPath>TKKN_NPS/Things/Plant/Wildflowers</texPath>
+         <graphicClass>Graphic_Random</graphicClass>
+      </graphicData>
+      <hideAtSnowDepth>0.1</hideAtSnowDepth>
+      <ingestible>
+         <nutrition>0.40</nutrition>
+      </ingestible>
+      <plant>
+         <fertilityMin>0.5</fertilityMin>
+         <fertilitySensitivity>0.7</fertilitySensitivity>
+         <growDays>3</growDays>
+         <reproduceMtbDays>3</reproduceMtbDays>
+		 <dieIfLeafless>true</dieIfLeafless>
+         <harvestWork>60</harvestWork>
+         <maxMeshCount>9</maxMeshCount>
+         <visualSizeRange>
+            <min>0.7</min>
+            <max>0.85</max>
+         </visualSizeRange>
+         <topWindExposure>0.4</topWindExposure>
+      </plant>
+   </ThingDef>
+   
+   <ThingDef ParentName="PlantBase">
+      <defName>TKKN_PlantCatTails</defName>
+      <label>cattails</label>
+      <description>Also known as bulrushes. A semi-aquatic plants with an brown, cigar-shaped, edible flower.</description>
+      <statBases>
+         <MaxHitPoints>85</MaxHitPoints>
+      </statBases>
+      <pathCost>18</pathCost>
+      <graphicData>
+         <texPath>TKKN_NPS/Things/Plant/CatTails</texPath>
+         <graphicClass>Graphic_Random</graphicClass>
+      </graphicData>
+      <hideAtSnowDepth>0.6</hideAtSnowDepth>
+      <ingestible>
+         <nutrition>0.40</nutrition>
+      </ingestible>
+      <plant>
+		 <harvestTag>Standard</harvestTag>
+		 <harvestedThingDef>TKKN_Cattails</harvestedThingDef>
+		 <harvestYield>3</harvestYield>
+         <fertilityMin>0.5</fertilityMin>
+         <fertilitySensitivity>0.7</fertilitySensitivity>
+         <growDays>3</growDays>
+         <reproduceMtbDays>3</reproduceMtbDays>
+		 <dieIfLeafless>true</dieIfLeafless>
+         <harvestWork>60</harvestWork>
+         <maxMeshCount>9</maxMeshCount>
+         <visualSizeRange>
+            <min>0.7</min>
+            <max>0.85</max>
+         </visualSizeRange>
+         <topWindExposure>0.4</topWindExposure>
+      </plant>
+   </ThingDef>
    <!--
   <ThingDef ParentName="PlantBase">
 	<defName>TKKN_PlantMoss</defName>

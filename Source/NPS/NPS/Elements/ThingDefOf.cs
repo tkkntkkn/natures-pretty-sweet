@@ -18,5 +18,7 @@ namespace TKKN_NPS
 
 		public static ThingDef TKKN_crab;
 
+		public static ThingDef TKKN_DustDevil;
+
 	}
 }

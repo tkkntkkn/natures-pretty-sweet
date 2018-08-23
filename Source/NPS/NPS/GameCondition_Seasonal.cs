@@ -7,6 +7,14 @@ using UnityEngine;
 
 namespace TKKN_NPS
 {
+	public class GameCondition_Drought : GameCondition
+	{
+		public int tempAdjust = 10;
+		public string floodOverride = "low";
+	}
+}
+namespace TKKN_NPS
+{
 	public class GameCondition_WildFlowerBloom : GameCondition_TKKNBlooms
 	{
 		public float howManyBlooms = 1.5f;

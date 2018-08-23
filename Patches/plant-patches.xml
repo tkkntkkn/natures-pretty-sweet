@@ -6,11 +6,42 @@
 		<texPath>TKKN_NPS/Things/Plant/Grass</texPath>
 	  </value>
 	</Operation> 
+	
+	
+	<Operation Class="PatchOperationAddModExtension">
+      <xpath>/Defs/ThingDef[defName = "TKKN_PlantCatTails"]</xpath>
+	   <value>
+         <li Class="TKKN_NPS.ThingWeatherReaction">
+          <allowedTerrains>
+			<li>TKKN_ColdSpringsWater</li>
+			<li>TKKN_HotSpringsWater</li>
+			<li>TKKN_RiverDeposit</li>
+			<li>WaterShallow</li>
+			<li>WaterMovingShallow</li>
+		  </allowedTerrains>
+         </li>
+      </value>
+	</Operation> 
+	
+	<Operation Class="PatchOperationAddModExtension">
+      <xpath>/Defs/ThingDef[defName = "TKKN_PlantLilypad"]</xpath>
+	   <value>
+         <li Class="TKKN_NPS.ThingWeatherReaction">
+          <allowedTerrains>
+			<li>TKKN_ColdSpringsWater</li>
+			<li>TKKN_HotSpringsWater</li>
+			<li>WaterShallow</li>
+		  </allowedTerrains>
+         </li>
+      </value>
+	</Operation> 
+	
+	
     <Operation Class="PatchOperationAddModExtension">
       <xpath>/Defs/ThingDef[defName = "PlantTallGrass"]</xpath>
 	   <value>
          <li Class="TKKN_NPS.ThingWeatherReaction">
-          <!-- frostGraphicPath>TKKN_NPS/Things/Plant/Frosted/GrassFrost</frostGraphicPath -->
+          <frostGraphicPath>TKKN_NPS/Things/Plant/Frosted/Grass</frostGraphicPath>
          </li>
       </value>
 	</Operation> 

@@ -1,4 +1,5 @@
 ﻿using Verse;
+using System.Collections.Generic;
 
 namespace TKKN_NPS
 {
@@ -9,5 +10,8 @@ namespace TKKN_NPS
 		public string frostLeaflessGraphicPath;
 		public string snowLeaflessGraphicPath;
 		public Graphic frostGraphicData;
+
+		public List<TerrainDef> allowedTerrains;
+		
 	}
 }

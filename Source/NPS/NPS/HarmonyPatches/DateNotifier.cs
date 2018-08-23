@@ -20,10 +20,13 @@ namespace TKKN_NPS
 				Vector2 location = Find.WorldGrid.LongLatOf(map.Tile);
 				Season season = GenDate.Season((long)Find.TickManager.TicksAbs, location);
 
-				biomeSettings.setWeatherBySeason(map, season);
-				biomeSettings.setDiseaseBySeason(season);
-				biomeSettings.setIncidentsBySeason(season);
-				
+				if (biomeSettings.lastChanged != season)
+				{
+					biomeSettings.setWeatherBySeason(map, season);
+					biomeSettings.setDiseaseBySeason(season);
+					biomeSettings.setIncidentsBySeason(season);
+					biomeSettings.lastChanged = season;
+				}
 				return;
 			}
 

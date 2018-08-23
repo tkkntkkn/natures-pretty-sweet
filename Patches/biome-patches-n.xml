@@ -59,18 +59,22 @@
           <springEvents>
 			<TKKN_Superbloom>1</TKKN_Superbloom>
 			<TKKN_WildFlowerBloom>1</TKKN_WildFlowerBloom>
+			<TKKN_DustDevil>.5</TKKN_DustDevil>
 		  </springEvents>
 		  <summerEvents>
 			<TKKN_Superbloom>0</TKKN_Superbloom>
 			<TKKN_WildFlowerBloom>0</TKKN_WildFlowerBloom>
+			<TKKN_DustDevil>1</TKKN_DustDevil>
 		  </summerEvents>
 		  <fallEvents>
 			<TKKN_Superbloom>0</TKKN_Superbloom>
 			<TKKN_WildFlowerBloom>0</TKKN_WildFlowerBloom>
+			<TKKN_DustDevil>1</TKKN_DustDevil>
 		  </fallEvents>
 		  <winterEvents>
 			<TKKN_Superbloom>0</TKKN_Superbloom>
 			<TKKN_WildFlowerBloom>0</TKKN_WildFlowerBloom>
+			<TKKN_DustDevil>.5</TKKN_DustDevil>
 		  </winterEvents>
 		  <springWeathers>
 		  </springWeathers>
@@ -92,21 +96,29 @@
 			<li>PlantDandelion</li>
 			<li>PlantAgave</li>
 		  </bloomPlants>
+          <specialPlants>
+			<TKKN_NPSLilyPads>.3</TKKN_NPSLilyPads>
+			<TKKN_NPSCatTails>.3</TKKN_NPSCatTails>
+		  </specialPlants>
           <springEvents>
 			<TKKN_Superbloom>1</TKKN_Superbloom>
 			<TKKN_WildFlowerBloom>1</TKKN_WildFlowerBloom>
+			<TKKN_DustDevil>.2</TKKN_DustDevil>
 		  </springEvents>
 		  <summerEvents>
 			<TKKN_Superbloom>0</TKKN_Superbloom>
 			<TKKN_WildFlowerBloom>0</TKKN_WildFlowerBloom>
+			<TKKN_DustDevil>.5</TKKN_DustDevil>
 		  </summerEvents>
 		  <fallEvents>
 			<TKKN_Superbloom>0</TKKN_Superbloom>
 			<TKKN_WildFlowerBloom>0</TKKN_WildFlowerBloom>
+			<TKKN_DustDevil>.5</TKKN_DustDevil>
 		  </fallEvents>
 		  <winterEvents>
 			<TKKN_Superbloom>0</TKKN_Superbloom>
 			<TKKN_WildFlowerBloom>0</TKKN_WildFlowerBloom>
+			<TKKN_DustDevil>.2</TKKN_DustDevil>
 		  </winterEvents>
 
          </li>
@@ -122,22 +134,29 @@
 			<li>PlantWildHealroot</li>
 			<li>PlantDandelion</li> <!--REPLACE WITH WILDFLOWERS AFTER TESTING -->
 		  </bloomPlants>
+          <specialPlants>
+			<TKKN_NPSCatTails>.3</TKKN_NPSCatTails>
+		  </specialPlants>
           <springEvents>
 			<TKKN_WildFlowerBloom>1</TKKN_WildFlowerBloom>
 			<HerdMigration>1.2</HerdMigration>
 			<Aurora>1</Aurora>
+			<TKKN_DustDevil>0</TKKN_DustDevil>
 		  </springEvents>
           <summerEvents>
 			<TKKN_WildFlowerBloom>.5</TKKN_WildFlowerBloom>
 			<HerdMigration>.2</HerdMigration>
+			<TKKN_DustDevil>0</TKKN_DustDevil>
 		  </summerEvents>
           <fallEvents>
 			<HerdMigration>1.2</HerdMigration>
 			<Aurora>1</Aurora>
+			<TKKN_DustDevil>0</TKKN_DustDevil>
 		  </fallEvents>
           <winterEvents>
 			<HerdMigration>.2</HerdMigration>
 			<Aurora>2</Aurora>
+			<TKKN_DustDevil>0</TKKN_DustDevil>
 		  </winterEvents>
 		  <springWeathers>
 			<Clear>19</Clear>
@@ -223,5 +242,132 @@
 	  </li>
       </value>
 	</Operation> 	
+	<Operation Class="PatchOperationAddModExtension">
+      <xpath>/Defs/BiomeDef[defName = "TemperateForest"]</xpath>
+	   <value>
+         <li Class="TKKN_NPS.BiomeSeasonalSettings">
+          <bloomPlants>
+			<li>PlantGrass</li>
+			<li>PlantRaspberry</li>
+			<li>PlantWildHealroot</li>
+			<li>PlantDandelion</li>
+			<li>TKKN_NPSPlantWildflowers</li>
+		  </bloomPlants>
+          <springEvents>
+			<TKKN_WildFlowerBloom>1</TKKN_WildFlowerBloom>
+			<HerdMigration>1.2</HerdMigration>
+			<Aurora>1</Aurora>
+		  </springEvents>
+          <summerEvents>
+			<TKKN_WildFlowerBloom>.5</TKKN_WildFlowerBloom>
+			<HerdMigration>.2</HerdMigration>
+		  </summerEvents>
+          <fallEvents>
+			<HerdMigration>1.2</HerdMigration>
+			<Aurora>1</Aurora>
+		  </fallEvents>
+          <winterEvents>
+			<HerdMigration>.2</HerdMigration>
+			<Aurora>2</Aurora>
+		  </winterEvents>
+		  <springWeathers>
+			<Clear>19</Clear>
+			<Fog>3</Fog>
+			<Rain>2</Rain>
+			<DryThunderstorm>2</DryThunderstorm>
+			<RainyThunderstorm>3</RainyThunderstorm>
+			<FoggyRain>3</FoggyRain>
+			<SnowGentle>0</SnowGentle>
+			<SnowHard>0</SnowHard>
+		  </springWeathers>
+		  <summerWeathers>
+			<Clear>26</Clear>
+			<Fog>1</Fog>
+			<Rain>2</Rain>
+			<DryThunderstorm>1</DryThunderstorm>
+			<RainyThunderstorm>1</RainyThunderstorm>
+			<FoggyRain>1</FoggyRain>
+			<SnowGentle>0</SnowGentle>
+			<SnowHard>0</SnowHard>
+		  </summerWeathers>
+		  <fallWeathers>
+			<Clear>18</Clear>
+			<Fog>3</Fog>
+			<Rain>2</Rain>
+			<DryThunderstorm>1</DryThunderstorm>
+			<RainyThunderstorm>5</RainyThunderstorm>
+			<FoggyRain>3</FoggyRain>
+			<SnowGentle>0</SnowGentle>
+			<SnowHard>0</SnowHard>
+		  </fallWeathers>
+		  <winterWeathers>
+			<Clear>18</Clear>
+			<Fog>3</Fog>
+			<Rain>0</Rain>
+			<DryThunderstorm>0</DryThunderstorm>
+			<RainyThunderstorm>0</RainyThunderstorm>
+			<FoggyRain>0</FoggyRain>
+			<SnowGentle>8</SnowGentle>
+			<SnowHard>8</SnowHard>
+		  </winterWeathers>
+		  <springDiseases>
+			 <li>
+				<diseaseInc>Disease_Flu</diseaseInc>
+				<commonality>80</commonality>
+			  </li>
+			  <li>
+				<diseaseInc>Disease_Plague</diseaseInc>
+				<commonality>80</commonality>
+			  </li>
+			  <li>
+				<diseaseInc>Disease_Malaria</diseaseInc>
+				<commonality>90</commonality>
+			  </li>
+		  </springDiseases>
+		  <summerDiseases>
+			 <li>
+				<diseaseInc>Disease_Flu</diseaseInc>
+				<commonality>50</commonality>
+			  </li>
+			  <li>
+				<diseaseInc>Disease_Plague</diseaseInc>
+				<commonality>100</commonality>
+			  </li>
+			  <li>
+				<diseaseInc>Disease_Malaria</diseaseInc>
+				<commonality>120</commonality>
+			  </li>
+		  </summerDiseases>
+		  <fallDiseases>
+			  <li>
+				<diseaseInc>Disease_Flu</diseaseInc>
+				<commonality>150</commonality>
+			  </li>
+			  <li>
+				<diseaseInc>Disease_Plague</diseaseInc>
+				<commonality>80</commonality>
+			  </li>
+			  <li>
+				<diseaseInc>Disease_Malaria</diseaseInc>
+				<commonality>80</commonality>
+			  </li>
+		  </fallDiseases>
+		  <winterDiseases>
+						 <li>
+				<diseaseInc>Disease_Flu</diseaseInc>
+				<commonality>180</commonality>
+			  </li>
+			  <li>
+				<diseaseInc>Disease_Plague</diseaseInc>
+				<commonality>50</commonality>
+			  </li>
+			  <li>
+				<diseaseInc>Disease_Malaria</diseaseInc>
+				<commonality>50</commonality>
+			  </li>
+		  </winterDiseases>
+	  </li>
+      </value>
+	</Operation> 		
 	
 </Patch>

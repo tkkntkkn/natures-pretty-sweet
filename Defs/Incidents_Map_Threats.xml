@@ -16,6 +16,21 @@
   </IncidentDef>
 
 
-
+	<IncidentDef>
+		<defName>TKKN_DustDevil</defName>
+		<label>dustdevil</label>
+		<category>Misc</category>
+		<targetTypes>
+		  <li>MapPlayerHome</li>
+		</targetTypes>
+			<workerClass>TKKN_NPS.IncidentWorker_DustDevil</workerClass>
+			<letterLabel>Dust Devils!</letterLabel>
+			<letterText>A dust devil has formed!\n\n It's less destructive than a tornado, but keep out of its way!</letterText>
+			<letterDef>ThreatSmall</letterDef>
+			<baseChance>0.25</baseChance>
+			<minRefireDays>15</minRefireDays>
+			<minDifficulty>2</minDifficulty>
+		<tale>Tornado</tale>
+	</IncidentDef>
 
 </Defs>

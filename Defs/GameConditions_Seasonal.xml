@@ -27,4 +27,17 @@
     </exclusiveConditions>
   </GameConditionDef>
 
+   <GameConditionDef>
+    <defName>TKKN_Drought</defName>
+    <label>drought</label>
+    <description>There's no rain in the forecast... for a very long time.</description>
+    <endMessage>The drought is ending.</endMessage>
+    <canBePermanent>true</canBePermanent>
+    <preventRain>true</preventRain>
+	<exclusiveConditions>
+      <li>TKKN_WildFlowerBloom</li>
+      <li>TKKN_Superbloom</li>
+    </exclusiveConditions>
+  </GameConditionDef>
+
 </Defs>

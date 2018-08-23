@@ -5,8 +5,10 @@ using System.Collections.Generic;
 
 namespace TKKN_NPS
 {
-	class BiomeSeasonalSettings : DefModExtension
+	public class BiomeSeasonalSettings : DefModExtension
 	{
+		public Season lastChanged;
+
 		public List<ThingDef> bloomPlants;
 		public List<WeatherCommonalityRecord> springWeathers;
 		public List<WeatherCommonalityRecord> summerWeathers;
@@ -20,8 +22,61 @@ namespace TKKN_NPS
 		public List<BiomeDiseaseRecord> summerDiseases;
 		public List<BiomeDiseaseRecord> fallDiseases;
 		public List<BiomeDiseaseRecord> winterDiseases;
+		public List<BiomePlantRecord> specialPlants;
 
-		public void setWeatherBySeason(Map map, Season season)
+
+		[Unsaved]
+		private Dictionary<ThingDef, float> cachedPlantCommonalities;
+
+		public List<ThingDef> listSpecialPlants
+		{
+			get
+			{
+				List<ThingDef> plants = new List<ThingDef>();
+				for (int i = 0; i < this.specialPlants.Count; i++)
+				{
+					BiomePlantRecord plant = this.specialPlants[i];
+					plants.Add(plant.plant);
+				}
+				return plants;
+			}
+		}
+		public bool canPutOnTerrain(IntVec3 c, ThingDef thingDef, Map map)
+		{
+			TerrainDef terrain = c.GetTerrain(map);
+
+			//make sure plants are spawning on terrain that they're limited to:
+			ThingWeatherReaction weatherReaction = thingDef.GetModExtension<ThingWeatherReaction>();
+			if (weatherReaction != null)
+			{
+				//if they're only allowed to spawn in certain terrains, stop it from spawning.
+				if (!weatherReaction.allowedTerrains.Contains(terrain))
+				{
+					return false;
+				}
+			}
+			return true;
+		}
+
+		public float CommonalityOfPlant(ThingDef plantDef)
+		{
+		if (this.cachedPlantCommonalities == null)
+		{
+			this.cachedPlantCommonalities = new Dictionary<ThingDef, float>();
+			for (int i = 0; i < this.specialPlants.Count; i++)
+			{
+				this.cachedPlantCommonalities.Add(this.specialPlants[i].plant, this.specialPlants[i].commonality);
+			}			
+		}
+		float result;
+		if (this.cachedPlantCommonalities.TryGetValue(plantDef, out result))
+		{
+			return result;
+		}
+		return 0f;
+	}
+
+	public void setWeatherBySeason(Map map, Season season)
 		{
 			if (Season.Spring == season) {
 				map.Biome.baseWeatherCommonalities = this.springWeathers;

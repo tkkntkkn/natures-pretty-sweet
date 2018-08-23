@@ -2,7 +2,6 @@
 <Defs>
   <ThoughtDef>
     <defName>TKKN_WildFlowerBloom</defName>
-    <workerClass>TKKN_NPS.ThoughtWorker_WildFlowerBloom</workerClass>
     <gameCondition>TKKN_WildFlowerBloom</gameCondition>
     <stages>
       <li>
@@ -15,7 +14,6 @@
   
   <ThoughtDef>
     <defName>TKKN_Superbloom</defName>
-    <workerClass>TKKN_NPS.ThoughtWorker_Superbloom</workerClass>
     <gameCondition>TKKN_Superbloom</gameCondition>
     <stages>
       <li>
