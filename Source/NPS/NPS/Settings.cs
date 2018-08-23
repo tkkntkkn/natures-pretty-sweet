@@ -28,11 +28,12 @@ namespace TKKN_NPS
 		public static bool allowPlantEffects = true;
 		public static bool showCold = true;
 		public static bool showHot = true;
+		public static bool allowPawnsToGetWet = true;
 		public static bool showRain = true;
 		public static bool doWeather = true;
 		public static bool regenCells = false;
 		public static bool doTides = true;		
-		public static bool showTempReadout = true;
+		public static bool showTempReadout = false;
 
 
 		public static bool showTempOverlay {
@@ -47,18 +48,7 @@ namespace TKKN_NPS
 			Listing_Standard list = new Listing_Standard(GameFont.Small) { ColumnWidth = inRect.width / 2 };
 			list.Begin(inRect);
 
-			list.CheckboxLabeled(
-				"TKKN_allowLavaEruption_title".Translate(),
-				ref Settings.allowLavaEruption,
-				"TKKN_allowLavaEruption_text".Translate());
-			list.CheckboxLabeled(
-				"TKKN_spawnLavaOnlyInBiome_title".Translate(),
-				ref Settings.spawnLavaOnlyInBiome,
-				"TKKN_spawnLavaOnlyInBiome_text".Translate());
-
-
-			list.Gap(12f);
-			
+			//Performance Settings
 			list.CheckboxLabeled(
 				"TKKN_doWeather_title".Translate(),
 				ref Settings.doWeather,
@@ -79,11 +69,30 @@ namespace TKKN_NPS
 				"TKKN_doTides_title".Translate(),
 				ref Settings.doTides,
 				"TKKN_doTides_text".Translate());
+			list.Gap(12f);
+
+
+			//Game Play Settings
+
+			list.CheckboxLabeled(
+				"TKKN_allowLavaEruption_title".Translate(),
+				ref Settings.allowLavaEruption,
+				"TKKN_allowLavaEruption_text".Translate());
+			list.CheckboxLabeled(
+				"TKKN_spawnLavaOnlyInBiome_title".Translate(),
+				ref Settings.spawnLavaOnlyInBiome,
+				"TKKN_spawnLavaOnlyInBiome_text".Translate());
 			list.CheckboxLabeled(
 				"TKKN_allowPlantEffects_title".Translate(),
 				ref Settings.allowPlantEffects,
 				"TKKN_allowPlantEffects_text".Translate());
+			list.CheckboxLabeled(
+				"TKKN_allowPawnsToGetWet_title".Translate(),
+				ref Settings.allowPawnsToGetWet,
+				"TKKN_allowPawnsToGetWet_text".Translate());
 
+
+			//Development stuff
 			list.Gap(30f);
 			list.CheckboxLabeled(
 				"TKKN_regen_title".Translate(),
@@ -110,10 +119,12 @@ namespace TKKN_NPS
 			Scribe_Values.Look(ref Settings.showHot, "allowPlantEffects", true, true);
 			Scribe_Values.Look(ref Settings.showRain, "showRain", true, true);
 			Scribe_Values.Look(ref Settings.doTides, "doTides", true, true);
+			Scribe_Values.Look(ref Settings.doTides, "allowPawnsToGetWet", true, true);
 			Scribe_Values.Look(ref Settings.showTempReadout, "showTempReadout", true, true);
 			Scribe_Values.Look(ref Settings.spawnLavaOnlyInBiome, "spawnLavaOnlyInBiome", false, true);
 			Scribe_Values.Look(ref Settings.allowLavaEruption, "allowLavaEruption", true, true);
 			Scribe_Values.Look(ref Settings.regenCells, "regenCells", false, true);
+			
 
 		}
 	}
