@@ -37,6 +37,40 @@
 	</Operation> 
 	
 	
+	<Operation Class="PatchOperationAddModExtension">
+      <xpath>/Defs/ThingDef[defName = "TKKN_TreeOcotollo"]</xpath>
+	   <value>
+         <li Class="TKKN_NPS.ThingWeatherReaction">
+          <flowerGraphicPath>TKKN_NPS/Things/Plant/Flowering/TreeOcotollo</frostGraphicPath>
+         </li>
+      </value>
+	</Operation> 
+	<Operation Class="PatchOperationAddModExtension">
+      <xpath>/Defs/ThingDef[defName = "TKKN_PlantCactusPricklyPear"]</xpath>
+	   <value>
+         <li Class="TKKN_NPS.ThingWeatherReaction">
+          <flowerGraphicPath>TKKN_NPS/Things/Plant/Flowering/CactusPricklyPear</frostGraphicPath>
+         </li>
+      </value>
+	</Operation> 
+	<Operation Class="PatchOperationAddModExtension">
+      <xpath>/Defs/ThingDef[defName = "TKKN_PlantCactusSanPedro"]</xpath>
+	   <value>
+         <li Class="TKKN_NPS.ThingWeatherReaction">
+          <flowerGraphicPath>TKKN_NPS/Things/Plant/Flowering/CactusSanPedro</frostGraphicPath>
+         </li>
+      </value>
+	</Operation> 
+	<Operation Class="PatchOperationAddModExtension">
+      <xpath>/Defs/ThingDef[defName = "TKKN_PlantCactusBarrel"]</xpath>
+	   <value>
+         <li Class="TKKN_NPS.ThingWeatherReaction">
+          <flowerGraphicPath>TKKN_NPS/Things/Plant/Flowering/CactusBarrel</frostGraphicPath>
+         </li>
+      </value>
+	</Operation> 
+	
+	
     <Operation Class="PatchOperationAddModExtension">
       <xpath>/Defs/ThingDef[defName = "PlantTallGrass"]</xpath>
 	   <value>
