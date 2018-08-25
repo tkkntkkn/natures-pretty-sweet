@@ -53,24 +53,20 @@ namespace TKKN_NPS
     {
         public override float GetScore(Tile tile)
         {
-            if (tile.WaterCovered)
-            {
-                return -100f;
-            }
-            if (tile.temperature < -10.0)
-            {
-                return 0f;
-            }
-            if (tile.rainfall < 600.0)
-            {
-                return 0f;
-            }
-			if (Rand.Value > .009)
+			if (tile.WaterCovered)
+			{
+				return -100f;
+			}
+			if (tile.temperature < -10f || tile.temperature > 10f)
 			{
 				return 0f;
 			}
-			return (float)(16.0 + (tile.temperature - 7.0) + (tile.rainfall - 600.0) / 180.0);
-        }
+			if (tile.rainfall < 1100f)
+			{
+				return 0f;
+			}
+			return 20f;
+		}
     }
     /*
     class NPS_BiomeWorker_Sequioa : BiomeWorker_TemperateForest
@@ -124,34 +120,74 @@ namespace TKKN_NPS
         }
     }
 
-    /*
-    class NPS_BiomeWorker_Prairie : BiomeWorker_AridShrubland
+	class NPS_BiomeWorker_Savanna : BiomeWorker_TemperateForest
+	{
+		public override float GetScore(Tile tile)
+		{
+			//keep this the same, just make it fail more often. When it fails, shrubland will be rendered, instead.
+			if (tile.WaterCovered)
+			{
+				return -100f;
+			}
+			if (tile.temperature < 24f || tile.temperature > 27f)
+			{
+				return 0f;
+			}
+			if (tile.rainfall < 1500f || tile.rainfall >= 1800f)
+			{
+				return 0f;
+			}
+			if (tile.hilliness != Hilliness.SmallHills && tile.hilliness != Hilliness.Flat)
+			{
+				return 0f;
+			}
+
+			return 22.5f + (tile.temperature - 7f) + (tile.rainfall - 0f) / 180f;
+		}
+	}
+
+	class NPS_BiomeWorker_Prairie : BiomeWorker_AridShrubland
     {
         public override float GetScore(Tile tile)
         {
-            //keep this the same, just make it fail more often. When it fails, shrubland will be rendered, instead.
-            if (tile.WaterCovered)
-            {
-                return -100f;
-            }
-            if (tile.temperature < -10f)
-            {
-                return 0f;
-            }
-            if (tile.rainfall < 600f || tile.rainfall >= 2000f)
-            {
-                return 0f;
-            }
+			//keep this the same, just make it fail more often. When it fails, shrubland will be rendered, instead.
+			/*
+			if (tile.WaterCovered)
+			{
+				return -100f;
+			}
+			if (tile.temperature < -10f)
+			{
+				return 0f;
+			}
+			if ((tile.rainfall < 600f) || tile.rainfall >= 2000f)
+			{
+				return 0f;
+			}
 
-            if (g.passOrFail(19))
-            {
+			return 22.5f + (tile.temperature - 22f) * 2.2f + (tile.rainfall - 600f) / 100f;
+			*/
+			if (tile.WaterCovered)
+			{
+				return -100f;
+			}
+			if (tile.temperature < -10f)
+			{
+				return 0f;
+			}
+			if (tile.rainfall < 1200f || tile.rainfall >= 1500f)
+			{
+				return 0f;
+			}
+			if (tile.hilliness != Hilliness.Flat)
+			{
+				return 0f;
+			}
 
-                return 0;
-            }
-
-            return 22.5f + (tile.temperature - 20f) * 2.2f + (tile.rainfall - 600f) / 100f;
-        }
+			return 22.5f + (tile.temperature - 20f) * 2.2f + (tile.rainfall - 0f) / 100f;
+		}
     }
+	/*
     class NPS_BiomeWorker_AridShrubland : BiomeWorker_AridShrubland
     {
         public override float GetScore(Tile tile)
@@ -179,5 +215,5 @@ namespace TKKN_NPS
             return 22.5f + (tile.temperature - 20f) * 2.2f + (tile.rainfall - 600f) / 100f;
         }
     }
-    */
+	*/
 }
