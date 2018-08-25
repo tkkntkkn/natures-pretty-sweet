@@ -250,6 +250,143 @@
          </li>
       </lifeStages>
    </PawnKindDef>
+   
+	<ThingDef ParentName="AnimalThingBase">
+      <defName>TKKN_Tumbleweed</defName>
+      <label>tumbleweed</label>
+      <description>A small animal that has cleverly disguised iteself like a rolling bush.</description>
+		<statBases>
+		  <MoveSpeed>3.0</MoveSpeed>
+		  <ArmorRating_Blunt>0.3</ArmorRating_Blunt>
+		  <ArmorRating_Sharp>0.5</ArmorRating_Sharp>
+		  <ComfyTemperatureMin>0</ComfyTemperatureMin>
+		  <MarketValue>50</MarketValue>
+		   <LeatherAmount>0</LeatherAmount>
+		</statBases>
+      <tools>
+         <li>
+            <capacities>
+               <li>Bite</li>
+            </capacities>
+            <power>3</power>
+            <cooldownTime>1.65</cooldownTime>
+            <linkedBodyPartsGroup>Teeth</linkedBodyPartsGroup>
+         </li>
+         <li>
+            <label>head</label>
+            <capacities>
+               <li>Blunt</li>
+            </capacities>
+            <power>1</power>
+            <cooldownTime>1.65</cooldownTime>
+            <linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+            <commonality>0.2</commonality>
+         </li>
+      </tools>
+      <!-- comps> throwing a "can't find type of" error, figuring out later.
+         <li Class="TKKN_NPS.CompProperties_GraphicRotator">
+            <howManyDegrees>5</howManyDegrees>
+            <howOften>50</howOften>
+         </li>
+      </comps -->
+      <race>
+         <body>Rock</body>
+		<baseBodySize>0.5</baseBodySize>
+		<baseHungerRate>0.33</baseHungerRate>
+		<baseHealthScale>0.6</baseHealthScale>
+		<foodType>OmnivoreRoughAnimal</foodType>
+		<leatherInsulation>20</leatherInsulation>
+		<wildness>0.75</wildness>
+		<gestationPeriodDays>22.5</gestationPeriodDays>
+		<litterSizeCurve>
+		<points>
+		  <li>(0.5, 0)</li>
+		  <li>(1, 1)</li>
+		  <li>(3, 1)</li>
+		  <li>(3.5, 0)</li>
+		</points>
+		</litterSizeCurve>
+		<lifeExpectancy>5</lifeExpectancy>
+         <lifeStageAges>
+            <li>
+               <def>AnimalBabyTiny</def>
+               <minAge>0</minAge>
+               <soundWounded>Pawn_Cobra_Wounded</soundWounded>
+               <soundDeath>Pawn_Cobra_Wounded</soundDeath>
+               <soundCall>Pawn_Cobra_Wounded</soundCall>
+               <soundAngry>Pawn_Cobra_Wounded</soundAngry>
+            </li>
+            <li>
+               <def>AnimalJuvenile</def>
+               <minAge>0.12</minAge>
+            </li>
+            <li>
+               <def>AnimalAdult</def>
+               <minAge>0.3</minAge>
+               <soundWounded>Pawn_Cobra_Wounded</soundWounded>
+               <soundDeath>Pawn_Cobra_Wounded</soundDeath>
+               <soundCall>Pawn_Cobra_Wounded</soundCall>
+               <soundAngry>Pawn_Cobra_Wounded</soundAngry>
+            </li>
+         </lifeStageAges>
+         <soundMeleeHitPawn>Pawn_Melee_SmallScratch_HitPawn</soundMeleeHitPawn>
+         <soundMeleeHitBuilding>Pawn_Melee_SmallScratch_HitBuilding</soundMeleeHitBuilding>
+         <soundMeleeMiss>Pawn_Melee_SmallScratch_Miss</soundMeleeMiss>
+      </race>
+      <tradeTags>
+         <li>StandardAnimal</li>
+      </tradeTags>
+   </ThingDef>
+   <PawnKindDef ParentName="AnimalKindBase">
+      <defName>TKKN_Tumbleweed</defName>
+      <label>tumbleweed</label>
+      <race>TKKN_Tumbleweed</race>
+      <combatPower>30</combatPower>
+      <wildSpawn_EcoSystemWeight>0.20</wildSpawn_EcoSystemWeight>
+      <labelMale>tumbleweed</labelMale>
+      <labelFemale>tumbleweed</labelFemale>
+      <lifeStages>
+         <li>
+            <label>tumblesprout</label>
+            <bodyGraphicData>
+               <texPath>TKKN_NPS/Animals/Tumbleweed/Tumbleweed</texPath>
+               <drawSize>0.45</drawSize>
+               <color>(223,219,108)</color>
+            </bodyGraphicData>
+            <dessicatedBodyGraphicData>
+               <texPath>Things/Pawn/Animal/Dessicated/CritterDessicatedSmall</texPath>
+               <drawSize>0.45</drawSize>
+            </dessicatedBodyGraphicData>
+         </li>
+         <li>
+            <bodyGraphicData>
+               <texPath>TKKN_NPS/Animals/Tumbleweed/Tumbleweed</texPath>
+               <drawSize>0.75</drawSize>
+               <color>(200,150,85)</color>
+            </bodyGraphicData>
+            <dessicatedBodyGraphicData>
+               <texPath>Things/Pawn/Animal/Dessicated/CritterDessicatedSmall</texPath>
+               <drawSize>0.7</drawSize>
+            </dessicatedBodyGraphicData>
+         </li>
+         <li>
+            <bodyGraphicData>
+               <texPath>TKKN_NPS/Animals/Tumbleweed/Tumbleweed</texPath>
+               <drawSize>0.87</drawSize>
+               <color>(200,150,85)</color>
+               <shadowData>
+                  <volume>(0.3, 0.4, 0.3)</volume>
+                  <offset>(0,0,-0.05)</offset>
+               </shadowData>
+            </bodyGraphicData>
+            <dessicatedBodyGraphicData>
+               <texPath>Things/Pawn/Animal/Dessicated/CritterDessicatedSmall</texPath>
+               <drawSize>0.85</drawSize>
+            </dessicatedBodyGraphicData>
+         </li>
+      </lifeStages>
+   </PawnKindDef>
+   
    <ThingDef ParentName="AnimalThingBase">
       <defName>TKKN_salamander</defName>
       <label>fire salamander</label>
@@ -444,7 +581,7 @@
    </PawnKindDef>
    <ThingDef ParentName="AnimalThingBase">
       <defName>TKKN_giantsnail</defName>
-      <label>giant snail s</label>
+      <label>giant snails</label>
       <description>Slow moving, armoured herbivores. Salt is deadly to them.</description>
 	   <statBases>
 		  <MoveSpeed>.1</MoveSpeed>
@@ -531,7 +668,7 @@
    </ThingDef>
    <PawnKindDef ParentName="AnimalKindBase">
       <defName>TKKN_giantsnail</defName>
-      <label>Giant Snail</label>
+      <label>giant snail</label>
       <race>TKKN_giantsnail</race>
       <combatPower>30</combatPower>
       <wildSpawn_EcoSystemWeight>0.20</wildSpawn_EcoSystemWeight>

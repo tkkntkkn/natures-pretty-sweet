@@ -53,10 +53,19 @@
   <ItemGroup>
     <Compile Include="BiomeSeasonalSettings.cs" />
     <Compile Include="Controller.cs" />
+    <Compile Include="Elements\DustDevil.cs" />
     <Compile Include="Elements\ElementSpawnDefOf.cs" />
     <Compile Include="Elements\ElementSpawnDef.cs" />
     <Compile Include="Elements\Building_SteamVent.cs" />
     <Compile Include="GameCondition_Seasonal.cs" />
+    <Compile Include="HarmonyPatches\BiomeWorker.cs" />
+    <Compile Include="HarmonyPatches\ForbidUtility.cs" />
+    <Compile Include="HarmonyPatches\GenPlantReproduction.cs" />
+    <Compile Include="HarmonyPatches\GenTemperature.cs" />
+    <Compile Include="HarmonyPatches\Graphic_Shadow.cs" />
+    <Compile Include="HarmonyPatches\DateNotifier.cs" />
+    <Compile Include="HarmonyPatches\Pawn.cs" />
+    <Compile Include="HarmonyPatches\PawnRenderer.cs" />
     <Compile Include="HarmonyPatches\Plant.cs" />
     <Compile Include="Frost\FrostCategory.cs" />
     <Compile Include="Frost\FrostGrid.cs" />
@@ -70,9 +79,13 @@
     <Compile Include="HediffDefOf.cs" />
     <Compile Include="Compatability\PatchOperationFindModByName.cs" />
     <Compile Include="HarmonyPatches\MouseoverReadout.cs" />
+    <Compile Include="HeDiffs\HeDiff_Wetness.cs" />
+    <Compile Include="IncidentWorker\IncidentCommonalityRecord.cs" />
     <Compile Include="IncidentWorker\IncidentWorker_Seasonal.cs" />
+    <Compile Include="HarmonyPatches\JobGiverSpringsPatch.cs" />
+    <Compile Include="JobGivers\JobGiverSprings.cs" />
     <Compile Include="Pawn Stuff\CompProperties_Heater.cs" />
-    <Compile Include="Pawn Stuff\ThoughtWorkers_Seasonal.cs" />
+    <Compile Include="Pawn Stuff\JobDefOf.cs" />
     <Compile Include="Save Classes\cellData.cs" />
     <Compile Include="Save Classes\springData.cs" />
     <Compile Include="Settings.cs" />

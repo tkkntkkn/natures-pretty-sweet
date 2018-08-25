@@ -5,19 +5,6 @@
   <!--=================== Visual - Heat ==================-->
 
 
-  
-    <ThingDef>
-    <defName>TKKN_HeatWaver</defName>
-	<label>heat</label>
-	  <thingClass>Thing</thingClass>
-    <graphicData>
-      <texPath>TKKN_NPS/Temperature/HeatWaver</texPath>
-       <graphicClass>Graphic_Single</graphicClass>
-	  <shaderType>MoteGlow</shaderType>
-    </graphicData>
-    <altitudeLayer>MoteLow</altitudeLayer>
-  </ThingDef>
-  
 
   <ThingDef ParentName="MoteBase">
     <defName>TKKN_Frost</defName>

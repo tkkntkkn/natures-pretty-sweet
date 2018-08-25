@@ -5,7 +5,7 @@ using RimWorld;
 
 namespace TKKN_NPS
 {
-	//add a frost overlay onto plants and stuff
+	//swap out plant graphics based on seasonal effects
 	[HarmonyPatch(typeof(Plant))]
 	[HarmonyPatch("Graphic", PropertyMethod.Getter)]
 	public static class PatchGraphicPlant
@@ -14,11 +14,6 @@ namespace TKKN_NPS
 		[HarmonyPostfix]
 		public static void Postfix(Plant __instance, ref Graphic __result)
 		{
-			//return;
-			if (!Settings.showCold)
-			{
-				return;
-			}
 			string id = __instance.def.defName;
 
 			if (!__instance.def.HasModExtension<ThingWeatherReaction>())
@@ -27,54 +22,83 @@ namespace TKKN_NPS
 			}
 
 			ThingWeatherReaction mod = __instance.def.GetModExtension<ThingWeatherReaction>();
+			Map map = __instance.Map;
 
 			string path = "";
 
-			//get snow graphic
-			if (__instance.Map.snowGrid.GetDepth(__instance.Position) >= 0.5f)
+			//get flowering or drought graphic if it's over 70
+			if (__instance.AmbientTemperature > 21)
 			{
-				if (!String.IsNullOrEmpty(mod.snowGraphicPath))
+				Watcher watcher = map.GetComponent<Watcher>();
+				cellData cell = watcher.cellWeatherAffects[__instance.Position];
+				if (cell != null)
 				{
-					id += "snow";
-					path = mod.snowGraphicPath;
+					if (!String.IsNullOrEmpty(mod.floweringGraphicPath) && cell.howWetPlants > 60)
+					{
+						id = "flowering";
+						path = mod.floweringGraphicPath;
+					}
+
+					if (!String.IsNullOrEmpty(mod.droughtGraphicPath) && cell.howWetPlants < 30)
+					{
+						id = "drought";
+						path = mod.droughtGraphicPath;
+					}
 				}
-			} else if (__instance.Map.GetComponent<FrostGrid>().GetDepth(__instance.Position) >= 0.6f)
+
+			}
+
+			if (Settings.showCold)
 			{
-				if (!String.IsNullOrEmpty(mod.frostGraphicPath))
+				//get snow graphic
+				if (map.snowGrid.GetDepth(__instance.Position) >= 0.5f)
 				{
-					id += "frost";
-					path = mod.frostGraphicPath;
+					if (!String.IsNullOrEmpty(mod.snowGraphicPath))
+					{
+						id += "snow";
+						path = mod.snowGraphicPath;
+					}
+				}
+				else if (map.GetComponent<FrostGrid>().GetDepth(__instance.Position) >= 0.6f)
+				{
+					if (!String.IsNullOrEmpty(mod.frostGraphicPath))
+					{
+						id += "frost";
+						path = mod.frostGraphicPath;
+					}
+				}
+
+				if (String.IsNullOrEmpty(path))
+				{
+					return;
+				}
+				//if it's leafless
+				if (__instance.def.plant.leaflessGraphic == __result)
+				{
+					id += "leafless";
+					path = path.Replace("Frosted", "Frosted/Leafless");
+					path = path.Replace("Snow", "Snow/Leafless");
+					path += "_Leafless";
+				}
+				else if (__instance.def.blockWind)
+				{
+					//make it so snow doesn't fall under the tree until it's leafless.
+					//	map.snowGrid.AddDepth(__instance.Position, -.05f);
+
 				}
 			}
 
-			if (String.IsNullOrEmpty(path)) {
-				return;
-			}
-			//if it's leafless
-			if (__instance.def.plant.leaflessGraphic == __result)
-			{
-				id += "leafless";
-				path = path.Replace("Frosted", "Frosted/Leafless");
-				path = path.Replace("Snow", "Snow/Leafless");
-				path += "_Leafless";
-			}
-			else if(__instance.def.blockWind)
-			{
-				//make it so snow doesn't fall under the tree until it's leafless.
-			//	__instance.Map.snowGrid.AddDepth(__instance.Position, -.05f);
-						
-			}
 
 
-			if (!__instance.Map.GetComponent<Watcher>().graphicHolder.ContainsKey(id))
+
+			if (!map.GetComponent<Watcher>().graphicHolder.ContainsKey(id))
 			{
 				//only load the image once.
-				__instance.Map.GetComponent<Watcher>().graphicHolder.Add(id, GraphicDatabase.Get(__instance.def.graphicData.graphicClass, path, __instance.def.graphic.Shader, __instance.def.graphicData.drawSize, __instance.def.graphicData.color, __instance.def.graphicData.colorTwo));
+				map.GetComponent<Watcher>().graphicHolder.Add(id, GraphicDatabase.Get(__instance.def.graphicData.graphicClass, path, __instance.def.graphic.Shader, __instance.def.graphicData.drawSize, __instance.def.graphicData.color, __instance.def.graphicData.colorTwo));
 			}
-			if (__instance.Map.GetComponent<Watcher>().graphicHolder.ContainsKey(id))
+			if (map.GetComponent<Watcher>().graphicHolder.ContainsKey(id))
 			{
-				//only load the image once.
-				__result = __instance.Map.GetComponent<Watcher>().graphicHolder[id];
+				__result = map.GetComponent<Watcher>().graphicHolder[id];
 			}
 
 		}

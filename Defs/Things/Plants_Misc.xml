@@ -40,7 +40,7 @@
       </statBases>
       <pathCost>18</pathCost>
       <graphicData>
-         <texPath>TKKN_NPS/Things/Plant/Lilypad</texPath>
+         <texPath>TKKN_NPS/Things/Plant/Lilypads</texPath>
          <graphicClass>Graphic_Random</graphicClass>
       </graphicData>
       <hideAtSnowDepth>0.1</hideAtSnowDepth>

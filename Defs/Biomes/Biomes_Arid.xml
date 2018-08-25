@@ -151,13 +151,15 @@
     </baseWeatherCommonalities>
     <wildPlants>
 		<PlantGrass>8</PlantGrass>
-		<PlantTreeBaobab>.5</PlantTreeBaobab>
-		<TKKN_PlantTreeGumTree>.5</TKKN_PlantTreeGumTree>
+		<TKKN_PlantTreeBaobab>.5</TKKN_PlantTreeBaobab>
+		<TKKN_PlantTreeGum>.5</TKKN_PlantTreeGum>
 		<TKKN_PlantCactusPricklyPear>.3</TKKN_PlantCactusPricklyPear>
 		<TKKN_PlantCactusSanPedro>.5</TKKN_PlantCactusSanPedro>
 		<TKKN_PlantCactusBarrel>.5</TKKN_PlantCactusBarrel>
-		<TKKN_PlantDesertShrubs>.5</TKKN_PlantDesertShrubs>
-		<TKKN_TreeOcotollo>.5</TKKN_TreeOcotollo>
+		<TKKN_PlantDesertShrubA>1</TKKN_PlantDesertShrubA>
+		<TKKN_PlantDesertShrubB>1</TKKN_PlantDesertShrubB>
+		<TKKN_PlantSucculants>.5</TKKN_PlantSucculants>
+		<TKKN_TreeOcotillo>.5</TKKN_TreeOcotillo>
 		<PlantPincushionCactus>.5</PlantPincushionCactus>
 		<PlantDandelion>0.8</PlantDandelion>
 		<PlantTreePalm>0.8</PlantTreePalm>
@@ -187,7 +189,7 @@
     <defName>TKKN_Grasslands</defName>
     <label>Tallgrass Prairie</label>
     <description>Extensive grasslands, high winds and bright sun. The soil is rich but there is little protection from the elements, and seasonal droughts, fires, storms and tornados are punishing. Only 1%-4% of tall grass praries remain on Earth. </description>
-    <workerClass>TKKN_NPS.NPS_BiomeWorker_Oasis</workerClass>
+    <workerClass>TKKN_NPS.NPS_BiomeWorker_Prairie</workerClass>
     <animalDensity>1.3</animalDensity>
     <plantDensity>0.8</plantDensity>
    <factionBaseSelectionWeight>0.95</factionBaseSelectionWeight>
@@ -195,7 +197,7 @@
     <pathCost_summer>0</pathCost_summer>
     <pathCost_fall>0</pathCost_fall>
     <pathCost_winter>0</pathCost_winter>
-    <texture>World/Biomes/AridShrubland</texture>
+    <texture>TKKN_NPS/World/Biomes/Grasslands</texture>
     <soundsAmbient>
       <li>AmbientNightInsects_Standard</li>
     </soundsAmbient>
@@ -260,17 +262,16 @@
 		<TKKN_PlantSunflower>0.8</TKKN_PlantSunflower>
 		<PlantBush>0.7</PlantBush>
 		<TKKN_PlantWildflowers>0.3</TKKN_PlantWildflowers>
-		<PlantTreeOak>0.8</PlantTreeDrago>
+		<PlantTreeOak>0.8</PlantTreeOak>
 		<PlantRaspberry>0.2</PlantRaspberry>
 		<TKKN_PlantWildCorn>0.3</TKKN_PlantWildCorn>		
     </wildPlants>
     <wildAnimals>
       <Muffalo>1</Muffalo>
       <Elk>0.5</Elk>
-      <Alpaca>0.2</Alpaca>
+      <Deer>0.5</Deer>
       <Boomrat>1</Boomrat>
-      <Iguana>0.2</Iguana>
-      <Rabbit>0.15</Rabbit>
+      <Hare>0.15</Hare>
       <WildBoar>0.4</WildBoar>
       <Boomalope>0.5</Boomalope>
       <Emu>0.3</Emu>
@@ -288,10 +289,10 @@
   </BiomeDef>
  
   <BiomeDef>
-    <defName>TKKN_Savannah</defName>
-    <label>Tropical Savannah</label>
-    <description>Extensive grasslands with scattered trees.  It has the most trees of the grasslands, and the most rock, in the form of kopjes. The soil is rich but there is little protection from the elements. Seasonal droughts, wildfires and animal migrations occur.</description>
-    <workerClass>TKKN_NPS.NPS_BiomeWorker_Oasis</workerClass>
+    <defName>TKKN_Savanna</defName>
+    <label>Temperate Savanna</label>
+    <description>Extensive grasslands with scattered trees.  It has the most trees of the grasslands. The soil is rich but there is little protection from the elements. Seasonal droughts, wildfires and animal migrations occur.</description>
+    <workerClass>TKKN_NPS.NPS_BiomeWorker_Savanna</workerClass>
     <animalDensity>1.3</animalDensity>
     <plantDensity>0.8</plantDensity>
    <factionBaseSelectionWeight>0.95</factionBaseSelectionWeight>
@@ -299,7 +300,7 @@
     <pathCost_summer>0</pathCost_summer>
     <pathCost_fall>0</pathCost_fall>
     <pathCost_winter>0</pathCost_winter>
-    <texture>World/Biomes/AridShrubland</texture>
+    <texture>TKKN_NPS/World/Biomes/Savanna</texture>
     <soundsAmbient>
       <li>AmbientNightInsects_Standard</li>
     </soundsAmbient>
@@ -365,8 +366,9 @@
 		<PlantPincushionCactus>0.6</PlantPincushionCactus>
 		<PlantAgave>0.3</PlantAgave>
 		<TKKN_PlantTreeAcacia>0.11</TKKN_PlantTreeAcacia>
-		<TKKN_PlantTreeGumTree>0.6</TKKN_PlantTreeGumTree>
-		<PlantTreeBaobab>0.11</PlantTreeBaobab>
+		<TKKN_PlantTreeGum>0.6</TKKN_PlantTreeGum>
+		<TKKN_PlantTreeBaobab>0.11</TKKN_PlantTreeBaobab>
+		<PlantTreeDrago>0.11</PlantTreeDrago>
 		<PlantRaspberry>0.1</PlantRaspberry>
     </wildPlants>
     <wildAnimals>

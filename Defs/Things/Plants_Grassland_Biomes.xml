@@ -6,14 +6,14 @@
       <label>baobab tree</label>
       <description>Long lived tree that store water in their trunks.</description>
       <graphicData>
-         <texPath>TKKN_NPS/Things/Plant/Baobab</texPath>
+         <texPath>TKKN_NPS/Things/Plant/TreeBaobab</texPath>
          <graphicClass>Graphic_Random</graphicClass>
       </graphicData>
       <statBases>
          <Beauty>2</Beauty>
       </statBases>
       <plant>
-         <leaflessGraphicPath>TKKN_NPS/Things/Plant/Leafless/Baobab_Leafless</leaflessGraphicPath>
+         <leaflessGraphicPath>TKKN_NPS/Things/Plant/VarientLeafless/TreeBaobab_Leafless</leaflessGraphicPath>
          <growDays>60</growDays>
          <harvestWork>1000</harvestWork>
          <harvestYield>75</harvestYield>
@@ -22,6 +22,11 @@
             <max>4</max>
          </wildClusterSizeRange>
          <wildClusterRadius>5</wildClusterRadius>
+		<visualSizeRange>
+			<min>2</min>
+			<max>4</max>
+		</visualSizeRange>
+
       </plant>
    </ThingDef>
    <ThingDef ParentName="TreeBase">
@@ -29,7 +34,7 @@
       <label>umbrella thorn acacia tree</label>
       <description>Hardy plant known to tolerate high alkalinity, drought, high temperatures, sandy and stony soils, strongly sloped rooting surfaces, and sand blasting.</description>
       <graphicData>
-         <texPath>TKKN_NPS/Things/Plant/Acacia</texPath>
+         <texPath>TKKN_NPS/Things/Plant/TreeAcacia</texPath>
          <graphicClass>Graphic_Random</graphicClass>
       </graphicData>
       <statBases>
@@ -45,6 +50,35 @@
          </wildClusterSizeRange>
          <wildClusterRadius>5</wildClusterRadius>
       </plant>
+   </ThingDef>
+   
+   <ThingDef ParentName="TreeBase">
+      <defName>TKKN_PlantTreeGum</defName>
+      <label>gum tree</label>
+      <description>Smooth barked, fast growing tree that guzzles water and repells insects.</description>
+      <graphicData>
+         <texPath>TKKN_NPS/Things/Plant/TreeGum</texPath>
+         <graphicClass>Graphic_Random</graphicClass>
+      </graphicData>
+      <statBases>
+         <Beauty>2</Beauty>
+      </statBases>
+      <plant>
+         <growDays>15</growDays>
+         <harvestWork>1000</harvestWork>
+         <harvestYield>30</harvestYield>
+         <wildClusterSizeRange>
+            <min>2</min>
+            <max>4</max>
+         </wildClusterSizeRange>
+         <wildClusterRadius>5</wildClusterRadius>
+		  <visualSizeRange>
+			<min>1.0</min>
+			<max>1.7</max>
+		  </visualSizeRange>
+
+      </plant>
+
    </ThingDef>
    <ThingDef ParentName="PlantBase">
       <defName>TKKN_PlantSunflower</defName>

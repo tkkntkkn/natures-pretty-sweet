@@ -5,7 +5,7 @@
       <label>redwood</label>
       <description>A huge, very slow growing tree. Its roots are shallow, and when it gets too large, it topples over. \n\n Yields red wood, which is valuable and rare.</description>
       <graphicData>
-         <texPath>TKKN_NPS/Things/Plant/Redwoods</texPath>
+         <texPath>TKKN_NPS/Things/Plant/TreeRedwoods</texPath>
          <graphicClass>Graphic_Random</graphicClass>
          <shadowData>
             <volume>(0.55, 0.2, 0.2)</volume>
@@ -72,7 +72,7 @@
       <label>old growth hazelnut tree</label>
       <description>A multi-stemmed woodland shrub with soft, saw-toothed, velvety leaves.</description>
       <graphicData>
-         <texPath>TKKN_NPS/Things/Plant/HazelOldGrowth</texPath>
+         <texPath>TKKN_NPS/Things/Plant/TreeOldGrowthHazel</texPath>
          <graphicClass>Graphic_Random</graphicClass>
       </graphicData>
       <statBases>
@@ -80,7 +80,7 @@
       </statBases>
       <plant>
          <sowTags />
-		<leaflessGraphicPath>TKKN_NPS/Things/Plant/Leafless/HazelOldGrowth_Leafless</leaflessGraphicPath>
+		<leaflessGraphicPath>TKKN_NPS/Things/Plant/VarientLeafless/TreeOldGrowthHazel_Leafless</leaflessGraphicPath>
          <growDays>60</growDays>
          <harvestWork>1000</harvestWork>
          <harvestYield>75</harvestYield>
@@ -101,14 +101,14 @@
       <label>hazelnut tree</label>
       <description>A multi-stemmed woodland shrub with soft, saw-toothed, velvety leaves.</description>
       <graphicData>
-         <texPath>TKKN_NPS/Things/Plant/Hazels</texPath>
+         <texPath>TKKN_NPS/Things/Plant/TreeHazel</texPath>
          <graphicClass>Graphic_Random</graphicClass>
       </graphicData>
       <statBases>
          <Beauty>2</Beauty>
       </statBases>
       <plant>
-		<leaflessGraphicPath>TKKN_NPS/Things/Plant/Leafless/Hazels_Leafless</leaflessGraphicPath>
+		<leaflessGraphicPath>TKKN_NPS/Things/Plant/VarientLeafless/TreeHazel_Leafless</leaflessGraphicPath>
          <growDays>60</growDays>
          <harvestWork>1000</harvestWork>
          <harvestYield>75</harvestYield>
@@ -125,7 +125,7 @@
       <label>redwood</label>
       <description>A huge, very slow growing tree. This one has toppled over due to its weight. \n\n Yeilds red wood, which is valuable and rare.</description>
       <graphicData>
-         <texPath>TKKN_NPS/Things/Plant/RedwoodDead</texPath>
+         <texPath>TKKN_NPS/Things/Plant/TreeRedwoodDead</texPath>
          <graphicClass>Graphic_Random</graphicClass>
          <shadowData>
             <volume>(0.55, 0.2, 0.2)</volume>

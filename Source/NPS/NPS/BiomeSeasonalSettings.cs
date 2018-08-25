@@ -47,7 +47,7 @@ namespace TKKN_NPS
 
 			//make sure plants are spawning on terrain that they're limited to:
 			ThingWeatherReaction weatherReaction = thingDef.GetModExtension<ThingWeatherReaction>();
-			if (weatherReaction != null)
+			if (weatherReaction != null && terrain!= null && weatherReaction.allowedTerrains != null)
 			{
 				//if they're only allowed to spawn in certain terrains, stop it from spawning.
 				if (!weatherReaction.allowedTerrains.Contains(terrain))
@@ -94,19 +94,19 @@ namespace TKKN_NPS
 		public void setDiseaseBySeason(Season season)
 		{
 			List<BiomeDiseaseRecord> seasonalDiseases = new List<BiomeDiseaseRecord>();
-			if (Season.Spring == season)
+			if (Season.Spring == season && this.springDiseases != null)
 			{
 				seasonalDiseases = this.springDiseases;
 			}
-			else if (Season.Summer == season)
+			else if (Season.Summer == season && this.summerDiseases != null)
 			{
 				seasonalDiseases = this.summerDiseases;
 			}
-			else if (Season.Fall == season)
+			else if (Season.Fall == season && this.fallDiseases != null)
 			{
 				seasonalDiseases = this.fallDiseases;
 			}
-			else if (Season.Winter == season)
+			else if (Season.Winter == season && this.winterDiseases != null)
 			{
 				seasonalDiseases = this.winterDiseases;
 			}
@@ -123,19 +123,19 @@ namespace TKKN_NPS
 		public void setIncidentsBySeason(Season season)
 		{
 			List<TKKN_IncidentCommonalityRecord> seasonalIncidents = new List<TKKN_IncidentCommonalityRecord>();
-			if (Season.Spring == season)
+			if (Season.Spring == season && this.springEvents != null)
 			{
 				seasonalIncidents = this.springEvents;
 			}
-			else if (Season.Summer == season)
+			else if (Season.Summer == season && this.summerEvents != null)
 			{
 				seasonalIncidents = this.summerEvents;
 			}
-			else if (Season.Fall == season)
+			else if (Season.Fall == season && this.fallEvents != null)
 			{
 				seasonalIncidents = this.fallEvents;
 			}
-			else if (Season.Winter == season)
+			else if (Season.Winter == season && this.winterEvents != null)
 			{
 				seasonalIncidents = this.winterEvents;
 			}

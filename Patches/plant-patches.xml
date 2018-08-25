@@ -1,319 +1,320 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <Patch>
-	<Operation Class="PatchOperationReplace">
-	  <xpath>/Defs/ThingDef[defName = "PlantTallGrass"]/graphicData/texPath</xpath>
-	  <value>
-		<texPath>TKKN_NPS/Things/Plant/Grass</texPath>
-	  </value>
-	</Operation> 
-	
-	
-	<Operation Class="PatchOperationAddModExtension">
+   <Operation Class="PatchOperationReplace">
+      <xpath>/Defs/ThingDef[defName = "PlantTallGrass"]/graphicData/texPath</xpath>
+      <value>
+         <texPath>TKKN_NPS/Things/Plant/Grass</texPath>
+      </value>
+   </Operation>
+   <Operation Class="PatchOperationAddModExtension">
       <xpath>/Defs/ThingDef[defName = "TKKN_PlantCatTails"]</xpath>
-	   <value>
+      <value>
          <li Class="TKKN_NPS.ThingWeatherReaction">
-          <allowedTerrains>
-			<li>TKKN_ColdSpringsWater</li>
-			<li>TKKN_HotSpringsWater</li>
-			<li>TKKN_RiverDeposit</li>
-			<li>WaterShallow</li>
-			<li>WaterMovingShallow</li>
-		  </allowedTerrains>
+            <allowedTerrains>
+               <li>TKKN_ColdSpringsWater</li>
+               <li>TKKN_HotSpringsWater</li>
+               <li>TKKN_RiverDeposit</li>
+               <li>WaterShallow</li>
+               <li>WaterMovingShallow</li>
+            </allowedTerrains>
          </li>
       </value>
-	</Operation> 
-	
-	<Operation Class="PatchOperationAddModExtension">
+   </Operation>
+   <Operation Class="PatchOperationAddModExtension">
       <xpath>/Defs/ThingDef[defName = "TKKN_PlantLilypad"]</xpath>
-	   <value>
+      <value>
          <li Class="TKKN_NPS.ThingWeatherReaction">
-          <allowedTerrains>
-			<li>TKKN_ColdSpringsWater</li>
-			<li>TKKN_HotSpringsWater</li>
-			<li>WaterShallow</li>
-		  </allowedTerrains>
+            <allowedTerrains>
+               <li>TKKN_ColdSpringsWater</li>
+               <li>TKKN_HotSpringsWater</li>
+               <li>WaterShallow</li>
+            </allowedTerrains>
          </li>
       </value>
-	</Operation> 
-	
-	
-	<Operation Class="PatchOperationAddModExtension">
-      <xpath>/Defs/ThingDef[defName = "TKKN_TreeOcotollo"]</xpath>
-	   <value>
+   </Operation>
+   <Operation Class="PatchOperationAddModExtension">
+      <xpath>/Defs/ThingDef[defName = "TKKN_PlantDesertShrubA"]</xpath>
+      <value>
          <li Class="TKKN_NPS.ThingWeatherReaction">
-          <flowerGraphicPath>TKKN_NPS/Things/Plant/Flowering/TreeOcotollo</frostGraphicPath>
+            <frostGraphicPath>TKKN_NPS/Things/Plant/VarientFrost/DesertShrubA</frostGraphicPath>
          </li>
       </value>
-	</Operation> 
-	<Operation Class="PatchOperationAddModExtension">
+   </Operation>
+   <Operation Class="PatchOperationAddModExtension">
+      <xpath>/Defs/ThingDef[defName = "TKKN_PlantDesertShrubB"]</xpath>
+      <value>
+         <li Class="TKKN_NPS.ThingWeatherReaction">
+            <droughtGraphicPath>TKKN_NPS/Things/Plant/VarientDrought/DesertShrubB</droughtGraphicPath>
+            <frostGraphicPath>TKKN_NPS/Things/Plant/VarientFrost/DesertShrubB</frostGraphicPath>
+         </li>
+      </value>
+   </Operation>
+   <Operation Class="PatchOperationAddModExtension">
+      <xpath>/Defs/ThingDef[defName = "TKKN_TreeOcotillo"]</xpath>
+      <value>
+         <li Class="TKKN_NPS.ThingWeatherReaction">
+            <floweringGraphicPath>TKKN_NPS/Things/Plant/VarientFlowering/TreeOcotillo</floweringGraphicPath>
+            <droughtGraphicPath>TKKN_NPS/Things/Plant/VarientDrought/TreeOcotillo</droughtGraphicPath>
+            <snowGraphicPath>TKKN_NPS/Things/Plant/VarientSnow/TreeOcotillo</snowGraphicPath>
+         </li>
+      </value>
+   </Operation>
+   <Operation Class="PatchOperationAddModExtension">
       <xpath>/Defs/ThingDef[defName = "TKKN_PlantCactusPricklyPear"]</xpath>
-	   <value>
+      <value>
          <li Class="TKKN_NPS.ThingWeatherReaction">
-          <flowerGraphicPath>TKKN_NPS/Things/Plant/Flowering/CactusPricklyPear</frostGraphicPath>
+            <floweringGraphicPath>TKKN_NPS/Things/Plant/VarientFlowering/CactusPricklyPear</floweringGraphicPath>
+            <snowGraphicPath>TKKN_NPS/Things/Plant/VarientSnow/CactusPricklyPear</snowGraphicPath>
          </li>
       </value>
-	</Operation> 
-	<Operation Class="PatchOperationAddModExtension">
+   </Operation>
+   <Operation Class="PatchOperationAddModExtension">
       <xpath>/Defs/ThingDef[defName = "TKKN_PlantCactusSanPedro"]</xpath>
-	   <value>
+      <value>
          <li Class="TKKN_NPS.ThingWeatherReaction">
-          <flowerGraphicPath>TKKN_NPS/Things/Plant/Flowering/CactusSanPedro</frostGraphicPath>
+            <floweringGraphicPath>TKKN_NPS/Things/Plant/VarientFlowering/CactusSanPedro</floweringGraphicPath>
+            <snowGraphicPath>TKKN_NPS/Things/Plant/VarientSnow/CactusSanPedro</snowGraphicPath>
          </li>
       </value>
-	</Operation> 
-	<Operation Class="PatchOperationAddModExtension">
+   </Operation>
+   <Operation Class="PatchOperationAddModExtension">
       <xpath>/Defs/ThingDef[defName = "TKKN_PlantCactusBarrel"]</xpath>
-	   <value>
+      <value>
          <li Class="TKKN_NPS.ThingWeatherReaction">
-          <flowerGraphicPath>TKKN_NPS/Things/Plant/Flowering/CactusBarrel</frostGraphicPath>
+            <floweringGraphicPath>TKKN_NPS/Things/Plant/VarientFlowering/CactusBarrel</floweringGraphicPath>
+            <snowGraphicPath>TKKN_NPS/Things/Plant/VarientSnow/CactusBarrel</snowGraphicPath>
          </li>
       </value>
-	</Operation> 
-	
-	
-    <Operation Class="PatchOperationAddModExtension">
+   </Operation>
+   <Operation Class="PatchOperationAddModExtension">
       <xpath>/Defs/ThingDef[defName = "PlantTallGrass"]</xpath>
-	   <value>
+      <value>
          <li Class="TKKN_NPS.ThingWeatherReaction">
-          <frostGraphicPath>TKKN_NPS/Things/Plant/Frosted/Grass</frostGraphicPath>
+            <frostGraphicPath>TKKN_NPS/Things/Plant/VarientFrosted/Grass</frostGraphicPath>
+            <droughtGraphicPath>TKKN_NPS/Things/VarientDrought/Grass</droughtGraphicPath>
          </li>
       </value>
-	</Operation> 
-	
-	<Operation Class="PatchOperationReplace">
-	  <xpath>/Defs/ThingDef[defName = "PlantGrass"]/graphicData/texPath</xpath>
-	  <value>
-		<texPath>TKKN_NPS/Things/Plant/Grass</texPath>
-	  </value>
-	</Operation> 
-    <Operation Class="PatchOperationAddModExtension">
+   </Operation>
+   <Operation Class="PatchOperationReplace">
+      <xpath>/Defs/ThingDef[defName = "PlantGrass"]/graphicData/texPath</xpath>
+      <value>
+         <texPath>TKKN_NPS/Things/Plant/Grass</texPath>
+      </value>
+   </Operation>
+   <Operation Class="PatchOperationAddModExtension">
       <xpath>/Defs/ThingDef[defName = "PlantGrass"]</xpath>
-	   <value>
+      <value>
          <li Class="TKKN_NPS.ThingWeatherReaction">
-          <frostGraphicPath>TKKN_NPS/Things/Plant/Frosted/Grass</frostGraphicPath>
+            <frostGraphicPath>TKKN_NPS/Things/Plant/VarientFrosted/Grass</frostGraphicPath>
+            <droughtGraphicPath>TKKN_NPS/Things/VarientDrought/Grass</droughtGraphicPath>
          </li>
       </value>
-	</Operation> 
-
-	
-	
-	<Operation Class="PatchOperationAddModExtension">
+   </Operation>
+   <Operation Class="PatchOperationAddModExtension">
       <xpath>/Defs/ThingDef[defName = "PlantBrambles"]</xpath>
-	   <value>
+      <value>
          <li Class="TKKN_NPS.ThingWeatherReaction">
-          <frostGraphicPath>TKKN_NPS/Things/Plant/Frosted/Brambles</frostGraphicPath>
-          <snowGraphicPath>TKKN_NPS/Things/Plant/Snow/Brambles</snowGraphicPath>
+            <frostGraphicPath>TKKN_NPS/Things/Plant/VarientFrosted/Brambles</frostGraphicPath>
+            <snowGraphicPath>TKKN_NPS/Things/Plant/VarientSnow/Brambles</snowGraphicPath>
          </li>
       </value>
-	</Operation> 
-	
-
-	<Operation Class="PatchOperationAddModExtension">
+   </Operation>
+   <Operation Class="PatchOperationAddModExtension">
       <xpath>/Defs/ThingDef[defName = "PlantTreeMaple"]</xpath>
-	   <value>
+      <value>
          <li Class="TKKN_NPS.ThingWeatherReaction">
-          <!-- frostGraphicPath>TKKN_NPS/Things/Plant/Frosted/TreeMaple</frostGraphicPath -->
-          <snowGraphicPath>TKKN_NPS/Things/Plant/Snow/TreeMaple</snowGraphicPath>
+            <!-- frostGraphicPath>TKKN_NPS/Things/Plant/VarientFrosted/TreeMaple</frostGraphicPath -->
+            <snowGraphicPath>TKKN_NPS/Things/Plant/VarientSnow/TreeMaple</snowGraphicPath>
          </li>
       </value>
-	</Operation> 
-
-	<Operation Class="PatchOperationAddModExtension">
+   </Operation>
+   <Operation Class="PatchOperationAddModExtension">
       <xpath>/Defs/ThingDef[defName = "PlantTreeDrago"]</xpath>
-	   <value>
+      <value>
          <li Class="TKKN_NPS.ThingWeatherReaction">
-          <!-- frostGraphicPath>TKKN_NPS/Things/Plant/Frosted/TreeDrago</frostGraphicPath -->
-          <snowGraphicPath>TKKN_NPS/Things/Plant/Snow/TreeDrago</snowGraphicPath>
+            <!-- frostGraphicPath>TKKN_NPS/Things/Plant/VarientFrosted/TreeDrago</frostGraphicPath -->
+            <snowGraphicPath>TKKN_NPS/Things/Plant/VarientSnow/TreeDrago</snowGraphicPath>
          </li>
       </value>
-	</Operation> 
-	
-	<Operation Class="PatchOperationAddModExtension">
+   </Operation>
+   <Operation Class="PatchOperationAddModExtension">
       <xpath>/Defs/ThingDef[defName = "PlantTreeCypress"]</xpath>
-	   <value>
+      <value>
          <li Class="TKKN_NPS.ThingWeatherReaction">
-          <!-- frostGraphicPath>TKKN_NPS/Things/Plant/Frosted/TreeCypress</frostGraphicPath -->
-          <snowGraphicPath>TKKN_NPS/Things/Plant/Snow/TreeCypress</snowGraphicPath>
+            <!-- frostGraphicPath>TKKN_NPS/Things/Plant/VarientFrosted/TreeCypress</frostGraphicPath -->
+            <snowGraphicPath>TKKN_NPS/Things/Plant/VarientSnow/TreeCypress</snowGraphicPath>
          </li>
       </value>
-	</Operation> 
-	
-	<Operation Class="PatchOperationAddModExtension">
+   </Operation>
+   <Operation Class="PatchOperationAddModExtension">
       <xpath>/Defs/ThingDef[defName = "PlantTreeCecropia"]</xpath>
-	   <value>
+      <value>
          <li Class="TKKN_NPS.ThingWeatherReaction">
-          <!-- frostGraphicPath>TKKN_NPS/Things/Plant/Frosted/TreeCecropia</frostGraphicPath -->
-          <snowGraphicPath>TKKN_NPS/Things/Plant/Snow/TreeCecropia</snowGraphicPath>
+            <!-- frostGraphicPath>TKKN_NPS/Things/Plant/VarientFrosted/TreeCecropia</frostGraphicPath -->
+            <snowGraphicPath>TKKN_NPS/Things/Plant/VarientSnow/TreeCecropia</snowGraphicPath>
          </li>
       </value>
-	</Operation> 
-
-	<Operation Class="PatchOperationAddModExtension">
+   </Operation>
+   <Operation Class="PatchOperationAddModExtension">
       <xpath>/Defs/ThingDef[defName = "PlantTreeBirch"]</xpath>
-	   <value>
+      <value>
          <li Class="TKKN_NPS.ThingWeatherReaction">
-          <!-- frostGraphicPath>TKKN_NPS/Things/Plant/Frosted/TreeBirch</frostGraphicPath -->
-          <snowGraphicPath>TKKN_NPS/Things/Plant/Snow/TreeBirch</snowGraphicPath>
+            <!-- frostGraphicPath>TKKN_NPS/Things/Plant/VarientFrosted/TreeBirch</frostGraphicPath -->
+            <snowGraphicPath>TKKN_NPS/Things/Plant/VarientSnow/TreeBirch</snowGraphicPath>
          </li>
       </value>
-	</Operation> 
-
-	<Operation Class="PatchOperationAddModExtension">
+   </Operation>
+   <Operation Class="PatchOperationAddModExtension">
       <xpath>/Defs/ThingDef[defName = "PlantTreeBamboo"]</xpath>
-	   <value>
+      <value>
          <li Class="TKKN_NPS.ThingWeatherReaction">
-          <!-- frostGraphicPath>TKKN_NPS/Things/Plant/Frosted/TreeBamboo</frostGraphicPath -->
-          <snowGraphicPath>TKKN_NPS/Things/Plant/Snow/TreeBamboo</snowGraphicPath>
+            <!-- frostGraphicPath>TKKN_NPS/Things/Plant/VarientFrosted/TreeBamboo</frostGraphicPath -->
+            <snowGraphicPath>TKKN_NPS/Things/Plant/VarientSnow/TreeBamboo</snowGraphicPath>
          </li>
       </value>
-	</Operation> 
-
-	<Operation Class="PatchOperationAddModExtension">
+   </Operation>
+   <Operation Class="PatchOperationAddModExtension">
       <xpath>/Defs/ThingDef[defName = "PlantShrubLow"]</xpath>
-	   <value>
+      <value>
          <li Class="TKKN_NPS.ThingWeatherReaction">
-          <frostGraphicPath>TKKN_NPS/Things/Plant/Frosted/ShrubLow</frostGraphicPath>
-          <snowGraphicPath>TKKN_NPS/Things/Plant/Snow/ShrubLow</snowGraphicPath>
+            <frostGraphicPath>TKKN_NPS/Things/Plant/VarientFrosted/ShrubLow</frostGraphicPath>
+            <snowGraphicPath>TKKN_NPS/Things/Plant/VarientSnow/ShrubLow</snowGraphicPath>
          </li>
       </value>
-	</Operation> 	
-	
-	<Operation Class="PatchOperationAddModExtension">
+   </Operation>
+   <Operation Class="PatchOperationAddModExtension">
       <xpath>/Defs/ThingDef[defName = "PlantBush"]</xpath>
-	   <value>
+      <value>
          <li Class="TKKN_NPS.ThingWeatherReaction">
-          <frostGraphicPath>TKKN_NPS/Things/Plant/Frosted/Bush</frostGraphicPath>
-          <snowGraphicPath>TKKN_NPS/Things/Plant/Snow/Bush</snowGraphicPath>
+            <frostGraphicPath>TKKN_NPS/Things/Plant/VarientFrosted/Bush</frostGraphicPath>
+            <snowGraphicPath>TKKN_NPS/Things/Plant/VarientSnow/Bush</snowGraphicPath>
          </li>
       </value>
-	</Operation> 	
-
-	<Operation Class="PatchOperationAddModExtension">
+   </Operation>
+   <Operation Class="PatchOperationAddModExtension">
       <xpath>/Defs/ThingDef[defName = "PlantTreeOak"]</xpath>
-	   <value>
+      <value>
          <li Class="TKKN_NPS.ThingWeatherReaction">
-          <!-- frostGraphicPath>TKKN_NPS/Things/Plant/Frosted/TreeOak</frostGraphicPath -->
-          <snowGraphicPath>TKKN_NPS/Things/Plant/Snow/TreeOak</snowGraphicPath>
+            <!-- frostGraphicPath>TKKN_NPS/Things/Plant/VarientFrosted/TreeOak</frostGraphicPath -->
+            <snowGraphicPath>TKKN_NPS/Things/Plant/VarientSnow/TreeOak</snowGraphicPath>
          </li>
       </value>
-	</Operation> 	
-	<Operation Class="PatchOperationAddModExtension">
+   </Operation>
+   <Operation Class="PatchOperationAddModExtension">
       <xpath>/Defs/ThingDef[defName = "TKKN_OldGrowth_PlantTreeOak"]</xpath>
-	   <value>
+      <value>
          <li Class="TKKN_NPS.ThingWeatherReaction">
-          <!-- frostGraphicPath>TKKN_NPS/Things/Plant/Frosted/TreeOak</frostGraphicPath -->
-          <snowGraphicPath>TKKN_NPS/Things/Plant/Snow/TreeOak</snowGraphicPath>
+            <!-- frostGraphicPath>TKKN_NPS/Things/Plant/VarientFrosted/TreeOak</frostGraphicPath -->
+            <snowGraphicPath>TKKN_NPS/Things/Plant/VarientSnow/TreeOak</snowGraphicPath>
          </li>
       </value>
-	</Operation> 	
-		<Operation Class="PatchOperationAddModExtension">
+   </Operation>
+   <Operation Class="PatchOperationAddModExtension">
       <xpath>/Defs/ThingDef[defName = "PlantTreePine"]</xpath>
-	   <value>
+      <value>
          <li Class="TKKN_NPS.ThingWeatherReaction">
-          <!-- frostGraphicPath>TKKN_NPS/Things/Plant/Frosted/TreePine</frostGraphicPath -->
-          <snowGraphicPath>TKKN_NPS/Things/Plant/Snow/TreePine</snowGraphicPath>
+            <!-- frostGraphicPath>TKKN_NPS/Things/Plant/VarientFrosted/TreePine</frostGraphicPath -->
+            <snowGraphicPath>TKKN_NPS/Things/Plant/VarientSnow/TreePine</snowGraphicPath>
          </li>
       </value>
-	</Operation> 
-	<Operation Class="PatchOperationAddModExtension">
+   </Operation>
+   <Operation Class="PatchOperationAddModExtension">
       <xpath>/Defs/ThingDef[defName = "PlantTreeWillow"]</xpath>
-	   <value>
+      <value>
          <li Class="TKKN_NPS.ThingWeatherReaction">
-          <!-- frostGraphicPath>TKKN_NPS/Things/Plant/Frosted/TreeWillow</frostGraphicPath -->
-          <snowGraphicPath>TKKN_NPS/Things/Plant/Snow/TreeWillow</snowGraphicPath>
+            <!-- frostGraphicPath>TKKN_NPS/Things/Plant/VarientFrosted/TreeWillow</frostGraphicPath -->
+            <snowGraphicPath>TKKN_NPS/Things/Plant/VarientSnow/TreeWillow</snowGraphicPath>
          </li>
       </value>
-	</Operation> 	
-	<Operation Class="PatchOperationAddModExtension">
+   </Operation>
+   <Operation Class="PatchOperationAddModExtension">
       <xpath>/Defs/ThingDef[defName = "PlantTreeTeak"]</xpath>
-	   <value>
+      <value>
          <li Class="TKKN_NPS.ThingWeatherReaction">
-          <!-- frostGraphicPath>TKKN_NPS/Things/Plant/Frosted/TreeTeak</frostGraphicPath -->
-          <snowGraphicPath>TKKN_NPS/Things/Plant/Snow/TreeTeak</snowGraphicPath>
+            <!-- frostGraphicPath>TKKN_NPS/Things/Plant/VarientFrosted/TreeTeak</frostGraphicPath -->
+            <snowGraphicPath>TKKN_NPS/Things/Plant/VarientSnow/TreeTeak</snowGraphicPath>
          </li>
       </value>
-	</Operation> 	
-	<Operation Class="PatchOperationAddModExtension">
+   </Operation>
+   <Operation Class="PatchOperationAddModExtension">
       <xpath>/Defs/ThingDef[defName = "PlantTreePoplar"]</xpath>
-	   <value>
+      <value>
          <li Class="TKKN_NPS.ThingWeatherReaction">
-          <!-- frostGraphicPath>TKKN_NPS/Things/Plant/Frosted/TreePoplar</frostGraphicPath -->
-          <snowGraphicPath>TKKN_NPS/Things/Plant/Snow/TreePoplar</snowGraphicPath>
+            <!-- frostGraphicPath>TKKN_NPS/Things/Plant/VarientFrosted/TreePoplar</frostGraphicPath -->
+            <snowGraphicPath>TKKN_NPS/Things/Plant/VarientSnow/TreePoplar</snowGraphicPath>
          </li>
       </value>
-	</Operation> 	
-	<Operation Class="PatchOperationAddModExtension">
+   </Operation>
+   <Operation Class="PatchOperationAddModExtension">
       <xpath>/Defs/ThingDef[defName = "PlantTreePalm"]</xpath>
-	   <value>
+      <value>
          <li Class="TKKN_NPS.ThingWeatherReaction">
-          <!-- frostGraphicPath>TKKN_NPS/Things/Plant/Frosted/TreePalm</frostGraphicPath -->
-          <snowGraphicPath>TKKN_NPS/Things/Plant/Snow/TreePalm</snowGraphicPath>
+            <!-- frostGraphicPath>TKKN_NPS/Things/Plant/VarientFrosted/TreePalm</frostGraphicPath -->
+            <snowGraphicPath>TKKN_NPS/Things/Plant/VarientSnow/TreePalm</snowGraphicPath>
          </li>
       </value>
-	</Operation> 	
-	<Operation Class="PatchOperationAddModExtension">
+   </Operation>
+   <Operation Class="PatchOperationAddModExtension">
       <xpath>/Defs/ThingDef[defName = "PlantTreePine"]</xpath>
-	   <value>
+      <value>
          <li Class="TKKN_NPS.ThingWeatherReaction">
-          <!-- frostGraphicPath>TKKN_NPS/Things/Plant/Frosted/TreePine</frostGraphicPath -->
-          <snowGraphicPath>TKKN_NPS/Things/Plant/Snow/TreePine</snowGraphicPath>
+            <!-- frostGraphicPath>TKKN_NPS/Things/Plant/VarientFrosted/TreePine</frostGraphicPath -->
+            <snowGraphicPath>TKKN_NPS/Things/Plant/VarientSnow/TreePine</snowGraphicPath>
          </li>
       </value>
-	</Operation> 	
-	<Operation Class="PatchOperationAddModExtension">
+   </Operation>
+   <Operation Class="PatchOperationAddModExtension">
       <xpath>/Defs/ThingDef[defName = "PlantChokevine"]</xpath>
-	   <value>
+      <value>
          <li Class="TKKN_NPS.ThingWeatherReaction">
-          <frostGraphicPath>TKKN_NPS/Things/Plant/Frosted/Chokevine</frostGraphicPath>
-          <snowGraphicPath>TKKN_NPS/Things/Plant/Snow/Chokevine</snowGraphicPath>
+            <frostGraphicPath>TKKN_NPS/Things/Plant/VarientFrosted/Chokevine</frostGraphicPath>
+            <snowGraphicPath>TKKN_NPS/Things/Plant/VarientSnow/Chokevine</snowGraphicPath>
          </li>
       </value>
-	</Operation> 	
-	<Operation Class="PatchOperationAddModExtension">
+   </Operation>
+   <Operation Class="PatchOperationAddModExtension">
       <xpath>/Defs/ThingDef[defName = "PlantPincushionCactus"]</xpath>
-	   <value>
+      <value>
          <li Class="TKKN_NPS.ThingWeatherReaction">
-          <frostGraphicPath>TKKN_NPS/Things/Plant/Frosted/PincushionCactus</frostGraphicPath>
-          <snowGraphicPath>TKKN_NPS/Things/Plant/Snow/PincushionCactus</snowGraphicPath>
+            <frostGraphicPath>TKKN_NPS/Things/Plant/VarientFrosted/PincushionCactus</frostGraphicPath>
+            <snowGraphicPath>TKKN_NPS/Things/Plant/VarientSnow/PincushionCactus</snowGraphicPath>
          </li>
       </value>
-	</Operation> 		
-	<Operation Class="PatchOperationAddModExtension">
+   </Operation>
+   <Operation Class="PatchOperationAddModExtension">
       <xpath>/Defs/ThingDef[defName = "TKKN_PlantTreeRedwood"]</xpath>
-	   <value>
+      <value>
          <li Class="TKKN_NPS.ThingWeatherReaction">
-          <!-- frostGraphicPath>TKKN_NPS/Things/Plant/Frosted/Redwoods</frostGraphicPath -->
-          <snowGraphicPath>TKKN_NPS/Things/Plant/Snow/Redwoods</snowGraphicPath>
+            <!-- frostGraphicPath>TKKN_NPS/Things/Plant/VarientFrosted/Redwoods</frostGraphicPath -->
+            <snowGraphicPath>TKKN_NPS/Things/Plant/VarientSnow/TreeRedwoods</snowGraphicPath>
          </li>
       </value>
-	</Operation> 	
-	
-	<Operation Class="PatchOperationAddModExtension">
+   </Operation>
+   <Operation Class="PatchOperationAddModExtension">
       <xpath>/Defs/ThingDef[defName = "TKKN_OldGrowth_PlantTreeHazelnut"]</xpath>
-	   <value>
+      <value>
          <li Class="TKKN_NPS.ThingWeatherReaction">
-          <!-- frostGraphicPath>TKKN_NPS/Things/Plant/Frosted/HazelOldGrowth</frostGraphicPath -->
-          <snowGraphicPath>TKKN_NPS/Things/Plant/Snow/HazelOldGrowth</snowGraphicPath>
+            <!-- frostGraphicPath>TKKN_NPS/Things/Plant/VarientFrosted/HazelOldGrowth</frostGraphicPath -->
+            <snowGraphicPath>TKKN_NPS/Things/Plant/VarientSnow/TreeOldGrowthHazel</snowGraphicPath>
          </li>
       </value>
-	</Operation> 	
-	<Operation Class="PatchOperationAddModExtension">
+   </Operation>
+   <Operation Class="PatchOperationAddModExtension">
       <xpath>/Defs/ThingDef[defName = "TKKN_PlantTreeHazelnut"]</xpath>
-	   <value>
+      <value>
          <li Class="TKKN_NPS.ThingWeatherReaction">
-          <!-- frostGraphicPath>TKKN_NPS/Things/Plant/Frosted/Hazels</frostGraphicPath -->
-          <snowGraphicPath>TKKN_NPS/Things/Plant/Snow/Hazels</snowGraphicPath>
+            <!-- frostGraphicPath>TKKN_NPS/Things/Plant/VarientFrosted/Hazels</frostGraphicPath -->
+            <snowGraphicPath>TKKN_NPS/Things/Plant/VarientSnow/TreeHazel</snowGraphicPath>
          </li>
       </value>
-	</Operation> 	
-		
-	<Operation Class="PatchOperationAddModExtension">
+   </Operation>
+   <Operation Class="PatchOperationAddModExtension">
       <xpath>/Defs/ThingDef[defName = "TKKN_PlantFern"]</xpath>
-	   <value>
+      <value>
          <li Class="TKKN_NPS.ThingWeatherReaction">
-          <frostGraphicPath>TKKN_NPS/Things/Plant/Frosted/Fern</frostGraphicPath>
-          <snowGraphicPath>TKKN_NPS/Things/Plant/Snow/Fern</snowGraphicPath>
+            <frostGraphicPath>TKKN_NPS/Things/Plant/VarientFrosted/Fern</frostGraphicPath>
+            <snowGraphicPath>TKKN_NPS/Things/Plant/VarientSnow/Fern</snowGraphicPath>
          </li>
       </value>
-	</Operation> 	
+   </Operation>
 </Patch>

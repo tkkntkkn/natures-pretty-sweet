@@ -1,10 +1,55 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Defs>
 
+
+<WeatherDef>
+    <defName>TKKN_WindStorm</defName>
+    <label>wind storm</label>
+    <description>A wind storm. High winds and a little rain. Help turbines but tears out plants and hinders shooting.</description>
+    <repeatable>true</repeatable>
+    <favorability>VeryBad</favorability>
+    <windSpeedFactor>2</windSpeedFactor>
+    <accuracyMultiplier>0.5</accuracyMultiplier>
+    <ambientSounds>
+      <li>AmbientWind_Storm</li>
+    </ambientSounds>
+    <durationRange>
+      <min>15000</min>
+      <max>40000</max>
+    </durationRange>
+    <rainRate>.3</rainRate>
+    <moveSpeedMultiplier>0.8</moveSpeedMultiplier>	
+  <skyColorsDay>
+      <sky>(0.8,0.8,0.8)</sky>
+      <shadow>(0.92,0.92,0.92)</shadow>
+      <overlay>(0.7,0.7,0.7)</overlay>
+      <saturation>0.9</saturation>
+    </skyColorsDay>
+    <skyColorsDusk>
+      <sky>(1,1,1)</sky>
+      <shadow>(0.92,0.92,0.92)</shadow>
+      <overlay>(0.6,0.6,0.6)</overlay>
+      <saturation>0.9</saturation>
+    </skyColorsDusk>
+    <skyColorsNightEdge>
+      <sky>(0.35,0.40,0.45)</sky>
+      <shadow>(0.92,0.92,0.92)</shadow>
+      <overlay>(0.5,0.5,0.5)</overlay>
+      <saturation>0.9</saturation>
+    </skyColorsNightEdge>
+    <skyColorsNightMid>
+      <sky>(0.35,0.40,0.45)</sky>
+      <shadow>(0.92,0.92,0.92)</shadow>
+      <overlay>(0.5,0.5,0.5)</overlay>
+      <saturation>0.9</saturation>
+    </skyColorsNightMid>
+  </WeatherDef>
+
+  
 <WeatherDef>
     <defName>TKKN_Windy</defName>
     <label>windy</label>
-    <description>A blustery day. High winds help turbines but hinder shooting.</description>
+    <description>A blustery day. High winds help turbines but hinders shooting.</description>
     <repeatable>true</repeatable>
     <favorability>Neutral</favorability>
     <windSpeedFactor>1.5</windSpeedFactor>

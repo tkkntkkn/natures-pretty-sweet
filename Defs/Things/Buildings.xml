@@ -51,7 +51,7 @@
     <label>redwood</label>
     <description>A huge, dead tree. Its roots are shallow, and when it gets too large, it topples over. \n\n Yeilds red wood, which is valuable and rare.</description>
       <graphicData>
-         <texPath>TKKN_NPS/Things/Plant/RedwoodDead</texPath>
+         <texPath>TKKN_NPS/Things/Plant/TreeRedwoodDead</texPath>
          <graphicClass>Graphic_Random</graphicClass>
          <drawRotated>false</drawRotated>
          <shadowData>
@@ -363,5 +363,48 @@
     <constructionSkillPrerequisite>4</constructionSkillPrerequisite>
   </ThingDef>
   
-
+<ThingDef ParentName="BuildingBase">
+    <defName>TKKN_Well</defName>
+    <label>well</label>
+    <thingClass>Building</thingClass>
+    <graphicData>
+      <texPath>TKKN_NPS/Things/Building/Well</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1,1)</drawSize>
+      <damageData>
+        <rect>(0.3,0,5.4,6)</rect>
+      </damageData>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>Impassable</passability>
+	<minifiedDef>MinifiedFurniture</minifiedDef>
+    <blockWind>true</blockWind>
+    <castEdgeShadows>true</castEdgeShadows>
+		<scatterableOnMapGen>false</scatterableOnMapGen>
+		<fillPercent>1</fillPercent>
+    <blockLight>true</blockLight>
+    <canOverlapZones>false</canOverlapZones>
+    <statBases>
+      <MaxHitPoints>500</MaxHitPoints>
+      <WorkToBuild>500</WorkToBuild>
+      <Flammability>1.0</Flammability>
+      <Beauty>-30</Beauty>
+    </statBases>
+    <tickerType>Normal</tickerType>
+    <description>Place near a growing zone to provide water to plants in the zone.</description>
+    <size>(1,1)</size>
+    <costList>
+      <WoodLog>50</WoodLog>
+      <Steel>5</Steel>
+    </costList>    
+    <rotatable>false</rotatable>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <designationCategory>Misc</designationCategory>
+    <staticSunShadowHeight>.5</staticSunShadowHeight>
+    <building>
+		<ai_chillDestination>false</ai_chillDestination>
+    </building>
+    <constructEffect>ConstructWood</constructEffect>
+    <designationHotKey>Misc6</designationHotKey>
+  </ThingDef>
   </Defs>

@@ -14,7 +14,7 @@ namespace TKKN_NPS
 		public Map map;
 		public int howPacked = 0;
 		public int howWet = 0;
-		public float howWetPlants = 50;
+		public float howWetPlants = 30;
 		public float temperature = -9999;
 		public float frostLevel = 0;
 		public TerrainDef baseTerrain;

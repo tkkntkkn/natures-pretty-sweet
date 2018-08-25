@@ -39,10 +39,18 @@ namespace TKKN_NPS
 				}
 				if (this.Severity > .62 && (this.ageTicks % 250 == 0))
 				{
-					
 					FilthMaker.MakeFilth(this.pawn.Position, this.pawn.Map, ThingDef.Named("TKKN_FilthPuddle"), 1);
 					this.Severity -= .3f;
 				}
+
+			}
+
+			if (this.Severity > 0)
+			{
+				FloatRange floatRange = pawn.ComfortableTemperatureRange();
+				FloatRange floatRange2 = pawn.SafeTemperatureRange();
+				Log.Warning("Getting temps " + floatRange.ToString() + " " + floatRange2.ToString());
+
 			}
 
 		}

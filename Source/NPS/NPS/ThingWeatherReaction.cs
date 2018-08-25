@@ -9,6 +9,8 @@ namespace TKKN_NPS
 		public string snowGraphicPath;
 		public string frostLeaflessGraphicPath;
 		public string snowLeaflessGraphicPath;
+		public string floweringGraphicPath;
+		public string droughtGraphicPath;
 		public Graphic frostGraphicData;
 
 		public List<TerrainDef> allowedTerrains;
