@@ -196,7 +196,15 @@ namespace TKKN_NPS
 			}
 
 			TerrainDef floodTerrain = weather.floodTerrain;
-			if (overrideType == "dry")
+			if (isFrozen)
+			{
+				TerrainWeatherReactions currWeather = currentTerrain.GetModExtension<TerrainWeatherReactions>();
+				TerrainDef frozenTerrain = currWeather.freezeTerrain;
+				if (frozenTerrain != null)
+				{
+					changeTerrain(frozenTerrain);
+				}
+			} else if (overrideType == "dry")
 			{
 				floodTerrain = baseTerrain;
 				changeTerrain(floodTerrain);
@@ -264,9 +272,18 @@ namespace TKKN_NPS
 		{
 			//only pack dirt right now. TO DO: Add sand.
 			//don't pack if there's a growing zone.
-			if (this.howPacked > 0 && baseTerrain.defName == "Soil")
+			if (this.howPacked > 0)
 			{
+				Log.Warning("unpacking");
 				this.howPacked--;
+			}
+			else if(this.howPacked == 0 && this.currentTerrain.defName == "TKKN_DirtPath")
+			{
+				this.changeTerrain(RimWorld.TerrainDefOf.Soil);
+			}
+			else if (this.howPacked == 0 && this.currentTerrain.defName == "TKKN_SandPath")
+			{
+				this.changeTerrain(RimWorld.TerrainDefOf.Sand);
 			}
 		}
 
@@ -275,28 +292,37 @@ namespace TKKN_NPS
 			//only pack dirt right now. TO DO: Add sand.
 			//don't hurt things in growing zone
 			Zone_Growing zone = this.map.zoneManager.ZoneAt(this.location) as Zone_Growing;
-			if (zone != null)
+			if (zone != null && (currentTerrain.defName != "TKKN_DirtPath" || currentTerrain.defName != "TKKN_SandPath"))
 			{
 				return;
 			}           
 			//don't pack if there's a growing zone.
-			if (baseTerrain.defName == "Soil") {
+			if (baseTerrain.defName == "Soil" || baseTerrain.defName == "Sand") {
 				this.howPacked++;
 			}
-
+			/*
 			if (currentTerrain.defName == "PackedDirt")
 			{
 				TerrainDef packed1 = TerrainDef.Named("Soil");
 				this.changeTerrain(packed1);
 				this.baseTerrain = packed1;
 			}
+			*/
 
-			if (this.howPacked > 100)
+			if (this.howPacked > 3000)
 			{
-				TerrainDef packed = TerrainDef.Named("TKKN_DirtPath");
-				this.changeTerrain(packed);
-				this.baseTerrain = packed;
-				this.howPacked = 0;
+				if (baseTerrain.defName == "Soil")
+				{
+					TerrainDef packed = TerrainDef.Named("TKKN_DirtPath");
+					this.changeTerrain(packed);
+					this.baseTerrain = packed;
+				}
+				if (baseTerrain.defName == "Sand")
+				{
+					TerrainDef packed = TerrainDef.Named("TKKN_SandPath");
+					this.changeTerrain(packed);
+					this.baseTerrain = packed;
+				}
 			}
 		}
 		/*
@@ -372,7 +398,7 @@ namespace TKKN_NPS
 					//leave trash;
 					allowed = new List<string>
 					{
-						"FilthSlime",
+						"Filth_Slime",
 						"TKKN_FilthShells",
 						"TKKN_FilthPuddle",
 						"TKKN_FilthSeaweed",
@@ -395,8 +421,8 @@ namespace TKKN_NPS
 						"Hyperweave",
 						"Kibble",
 						"SimpleProstheticLeg",
-						"Medicine",
-						"Component",
+						"MedicineIndustrial",
+						"ComponentIndustrial",
 						"Neutroamine",
 						"Chemfuel",
 						"MealSurvivalPack",
@@ -443,7 +469,12 @@ namespace TKKN_NPS
 				{
 					int leaveWhat2 = Rand.Range(1, allowed.Count) - 1;
 					Thing loot = ThingMaker.MakeThing(ThingDef.Named(allowed[leaveWhat2]), null);
-					GenSpawn.Spawn(loot, location, this.map);
+					if(loot != null){
+						GenSpawn.Spawn(loot, location, this.map);
+					} else {
+						Log.Error(allowed[leaveWhat2]);
+					}
+						
 				}
 
 			}

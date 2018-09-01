@@ -7,11 +7,8 @@
     <workerClass>TKKN_NPS.NPS_BiomeWorker_Redwoods</workerClass>
     <animalDensity>2.8</animalDensity>
     <plantDensity>0.55</plantDensity>
-    <factionBaseSelectionWeight>1</factionBaseSelectionWeight>
-    <pathCost_spring>1750</pathCost_spring>
-    <pathCost_summer>1750</pathCost_summer>
-    <pathCost_fall>1750</pathCost_fall>
-    <pathCost_winter>44000</pathCost_winter>
+	<implemented>true</implemented>
+    <settlementSelectionWeight>1</settlementSelectionWeight>
     <texture>TKKN_NPS/World/Biomes/Redwoods</texture>
         <soundsAmbient>
       <li>AmbientNightInsects_Standard</li>
@@ -103,17 +100,17 @@
       <TKKN_ThickFog>3</TKKN_ThickFog>
     </baseWeatherCommonalities>
     <wildPlants>
-			<PlantGrass>1.0</PlantGrass>
-			<PlantTallGrass>1.0</PlantTallGrass>
+			<Plant_Grass>1.0</Plant_Grass>
+			<Plant_TallGrass>1.0</Plant_TallGrass>
 			<TKKN_PlantFern>0.5</TKKN_PlantFern>
-			<PlantBush>0.5</PlantBush>
-			<PlantTreeOak>0.4</PlantTreeOak>
+			<Plant_Bush>0.5</Plant_Bush>
+			<Plant_TreeOak>0.4</Plant_TreeOak>
 			<TKKN_PlantTreeHazelnut>0.4</TKKN_PlantTreeHazelnut>
 			<TKKN_OldGrowth_PlantTreeOak>0.05</TKKN_OldGrowth_PlantTreeOak>            
 			<TKKN_OldGrowth_PlantTreeHazelnut>0.05</TKKN_OldGrowth_PlantTreeHazelnut>            
 			<TKKN_PlantTreeRedwood>0.02</TKKN_PlantTreeRedwood>
-			<PlantRaspberry>0.1</PlantRaspberry>
-			<PlantWildHealroot>0.05</PlantWildHealroot>
+			<Plant_Berry>0.1</Plant_Berry>
+			<Plant_Healroot>0.05</Plant_Healroot>
 		</wildPlants>
     <wildAnimals>
 			<Hare>1.00</Hare>
@@ -130,10 +127,10 @@
 			<Boomalope>0.2</Boomalope>
 			<Elk>0.3</Elk>
 			<TKKN_giantsnail>0.04</TKKN_giantsnail>
-			<WolfTimber>0.04</WolfTimber>
-			<FoxRed>0.04</FoxRed>
+			<Wolf_Timber>0.04</Wolf_Timber>
+			<Fox_Red>0.04</Fox_Red>
 			<Megasloth>0.04</Megasloth>
-			<GrizzlyBear>0.022</GrizzlyBear>
+			<Bear_Grizzly>0.022</Bear_Grizzly>
 			<Warg>0.012</Warg>
 			<Cougar>0.012</Cougar>
       <Lynx>0.01</Lynx>
@@ -154,7 +151,7 @@
     <workerClass>TKKN_NPS.NPS_BiomeWorker_Sequioa</workerClass>
     <animalDensity>2.8</animalDensity>
     <plantDensity>0.55</plantDensity>
-    <factionBaseSelectionWeight>1</factionBaseSelectionWeight>
+    <settlementSelectionWeight>1</settlementSelectionWeight>
     <pathCost_spring>1650</pathCost_spring>
     <pathCost_summer>1650</pathCost_summer>
     <pathCost_fall>1650</pathCost_fall>
@@ -244,13 +241,13 @@
       <SnowHard>4</SnowHard>
     </baseWeatherCommonalities>
     <wildPlants>
-			<PlantGrass>8.0</PlantGrass>
-			<PlantDandelion>0.8</PlantDandelion>
-			<PlantBush>0.7</PlantBush>
-			<PlantTreeOak>0.5</PlantTreeOak>
-			<PlantTreePoplar>0.5</PlantTreePoplar>
-			<PlantRaspberry>0.1</PlantRaspberry>
-			<PlantWildHealroot>0.05</PlantWildHealroot>
+			<Plant_Grass>8.0</Plant_Grass>
+			<Plant_Dandelion>0.8</Plant_Dandelion>
+			<Plant_Bush>0.7</Plant_Bush>
+			<Plant_TreeOak>0.5</Plant_TreeOak>
+			<Plant_TreePoplar>0.5</Plant_TreePoplar>
+			<Plant_Berry>0.1</Plant_Berry>
+			<Plant_Healroot>0.05</Plant_Healroot>
 		</wildPlants>
     <wildAnimals>
 			<Hare>1.00</Hare>
@@ -269,10 +266,10 @@
 			<Emu>0.1</Emu>
 			<Ostrich>0.1</Ostrich>
 			<Gazelle>0.05</Gazelle>
-			<WolfTimber>0.04</WolfTimber>
-			<FoxRed>0.04</FoxRed>
+			<Wolf_Timber>0.04</Wolf_Timber>
+			<Fox_Red>0.04</Fox_Red>
 			<Megasloth>0.04</Megasloth>
-			<GrizzlyBear>0.022</GrizzlyBear>
+			<Bear_Grizzly>0.022</Bear_Grizzly>
 			<Warg>0.012</Warg>
 			<Cougar>0.012</Cougar>
       <Lynx>0.008</Lynx>

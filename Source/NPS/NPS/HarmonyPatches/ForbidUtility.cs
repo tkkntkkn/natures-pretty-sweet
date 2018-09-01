@@ -17,7 +17,7 @@ namespace TKKN_NPS
 				return;
 			}
 			TerrainDef terrain = pawn.Position.GetTerrain(pawn.Map);
-			if (terrain != null && (terrain.HasTag("Lava") || (terrain.HasTag("Water") && terrain.defName.ToLower().Contains("deep"))) && !pawn.RaceProps.Humanlike) {
+			if (terrain != null && (terrain.HasTag("Lava") || terrain.HasTag("TKKN_Swim")) && !pawn.RaceProps.Humanlike) {
 				__result = false;
 
 			}

@@ -20,7 +20,7 @@ namespace TKKN_NPS
 				}
 				else
 				{
-					__result = 22.5f + (tile.temperature - 20f) * 2.2f + (tile.rainfall - 600f) / 100f;
+					__result = (float)(22.5 + (tile.temperature - 20.0) * 2.2000000476837158 + (tile.rainfall - 600.0) / 100.0);
 				}
 			}
 		}
@@ -35,12 +35,12 @@ namespace TKKN_NPS
 		{
 			if (__result != -100f && __result != 0f)
 			{
-				if (tile.rainfall < 700f)
+				if (tile.rainfall < 1200f)
 				{
 					__result = 0f;
 					return;
 				}
-				__result = 15f + (tile.temperature - 7f) + (tile.rainfall - 700f) / 180f;
+				__result = (float)(15.0 + (tile.temperature - 7.0) + (tile.rainfall - 600.0) / 180.0);
 			}
 		}
 	}

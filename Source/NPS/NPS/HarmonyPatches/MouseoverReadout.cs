@@ -15,26 +15,26 @@ namespace TKKN_NPS
 	{
 		static void Postfix()
 		{
-			//			Log.Warning("Window: " + window);
 			IntVec3 c = UI.MouseCell();
-			if (!c.InBounds(Find.VisibleMap))
+			Map map = Find.CurrentMap;
+			if (!c.InBounds(map))
 			{
 				return;
 			}
 			Rect rect;
 			Vector2 BotLeft = new Vector2(15f, 65f);
 			float num = 38f;
-			Zone zone = c.GetZone(Find.VisibleMap);
+			Zone zone = c.GetZone(map);
 			if (zone != null)
 			{
 				num += 19f;
 			}
-			float depth = Find.VisibleMap.snowGrid.GetDepth(c);
+			float depth = map.snowGrid.GetDepth(c);
 			if (depth > 0.03f)
 			{
 				num += 19f;
 			}
-			List<Thing> thingList = c.GetThingList(Find.VisibleMap);
+			List<Thing> thingList = c.GetThingList(map);
 			for (int i = 0; i < thingList.Count; i++)
 			{
 				Thing thing = thingList[i];
@@ -43,19 +43,18 @@ namespace TKKN_NPS
 					num += 19f;
 				}
 			}
-			RoofDef roof = c.GetRoof(Find.VisibleMap);
+			RoofDef roof = c.GetRoof(map);
 			if (roof != null)
 			{
 				num += 19f;
 			}
-			if (Settings.showTempReadout)
+			if (Settings.showDevReadout)
 			{
 				rect = new Rect(BotLeft.x, (float)UI.screenHeight - BotLeft.y - num, 999f, 999f);
 				string label3 = "C: x-" + c.x.ToString() + " y-" + c.y.ToString() + " z-" + c.z.ToString();
 				Widgets.Label(rect, label3);
 				num += 19f;
 
-				Map map = Find.VisibleMap;
 				Watcher watcher = map.GetComponent<Watcher>();
 				cellData cell = watcher.cellWeatherAffects[c];
 				rect = new Rect(BotLeft.x, (float)UI.screenHeight - BotLeft.y - num, 999f, 999f);
@@ -95,7 +94,7 @@ namespace TKKN_NPS
 			}
 
 
-			depth = Find.VisibleMap.GetComponent<FrostGrid>().GetDepth(c);
+			depth = map.GetComponent<FrostGrid>().GetDepth(c);
 			if (depth > 0.01f)
 			{
 				rect = new Rect(BotLeft.x, (float)UI.screenHeight - BotLeft.y - num, 999f, 999f);

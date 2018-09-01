@@ -6,23 +6,44 @@
   <IncidentDef>
     <defName>TKKN_LavaEruption</defName>
     <label>Lava Eruption!</label>
-    <targetTypes>
-        <li>MapPlayerHome</li>
-    </targetTypes>
+    <targetTags>
+        <li>Map_PlayerHome</li>
+    </targetTags>
     <workerClass>TKKN_NPS.IncidentWorker_LavaFlow</workerClass>
     <baseChance>2</baseChance>
     <category>ThreatBig</category>
     <pointsScaleable>true</pointsScaleable>
   </IncidentDef>
 
-
+	<IncidentDef>
+      <defName>TKKN_Drought</defName>
+      <label>drought</label>
+      <targetTags>
+         <li>Map_PlayerHome</li>
+      </targetTags>
+  	  <workerClass>TKKN_NPS.IncidentWorker_Drought</workerClass>
+      <gameCondition>TKKN_Drought</gameCondition>
+      <letterLabel>drought</letterLabel>
+      <letterText>There's no rain in the forecast... for a very long time.</letterText>
+      <letterDef>ThreatSmall</letterDef>
+      <baseChance>1.2</baseChance>
+      <minRefireDays>0</minRefireDays>
+      <durationDays>
+         <min>0.35</min>
+         <max>1</max>
+      </durationDays>
+      <category>ThreatBig</category>
+      <tale>TKKN_Drought</tale>
+   </IncidentDef>
+   
+   
 	<IncidentDef>
 		<defName>TKKN_DustDevil</defName>
 		<label>dustdevil</label>
 		<category>Misc</category>
-		<targetTypes>
-		  <li>MapPlayerHome</li>
-		</targetTypes>
+		<targetTags>
+		  <li>Map_PlayerHome</li>
+		</targetTags>
 			<workerClass>TKKN_NPS.IncidentWorker_DustDevil</workerClass>
 			<letterLabel>Dust Devils!</letterLabel>
 			<letterText>A dust devil has formed!\n\n It's less destructive than a tornado, but keep out of its way!</letterText>

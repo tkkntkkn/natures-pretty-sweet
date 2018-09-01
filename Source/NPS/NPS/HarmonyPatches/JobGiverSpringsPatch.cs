@@ -14,7 +14,7 @@ namespace TKKN_NPS
 		public static void Postfix(ref Job __result, Pawn pawn)
 		{
 			if (__result == null) {
-				if (Find.VisibleMap.GetComponent<Watcher>().activeSprings.Count != 0)
+				if (Find.CurrentMap.GetComponent<Watcher>().activeSprings.Count != 0)
 				{
 					__result = null;
 					return;
@@ -36,10 +36,10 @@ namespace TKKN_NPS
 					return;
 				}
 
-				TerrainDef terrain = pawn.Position.GetTerrain(Find.VisibleMap);
+				TerrainDef terrain = pawn.Position.GetTerrain(Find.CurrentMap);
 				if (isHot && terrain.defName == "TKKN_ColdSpringsWater") 
 				{
-					__result = new Job(RimWorld.JobDefOf.WaitSafeTemperature, 500, true);
+					__result = new Job(RimWorld.JobDefOf.Wait_SafeTemperature, 500, true);
 					return;
 				}
 

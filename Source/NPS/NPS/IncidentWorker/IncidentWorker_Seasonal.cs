@@ -12,8 +12,9 @@ namespace TKKN_NPS
 	{
 		private static readonly IntRange AnimalsCount = new IntRange(50, 70);
 
-		protected override bool CanFireNowSub(IIncidentTarget target)
+		protected override bool CanFireNowSub(IncidentParms parms)
 		{
+			IIncidentTarget target = parms.target;
 			Map map = (Map)target;
 			PawnKindDef pawnKindDef;
 			IntVec3 intVec;
@@ -47,9 +48,9 @@ namespace TKKN_NPS
 			{
 				Pawn newThing = list[i];
 				IntVec3 loc = CellFinder.RandomClosewalkCellNear(intVec, map, 10, null);
-				GenSpawn.Spawn(newThing, loc, map, rot, false);
+				GenSpawn.Spawn(newThing, loc, map, rot, WipeMode.Vanish, false);
 			}
-			LordMaker.MakeNewLord(null, new LordJob_ExitMapNear(near, LocomotionUrgency.Walk, 12f, false, false), map, list);
+			LordMaker.MakeNewLord(null, new LordJob_ExitMapNear(near, LocomotionUrgency.Jog, 0f, false, false), map, list);
 			string text = string.Format(this.def.letterText, pawnKindDef.GetLabelPlural(-1)).CapitalizeFirst();
 			string label = string.Format(this.def.letterLabel, pawnKindDef.GetLabelPlural(-1).CapitalizeFirst());
 			Find.LetterStack.ReceiveLetter(label, text, this.def.letterDef, list[0], null);
@@ -94,15 +95,17 @@ namespace TKKN_NPS
 	}
 
 
-		public class IncidentWorker_Dustdevil : IncidentWorker
+	public class IncidentWorker_Dustdevil : IncidentWorker
 	{
 		private const int MinDistanceFromMapEdge = 30;
 
 		private const float MinWind = 1f;
 
-		protected override bool CanFireNowSub(IIncidentTarget target)
+		protected override bool CanFireNowSub(IncidentParms parms)
 		{
-			Map map = (Map)target;
+
+			return false;
+			Map map = (Map)parms.target;
 			return map.weatherManager.CurWindSpeedFactor >= 1f;
 		}
 
@@ -123,7 +126,7 @@ namespace TKKN_NPS
 					return false;
 				}
 				DustDevil t = (DustDevil)GenSpawn.Spawn(ThingDefOf.TKKN_DustDevil, loc, map);
-				base.SendStandardLetter(t, new string[0]);
+				base.SendStandardLetter(t);
 			}
 			return true;
 		}
@@ -164,7 +167,6 @@ namespace TKKN_NPS
 		}
 	}
 }
-
 namespace TKKN_NPS
 {
 
@@ -176,7 +178,6 @@ namespace TKKN_NPS
 		
 	}
 }
-
 namespace TKKN_NPS
 {
 
@@ -190,21 +191,22 @@ namespace TKKN_NPS
 	
 	}
 }
-
 namespace TKKN_NPS
 {
 
-	public class IncidentWorker_Bloom : IncidentWorker
+	public class IncidentWorker_Bloom : IncidentWorker_TKKN_Weather
 	{
 		public string label;
 		public string text;
 		public ThingDef thingDef;
+		bool relevantSetting = Settings.allowPlantEffects;
 
 		protected override bool TryExecuteWorker(IncidentParms parms)
 		{
 
-			if (!Settings.allowPlantEffects)
+			if (!base.settingsCheck())
 			{
+
 				return false;
 			}
 
@@ -214,6 +216,10 @@ namespace TKKN_NPS
 			//can the biome support it?
 			bool canBloomHere = true;
 			BiomeSeasonalSettings biomeSettings = map.Biome.GetModExtension<BiomeSeasonalSettings>();
+			if (biomeSettings == null)
+			{
+				return false;
+			}
 			List<ThingDef> bloomPlants = biomeSettings.bloomPlants.ToList<ThingDef>();
 			if (bloomPlants.Count == 0)
 			{
@@ -231,6 +237,62 @@ namespace TKKN_NPS
 
 
 			return true;
+		}
+	}
+}
+
+namespace TKKN_NPS
+{
+
+	public class IncidentWorker_Drought : IncidentWorker_TKKN_Weather
+	{
+		public string label;
+		public string text;
+		public ThingDef thingDef;
+
+		protected override bool TryExecuteWorker(IncidentParms parms)
+		{
+
+			if (!base.settingsCheck()){
+
+				return false;
+			}
+
+			Map map = (Map)parms.target;
+
+			if (map.weatherManager.RainRate > 0 || map.weatherManager.SnowRate > 0) {
+				return false;
+			}
+
+			Find.LetterStack.ReceiveLetter(this.label, this.text, LetterDefOf.NeutralEvent);
+
+
+			return true;
+		}
+	}
+}
+
+namespace TKKN_NPS
+{
+
+	public class IncidentWorker_TKKN_Weather : IncidentWorker
+	{
+		public string label;
+		public string text;
+		public ThingDef thingDef;
+		bool relevantSetting = Settings.doWeather;
+
+		public bool settingsCheck() {
+			if (!relevantSetting)
+			{
+				return false;
+			}
+			return true;
+		}
+
+		protected override bool TryExecuteWorker(IncidentParms parms)
+		{
+			return settingsCheck();
 		}
 	}
 }

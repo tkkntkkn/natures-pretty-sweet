@@ -28,12 +28,22 @@ namespace TKKN_NPS
 			Hediff_Wetness wetness = p.health.hediffSet.GetFirstHediffOfDef(hediffDef) as Hediff_Wetness;
 			if (wetness != null)
 			{
-				int setTo = PatchComfortableTemperatureRange.getOffSet(wetness);
+				int setTo = PatchComfortableTemperatureRange.getOffSet(wetness, p);
 				if (setTo > 0) {
 					//they are comfortable only at higher temp
 					FloatRange old = __result;
 					__result.min += setTo;
 					__result.max += setTo;
+
+					if (__result.min < 12)
+					{
+						__result.min = 12;
+					}
+					if (__result.max < 32)
+					{
+						__result.max = 32;
+					}
+				//	Log.Warning(p.Name.ToString() + " temp old: " + old.ToString() + " temp range: " + __result.ToString() + " temp: " + p.AmbientTemperature);
 					return;
 				}
 
@@ -42,26 +52,41 @@ namespace TKKN_NPS
 
 		}
 
-		public static int getOffSet(Hediff_Wetness wetness){
+		public static int getOffSet(Hediff_Wetness wetness, Pawn pawn){
+			//soaked
 			int setTo = 40;
-			if (wetness.Severity == 0)
+			if (wetness.CurStage.label == "dry")
 			{
 				setTo = 0;
 			}
-			else if(wetness.Severity < .04)
+			if (wetness.CurStage.label == "damp")
 			{
+				//damp
 				setTo = 5;
 
 			}
-			else if (wetness.Severity < .2)
+			if (wetness.CurStage.label == "soggy")
 			{
+				//soggy
 				setTo = 10;
 			}
-			 else if (wetness.Severity < .35)
+			if (wetness.CurStage.label == "wet")
 			{
-				setTo = 25;
+				//wet
+				setTo = 20;
 			}
-				
+
+			if (pawn.InBed())
+			{
+				setTo -= 10;
+			}
+			//to stop hypothermia when it's hot outside
+			if (pawn.AmbientTemperature > 0)
+			{
+				setTo -= (int)Math.Floor(pawn.AmbientTemperature / 3);
+
+			}
+
 			return setTo;
 
 		}

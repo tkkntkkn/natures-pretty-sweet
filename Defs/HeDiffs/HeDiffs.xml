@@ -16,15 +16,15 @@
 		  </li>
 		  <li>
 			<label>soggy</label>
-			<minSeverity>0.2</minSeverity>
-		  </li>
-		  <li>
-			<label>wet</label>
 			<minSeverity>0.35</minSeverity>
 		  </li>
 		  <li>
-			<label>soaked</label>
+			<label>wet</label>
 			<minSeverity>0.62</minSeverity>
+		  </li>
+		  <li>
+			<label>soaked</label>
+			<minSeverity>0.8</minSeverity>
 		  </li>
 		</stages>
 	</HediffDef>

@@ -14,6 +14,8 @@
   <TKKN_NPS_Superbloom>Superbloom!</TKKN_NPS_Superbloom>
   <TKKN_NPS_SuperbloomTxt>An record setting amount of wildflowers are blooming! Make sure you go outside to see it. Watch out for allergies!</TKKN_NPS_SuperbloomTxt>
   
+  <LetterLabelUpdateNotes1>NPS has updated!</LetterLabelUpdateNotes1>
+  <LetterLabelUpdateNotes1Text>The biggest changes: 2 new biomes (require new save). Seasonal weather, disease, and incidents. Humans create walking paths. Plants will dry out and die (doesn't affect biomes that aren't arid, and doesn't affect plants in a growing zone).</LetterLabelUpdateNotes1Text>
   
   <TKKN_NPS_TreasureWashedUpText>Treasure has washed up on the beach! Get it before it washes away.</TKKN_NPS_TreasureWashedUpText>
   <TKKN_NPS_TreasureFloodedUpText>Recent flooding has left behind treasure! Get it before it washes away.</TKKN_NPS_TreasureFloodedUpText>

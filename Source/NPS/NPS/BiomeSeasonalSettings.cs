@@ -24,30 +24,18 @@ namespace TKKN_NPS
 		public List<BiomeDiseaseRecord> winterDiseases;
 		public List<BiomePlantRecord> specialPlants;
 
+		public bool plantsAdded;
+		public bool plantCacheUpdated;
+		public bool diseaseCacheUpdated;
 
-		[Unsaved]
-		private Dictionary<ThingDef, float> cachedPlantCommonalities;
 
-		public List<ThingDef> listSpecialPlants
-		{
-			get
-			{
-				List<ThingDef> plants = new List<ThingDef>();
-				for (int i = 0; i < this.specialPlants.Count; i++)
-				{
-					BiomePlantRecord plant = this.specialPlants[i];
-					plants.Add(plant.plant);
-				}
-				return plants;
-			}
-		}
 		public bool canPutOnTerrain(IntVec3 c, ThingDef thingDef, Map map)
 		{
 			TerrainDef terrain = c.GetTerrain(map);
 
 			//make sure plants are spawning on terrain that they're limited to:
 			ThingWeatherReaction weatherReaction = thingDef.GetModExtension<ThingWeatherReaction>();
-			if (weatherReaction != null && terrain!= null && weatherReaction.allowedTerrains != null)
+			if (weatherReaction != null && terrain != null && weatherReaction.allowedTerrains != null)
 			{
 				//if they're only allowed to spawn in certain terrains, stop it from spawning.
 				if (!weatherReaction.allowedTerrains.Contains(terrain))
@@ -58,37 +46,25 @@ namespace TKKN_NPS
 			return true;
 		}
 
-		public float CommonalityOfPlant(ThingDef plantDef)
+		public void setWeatherBySeason(Map map, Season season)
 		{
-		if (this.cachedPlantCommonalities == null)
-		{
-			this.cachedPlantCommonalities = new Dictionary<ThingDef, float>();
-			for (int i = 0; i < this.specialPlants.Count; i++)
+			if (Season.Spring == season)
 			{
-				this.cachedPlantCommonalities.Add(this.specialPlants[i].plant, this.specialPlants[i].commonality);
-			}			
-		}
-		float result;
-		if (this.cachedPlantCommonalities.TryGetValue(plantDef, out result))
-		{
-			return result;
-		}
-		return 0f;
-	}
-
-	public void setWeatherBySeason(Map map, Season season)
-		{
-			if (Season.Spring == season) {
 				map.Biome.baseWeatherCommonalities = this.springWeathers;
-			} else if (Season.Summer == season) {
+			}
+			else if (Season.Summer == season)
+			{
 				map.Biome.baseWeatherCommonalities = this.summerWeathers;
-			} else if (Season.Fall == season) {
+			}
+			else if (Season.Fall == season)
+			{
 				map.Biome.baseWeatherCommonalities = this.fallWeathers;
-			} else if (Season.Winter == season){
+			}
+			else if (Season.Winter == season)
+			{
 				map.Biome.baseWeatherCommonalities = this.winterWeathers;
 			}
 			return;
-
 		}
 
 		public void setDiseaseBySeason(Season season)
@@ -117,6 +93,7 @@ namespace TKKN_NPS
 				IncidentDef disease = diseaseRec.diseaseInc;
 				disease.baseChance = diseaseRec.commonality;
 			}
+			diseaseCacheUpdated = false;
 
 		}
 

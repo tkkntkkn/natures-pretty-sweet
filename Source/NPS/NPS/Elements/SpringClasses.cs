@@ -242,7 +242,7 @@ namespace TKKN_NPS
 			{
 				return;
 			}
-			RegionTraverser.BreadthFirstTraverse(region, (Region from, Region r) => r.portal == null, delegate (Region r)
+			RegionTraverser.BreadthFirstTraverse(region, (Region from, Region r) => r.door == null, delegate (Region r)
 			{
 				foreach (IntVec3 current in r.Cells)
 				{
@@ -352,7 +352,7 @@ namespace TKKN_NPS
 			Map map = this.parent.Map;
 			List<ThingDef> list = map.Biome.AllWildPlants.ToList<ThingDef>();
 			list.Add(this.Props.spawnProp);
-			float num = map.Biome.plantDensity * 2;
+			float num = map.Biome.plantDensity;
 			foreach (IntVec3 c in this.boundaryCellsRough.InRandomOrder(null))
 			{
 				this.genPlants(c, map, list);
@@ -373,8 +373,8 @@ namespace TKKN_NPS
 
 				if (source.Any<ThingDef>())
 				{
+
 					ThingDef thingDef = source.RandomElementByWeight((ThingDef x) => this.PlantChoiceWeight(x, map));
-					int randomInRange = thingDef.plant.wildClusterSizeRange.RandomInRange;
 					Plant plant = (Plant)ThingMaker.MakeThing(thingDef, null);
 					plant.Growth = Rand.Range(0.07f, 1f);
 					if (plant.def.plant.LimitedLifespan)
@@ -390,7 +390,7 @@ namespace TKKN_NPS
 		private float PlantChoiceWeight(ThingDef def, Map map)
 		{
 			float num = map.Biome.CommonalityOfPlant(def);
-			return num / def.plant.wildClusterSizeRange.Average;
+			return num * def.plant.wildClusterWeight;
 		}
 
 		public void AffectCell(IntVec3 c)

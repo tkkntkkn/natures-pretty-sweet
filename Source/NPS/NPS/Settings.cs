@@ -33,7 +33,10 @@ namespace TKKN_NPS
 		public static bool doWeather = true;
 		public static bool regenCells = false;
 		public static bool doTides = true;		
-		public static bool showTempReadout = false;
+		public static bool showDevReadout = false;
+
+		public static bool showUpdateNotes = true;
+
 
 
 		public static bool showTempOverlay {
@@ -94,15 +97,20 @@ namespace TKKN_NPS
 
 			//Development stuff
 			list.Gap(30f);
+			
+			list.CheckboxLabeled(
+				"Show Update Notes?",
+				ref Settings.showUpdateNotes,
+				"");
+			list.Gap(30f);
 			list.CheckboxLabeled(
 				"TKKN_regen_title".Translate(),
 				ref Settings.regenCells,
 				"TKKN_regen_text".Translate());
 
-			list.Gap(30f);
 			list.CheckboxLabeled(
 				"TKKN_showTempReadout_title".Translate(),
-				ref Settings.showTempReadout,
+				ref Settings.showDevReadout,
 				"TKKN_showTempReadout_text".Translate());
 
 			
@@ -120,7 +128,7 @@ namespace TKKN_NPS
 			Scribe_Values.Look(ref Settings.showRain, "showRain", true, true);
 			Scribe_Values.Look(ref Settings.doTides, "doTides", true, true);
 			Scribe_Values.Look(ref Settings.doTides, "allowPawnsToGetWet", true, true);
-			Scribe_Values.Look(ref Settings.showTempReadout, "showTempReadout", true, true);
+			Scribe_Values.Look(ref Settings.showDevReadout, "showDevReadout", false, true);
 			Scribe_Values.Look(ref Settings.spawnLavaOnlyInBiome, "spawnLavaOnlyInBiome", false, true);
 			Scribe_Values.Look(ref Settings.allowLavaEruption, "allowLavaEruption", true, true);
 			Scribe_Values.Look(ref Settings.regenCells, "regenCells", false, true);

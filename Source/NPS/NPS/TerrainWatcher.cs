@@ -48,13 +48,15 @@ namespace TKKN_NPS
 		/* STANDARD STUFF */
 		public Watcher(Map map) : base(map)
 		{
-			
+		
 		}
 
 		public override void MapComponentTick()
 		{
 			this.ticks++;
 			base.MapComponentTick();
+
+			
 			//run through saved terrain and check it
 			this.checkThingsforLava();
 
@@ -64,7 +66,36 @@ namespace TKKN_NPS
 				// this.checkRandomTerrain(); triggering on atmosphere affects
 				this.doTides();
 				this.doFloods();
+				int num = Mathf.RoundToInt((float)this.map.Area * 0.0006f);
+				int area = this.map.Area;
+				for (int i = 0; i < num; i++)
+				{
+					if (this.cycleIndex >= area)
+					{
+						this.cycleIndex = 0;
+					}
+					IntVec3 c = this.map.cellsInRandomOrder.Get(this.cycleIndex);
+					this.doCellEnvironment(c);
+					this.cycleIndex++;
+				}
 			}
+
+			BiomeSeasonalSettings biomeSettings = map.Biome.GetModExtension<BiomeSeasonalSettings>();
+			if (biomeSettings != null)
+			{
+				Vector2 location = Find.WorldGrid.LongLatOf(map.Tile);
+				Season season = GenDate.Season((long)Find.TickManager.TicksAbs, location);
+
+				if (biomeSettings.lastChanged != season)
+				{
+					Log.Warning("Updating seasonal settings");
+					biomeSettings.setWeatherBySeason(map, season);
+					biomeSettings.setDiseaseBySeason(season);
+					biomeSettings.setIncidentsBySeason(season);
+					biomeSettings.lastChanged = season;
+				}
+			}
+
 		}
 
 	
@@ -85,7 +116,6 @@ namespace TKKN_NPS
 			Scribe_Values.Look<int>(ref this.ticks, "ticks", 0, true);
 			Scribe_Values.Look<int>(ref this.totalPuddles, "totalPuddles", this.totalPuddles, true);
 			Scribe_Values.Look<bool>(ref this.bugFixFrostIsRemoved, "bugFixFrostIsRemoved", this.bugFixFrostIsRemoved, true);
-
 		}
 
 
@@ -275,7 +305,7 @@ namespace TKKN_NPS
 						this.floodCellsList[level].Add(thiscell.Key);
 					}
 				}
-				if (thiscell.Value.baseTerrain.HasTag("Water") && thiscell.Value.baseTerrain.defName.Contains("Deep"))
+				if (thiscell.Value.baseTerrain.HasTag("TKKN_Swim"))
 				{
 					this.swimmingCellsList.Add(thiscell.Key);
 				}
@@ -318,7 +348,6 @@ namespace TKKN_NPS
 					GenSpawn.Spawn(plant, c, map);
 				}
 			}
-
 		}
 
 		public void spawnSpecialElements(IntVec3 c)
@@ -524,7 +553,7 @@ namespace TKKN_NPS
 			}
 			cellData cell = this.cellWeatherAffects[c];
 
-			if (this.ticks % 250 == 0)
+			if (this.ticks % 100 == 0)
 			{
 				cell.unpack();
 			}
@@ -670,7 +699,7 @@ namespace TKKN_NPS
 			{
 				if (this.map.mapTemperature.OutdoorTemp > 20)
 				{
-					cell.howWetPlants += -1 * (this.map.mapTemperature.OutdoorTemp / 100);
+					cell.howWetPlants += -1 * (this.map.mapTemperature.OutdoorTemp / 200);
 					if(cell.howWetPlants <= 0){
 						if (cell.currentTerrain.HasModExtension<TerrainWeatherReactions>())
 						{
@@ -732,7 +761,6 @@ namespace TKKN_NPS
 			{
 				if (puddle == null)
 				{
-					Log.Warning("Making puddle");
 					FilthMaker.MakeFilth(c, this.map, ThingDef.Named("TKKN_FilthPuddle"), 1);
 					this.totalPuddles++;
 				}
@@ -867,7 +895,6 @@ namespace TKKN_NPS
 			{
 				flood = "low";
 			}
-
 			GameCondition_Drought isDrought = this.map.gameConditionManager.GetActiveCondition<GameCondition_Drought>();
 			if (isDrought != null)
 			{
@@ -1027,7 +1054,7 @@ namespace TKKN_NPS
 		public void hurtPlants(IntVec3 c, bool onlyLow, bool saveHarvest)
 		{
 
-			if (!Settings.allowPlantEffects)
+			if (!Settings.allowPlantEffects || this.ticks % 150 != 0)
 			{
 				return;
 			}
@@ -1060,9 +1087,9 @@ namespace TKKN_NPS
 
 				if (thing.def.category == ThingCategory.Plant && isLow && isHarvestable)
 				{
-					float damage = -.01f;
+					float damage = -.001f;
 					damage = damage * thing.def.plant.fertilityMin;
-					thing.TakeDamage(new DamageInfo(DamageDefOf.Rotting, 99999, damage, null, null, null, DamageInfo.SourceCategory.ThingOrUnknown));
+					thing.TakeDamage(new DamageInfo(DamageDefOf.Rotting, damage, 0, 0, null, null, null, DamageInfo.SourceCategory.ThingOrUnknown));
 				}
 			}
 		}

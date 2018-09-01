@@ -8,7 +8,25 @@
             <floodTerrain />
             <wetTerrain />
             <freezeTerrain>TKKN_Ice</freezeTerrain>
+            <dryTerrain />
+            <baseOverride />
             <freezeAt>0</freezeAt>
+			<wetAt></wetAt>
+            <isSalty>False</isSalty>
+			<holdFrost>False</holdFrost>
+            <temperatureAdjust />
+         </li>
+      </value>
+   </Operation>
+   <Operation Class="PatchOperationAddModExtension">
+      <xpath>/Defs/TerrainDef[defName = "WaterMovingChestDeep"]</xpath>
+      <value>
+         <li Class="TKKN_NPS.TerrainWeatherReactions">
+            <tideTerrain />
+            <floodTerrain />
+            <wetTerrain />
+            <freezeTerrain>TKKN_Ice</freezeTerrain>
+            <freezeAt>1</freezeAt>
 			<wetAt></wetAt>
             <isSalty>False</isSalty>
 			<holdFrost>False</holdFrost>
@@ -24,7 +42,7 @@
             <wetTerrain />
             <freezeTerrain>TKKN_Ice</freezeTerrain>
             <freezeAt>0</freezeAt>
-			<wetAt></wetAt>
+			<wetAt/>
             <isSalty>False</isSalty>
 			<holdFrost>False</holdFrost>
 			<temperatureAdjust>-5</temperatureAdjust>
@@ -47,7 +65,7 @@
          </li>
       </value>
    </Operation>
-   <Operation Class="PatchOperationAddModExtension">
+   <!--Operation Class="PatchOperationAddModExtension">
       <xpath>/Defs/TerrainDef[defName = "WaterMovingDeep"]</xpath>
       <value>
          <li Class="TKKN_NPS.TerrainWeatherReactions">
@@ -61,7 +79,7 @@
 			<holdFrost>False</holdFrost>
          </li>
       </value>
-   </Operation>
+   </Operation -->
    <Operation Class="PatchOperationAddModExtension">
       <xpath>/Defs/TerrainDef[defName = "TKKN_ColdSpringsWater"]</xpath>
       <value>
@@ -123,6 +141,95 @@
             <isSalty>True</isSalty>
 			<holdFrost>False</holdFrost>
          </li>
+      </value>
+   </Operation>
+    <Operation Class="PatchOperationAddModExtension">
+      <xpath>Defs/TerrainDef[defName = "Marsh"]</xpath>
+      <value>
+         <li Class="TKKN_NPS.TerrainWeatherReactions">
+            <tideTerrain />
+            <floodTerrain>WaterShallow</floodTerrain>
+            <wetTerrain/>
+            <freezeTerrain>TKKN_MuddyIce</freezeTerrain>
+            <freezeAt>0</freezeAt>
+			<wetAt>0</wetAt>
+            <isSalty>False</isSalty>
+			<holdFrost>False</holdFrost>
+			<dryTerrain />
+         </li>
+      </value>
+   </Operation>
+   
+   
+   
+   
+    <Operation Class="PatchOperationAdd">
+      <xpath>/Defs/TerrainDef[defName = "WaterMovingShallow"]</xpath>
+      <value><fertility>0.1</fertility></value>
+   </Operation>
+    <Operation Class="PatchOperationAdd">
+      <xpath>/Defs/TerrainDef[defName = "WaterShallow"]</xpath>
+      <value><fertility>0.1</fertility></value>
+   </Operation>
+
+   <Operation Class="PatchOperationReplace">
+      <xpath>/Defs/TerrainDef[defName = "Marsh"]/fertility</xpath>
+      <value><fertility>0.1</fertility></value>
+   </Operation>
+
+
+   <Operation Class="PatchOperationInsert">
+      <xpath>/Defs/TerrainDef[defName = "WaterDeep"]</xpath>
+      <value>
+		<tags>
+         <li>TKKN_Swim</li>
+		 </tags>
+      </value>
+   </Operation>
+   <Operation Class="PatchOperationInsert">
+      <xpath>/Defs/TerrainDef[defName = "WaterMovingShallow"]</xpath>
+      <value>
+		<tags>
+         <li>TKKN_SpecialPlants</li>
+		</tags>
+      </value>
+   </Operation>
+   <!-- Operation Class="PatchOperationAdd">
+      <xpath>/Defs/TerrainDef[defName = "WaterOceanDeep"]/tags</xpath>
+      <value>
+         <li>TKKN_SpecialPlants</li>
+      </value>
+   </Operation -->
+   <Operation Class="PatchOperationInsert">
+      <xpath>/Defs/TerrainDef[defName = "WaterMovingChestDeep"]</xpath>
+      <value>
+		<tags>
+         <li>TKKN_Swim</li>
+		</tags>
+      </value>
+   </Operation>
+   <Operation Class="PatchOperationInsert">
+      <xpath>/Defs/TerrainDef[defName = "WaterOceanShallow"]</xpath>
+      <value>
+		<tags>
+         <li>TKKN_Swim</li>
+		</tags>
+      </value>
+   </Operation>
+   <Operation Class="PatchOperationInsert">
+      <xpath>/Defs/TerrainDef[defName = "WaterShallow"]</xpath>
+      <value>
+		<tags>
+         <li>TKKN_SpecialPlants</li>
+		</tags>
+      </value>
+   </Operation>
+   <Operation Class="PatchOperationInsert">
+      <xpath>/Defs/TerrainDef[defName = "Marsh"]</xpath>
+      <value>
+		<tags>
+         <li>TKKN_SpecialPlants</li>
+		</tags>
       </value>
    </Operation>
 </Patch>

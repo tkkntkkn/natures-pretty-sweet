@@ -12,33 +12,34 @@ namespace TKKN_NPS
 		[HarmonyPostfix]
 		public static void Postfix(Plant __instance, ThingDef parentDef)
 		{
-			if (parentDef.HasModExtension<ThingWeatherReaction>())
+			if (__instance.def.HasModExtension<ThingWeatherReaction>())
 			{
-				ThingWeatherReaction mod = parentDef.GetModExtension<ThingWeatherReaction>();
+				ThingWeatherReaction mod = __instance.def.GetModExtension<ThingWeatherReaction>();
 
 				if (!mod.frostGraphicPath.NullOrEmpty())
 				{
-					string id = parentDef.defName + "frost";
+					string id = __instance.def.defName + "frost";
 					LongEventHandler.ExecuteWhenFinished(delegate
 					{
-						__instance.Map.GetComponent<Watcher>().graphicHolder.Add(id, GraphicDatabase.Get(parentDef.graphicData.graphicClass, mod.frostGraphicPath, parentDef.graphic.Shader, parentDef.graphicData.drawSize, parentDef.graphicData.color, parentDef.graphicData.colorTwo));
+						__instance.Map.GetComponent<Watcher>().graphicHolder.Add(id, GraphicDatabase.Get(__instance.def.graphicData.graphicClass, mod.frostGraphicPath, __instance.def.graphic.Shader, __instance.def.graphicData.drawSize, __instance.def.graphicData.color, __instance.def.graphicData.colorTwo));
 					});
 				}
 				if (!mod.droughtGraphicPath.NullOrEmpty())
 				{
-					string id = parentDef.defName + "drought";
+					
+					string id = __instance.def.defName + "drought";
 					LongEventHandler.ExecuteWhenFinished(delegate
 					{
-						__instance.Map.GetComponent<Watcher>().graphicHolder.Add(id, GraphicDatabase.Get(parentDef.graphicData.graphicClass, mod.droughtGraphicPath, parentDef.graphic.Shader, parentDef.graphicData.drawSize, parentDef.graphicData.color, parentDef.graphicData.colorTwo));
+						__instance.Map.GetComponent<Watcher>().graphicHolder.Add(id, GraphicDatabase.Get(__instance.def.graphicData.graphicClass, mod.droughtGraphicPath, __instance.def.graphic.Shader, __instance.def.graphicData.drawSize, __instance.def.graphicData.color, __instance.def.graphicData.colorTwo));
 					});
 
 				}
 				if (!mod.floweringGraphicPath.NullOrEmpty())
 				{
-					string id = parentDef.defName + "flowering";
+					string id = __instance.def.defName + "flowering";
 					LongEventHandler.ExecuteWhenFinished(delegate
 					{
-						__instance.Map.GetComponent<Watcher>().graphicHolder.Add(id, GraphicDatabase.Get(parentDef.graphicData.graphicClass, mod.floweringGraphicPath, parentDef.graphic.Shader, parentDef.graphicData.drawSize, parentDef.graphicData.color, parentDef.graphicData.colorTwo));
+						__instance.Map.GetComponent<Watcher>().graphicHolder.Add(id, GraphicDatabase.Get(__instance.def.graphicData.graphicClass, mod.floweringGraphicPath, __instance.def.graphic.Shader, __instance.def.graphicData.drawSize, __instance.def.graphicData.color, __instance.def.graphicData.colorTwo));
 					});
 				}
 			}

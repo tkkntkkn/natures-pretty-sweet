@@ -238,7 +238,7 @@ namespace TKKN_NPS
 		{
 			LongEventHandler.ExecuteWhenFinished(delegate
 			{
-				SoundDef soundDef = SoundDef.Named("DustDevil");
+				SoundDef soundDef = SoundDef.Named("Tornado");
 				this.sustainer = soundDef.TrySpawnSustainer(SoundInfo.InMap(this, MaintenanceType.PerTick));
 				this.UpdateSustainerVolume();
 			});
@@ -326,7 +326,7 @@ namespace TKKN_NPS
 						break;
 				}
 				int amount = Mathf.Max(GenMath.RoundRandom(30f * damageFactor), 1);
-				DustDevil.tmpThings[i].TakeDamage(new DamageInfo(DamageDefOf.TornadoScratch, amount, angle, this, null, null, DamageInfo.SourceCategory.ThingOrUnknown)).InsertIntoLog(battleLogEntry_DamageTaken);
+				DustDevil.tmpThings[i].TakeDamage(new DamageInfo(DamageDefOf.TornadoScratch, amount, 0, angle, this, null, null, DamageInfo.SourceCategory.ThingOrUnknown)).AssociateWithLog(battleLogEntry_DamageTaken);
 			}
 			DustDevil.tmpThings.Clear();
 		}

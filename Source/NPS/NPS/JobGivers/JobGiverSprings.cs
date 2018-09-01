@@ -12,6 +12,49 @@ using Verse.AI.Group;
 
 namespace TKKN_NPS
 {
+	public class JobGiver_Dryoff : ThinkNode_JobGiver
+	{
+		protected override Job TryGiveJob(Pawn pawn)
+		{
+			HediffDef hediffDef = HediffDefOf.TKKN_Wetness;
+			Hediff_Wetness wetness = pawn.health.hediffSet.GetFirstHediffOfDef(hediffDef) as Hediff_Wetness;
+
+			if (wetness != null && wetness.CurStage.label != "soaked")
+			{
+				return null;
+			}
+
+			IntVec3 c = this.getDryCell(pawn);
+
+			Job job = new Job(JobDefOf.TKKN_DryOff, c);
+			pawn.Map.pawnDestinationReservationManager.Reserve(pawn, job, c);
+			return job;
+		}
+
+		private IntVec3 getDryCell(Pawn pawn)
+		{
+			Predicate<IntVec3> validator = delegate (IntVec3 pos)
+			{
+				if (pos.GetTerrain(pawn.MapHeld).HasTag("Water"))
+				{
+					return false;
+				}
+				if (pawn.MapHeld.weatherManager.RainRate > 0 || pawn.MapHeld.weatherManager.SnowRate > 0)
+				{
+					if (!pawn.MapHeld.roofGrid.Roofed(pos))
+					{
+						return false;
+					}					
+				}
+				return true;
+			};
+			IntVec3 c = new IntVec3();
+			CellFinder.TryFindRandomCellNear(pawn.Position, pawn.MapHeld, 6, validator, out c);
+			return c;
+
+		}
+	}
+
 	public class JobGiver_GoSwimming : JobGiver_Wander
 	{
 
@@ -19,7 +62,7 @@ namespace TKKN_NPS
 
 		private static List<IntVec3> swimmingSpots = new List<IntVec3>();
 
-		protected Func<Pawn, IntVec3, bool> wanderDestValidator;
+		protected Func<Pawn, IntVec3, IntVec3, bool> wanderDestValidator;
 
 		protected IntRange ticksBetweenWandersRange = new IntRange(20, 100);
 
@@ -37,7 +80,7 @@ namespace TKKN_NPS
 			pawn.mindState.nextMoveOrderIsWait = !pawn.mindState.nextMoveOrderIsWait;
 			if (nextMoveOrderIsWait)
 			{
-				return new Job(RimWorld.JobDefOf.WaitWander)
+				return new Job(RimWorld.JobDefOf.Wait_Wander)
 				{
 					expiryInterval = this.ticksBetweenWandersRange.RandomInRange
 				};
@@ -120,7 +163,6 @@ namespace TKKN_NPS
 
 		protected override Job TryGiveJob(Pawn pawn)
 		{
-			Log.Warning("hi");
 			if (!JoyUtility.EnjoyableOutsideNow(pawn, null))
 			{
 				return null;
@@ -140,12 +182,10 @@ namespace TKKN_NPS
 				}
 				return false;
 			};
-			Log.Warning("here");
 			Thing hotSpring = GenClosest.ClosestThingReachable(pawn.GetLord().CurLordToil.FlagLoc, pawn.Map, ThingRequest.ForDef(TKKN_NPS.ThingDefOf.TKKN_HotSpring), PathEndMode.Touch, TraverseParms.For(pawn, Danger.Deadly, TraverseMode.ByPawn, false), -1f, validator, null, 0, -1, false, RegionType.Set_Passable, false);
 			if (hotSpring != null)
 			{
 				Thing spring = GenClosest.ClosestThingReachable(pawn.GetLord().CurLordToil.FlagLoc, pawn.Map, ThingRequest.ForDef(TKKN_NPS.ThingDefOf.TKKN_ColdSpring), PathEndMode.Touch, TraverseParms.For(pawn, Danger.Deadly, TraverseMode.ByPawn, false), -1f, validator, null, 0, -1, false, RegionType.Set_Passable, false);
-				Log.Warning("here2");
 				if (spring != null)
 				{
 					return new Job(RimWorld.JobDefOf.GotoSafeTemperature, this.getSpringCell(spring));
@@ -160,12 +200,9 @@ namespace TKKN_NPS
 
 		private IntVec3 getSpringCell(Thing spring)
 		{
-			Log.Warning("sup");
-
 
 			Predicate<IntVec3> validator = delegate (IntVec3 pos)
 			{
-				Log.Warning("sup2");
 				if (spring.def.defName == "TKKN_HotSpring")
 				{
 					return pos.GetTerrain(spring.Map).defName == "TKKN_HotSpringsWater";
@@ -176,10 +213,8 @@ namespace TKKN_NPS
 				}
 				return false;
 			};
-			Log.Warning("sup3");
 			IntVec3 c = new IntVec3();
 			CellFinder.TryFindRandomCellNear(spring.Position, spring.Map, 6, validator, out c);
-			Log.Warning("sup4");
 			return c;
 		}
 	}

@@ -20,7 +20,6 @@ namespace TKKN_NPS
 		public float howManyBlooms = 1.5f;
 	} 
 }
-
 namespace TKKN_NPS
 {
 	public class GameCondition_Superbloom : GameCondition_TKKNBlooms
@@ -28,45 +27,39 @@ namespace TKKN_NPS
 		public float howManyBlooms = 3;
 	}
 }
-
 namespace TKKN_NPS
 {
 	public class GameCondition_TKKNBlooms : GameCondition
 	{
-		public float howManyBlooms = 1;
-		public override void DoCellSteadyEffects(IntVec3 c)
+		public float howManyBlooms;
+		public void DoCellSteadyEffects(IntVec3 c)
 		{
-			bool canBloomHere = true;
 			//must be outdoors.
-
-			BiomeSeasonalSettings biomeSettings = base.Map.Biome.GetModExtension<BiomeSeasonalSettings>();
+			Map map = base.SingleMap;
+			BiomeSeasonalSettings biomeSettings = base.SingleMap.Biome.GetModExtension<BiomeSeasonalSettings>();
 			List<ThingDef> bloomPlants = biomeSettings.bloomPlants.ToList<ThingDef>();
 			if (bloomPlants.Count == 0)
 			{
 				return;
 			}
 
-			if (!canBloomHere)
-			{
-				return;
-			}
-
-			Room room = c.GetRoom(base.Map, RegionType.Set_All);
+			Room room = c.GetRoom(base.SingleMap, RegionType.Set_All);
 			if (room != null)
 			{
 				return;
 			}
 
 
-			TerrainDef terrain = c.GetTerrain(base.Map);
+			TerrainDef terrain = c.GetTerrain(base.SingleMap);
 			if (terrain.fertility == 0)
 			{
 				return;
 			}
-
-			if (!c.Roofed(base.Map))
+			
+			if (!c.Roofed(base.SingleMap) && c.GetEdifice(base.SingleMap) == null && c.GetCover(base.SingleMap) == null)
 			{
-				List<Thing> thingList = c.GetThingList(base.Map);
+				List<Thing> thingList = c.GetThingList(base.SingleMap);
+				bool planted = false;
 				for (int i = 0; i < thingList.Count; i++)
 				{
 					Thing thing = thingList[i];
@@ -79,12 +72,13 @@ namespace TKKN_NPS
 							{
 								plant.Growth = 1;
 							}
+							planted = true;
 						}
 					}
-					else if (thing.def.category == ThingCategory.Item)
-					{
-						canBloomHere = false;
-					}
+				}
+				if (planted)
+				{
+					return;
 				}
 			}
 			else
@@ -92,33 +86,17 @@ namespace TKKN_NPS
 				return;
 			}
 
-			if (canBloomHere && Rand.Value < 0.065f * base.Map.fertilityGrid.FertilityAt(c) * this.howManyBlooms)
+			if (Rand.Value < 0.65f * base.SingleMap.fertilityGrid.FertilityAt(c) * this.howManyBlooms)
 			{
-				if (c.GetEdifice(base.Map) == null && c.GetCover(base.Map) == null)
+				IEnumerable<ThingDef> source = from def in bloomPlants
+												where def.CanEverPlantAt(c, base.SingleMap)
+												select def;
+				if (source.Any<ThingDef>())
 				{
-					IEnumerable<ThingDef> source = from def in bloomPlants
-												   where def.CanEverPlantAt(c, base.Map)
-												   select def;
-					if (source.Any<ThingDef>())
-					{
-						ThingDef thingDef = source.RandomElement();
-						int randomInRange = thingDef.plant.wildClusterSizeRange.RandomInRange;
-						for (int j = 0; j < randomInRange; j++)
-						{
-							IntVec3 c2;
-							if (j == 0)
-							{
-								c2 = c;
-							}
-							else if (!GenPlantReproduction.TryFindReproductionDestination(c, thingDef, SeedTargFindMode.MapGenCluster, base.Map, out c2))
-							{
-								break;
-							}
-							Plant plant = (Plant)ThingMaker.MakeThing(thingDef, null);
-							plant.Growth = 1;
-							GenSpawn.Spawn(plant, c2, base.Map);
-						}
-					}
+					ThingDef thingDef = source.RandomElement();
+					Plant plant = (Plant)ThingMaker.MakeThing(thingDef, null);
+					plant.Growth = 1;
+					GenSpawn.Spawn(plant, c, base.SingleMap);
 				}
 			}
 		}

@@ -6,9 +6,9 @@
 		<defName>TKKN_WildFlowerBloom</defName>
 		<label>wild flower bloom</label>
 		<category>Misc</category>
-		<targetTypes>
-		  <li>MapPlayerHome</li>
-		</targetTypes>
+		<targetTags>
+		  <li>Map_PlayerHome</li>
+		</targetTags>
 			<workerClass>TKKN_NPS.IncidentWorker_WildFlowerBloom</workerClass>
 			<gameCondition>TKKN_WildFlowerBloom</gameCondition>
 			<letterLabel>Wild Flower Bloom</letterLabel>
@@ -27,12 +27,12 @@
 		<defName>TKKN_Superbloom</defName>
 		<label>superbloom</label>
 		<category>Misc</category>
-		<targetTypes>
-		  <li>MapPlayerHome</li>
-		</targetTypes>
+		<targetTags>
+		  <li>Map_PlayerHome</li>
+		</targetTags>
 			<workerClass>TKKN_NPS.IncidentWorker_Superbloom</workerClass>
 			<gameCondition>TKKN_Superbloom</gameCondition>
-			<letterLabel>Superbloom</letterLabel>
+			<letterLabel>TKKN_NPS_WildFlowerBloom</letterLabel>
 			<letterText>A massive blooming of wild flowers and plants are blooming! \n\nThis will boost the mood of anyone outside to see them, and might trigger allergies.</letterText>
 			<letterDef>PositiveEvent</letterDef>
 			<baseChance>1.2</baseChance>
@@ -44,33 +44,15 @@
 		<tale>TKKN_Superbloom</tale>
 	</IncidentDef>
 	
-	<IncidentDef>
-		<defName>TKKN_Drought</defName>
-		<label>drought</label>
-		<category>Misc</category>
-		<targetTypes>
-		  <li>MapPlayerHome</li>
-		</targetTypes>
-			<gameCondition>TKKN_Drought</gameCondition>
-			<letterLabel>drought</letterLabel>
-			<letterText>There's no rain in the forecast... for a very long time.</letterText>
-			<letterDef>ThreatSmall</letterDef>
-			<baseChance>1.2</baseChance>
-			<minRefireDays>0</minRefireDays>
-			<durationDays>
-				<min>0.35</min>
-				<max>1</max>
-			</durationDays>
-		<tale>TKKN_Drought</tale>
-	</IncidentDef>
+	
 	
 	<IncidentDef>
 		<defName>TKKN_TumblnweedMigration</defName>
 		<label>tumbleweeds passing through</label>
 		<category>Misc</category>
-		<targetTypes>
-			<li>MapPlayerHome</li>
-		</targetTypes>
+		<targetTags>
+			<li>Map_PlayerHome</li>
+		</targetTags>
 		<workerClass>TKKN_NPS.IncidentWorker_TumbleweedMigration</workerClass>
 		<baseChance>0.8</baseChance>
 		<letterLabel>tumbleweeds passing through</letterLabel>

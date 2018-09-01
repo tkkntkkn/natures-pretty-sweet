@@ -26,7 +26,7 @@ namespace TKKN_NPS
 
 
 	class Building_SteamVent : Building
-    {
+	{
         private IntermittentSteamSprayer steamSprayer;
 
         public Building harvester = null;
@@ -36,9 +36,9 @@ namespace TKKN_NPS
         private int spraySustainerStartTick = -999;
         private int age = 0;
 
-        public override void SpawnSetup(Map map, bool respawningAfterLoad)
-        {
-            base.SpawnSetup(map, respawningAfterLoad);
+		public override void SpawnSetup(Map map, bool respawningAfterLoad)
+		{
+			base.SpawnSetup(map, respawningAfterLoad);
             this.steamSprayer = new IntermittentSteamSprayer(this);
             this.steamSprayer.startSprayCallback = this.StartSpray;
             this.steamSprayer.endSprayCallback = this.EndSpray;

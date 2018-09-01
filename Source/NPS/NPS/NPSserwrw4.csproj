@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4F97F752-628E-4416-98E5-319FAF8E6271}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TKKN_NPS</RootNamespace>
+    <AssemblyName>TKKN_NPS</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>false</DebugSymbols>
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\..\Assemblies\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="0Harmony">
+      <HintPath>..\..\..\..\..\..\..\..\..\..\Users\knord\Desktop\0Harmony.dll</HintPath>
+    </Reference>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>..\..\..\..\..\RimWorldWin64_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UnityEngine">
+      <HintPath>..\..\..\..\..\RimWorldWin64_Data\Managed\UnityEngine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BiomeSeasonalSettings.cs" />
+    <Compile Include="Controller.cs" />
+    <Compile Include="Elements\DustDevil.cs" />
+    <Compile Include="Elements\ElementSpawnDefOf.cs" />
+    <Compile Include="Elements\ElementSpawnDef.cs" />
+    <Compile Include="Elements\Building_SteamVent.cs" />
+    <Compile Include="GameCondition_Seasonal.cs" />
+    <Compile Include="HarmonyPatches\BiomeDef.cs" />
+    <Compile Include="HarmonyPatches\BiomeWorker.cs" />
+    <Compile Include="HarmonyPatches\PlantUtility.cs" />
+    <Compile Include="HarmonyPatches\ForbidUtility.cs" />
+    <Compile Include="HarmonyPatches\GenTemperature.cs" />
+    <Compile Include="HarmonyPatches\Graphic_Shadow.cs" />
+    <Compile Include="HarmonyPatches\Pawn.cs" />
+    <Compile Include="HarmonyPatches\PawnRenderer.cs" />
+    <Compile Include="HarmonyPatches\Plant.cs" />
+    <Compile Include="Frost\FrostCategory.cs" />
+    <Compile Include="Frost\FrostGrid.cs" />
+    <Compile Include="Frost\FrostUtility.cs" />
+    <Compile Include="Frost\MatBases.cs" />
+    <Compile Include="Frost\SectionLayer_Frost.cs" />
+    <Compile Include="Generation\SectionLayerGeometryMaker_Solid.cs" />
+    <Compile Include="HarmonyPatches\HarmonyPatch.cs" />
+    <Compile Include="HarmonyPatches\Thing.cs" />
+    <Compile Include="HarmonyPatches\PlantProperties.cs" />
+    <Compile Include="HediffDefOf.cs" />
+    <Compile Include="Compatability\PatchOperationFindModByName.cs" />
+    <Compile Include="HarmonyPatches\MouseoverReadout.cs" />
+    <Compile Include="HeDiffs\HeDiff_Wetness.cs" />
+    <Compile Include="IncidentWorker\IncidentCommonalityRecord.cs" />
+    <Compile Include="IncidentWorker\IncidentWorker_Seasonal.cs" />
+    <Compile Include="HarmonyPatches\JobGiverSpringsPatch.cs" />
+    <Compile Include="JobGivers\JobGiverSprings.cs" />
+    <Compile Include="Pawn Stuff\CompProperties_Heater.cs" />
+    <Compile Include="Pawn Stuff\JobDefOf.cs" />
+    <Compile Include="Save Classes\cellData.cs" />
+    <Compile Include="Save Classes\springData.cs" />
+    <Compile Include="Settings.cs" />
+    <Compile Include="Pawn Stuff\ThoughtWorker_AweOfNature.cs" />
+    <Compile Include="IncidentWorker\IncidentWorker_LavaFlow.cs" />
+    <Compile Include="Elements\SpringClasses.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Generation\BiomeWorker.cs" />
+    <Compile Include="Generation\TerrainDefOf.cs" />
+    <Compile Include="TerrainWatcher.cs" />
+    <Compile Include="Elements\ThingDefOf.cs" />
+    <Compile Include="TerrainWeatherReactions.cs" />
+    <Compile Include="ThingWeatherReaction.cs" />
+    <Compile Include="TKKN_Holder.cs" />
+    <Compile Include="WeatherOverlay.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

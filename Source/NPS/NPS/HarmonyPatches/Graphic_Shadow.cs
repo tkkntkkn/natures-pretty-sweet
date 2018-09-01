@@ -20,10 +20,10 @@ namespace TKKN_NPS
 			{
 				Pawn pawn = thing as Pawn;
 				if (pawn is Pawn && pawn != null){
-					if (pawn.Position.IsValid)
+					if (pawn.RaceProps.Humanlike && pawn.Position.IsValid)
 					{
-						TerrainDef terrain = pawn.Position.GetTerrain(pawn.Map);
-						if (terrain != null && terrain.HasTag("Water") && terrain.defName.ToLower().Contains("deep"))
+						TerrainDef terrain = pawn.Position.GetTerrain(pawn.MapHeld);
+						if (terrain != null && terrain.HasTag("TKKN_Swim"))
 						{
 							return false;
 						}

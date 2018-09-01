@@ -1,6 +1,8 @@
 ﻿using Verse;
 using Harmony;
 using RimWorld;
+using System;
+using System.Collections.Generic;
 
 namespace TKKN_NPS
 {
@@ -16,13 +18,7 @@ namespace TKKN_NPS
 			{
 				return;
 			}
-			HediffDef hediffDef = HediffDefOf.TKKN_Wetness;
-			if (__instance.health.hediffSet.GetFirstHediffOfDef(hediffDef) == null)
-			{
-				Hediff hediff = HediffMaker.MakeHediff(hediffDef, __instance, null);
-				hediff.Severity = 0;
-				__instance.health.AddHediff(hediff, null, null);
-			}
+			
 		}
 	}
 	[HarmonyPatch(typeof(Pawn))]
@@ -37,7 +33,7 @@ namespace TKKN_NPS
 				return;
 			}
 
-			TerrainDef terrain = __instance.Position.GetTerrain(__instance.Map);
+			TerrainDef terrain = __instance.Position.GetTerrain(__instance.MapHeld);
 			if ((terrain.defName == "TKKN_SaltField" || terrain.defName == "TKKN_Salted_Earth") && __instance.def.defName == "TKKN_giantsnail")
 			{
 				PatchTickPawn.BurnSnails(__instance);
@@ -46,17 +42,85 @@ namespace TKKN_NPS
 
 			if (!__instance.Dead)
 			{
-				PatchTickPawn.MakePaths(__instance);
-				PatchTickPawn.MakeBreath(__instance);
+				if (!Find.TickManager.Paused)
+				{
+					PatchTickPawn.MakePaths(__instance);
+					PatchTickPawn.MakeBreath(__instance);
+					PatchTickPawn.MakeWet(__instance);
+					PatchTickPawn.DyingCheck(__instance, terrain);
+				}
 			}
 		}
+		public static void DyingCheck(Pawn pawn, TerrainDef terrain)
+		{
+			//drowning == immobile and in water
+			if (pawn.RaceProps.Humanlike && pawn.health.Downed && terrain.HasTag("Water"))
+			{
+				float damage = .1f;
+				//if they're awake, take less damage
+				if (!pawn.health.capacities.CanBeAwake)
+				{
+					damage = .05f;
+				}
+
+				//heavier clothing hurts them more
+				List<Apparel> apparel = pawn.apparel.WornApparel;
+				float weight = 0f;
+				for (int i = 0; i < apparel.Count; i++)
+				{
+					weight += apparel[i].HitPoints / 100;
+				}
+				damage += weight / 10;
+				HealthUtility.AdjustSeverity(pawn, HediffDef.Named("TKKN_Drowning"), damage);
+			}
+		}
+		public static void MakeWet(Pawn pawn)
+		{
+			HediffDef hediffDef = HediffDefOf.TKKN_Wetness;
+			if (pawn.health.hediffSet.GetFirstHediffOfDef(hediffDef) == null && pawn.RaceProps.Humanlike)
+			{
+				Map map = pawn.MapHeld;
+				IntVec3 c = pawn.Position;
+				if (map == null || !c.IsValid)
+				{
+					return;
+				}
+				bool isWet = false;
+				if (map.weatherManager.curWeather.rainRate > .001f)
+				{
+					Room room = c.GetRoom(map, RegionType.Set_All);
+					bool roofed = map.roofGrid.Roofed(c);
+					bool flag2 = room != null && room.UsesOutdoorTemperature;
+					if (!roofed)
+					{
+						isWet = true;
+					}
+
+				}
+				else
+				{
+					TerrainDef currentTerrain = c.GetTerrain(map);
+					if (currentTerrain.HasTag("Water")){
+						isWet = true;
+					}
+				}
+
+				if (isWet)
+				{
+					Hediff hediff = HediffMaker.MakeHediff(hediffDef, pawn, null);
+					hediff.Severity = 0;
+					pawn.health.AddHediff(hediff, null, null);
+				}
+			}
+		}
+
 		public static void BurnSnails(Pawn pawn)
 		{
 			BattleLogEntry_DamageTaken battleLogEntry_DamageTaken = new BattleLogEntry_DamageTaken(pawn, RulePackDefOf.DamageEvent_Fire, null);
 			Find.BattleLog.Add(battleLogEntry_DamageTaken);
-			DamageInfo dinfo = new DamageInfo(DamageDefOf.Flame, 100, -1f, pawn, null, null, DamageInfo.SourceCategory.ThingOrUnknown);
+			DamageInfo dinfo = new DamageInfo(DamageDefOf.Flame, 100, -1f, 0, null, null, null, DamageInfo.SourceCategory.ThingOrUnknown, pawn);
 			dinfo.SetBodyRegion(BodyPartHeight.Undefined, BodyPartDepth.Outside);
-			pawn.TakeDamage(dinfo).InsertIntoLog(battleLogEntry_DamageTaken);
+			pawn.TakeDamage(dinfo).AssociateWithLog(battleLogEntry_DamageTaken);
 		}
 		public static void MakePaths(Pawn pawn)
 		{
@@ -67,24 +131,22 @@ namespace TKKN_NPS
 				return;
 			}
 			#region paths
-			if (pawn.Position.InBounds(map))
+			if (pawn.Position.InBounds(map) && pawn.RaceProps.Humanlike)
 			{
 				//damage plants and remove snow/frost where they are. This will hopefully generate paths as pawns walk :)
-				if (watcher.checkIfCold(pawn.Position) && pawn.RaceProps.Humanlike)
+				if (watcher.checkIfCold(pawn.Position))
 				{
 					map.GetComponent<FrostGrid>().AddDepth(pawn.Position, (float)-.05);
 					map.snowGrid.AddDepth(pawn.Position, (float)-.05);
 				}
 
-				if (pawn.RaceProps.Humanlike)
+				//pack down the soil.
+				cellData cell = watcher.cellWeatherAffects[pawn.Position];
+				cell.doPack();
+				if (Settings.allowPlantEffects)
 				{
-					//pack down the soil.
-					cellData cell = watcher.cellWeatherAffects[pawn.Position];
-					cell.doPack();
-					if (Settings.allowPlantEffects)
-					{
-						watcher.hurtPlants(pawn.Position, true, true);
-					}
+					//this will be handled by the terrain changing in doPack
+			//		watcher.hurtPlants(pawn.Position, true, true);
 				}
 			}
 			#endregion

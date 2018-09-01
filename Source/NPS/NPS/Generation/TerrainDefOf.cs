@@ -13,9 +13,6 @@ namespace TKKN_NPS
         public static TerrainDef TKKN_Lava;
 		public static TerrainDef TKKN_LavaDeep;
 		public static TerrainDef TKKN_LavaRock_RoughHewn;
-		//compatibility with some older code
-		public static TerrainDef TKKN_HotSprings;
-		public static TerrainDef TKKN_ColdSprings;
 
 		//FOR WEATHER:
 

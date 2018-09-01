@@ -1,35 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Patch>
-   <Operation Class="PatchOperationAdd">
-      <xpath>/Defs/BiomeDef[defName = "TemperateForest"]/wildAnimals</xpath>
+   <Operation Class="PatchOperationInsert">
+      <xpath>/Defs/BiomeDef[defName = "TemperateForest"]</xpath>
       <value>
-         <TKKN_giantsnail>0.04</TKKN_giantsnail>
+         <wildAnimals>
+            <TKKN_giantsnail>0.04</TKKN_giantsnail>
+         </wildAnimals>
       </value>
    </Operation>
-   <Operation Class="PatchOperationAdd">
-      <xpath>/Defs/BiomeDef[defName = "TropicalRainforest"]/wildAnimals</xpath>
+   <Operation Class="PatchOperationInsert">
+      <xpath>/Defs/BiomeDef[defName = "TropicalRainforest"]</xpath>
       <value>
-         <TKKN_giantsnail>0.04</TKKN_giantsnail>
+         <wildAnimals>
+            <TKKN_giantsnail>0.04</TKKN_giantsnail>
+         </wildAnimals>
       </value>
    </Operation>
-   <Operation Class="PatchOperationAdd">
-      <xpath>/Defs/BiomeDef[defName = "TropicalSwamp"]/wildAnimals</xpath>
+   <Operation Class="PatchOperationInsert">
+      <xpath>/Defs/BiomeDef[defName = "TropicalSwamp"]</xpath>
       <value>
-         <TKKN_giantsnail>0.04</TKKN_giantsnail>
-         <TKKN_crab>0.04</TKKN_crab>
+         <wildAnimals>
+			 <TKKN_giantsnail>0.04</TKKN_giantsnail>
+			 <TKKN_crab>0.04</TKKN_crab>
+         </wildAnimals>
       </value>
    </Operation>
-   <Operation Class="PatchOperationAdd">
-      <xpath>/Defs/BiomeDef[defName = "AridShrubland"]/baseWeatherCommonalities</xpath>
+   <Operation Class="PatchOperationInsert">
+      <xpath>/Defs/BiomeDef[defName = "AridShrubland"]</xpath>
       <value>
+	  <baseWeatherCommonalities>
          <TKKN_DryDustStorm>1</TKKN_DryDustStorm>
          <TKKN_DustStorm>1</TKKN_DustStorm>
+	  </baseWeatherCommonalities>
       </value>
    </Operation>
-   <Operation Class="PatchOperationAdd">
+   <Operation Class="PatchOperationReplace">
+      <xpath>/Defs/BiomeDef[defName = "AridShrubland"]/wildPlants/Plant_SaguaroCactus</xpath>
+      <value><Plant_SaguaroCactus>.3</Plant_SaguaroCactus></value>
+   </Operation>
+   <Operation Class="PatchOperationReplace">
+      <xpath>/Defs/BiomeDef[defName = "AridShrubland"]/wildPlants/Plant_TreeDrago</xpath>
+      <value><Plant_TreeDrago>.3</Plant_TreeDrago></value>
+   </Operation>
+   <Operation Class="PatchOperationReplace">
+      <xpath>/Defs/BiomeDef[defName = "AridShrubland"]/wildPlants/Plant_Agave</xpath>
+      <value><Plant_Agave>.1</Plant_Agave></value>
+   </Operation>
+   <Operation Class="PatchOperationRemove">
+      <xpath>/Defs/BiomeDef[defName = "AridShrubland"]/wildPlants/Plant_Berry</xpath>
+   </Operation>
+   <Operation Class="PatchOperationReplace">
       <xpath>/Defs/BiomeDef[defName = "AridShrubland"]/wildPlants</xpath>
       <value>
-         <TKKN_PlantCactusPricklyPear>.1</TKKN_PlantCactusPricklyPear>
+	  <wildPlants>
+		<Plant_Grass>5.5</Plant_Grass>
+		<Plant_Dandelion>0.8</Plant_Dandelion>
+		<Plant_Bush>0.5</Plant_Bush>
+		<Plant_PincushionCactus>0.4</Plant_PincushionCactus>
+		<Plant_Agave>0.2</Plant_Agave>
+		<Plant_SaguaroCactus>0.1</Plant_SaguaroCactus>
+		<Plant_TreeDrago>0.3</Plant_TreeDrago> 
+		<TKKN_PlantCactusPricklyPear>.1</TKKN_PlantCactusPricklyPear>
          <TKKN_PlantCactusSanPedro>.1</TKKN_PlantCactusSanPedro>
          <TKKN_PlantCactusBarrel>.1</TKKN_PlantCactusBarrel>
          <TKKN_PlantDesertShrubA>3</TKKN_PlantDesertShrubA>
@@ -37,32 +68,115 @@
          <TKKN_PlantSucculants>.1</TKKN_PlantSucculants>
          <TKKN_TreeOcotillo>.3</TKKN_TreeOcotillo>
          <TKKN_PlantWildCorn>.1</TKKN_PlantWildCorn>
+	  </wildPlants>
       </value>
    </Operation>
-   <Operation Class="PatchOperationAdd">
-      <xpath>/Defs/BiomeDef[defName = "AridShrubland"]/wildPlants/PlantSaguaroCactus</xpath>
-      <value>.3</value>
-   </Operation>
-   <Operation Class="PatchOperationAdd">
-      <xpath>/Defs/BiomeDef[defName = "AridShrubland"]/wildPlants/PlantTreeDrago</xpath>
-      <value>.3</value>
-   </Operation>
-   <Operation Class="PatchOperationAdd">
-      <xpath>/Defs/BiomeDef[defName = "AridShrubland"]/wildPlants/PlantAgave</xpath>
-      <value>.1</value>
-   </Operation>
-   <Operation Class="PatchOperationAdd">
-      <xpath>/Defs/BiomeDef[defName = "Desert"]/baseWeatherCommonalities</xpath>
+   <Operation Class="PatchOperationInsert">
+      <xpath>/Defs/BiomeDef[defName = "Desert"]</xpath>
       <value>
+	  <baseWeatherCommonalities>
          <TKKN_DryDustStorm>2</TKKN_DryDustStorm>
          <TKKN_DustStorm>2</TKKN_DustStorm>
          <TKKN_WindStorm>2</TKKN_WindStorm>
          <TKKN_Windy>2</TKKN_Windy>
+	  </baseWeatherCommonalities>
       </value>
    </Operation>
-   <Operation Class="PatchOperationAdd">
+   <Operation Class="PatchOperationReplace">
       <xpath>/Defs/BiomeDef[defName = "Desert"]/wildPlants</xpath>
       <value>
+	  <wildPlants>
+			<Plant_Grass>3</Plant_Grass>
+			<Plant_PincushionCactus>.6</Plant_PincushionCactus>
+			<Plant_SaguaroCactus>.6</Plant_SaguaroCactus>
+			<Plant_Dandelion>0.5</Plant_Dandelion>
+			<Plant_TreeDrago>0.2</Plant_TreeDrago>
+			<Plant_Agave>0.25</Plant_Agave>
+			<Plant_Bush>0.25</Plant_Bush>
+			<TKKN_PlantCactusPricklyPear>.3</TKKN_PlantCactusPricklyPear>
+			<TKKN_PlantCactusSanPedro>.6</TKKN_PlantCactusSanPedro>
+			<TKKN_PlantCactusBarrel>.5</TKKN_PlantCactusBarrel>
+			<TKKN_PlantDesertShrubA>3</TKKN_PlantDesertShrubA>
+			<TKKN_PlantDesertShrubB>3</TKKN_PlantDesertShrubB>
+			<TKKN_PlantSucculants>.1</TKKN_PlantSucculants>
+			<TKKN_TreeOcotillo>.7</TKKN_TreeOcotillo>
+			<TKKN_PlantLilypad>.3</TKKN_PlantLilypad>
+			<TKKN_PlantCatTails>.3</TKKN_PlantCatTails>
+	  </wildPlants>
+      </value>
+   </Operation>   
+   <Operation Class="PatchOperationReplace">
+      <xpath>/Defs/BiomeDef[defName = "ExtremeDesert"]/wildPlants</xpath>
+      <value>
+	  <wildPlants>
+			<Plant_Grass>3</Plant_Grass>
+			<Plant_SaguaroCactus>.4</Plant_SaguaroCactus>
+			<Plant_Agave>0.25</Plant_Agave>
+			<TKKN_PlantCactusPricklyPear>.3</TKKN_PlantCactusPricklyPear>
+			<TKKN_PlantCactusSanPedro>.6</TKKN_PlantCactusSanPedro>
+			<TKKN_PlantCactusBarrel>.5</TKKN_PlantCactusBarrel>
+			<TKKN_PlantDesertShrubA>3</TKKN_PlantDesertShrubA>
+			<TKKN_PlantDesertShrubB>3</TKKN_PlantDesertShrubB>
+			<TKKN_PlantSucculants>.1</TKKN_PlantSucculants>
+			<TKKN_TreeOcotillo>.8</TKKN_TreeOcotillo>
+			<TKKN_PlantLilypad>.3</TKKN_PlantLilypad>
+			<TKKN_PlantCatTails>.3</TKKN_PlantCatTails>
+	  </wildPlants>
+      </value>
+   </Operation>   
+   <Operation Class="PatchOperationInsert">
+      <xpath>/Defs/BiomeDef[defName = "BorealForest"]</xpath>
+      <value>
+	  <wildPlants>
+		   <TKKN_PlantCatTails>.3</TKKN_PlantCatTails>
+		   <TKKN_PlantWildRice>.2</TKKN_PlantWildRice>
+	  </wildPlants>
+      </value>
+   </Operation>   
+   <Operation Class="PatchOperationInsert">
+      <xpath>/Defs/BiomeDef[defName = "TemperateForest"]</xpath>
+      <value>
+	  <wildPlants>
+		   <TKKN_PlantCatTails>.3</TKKN_PlantCatTails>
+		   <TKKN_PlantWildRice>.2</TKKN_PlantWildRice>
+	  </wildPlants>
+      </value>
+   </Operation>   
+   <Operation Class="PatchOperationInsert">
+      <xpath>/Defs/BiomeDef[defName = "TropicalRainforest"]</xpath>
+      <value>
+	  <baseWeatherCommonalities>
+		   <TKKN_PlantWildRice>.4</TKKN_PlantWildRice>
+		   <TKKN_PlantCatTails>.6</TKKN_PlantCatTails>
+		   <TKKN_PlantLilypad>.4</TKKN_PlantLilypad>
+	  </baseWeatherCommonalities>
+      </value>
+   </Operation>   
+   <Operation Class="PatchOperationInsert">
+      <xpath>/Defs/BiomeDef[defName = "TropicalSwamp"]</xpath>
+      <value>
+	  <baseWeatherCommonalities>
+		   <TKKN_PlantWildRice>.4</TKKN_PlantWildRice>
+		   <TKKN_PlantCatTails>.6</TKKN_PlantCatTails>
+		   <TKKN_PlantLilypad>.4</TKKN_PlantLilypad>
+	  </baseWeatherCommonalities>
+      </value>
+   </Operation>   
+   <Operation Class="PatchOperationInsert">
+      <xpath>/Defs/BiomeDef[defName = "TemperateSwamp"]</xpath>
+      <value>
+	  <baseWeatherCommonalities>
+		   <TKKN_PlantWildRice>.4</TKKN_PlantWildRice>
+		   <TKKN_PlantCatTails>.6</TKKN_PlantCatTails>
+		   <TKKN_PlantLilypad>.4</TKKN_PlantLilypad>
+	  </baseWeatherCommonalities>
+      </value>
+   </Operation>   
+   
+   <Operation Class="PatchOperationInsert">
+      <xpath>/Defs/BiomeDef[defName = "Desert"]</xpath>
+      <value>
+	  <wildPlants>
          <TKKN_PlantCactusPricklyPear>.2</TKKN_PlantCactusPricklyPear>
          <TKKN_PlantCactusSanPedro>.1</TKKN_PlantCactusSanPedro>
          <TKKN_PlantCactusBarrel>.2</TKKN_PlantCactusBarrel>
@@ -70,6 +184,7 @@
          <TKKN_PlantDesertShrubB>1</TKKN_PlantDesertShrubB>
          <TKKN_PlantSucculants>.5</TKKN_PlantSucculants>
          <TKKN_TreeOcotillo>.2</TKKN_TreeOcotillo>
+	  </wildPlants>
       </value>
    </Operation>
    <Operation Class="PatchOperationAdd">
@@ -87,8 +202,8 @@
       <value>
          <li Class="TKKN_NPS.BiomeSeasonalSettings">
             <bloomPlants>
-               <li>PlantAgave</li>
-               <li>PlantDandelion</li>
+               <li>Plant_Agave</li>
+               <li>Plant_Dandelion</li>
             </bloomPlants>
             <springEvents>
                <TKKN_Superbloom>1</TKKN_Superbloom>
@@ -122,14 +237,10 @@
       <value>
          <li Class="TKKN_NPS.BiomeSeasonalSettings">
             <bloomPlants>
-               <li>PlantPincushionCactus</li>
-               <li>PlantDandelion</li>
-               <li>PlantAgave</li>
+               <li>Plant_PincushionCactus</li>
+               <li>Plant_Dandelion</li>
+               <li>Plant_Agave</li>
             </bloomPlants>
-            <specialPlants>
-               <TKKN_PlantLilypad>.3</TKKN_PlantLilypad>
-               <TKKN_PlantCatTails>.3</TKKN_PlantCatTails>
-            </specialPlants>
             <springEvents>
                <TKKN_Superbloom>1</TKKN_Superbloom>
                <TKKN_WildFlowerBloom>1</TKKN_WildFlowerBloom>
@@ -158,14 +269,11 @@
       <value>
          <li Class="TKKN_NPS.BiomeSeasonalSettings">
             <bloomPlants>
-               <li>PlantMoss</li>
-               <li>PlantRaspberry</li>
-               <li>PlantWildHealroot</li>
+               <li>Plant_Moss</li>
+               <li>Plant_Berry</li>
+               <li>Plant_Healroot</li>
                <li>TKKN_PlantWildflowers</li>
             </bloomPlants>
-            <specialPlants>
-               <TKKN_PlantCatTails>.3</TKKN_PlantCatTails>
-            </specialPlants>
             <springEvents>
                <TKKN_WildFlowerBloom>1</TKKN_WildFlowerBloom>
                <HerdMigration>1.2</HerdMigration>
@@ -275,10 +383,10 @@
       <value>
          <li Class="TKKN_NPS.BiomeSeasonalSettings">
             <bloomPlants>
-               <li>PlantGrass</li>
-               <li>PlantRaspberry</li>
-               <li>PlantWildHealroot</li>
-               <li>PlantDandelion</li>
+               <li>Plant_Grass</li>
+               <li>Plant_Berry</li>
+               <li>Plant_Healroot</li>
+               <li>Plant_Dandelion</li>
                <li>TKKN_PlantWildflowers</li>
             </bloomPlants>
             <springEvents>
@@ -402,38 +510,34 @@
       <value>
          <li Class="TKKN_NPS.BiomeSeasonalSettings">
             <bloomPlants>
-               <li>PlantMoss</li>
-               <li>PlantRaspberry</li>
-               <li>PlantWildHealroot</li>
-               <li>PlantDandelion</li>
+               <li>Plant_Moss</li>
+               <li>Plant_Berry</li>
+               <li>Plant_Healroot</li>
+               <li>Plant_Dandelion</li>
                <li>TKKN_PlantSunflower</li>
                <li>TKKN_PlantWildflowers</li>
             </bloomPlants>
-            <specialPlants>
-               <TKKN_PlantCatTails>.3</TKKN_PlantCatTails>
-               <TKKN_PlantLilypad>.2</TKKN_PlantLilypad>
-            </specialPlants>
             <springEvents>
                <TKKN_WildFlowerBloom>1.2</TKKN_WildFlowerBloom>
                <HerdMigration>1.5</HerdMigration>
-               <Tornado>1</Tornado>
+               <!-- Tornado>1</Tornado -->
                <Aurora>0</Aurora>
                <TKKN_DustDevil>0</TKKN_DustDevil>
             </springEvents>
             <summerEvents>
-               <Tornado>1</Tornado>
+               <!-- Tornado>1</Tornado -->
                <TKKN_WildFlowerBloom>.5</TKKN_WildFlowerBloom>
                <HerdMigration>.2</HerdMigration>
                <TKKN_DustDevil>0</TKKN_DustDevil>
             </summerEvents>
             <fallEvents>
-               <Tornado>.5</Tornado>
+               <!-- Tornado>.5</Tornado -->
                <HerdMigration>1.2</HerdMigration>
                <Aurora>0</Aurora>
                <TKKN_DustDevil>0</TKKN_DustDevil>
             </fallEvents>
             <winterEvents>
-               <Tornado>.5</Tornado>
+               <!-- Tornado>.5</Tornado -->
                <HerdMigration>.2</HerdMigration>
                <Aurora>0</Aurora>
                <TKKN_DustDevil>0</TKKN_DustDevil>
@@ -526,16 +630,14 @@
       <value>
          <li Class="TKKN_NPS.BiomeSeasonalSettings">
             <bloomPlants>
-               <li>PlantMoss</li>
-               <li>PlantRaspberry</li>
-               <li>PlantWildHealroot</li>
-               <li>PlantDandelion</li>
+               <li>Plant_Moss</li>
+               <li>Plant_Berry</li>
+               <li>Plant_Healroot</li>
+               <li>Plant_Dandelion</li>
                <li>TKKN_PlantSunflower</li>
                <li>TKKN_PlantWildflowers</li>
             </bloomPlants>
             <specialPlants>
-               <TKKN_PlantCatTails>.3</TKKN_PlantCatTails>
-               <TKKN_PlantLilypad>.2</TKKN_PlantLilypad>
             </specialPlants>
             <springEvents>
                <HerdMigration>1.5</HerdMigration>

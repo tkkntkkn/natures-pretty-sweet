@@ -1,4 +1,11 @@
-﻿using Verse;
+﻿using RimWorld;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+using Verse;
+using Verse.Noise;
+
 namespace TKKN_NPS
 {
 	public abstract class CompProperties_GraphicRotatorCon : CompProperties

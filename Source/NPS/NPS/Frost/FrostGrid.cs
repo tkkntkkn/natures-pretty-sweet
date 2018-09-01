@@ -6,7 +6,6 @@ namespace TKKN_NPS
 {
 	public sealed class FrostGrid : MapComponent
 	{
-		private Map map;
 
 		public float[] depthGrid;
 

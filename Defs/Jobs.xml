@@ -17,6 +17,11 @@
 		<joyGainRate>1</joyGainRate>
 		<joyKind>Meditative</joyKind>
 	</JobDef>
-	
+    <JobDef>
+		<defName>TKKN_DryOff</defName>
+		<driverClass>TKKN_NPS.JobGiver_Dryoff</driverClass>
+		<reportString>drying off.</reportString>
+		<joyDuration>4000</joyDuration>
+	</JobDef>	
 	
   </Defs>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Patch>
+   <Operation Class="PatchOperationSequence">
+      <success>Always</success>
+      <operations>
+         <li Class="TKKN_NPS.PatchOperationFindModByName">
+            <mod>VGP Vegetable Garden</mod>
+         </li>
+         <!-- li Class="PatchOperationReplace">
+            <xpath>*/ThingDef[defName = "TKKN_SaltCrystal"]/plant/harvestedThingDef</xpath>
+            <value>
+               <harvestedThingDef>ChunkSalt</harvestedThingDef>
+            </value>
+         </li -->
+         <li Class="PatchOperationReplace">
+            <xpath>*/ThingDef[defName = "TKKN_Salt"]/thingCategories</xpath>
+			<value>
+				<thingCategories></thingCategories>
+			</value>
+         </li>
+         <li Class="PatchOperationReplace">
+            <xpath>*/ThingDef[defName = "TKKN_Salt"]/thingCategories/statBases/MarketValue</xpath>
+			<value>
+				<MarketValue>0</MarketValue>
+			</value>
+         </li>
+         <li Class="PatchOperationRemove">
+            <xpath>*/ThingDef[defName = "TKKN_PreservedMeat"]</xpath>
+         </li>
+         <li Class="PatchOperationAdd">
+            <xpath>*/ThingDef[defName = "TKKN_VG_SoilTilledWet"]</xpath>
+            <value>
+               <label>wet garden soil</label>
+               <Description>Wet till soil to make a small improvement in soil growing condition. Soil fertility is 20% of normal soil.</Description>
+               <texturePath>TKKN_NPS/Mods/VGP/WetFarmSoil</texturePath>
+               <EdgeType>FadeRough</EdgeType>
+               <RenderPrecedence>335</RenderPrecedence>
+               <PathCost>4</PathCost>
+               <statBases>
+                  <Beauty>0</Beauty>
+                  <WorkToBuild>1000</WorkToBuild>
+               </statBases>
+               <affordances>
+                  <li>Light</li>
+                  <li>Heavy</li>
+                  <li>GrowSoil</li>
+                  <li>Diggable</li>
+               </affordances>
+               <TerrainFilthDef>FilthDirt</TerrainFilthDef>
+               <Fertility>1.8</Fertility>
+               <TakeFootprints>True</TakeFootprints>
+               <acceptFilth>false</acceptFilth>
+               <avoidWander>true</avoidWander>
+               <CostList>
+                  <RawFertilizer>5</RawFertilizer>
+               </CostList>
+            </value>
+         </li>
+         <li Class="PatchOperationAdd">
+            <xpath>*/ThingDef[defName = "TKKN_VG_WetPlowSoil"]</xpath>
+            <value>
+               <label>wet plow soil</label>
+               <Description>Wet plow soil for much improved growing conditions. Soil fertility 200% of normal soil.</Description>
+               <texturePath>TKKN_NPS/Mods/VGP/wetPlowedSoil</texturePath>
+               <EdgeType>FadeRough</EdgeType>
+               <RenderPrecedence>335</RenderPrecedence>
+               <PathCost>5</PathCost>
+               <statBases>
+                  <Beauty>0</Beauty>
+               </statBases>
+               <affordances>
+                  <li>Light</li>
+                  <li>Heavy</li>
+                  <li>GrowSoil</li>
+                  <li>Diggable</li>
+               </affordances>
+               <TerrainFilthDef>FilthDirt</TerrainFilthDef>
+               <Fertility>2</Fertility>
+               <TakeFootprints>True</TakeFootprints>
+               <acceptFilth>false</acceptFilth>
+               <avoidWander>true</avoidWander>
+               <terrainAffordanceNeeded>GrowSoil</terrainAffordanceNeeded>
+               <CostList>
+                  <RawFertilizer>10</RawFertilizer>
+               </CostList>
+            </value>
+         </li>
+         <li Class="PatchOperationAddModExtension">
+            <xpath>*/TerrainDef[defName = "PlowSoil"]</xpath>
+            <value>
+               <li Class="TKKN_NPS.TerrainWeatherReactions">
+				  <alertOnLoad>True</alertOnLoad>
+                  <tideTerrain />
+                  <floodTerrain />
+                  <wetTerrain>TKKN_VG_WetPlowSoil</wetTerrain>
+                  <freezeTerrain />
+                  <freezeAt />
+                  <wetAt>0</wetAt>
+                  <isSalty>False</isSalty>
+               </li>
+            </value>
+         </li>
+         <li Class="PatchOperationAddModExtension">
+            <xpath>*/TerrainDef[defName = "VG_SoilTilled"]</xpath>
+            <value>
+               <li Class="TKKN_NPS.TerrainWeatherReactions">
+				  <alertOnLoad>True</alertOnLoad>
+                  <tideTerrain />
+                  <floodTerrain />
+                  <wetTerrain>TKKN_VG_SoilTilledWet</wetTerrain>
+                  <freezeTerrain />
+                  <freezeAt />
+                  <wetAt>0</wetAt>
+                  <isSalty>False</isSalty>
+               </li>
+            </value>
+         </li>
+      </operations>
+   </Operation>
+</Patch>

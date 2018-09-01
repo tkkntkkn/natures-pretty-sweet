@@ -8,12 +8,9 @@
     <workerClass>TKKN_NPS.NPS_BiomeWorker_Desert</workerClass>
     <animalDensity>0.25</animalDensity>
     <plantDensity>0.05</plantDensity>
-    <factionBaseSelectionWeight>0.65</factionBaseSelectionWeight>
-    <pathCost_spring>0</pathCost_spring>
-    <pathCost_summer>0</pathCost_summer>
-    <pathCost_fall>0</pathCost_fall>
-    <pathCost_winter>0</pathCost_winter>
+    <settlementSelectionWeight>0.65</settlementSelectionWeight>
     <texture>TKKN_NPS/World/Biomes/Saltfields</texture>
+	<implemented>true</implemented>
     <diseaseMtbDays>80</diseaseMtbDays>
     <diseases>
       <li>
@@ -67,13 +64,13 @@
       <SnowHard>3</SnowHard>
     </baseWeatherCommonalities>
     <wildPlants>
-		<PlantGrass>6</PlantGrass>
-		<PlantSaguaroCactus>1</PlantSaguaroCactus>
-		<PlantPincushionCactus>1</PlantPincushionCactus>
-		<PlantDandelion>0.5</PlantDandelion>
-		<PlantTreePoplar>0.45</PlantTreePoplar>
-		<PlantAgave>0.25</PlantAgave>
-		<PlantBush>0.25</PlantBush>
+		<Plant_Grass>6</Plant_Grass>
+		<Plant_SaguaroCactus>1</Plant_SaguaroCactus>
+		<Plant_PincushionCactus>1</Plant_PincushionCactus>
+		<Plant_Dandelion>0.5</Plant_Dandelion>
+		<Plant_TreePoplar>0.45</Plant_TreePoplar>
+		<Plant_Agave>0.25</Plant_Agave>
+		<Plant_Bush>0.25</Plant_Bush>
 	</wildPlants>
     <wildAnimals>
       <Gazelle>0.1</Gazelle>
@@ -85,7 +82,7 @@
       <Ostrich>0.2</Ostrich>
       <Rat>0.30</Rat>
       <Cougar>0.02</Cougar>
-      <FoxFennec>0.02</FoxFennec>
+      <Fox_Fennec>0.02</Fox_Fennec>
     </wildAnimals>
     <allowedPackAnimals>
       <li>Muffalo</li>
@@ -99,12 +96,9 @@
     <workerClass>TKKN_NPS.NPS_BiomeWorker_Oasis</workerClass>
     <animalDensity>0.35</animalDensity>
     <plantDensity>0.05</plantDensity>
-    <factionBaseSelectionWeight>0.65</factionBaseSelectionWeight>
-    <pathCost_spring>0</pathCost_spring>
-    <pathCost_summer>0</pathCost_summer>
-    <pathCost_fall>0</pathCost_fall>
-    <pathCost_winter>0</pathCost_winter>
+    <settlementSelectionWeight>0.65</settlementSelectionWeight>
     <texture>TKKN_NPS/World/Biomes/Oasis</texture>
+	<implemented>true</implemented>
     <diseaseMtbDays>80</diseaseMtbDays>
     <diseases>
       <li>
@@ -150,7 +144,7 @@
       <SnowHard>3</SnowHard>
     </baseWeatherCommonalities>
     <wildPlants>
-		<PlantGrass>8</PlantGrass>
+		<Plant_Grass>3</Plant_Grass>
 		<TKKN_PlantTreeBaobab>.5</TKKN_PlantTreeBaobab>
 		<TKKN_PlantTreeGum>.5</TKKN_PlantTreeGum>
 		<TKKN_PlantCactusPricklyPear>.3</TKKN_PlantCactusPricklyPear>
@@ -159,12 +153,16 @@
 		<TKKN_PlantDesertShrubA>1</TKKN_PlantDesertShrubA>
 		<TKKN_PlantDesertShrubB>1</TKKN_PlantDesertShrubB>
 		<TKKN_PlantSucculants>.5</TKKN_PlantSucculants>
-		<TKKN_TreeOcotillo>.5</TKKN_TreeOcotillo>
-		<PlantPincushionCactus>.5</PlantPincushionCactus>
-		<PlantDandelion>0.8</PlantDandelion>
-		<PlantTreePalm>0.8</PlantTreePalm>
-		<PlantAgave>0.3</PlantAgave>
-		<PlantBush>0.25</PlantBush>
+		<TKKN_TreeOcotillo>.3</TKKN_TreeOcotillo>
+	   <TKKN_PlantWildRice>.6</TKKN_PlantWildRice>
+	   <TKKN_PlantCatTails>.6</TKKN_PlantCatTails>
+	   <TKKN_PlantLilypad>.5</TKKN_PlantLilypad>
+		<Plant_PincushionCactus>.5</Plant_PincushionCactus>
+		<Plant_Dandelion>0.2</Plant_Dandelion>
+		<Plant_TreePalm>0.3</Plant_TreePalm>
+		<Plant_TreeBamboo>0.3</Plant_TreeBamboo>
+		<Plant_Agave>0.3</Plant_Agave>
+		<Plant_Bush>0.25</Plant_Bush>
 	</wildPlants>
     <wildAnimals>
       <Gazelle>1</Gazelle>
@@ -177,7 +175,7 @@
       <Rat>0.30</Rat>
       <Cougar>0.4</Cougar>
       <Rhinoceros>0.02</Rhinoceros>
-      <FoxFennec>0.02</FoxFennec>
+      <Fox_Fennec>0.02</Fox_Fennec>
     </wildAnimals>
     <allowedPackAnimals>
       <li>Muffalo</li>
@@ -188,15 +186,12 @@
   <BiomeDef>
     <defName>TKKN_Grasslands</defName>
     <label>Tallgrass Prairie</label>
-    <description>Extensive grasslands, high winds and bright sun. The soil is rich but there is little protection from the elements, and seasonal droughts, fires, storms and tornados are punishing. Only 1%-4% of tall grass praries remain on Earth. </description>
+    <description>Extensive grasslands, high winds and bright sun. The soil is incredibly fertile but there is little protection from the elements, and seasonal droughts, fires and storms are punishing.</description>
     <workerClass>TKKN_NPS.NPS_BiomeWorker_Prairie</workerClass>
     <animalDensity>1.3</animalDensity>
     <plantDensity>0.8</plantDensity>
-   <factionBaseSelectionWeight>0.95</factionBaseSelectionWeight>
-    <pathCost_spring>0</pathCost_spring>
-    <pathCost_summer>0</pathCost_summer>
-    <pathCost_fall>0</pathCost_fall>
-    <pathCost_winter>0</pathCost_winter>
+   <settlementSelectionWeight>0.95</settlementSelectionWeight>
+	<implemented>true</implemented>
     <texture>TKKN_NPS/World/Biomes/Grasslands</texture>
     <soundsAmbient>
       <li>AmbientNightInsects_Standard</li>
@@ -232,16 +227,16 @@
       <li>
         <terrain>Sand</terrain>
         <min>-999</min>
-        <max>0.35</max>
+        <max>0</max>
       </li>
       <li>
         <terrain>Soil</terrain>
-        <min>0.35</min>
-        <max>0.70</max>
+        <min>0</min>
+        <max>0.5</max>
       </li>
       <li>
         <terrain>SoilRich</terrain>
-        <min>0.70</min>
+        <min>0.5</min>
         <max>999</max>
       </li>
     </terrainsByFertility>
@@ -256,15 +251,19 @@
       <SnowHard>4</SnowHard>
     </baseWeatherCommonalities>
     <wildPlants>
-		<PlantTallGrass>10.0</PlantTallGrass>
-		<PlantGrass>5.0</PlantGrass>
-		<PlantDandelion>0.8</PlantDandelion>
-		<TKKN_PlantSunflower>0.8</TKKN_PlantSunflower>
-		<PlantBush>0.7</PlantBush>
-		<TKKN_PlantWildflowers>0.3</TKKN_PlantWildflowers>
-		<PlantTreeOak>0.8</PlantTreeOak>
-		<PlantRaspberry>0.2</PlantRaspberry>
-		<TKKN_PlantWildCorn>0.3</TKKN_PlantWildCorn>		
+		<TKKN_PlantTallGrasses>5.0</TKKN_PlantTallGrasses>
+		<Plant_TallGrass>5.0</Plant_TallGrass>
+		<Plant_Grass>3.0</Plant_Grass>
+		<Plant_Dandelion>0.5</Plant_Dandelion>
+		<TKKN_PlantSunflower>0.2</TKKN_PlantSunflower>
+		<Plant_Bush>0.7</Plant_Bush>
+		<TKKN_PlantWildflowers>0.05</TKKN_PlantWildflowers>
+		<Plant_TreeOak>0.05</Plant_TreeOak>
+		<Plant_Berry>0.2</Plant_Berry>
+		<TKKN_PlantWildCorn>0.1</TKKN_PlantWildCorn>		
+	   <TKKN_PlantWildRice>.6</TKKN_PlantWildRice>
+	   <TKKN_PlantCatTails>.6</TKKN_PlantCatTails>
+	   <TKKN_PlantLilypad>.5</TKKN_PlantLilypad>
     </wildPlants>
     <wildAnimals>
       <Muffalo>1</Muffalo>
@@ -295,11 +294,8 @@
     <workerClass>TKKN_NPS.NPS_BiomeWorker_Savanna</workerClass>
     <animalDensity>1.3</animalDensity>
     <plantDensity>0.8</plantDensity>
-   <factionBaseSelectionWeight>0.95</factionBaseSelectionWeight>
-    <pathCost_spring>0</pathCost_spring>
-    <pathCost_summer>0</pathCost_summer>
-    <pathCost_fall>0</pathCost_fall>
-    <pathCost_winter>0</pathCost_winter>
+	<implemented>true</implemented>
+   <settlementSelectionWeight>0.95</settlementSelectionWeight>
     <texture>TKKN_NPS/World/Biomes/Savanna</texture>
     <soundsAmbient>
       <li>AmbientNightInsects_Standard</li>
@@ -359,17 +355,20 @@
       <SnowHard>4</SnowHard>
     </baseWeatherCommonalities>
     <wildPlants>
-		<PlantGrass>7.0</PlantGrass>
-		<PlantTallGrass>3.0</PlantTallGrass>
-		<PlantDandelion>0.8</PlantDandelion>
-		<PlantBush>0.7</PlantBush>
-		<PlantPincushionCactus>0.6</PlantPincushionCactus>
-		<PlantAgave>0.3</PlantAgave>
+		<Plant_Grass>7.0</Plant_Grass>
+		<Plant_TallGrass>3.0</Plant_TallGrass>
+		<Plant_Dandelion>0.8</Plant_Dandelion>
+		<Plant_Bush>0.7</Plant_Bush>
+		<Plant_PincushionCactus>0.6</Plant_PincushionCactus>
+		<Plant_Agave>0.3</Plant_Agave>
 		<TKKN_PlantTreeAcacia>0.11</TKKN_PlantTreeAcacia>
-		<TKKN_PlantTreeGum>0.6</TKKN_PlantTreeGum>
+		<TKKN_PlantTreeGum>0.11</TKKN_PlantTreeGum>
 		<TKKN_PlantTreeBaobab>0.11</TKKN_PlantTreeBaobab>
-		<PlantTreeDrago>0.11</PlantTreeDrago>
-		<PlantRaspberry>0.1</PlantRaspberry>
+		<Plant_TreeDrago>0.11</Plant_TreeDrago>
+		<Plant_Berry>0.1</Plant_Berry>
+	   <TKKN_PlantWildRice>.2</TKKN_PlantWildRice>
+	   <TKKN_PlantCatTails>.3</TKKN_PlantCatTails>
+	   <TKKN_PlantLilypad>.2</TKKN_PlantLilypad>
     </wildPlants>
     <wildAnimals>
       <Muffalo>0.5</Muffalo>
@@ -388,8 +387,8 @@
       <Rat>1.0</Rat>
       <Megasloth>0.03</Megasloth>
       <Cougar>0.08</Cougar>
-      <WolfTimber>0.01</WolfTimber>
-      <FoxFennec>0.03</FoxFennec>
+      <Wolf_Timber>0.01</Wolf_Timber>
+      <Fox_Fennec>0.03</Fox_Fennec>
     </wildAnimals>
     <allowedPackAnimals>
       <li>Muffalo</li>

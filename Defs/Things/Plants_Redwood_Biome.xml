@@ -25,11 +25,7 @@
          <growDays>300</growDays>
          <harvestWork>3000</harvestWork>
          <harvestYield>225</harvestYield>
-         <reproduceMtbDays>30</reproduceMtbDays>
-         <wildClusterSizeRange>
-            <min>2</min>
-            <max>4</max>
-         </wildClusterSizeRange>
+			<wildClusterWeight>8</wildClusterWeight>
          <wildClusterRadius>10</wildClusterRadius>
          <visualSizeRange>
             <min>8</min>
@@ -55,11 +51,7 @@
          <leaflessGraphicPath>Things/Plant/TreeOak_Leafless</leaflessGraphicPath>
          <harvestWork>1000</harvestWork>
          <harvestYield>75</harvestYield>
-         <reproduceMtbDays>20</reproduceMtbDays>
-         <wildClusterSizeRange>
-            <min>2</min>
-            <max>4</max>
-         </wildClusterSizeRange>
+			<wildClusterWeight>32</wildClusterWeight>
          <wildClusterRadius>5</wildClusterRadius>
          <visualSizeRange>
             <min>2</min>
@@ -84,11 +76,7 @@
          <growDays>60</growDays>
          <harvestWork>1000</harvestWork>
          <harvestYield>75</harvestYield>
-         <reproduceMtbDays>20</reproduceMtbDays>
-         <wildClusterSizeRange>
-            <min>2</min>
-            <max>4</max>
-         </wildClusterSizeRange>
+			<wildClusterWeight>30</wildClusterWeight>
          <wildClusterRadius>5</wildClusterRadius>
          <visualSizeRange>
             <min>2</min>
@@ -112,10 +100,7 @@
          <growDays>60</growDays>
          <harvestWork>1000</harvestWork>
          <harvestYield>75</harvestYield>
-         <wildClusterSizeRange>
-            <min>2</min>
-            <max>4</max>
-         </wildClusterSizeRange>
+			<wildClusterWeight>30</wildClusterWeight>
          <wildClusterRadius>5</wildClusterRadius>
       </plant>
    </ThingDef>
@@ -143,10 +128,7 @@
          <harvestedThingDef>RedWoodLog</harvestedThingDef>
          <harvestWork>4000</harvestWork>
          <harvestYield>250</harvestYield>
-         <wildClusterSizeRange>
-            <min>1</min>
-            <max>2</max>
-         </wildClusterSizeRange>
+			<wildClusterWeight>1</wildClusterWeight>
          <wildClusterRadius>3</wildClusterRadius>
          <visualSizeRange>
             <min>7</min>
@@ -161,6 +143,7 @@
       <description>A soft, leafy plant that reproduces using spores.</description>
       <statBases>
          <MaxHitPoints>85</MaxHitPoints>
+		 <Nutrition>0.25</Nutrition>
       </statBases>
       <pathCost>18</pathCost>
       <graphicData>
@@ -168,14 +151,11 @@
          <graphicClass>Graphic_Random</graphicClass>
       </graphicData>
       <hideAtSnowDepth>0.6</hideAtSnowDepth>
-      <ingestible>
-         <nutrition>0.40</nutrition>
-      </ingestible>
+      <ingestible/>
       <plant>
          <fertilityMin>0.5</fertilityMin>
          <fertilitySensitivity>0.7</fertilitySensitivity>
          <growDays>3</growDays>
-         <reproduceMtbDays>3</reproduceMtbDays>
 		 <dieIfLeafless>true</dieIfLeafless>
          <harvestWork>60</harvestWork>
          <maxMeshCount>9</maxMeshCount>
@@ -201,7 +181,7 @@
     </graphicData>
     <hideAtSnowDepth>0.5</hideAtSnowDepth>
     <ingestible>
-      <nutrition>0.20</nutrition>
+      <Nutrition>0.20</Nutrition>
     </ingestible>
     <plant>
         <fertilityMin>0.5</fertilityMin>

@@ -7,51 +7,41 @@ namespace TKKN_NPS
 {    
     class NPS_BiomeWorker_Desert : BiomeWorker_Desert
     {
-        public override float GetScore(Tile tile)
+        public override float GetScore(Tile tile, int id)
         {
-            //keep this the same, just make it fail more often. When it fails, desert will be rendered, instead.
-            if (tile.WaterCovered)
-            {
-                return -100f;
-            }
-            if (tile.rainfall >= 600.0)
-            {
-                return 0f;
-            }
+			if (base.GetScore(tile, id) > 0)
+			{
+				if (Rand.Value > .006)
+				{
+					return 0f;
+				}
 
-            if (Rand.Value > .006)
-            {
-                return 0f;
-            }
+				return (float)(tile.temperature + 15);
 
-            return (float)(tile.temperature + 19.9999997473787516E-05);
-        }
+			}
+			return 0f;
+		}
     }
     class NPS_BiomeWorker_Oasis : BiomeWorker_Desert
     {
-        public override float GetScore(Tile tile)
+        public override float GetScore(Tile tile, int id)
         {
-            //keep this the same, just make it fail more often. When it fails, desert will be rendered, instead.
-            if (tile.WaterCovered)
-            {
-                return -100f;
-            }
-            if (tile.rainfall >= 600.0)
-            {
-                return 0f;
-            }
-
-			if (Rand.Value > .006)
+			if (base.GetScore(tile, id) > 0)
 			{
-				return 0f;
-			}
+				if (Rand.Value > .006)
+				{
+					return 0f;
+				}
 
-			return (float)(tile.temperature + 20.9999997473787516E-05);
-        }
-    }
+				return (float)(tile.temperature + 20);
+
+			}
+			return 0f;
+		}
+	}
     class NPS_BiomeWorker_Redwoods : BiomeWorker_BorealForest
     {
-        public override float GetScore(Tile tile)
+        public override float GetScore(Tile tile, int id)
         {
 			if (tile.WaterCovered)
 			{
@@ -65,7 +55,7 @@ namespace TKKN_NPS
 			{
 				return 0f;
 			}
-			return 20f;
+			return 40f;
 		}
     }
     /*
@@ -96,59 +86,48 @@ namespace TKKN_NPS
 	*/
     class NPS_BiomeWorker_LavaFields : BiomeWorker_TropicalRainforest
     {
-        public override float GetScore(Tile tile)
+        public override float GetScore(Tile tile, int id)
         {
-            if (tile.WaterCovered)
-            {
-                return -100f;
-            }
-            if (tile.temperature < 15.0)
-            {
-                return 0f;
-            }
-            if (tile.rainfall < 2000.0)
-            {
-                return 0f;
-            }
-			if (Rand.Value > .009)
+			if (base.GetScore(tile, id) > 0)
 			{
-				return 0f;
+				if (Rand.Value > .009)
+				{
+					return 0f;
+				}
+
+				return (float)(32.0 + (tile.temperature - 20.0) * 3.5 + (tile.rainfall - 600.0) / 165.0);
+
 			}
+			return 0f;
 
-			return (float)(32.0 + (tile.temperature - 20.0) * 1.5 + (tile.rainfall - 600.0) / 165.0);
-
-        }
-    }
+		}
+	}
 
 	class NPS_BiomeWorker_Savanna : BiomeWorker_TemperateForest
 	{
-		public override float GetScore(Tile tile)
+		public override float GetScore(Tile tile, int id)
 		{
 			//keep this the same, just make it fail more often. When it fails, shrubland will be rendered, instead.
-			if (tile.WaterCovered)
+				if (tile.WaterCovered)
 			{
 				return -100f;
 			}
-			if (tile.temperature < 24f || tile.temperature > 27f)
+			if (tile.temperature < 24f || tile.temperature > 30f)
 			{
 				return 0f;
 			}
-			if (tile.rainfall < 1500f || tile.rainfall >= 1800f)
-			{
-				return 0f;
-			}
-			if (tile.hilliness != Hilliness.SmallHills && tile.hilliness != Hilliness.Flat)
+			if (tile.rainfall < 1400f || tile.rainfall >= 2000f)
 			{
 				return 0f;
 			}
 
-			return 22.5f + (tile.temperature - 7f) + (tile.rainfall - 0f) / 180f;
+			return 22.5f + (tile.temperature - 7f) + 30 + (tile.rainfall - 0f) / 180f;
 		}
 	}
 
 	class NPS_BiomeWorker_Prairie : BiomeWorker_AridShrubland
     {
-        public override float GetScore(Tile tile)
+        public override float GetScore(Tile tile, int id)
         {
 			//keep this the same, just make it fail more often. When it fails, shrubland will be rendered, instead.
 			/*
@@ -171,11 +150,11 @@ namespace TKKN_NPS
 			{
 				return -100f;
 			}
-			if (tile.temperature < -10f)
+			if (tile.temperature < -10f || tile.temperature > 22)
 			{
 				return 0f;
 			}
-			if (tile.rainfall < 1200f || tile.rainfall >= 1500f)
+			if (tile.rainfall < 900f || tile.rainfall >= 1300f)
 			{
 				return 0f;
 			}
@@ -184,7 +163,7 @@ namespace TKKN_NPS
 				return 0f;
 			}
 
-			return 22.5f + (tile.temperature - 20f) * 2.2f + (tile.rainfall - 0f) / 100f;
+			return 22.5f + (tile.temperature - 20f) * 6.2f + (tile.rainfall - 0f) / 100f;
 		}
     }
 	/*

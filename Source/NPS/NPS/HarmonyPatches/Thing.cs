@@ -34,32 +34,8 @@ namespace TKKN_NPS
 					temperature = temperature + terrain.GetModExtension<TerrainWeatherReactions>().temperatureAdjust;
 				}
 			}
-			//adjust temperature
-			Pawn pawn = __instance as Pawn;
-			float adjustForWet = PatchAmbientTemperature.checkWetness(pawn);
-			if (adjustForWet > 0)
-			{
-				temperature -= adjustForWet;
-			}
 			__result = temperature;
 
-		}
-
-		public static float checkWetness(Pawn pawn)
-		{
-			if (pawn == null || !pawn.Spawned || pawn.Dead || (pawn.RaceProps.Humanlike && pawn.needs == null))
-			{
-				return 0f;
-			}
-
-			HediffDef hediffDef = HediffDefOf.TKKN_Wetness;
-			Hediff_Wetness wetness = pawn.health.hediffSet.GetFirstHediffOfDef(hediffDef) as Hediff_Wetness;
-			if (wetness != null)
-			{
-				return wetness.wetnessLevel;
-			}
-
-			return 0f;
 		}
 	}
 	

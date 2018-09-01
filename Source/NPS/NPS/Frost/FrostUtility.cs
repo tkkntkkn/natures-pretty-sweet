@@ -14,7 +14,10 @@ namespace TKKN_NPS
 			{
 				return FrostCategory.None;
 			}
-			return FrostCategory.Frost;
+			if (FrostDepth < 0.3f)
+			{
+				return FrostCategory.Frost;
+			}
 			if (FrostDepth < 0.5f)
 			{
 				return FrostCategory.Thin;

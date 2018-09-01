@@ -29,7 +29,6 @@
             <power>3</power>
             <cooldownTime>1.65</cooldownTime>
             <linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
-            <commonality>0.2</commonality>
          </li>
       </tools>
       <comps>
@@ -81,7 +80,6 @@
       <label>giant crab</label>
       <race>TKKN_crab</race>
       <combatPower>10</combatPower>
-      <wildSpawn_EcoSystemWeight>0.20</wildSpawn_EcoSystemWeight>
       <lifeStages>
          <li>
             <bodyGraphicData>
@@ -89,7 +87,7 @@
                <drawSize>1</drawSize>
             </bodyGraphicData>
             <dessicatedBodyGraphicData>
-               <texPath>Things/Pawn/Animal/Dessicated/CritterDessicatedSmall</texPath>
+          <texPath>Things/Pawn/Animal/Megascarab/Dessicated_Megascarab</texPath>
                <drawSize>1</drawSize>
             </dessicatedBodyGraphicData>
          </li>
@@ -99,7 +97,7 @@
                <drawSize>1</drawSize>
             </bodyGraphicData>
             <dessicatedBodyGraphicData>
-               <texPath>Things/Pawn/Animal/Dessicated/CritterDessicatedSmall</texPath>
+          <texPath>Things/Pawn/Animal/Megascarab/Dessicated_Megascarab</texPath>
                <drawSize>1</drawSize>
             </dessicatedBodyGraphicData>
          </li>
@@ -109,7 +107,7 @@
                <drawSize>1</drawSize>
             </bodyGraphicData>
             <dessicatedBodyGraphicData>
-               <texPath>Things/Pawn/Animal/Dessicated/CritterDessicatedSmall</texPath>
+          <texPath>Things/Pawn/Animal/Megascarab/Dessicated_Megascarab</texPath>
                <drawSize>1</drawSize>
             </dessicatedBodyGraphicData>
          </li>
@@ -144,7 +142,6 @@
             <power>1</power>
             <cooldownTime>1.65</cooldownTime>
             <linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
-            <commonality>0.2</commonality>
          </li>
       </tools>
       <comps>
@@ -159,9 +156,10 @@
 		<baseHungerRate>0.33</baseHungerRate>
 		<baseHealthScale>0.6</baseHealthScale>
 		<foodType>OmnivoreRoughAnimal</foodType>
-		<leatherInsulation>20</leatherInsulation>
 		<wildness>0.75</wildness>
 		<gestationPeriodDays>22.5</gestationPeriodDays>
+		<trainability>Simple</trainability>
+		<petness>0.08</petness>		
 		<litterSizeCurve>
 		<points>
 		  <li>(0.5, 0)</li>
@@ -170,7 +168,7 @@
 		  <li>(3.5, 0)</li>
 		</points>
 		</litterSizeCurve>
-		<lifeExpectancy>5</lifeExpectancy>
+		<lifeExpectancy>10</lifeExpectancy>
          <lifeStageAges>
             <li>
                <def>AnimalBabyTiny</def>
@@ -201,12 +199,11 @@
          <li>StandardAnimal</li>
       </tradeTags>
    </ThingDef>
-   <PawnKindDef ParentName="AnimalKindBase">
+      <PawnKindDef ParentName="AnimalKindBase">
       <defName>TKKN_petlavarock</defName>
       <label>pet lava rock</label>
       <race>TKKN_petlavarock</race>
       <combatPower>30</combatPower>
-      <wildSpawn_EcoSystemWeight>0.20</wildSpawn_EcoSystemWeight>
       <labelMale>pet lava rock</labelMale>
       <labelFemale>pet lava rock</labelFemale>
       <lifeStages>
@@ -218,7 +215,7 @@
                <color>(223,219,108)</color>
             </bodyGraphicData>
             <dessicatedBodyGraphicData>
-               <texPath>Things/Pawn/Animal/Dessicated/CritterDessicatedSmall</texPath>
+          <texPath>Things/Pawn/Animal/Squirrel/Dessicated_Squirrel</texPath>
                <drawSize>0.45</drawSize>
             </dessicatedBodyGraphicData>
          </li>
@@ -229,7 +226,7 @@
                <color>(200,150,85)</color>
             </bodyGraphicData>
             <dessicatedBodyGraphicData>
-               <texPath>Things/Pawn/Animal/Dessicated/CritterDessicatedSmall</texPath>
+          <texPath>Things/Pawn/Animal/Squirrel/Dessicated_Squirrel</texPath>
                <drawSize>0.7</drawSize>
             </dessicatedBodyGraphicData>
          </li>
@@ -244,13 +241,12 @@
                </shadowData>
             </bodyGraphicData>
             <dessicatedBodyGraphicData>
-               <texPath>Things/Pawn/Animal/Dessicated/CritterDessicatedSmall</texPath>
+          <texPath>Things/Pawn/Animal/Squirrel/Dessicated_Squirrel</texPath>
                <drawSize>0.85</drawSize>
             </dessicatedBodyGraphicData>
          </li>
       </lifeStages>
    </PawnKindDef>
-   
 	<ThingDef ParentName="AnimalThingBase">
       <defName>TKKN_Tumbleweed</defName>
       <label>tumbleweed</label>
@@ -280,22 +276,20 @@
             <power>1</power>
             <cooldownTime>1.65</cooldownTime>
             <linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
-            <commonality>0.2</commonality>
          </li>
       </tools>
-      <!-- comps> throwing a "can't find type of" error, figuring out later.
+      <comps>
          <li Class="TKKN_NPS.CompProperties_GraphicRotator">
-            <howManyDegrees>5</howManyDegrees>
-            <howOften>50</howOften>
+            <howManyDegrees>2</howManyDegrees>
+            <howOften>1</howOften>
          </li>
-      </comps -->
+      </comps>
       <race>
-         <body>Rock</body>
-		<baseBodySize>0.5</baseBodySize>
-		<baseHungerRate>0.33</baseHungerRate>
-		<baseHealthScale>0.6</baseHealthScale>
-		<foodType>OmnivoreRoughAnimal</foodType>
-		<leatherInsulation>20</leatherInsulation>
+      <body>QuadrupedAnimalWithPawsAndTail</body>
+  <baseHealthScale>0.25</baseHealthScale>
+			<baseHungerRate>0.20</baseHungerRate>
+			<foodType>VegetarianRoughAnimal</foodType>
+      <leatherDef>Leather_Light</leatherDef>
 		<wildness>0.75</wildness>
 		<gestationPeriodDays>22.5</gestationPeriodDays>
 		<litterSizeCurve>
@@ -342,7 +336,6 @@
       <label>tumbleweed</label>
       <race>TKKN_Tumbleweed</race>
       <combatPower>30</combatPower>
-      <wildSpawn_EcoSystemWeight>0.20</wildSpawn_EcoSystemWeight>
       <labelMale>tumbleweed</labelMale>
       <labelFemale>tumbleweed</labelFemale>
       <lifeStages>
@@ -354,7 +347,7 @@
                <color>(223,219,108)</color>
             </bodyGraphicData>
             <dessicatedBodyGraphicData>
-               <texPath>Things/Pawn/Animal/Dessicated/CritterDessicatedSmall</texPath>
+          <texPath>Things/Pawn/Animal/Squirrel/Dessicated_Squirrel</texPath>
                <drawSize>0.45</drawSize>
             </dessicatedBodyGraphicData>
          </li>
@@ -365,7 +358,7 @@
                <color>(200,150,85)</color>
             </bodyGraphicData>
             <dessicatedBodyGraphicData>
-               <texPath>Things/Pawn/Animal/Dessicated/CritterDessicatedSmall</texPath>
+          <texPath>Things/Pawn/Animal/Squirrel/Dessicated_Squirrel</texPath>
                <drawSize>0.7</drawSize>
             </dessicatedBodyGraphicData>
          </li>
@@ -380,7 +373,7 @@
                </shadowData>
             </bodyGraphicData>
             <dessicatedBodyGraphicData>
-               <texPath>Things/Pawn/Animal/Dessicated/CritterDessicatedSmall</texPath>
+          <texPath>Things/Pawn/Animal/Squirrel/Dessicated_Squirrel</texPath>
                <drawSize>0.85</drawSize>
             </dessicatedBodyGraphicData>
          </li>
@@ -431,7 +424,6 @@
             <power>1</power>
             <cooldownTime>1.65</cooldownTime>
             <linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
-            <commonality>0.2</commonality>
          </li>
       </tools>
       <comps>
@@ -446,9 +438,7 @@
          <baseHealthScale>0.5</baseHealthScale>
          <baseHungerRate>0.28</baseHungerRate>
          <foodType>OmnivoreRoughAnimal</foodType>
-         <leatherColor>(101,116,58)</leatherColor>
-         <leatherLabel>salamander skin</leatherLabel>
-         <leatherInsulation>0.50</leatherInsulation>
+         <leatherDef>Leather_Lizard</leatherDef>
          <wildness>0.5</wildness>
          <gestationPeriodDays>14</gestationPeriodDays>
          <litterSizeCurve>
@@ -491,8 +481,6 @@
       <label>salamander</label>
       <race>TKKN_salamander</race>
       <combatPower>60</combatPower>
-      <wildSpawn_EcoSystemWeight>0.33</wildSpawn_EcoSystemWeight>
-      <wildSpawn_spawnWild>true</wildSpawn_spawnWild>
       <lifeStages>
          <li>
             <bodyGraphicData>
@@ -500,7 +488,7 @@
                <drawSize>1</drawSize>
             </bodyGraphicData>
             <dessicatedBodyGraphicData>
-               <texPath>Things/Pawn/Animal/Dessicated/CritterDessicatedSmall</texPath>
+          <texPath>Things/Pawn/Animal/Iguana/Dessicated_Iguana</texPath>
                <drawSize>1</drawSize>
             </dessicatedBodyGraphicData>
          </li>
@@ -510,7 +498,7 @@
                <drawSize>1.25</drawSize>
             </bodyGraphicData>
             <dessicatedBodyGraphicData>
-               <texPath>Things/Pawn/Animal/Dessicated/CritterDessicatedSmall</texPath>
+          <texPath>Things/Pawn/Animal/Iguana/Dessicated_Iguana</texPath>
                <drawSize>1.25</drawSize>
             </dessicatedBodyGraphicData>
          </li>
@@ -524,61 +512,13 @@
                </shadowData>
             </bodyGraphicData>
             <dessicatedBodyGraphicData>
-               <texPath>Things/Pawn/Animal/Dessicated/CritterDessicatedSmall</texPath>
+          <texPath>Things/Pawn/Animal/Iguana/Dessicated_Iguana</texPath>
                <drawSize>1.4</drawSize>
             </dessicatedBodyGraphicData>
          </li>
       </lifeStages>
    </PawnKindDef>
-   <PawnKindDef ParentName="AnimalKindBase">
-      <defName>TKKN_petlavarock</defName>
-      <label>pet lava rock</label>
-      <race>TKKN_petlavarock</race>
-      <combatPower>30</combatPower>
-      <wildSpawn_EcoSystemWeight>0.20</wildSpawn_EcoSystemWeight>
-      <labelMale>pet lava rock</labelMale>
-      <labelFemale>pet lava rock</labelFemale>
-      <lifeStages>
-         <li>
-            <label>pet lava pebble</label>
-            <bodyGraphicData>
-               <texPath>TKKN_NPS/Animals/Petlavarock/Petlavarock</texPath>
-               <drawSize>0.45</drawSize>
-               <color>(223,219,108)</color>
-            </bodyGraphicData>
-            <dessicatedBodyGraphicData>
-               <texPath>Things/Pawn/Animal/Dessicated/CritterDessicatedSmall</texPath>
-               <drawSize>0.45</drawSize>
-            </dessicatedBodyGraphicData>
-         </li>
-         <li>
-            <bodyGraphicData>
-               <texPath>TKKN_NPS/Animals/Petlavarock/Petlavarock</texPath>
-               <drawSize>0.75</drawSize>
-               <color>(200,150,85)</color>
-            </bodyGraphicData>
-            <dessicatedBodyGraphicData>
-               <texPath>Things/Pawn/Animal/Dessicated/CritterDessicatedSmall</texPath>
-               <drawSize>0.7</drawSize>
-            </dessicatedBodyGraphicData>
-         </li>
-         <li>
-            <bodyGraphicData>
-               <texPath>TKKN_NPS/Animals/Petlavarock/Petlavarock</texPath>
-               <drawSize>0.87</drawSize>
-               <color>(200,150,85)</color>
-               <shadowData>
-                  <volume>(0.3, 0.4, 0.3)</volume>
-                  <offset>(0,0,-0.05)</offset>
-               </shadowData>
-            </bodyGraphicData>
-            <dessicatedBodyGraphicData>
-               <texPath>Things/Pawn/Animal/Dessicated/CritterDessicatedSmall</texPath>
-               <drawSize>0.85</drawSize>
-            </dessicatedBodyGraphicData>
-         </li>
-      </lifeStages>
-   </PawnKindDef>
+
    <ThingDef ParentName="AnimalThingBase">
       <defName>TKKN_giantsnail</defName>
       <label>giant snails</label>
@@ -608,7 +548,6 @@
         <power>4</power>
         <cooldownTime>1.65</cooldownTime>
         <linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
-        <commonality>0.2</commonality>
       </li>
       </tools>
       <comps>
@@ -627,7 +566,7 @@
       <baseHealthScale>0.4</baseHealthScale>
 	  
 	 <foodType>VegetarianRoughAnimal</foodType>
-	 <trainableIntelligence>None</trainableIntelligence>
+      <trainability>Simple</trainability>
 	 <wildness>0.95</wildness>
 	 <gestationPeriodDays>7</gestationPeriodDays>
 	 <mateMtbHours>8</mateMtbHours>
@@ -671,7 +610,6 @@
       <label>giant snail</label>
       <race>TKKN_giantsnail</race>
       <combatPower>30</combatPower>
-      <wildSpawn_EcoSystemWeight>0.20</wildSpawn_EcoSystemWeight>
       <lifeStages>
          <li>
             <label>Giant Snail</label>
@@ -681,7 +619,7 @@
                <color>(223,219,108)</color>
             </bodyGraphicData>
             <dessicatedBodyGraphicData>
-               <texPath>Things/Pawn/Animal/Dessicated/CritterDessicatedSmall</texPath>
+          <texPath>Things/Pawn/Animal/Megascarab/Dessicated_Megascarab</texPath>
                <drawSize>0.45</drawSize>
             </dessicatedBodyGraphicData>
          </li>
@@ -692,7 +630,7 @@
                <color>(200,150,85)</color>
             </bodyGraphicData>
             <dessicatedBodyGraphicData>
-               <texPath>Things/Pawn/Animal/Dessicated/CritterDessicatedSmall</texPath>
+          <texPath>Things/Pawn/Animal/Megascarab/Dessicated_Megascarab</texPath>
                <drawSize>0.7</drawSize>
             </dessicatedBodyGraphicData>
          </li>
@@ -707,7 +645,7 @@
                </shadowData>
             </bodyGraphicData>
             <dessicatedBodyGraphicData>
-               <texPath>Things/Pawn/Animal/Dessicated/CritterDessicatedSmall</texPath>
+          <texPath>Things/Pawn/Animal/Megascarab/Dessicated_Megascarab</texPath>
                <drawSize>0.85</drawSize>
             </dessicatedBodyGraphicData>
          </li>

@@ -29,14 +29,16 @@
     <hasInteractionCell>false</hasInteractionCell>
     <passability>PassThroughOnly</passability>
     <pathCost>50</pathCost>
-    <minifiedDef>MinifiedFurniture</minifiedDef>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <thingCategories>
+      <li>BuildingsArt</li>
+    </thingCategories>
     <socialPropernessMatters>true</socialPropernessMatters>
     <statBases>
       <MaxHitPoints>75</MaxHitPoints>
       <Flammability>1.0</Flammability>
       <MarketValue>200</MarketValue>
       <Mass>7.5</Mass>
-      <EntertainmentStrengthFactor>1</EntertainmentStrengthFactor>
     </statBases>
 		<comps>
 			<li Class="CompProperties_RoomIdentifier">
@@ -153,7 +155,7 @@
         <wetTile>TKKN_ColdSpringsWater</wetTile>      
         <deepTile>WaterDeep</deepTile>      
         <temperature>-20</temperature>
-        <spawnProp>PlantAmbrosia</spawnProp>
+        <spawnProp>Plant_Ambrosia</spawnProp>
 		<weight>2000</weight>
 		<howOftenToChange>0</howOftenToChange>
 		<commonBiome></commonBiome>
@@ -194,11 +196,11 @@
     <comps>
       <li Class="TKKN_NPS.CompProperties_SpringWater">
         <radius>15</radius>
-        <dryTile>SoilRich</dryTile>      
+        <dryTile>TKKN_RiverDeposit</dryTile>      
         <wetTile>TKKN_ColdSpringsWater</wetTile>      
         <deepTile>WaterDeep</deepTile>      
         <temperature>-20</temperature>
-        <spawnProp>PlantAmbrosia</spawnProp>
+        <spawnProp>Plant_Ambrosia</spawnProp>
 		<weight>2000</weight>
 		<howOftenToChange>0</howOftenToChange>
 		<commonBiome></commonBiome>
@@ -240,10 +242,10 @@
     <comps>
       <li Class="TKKN_NPS.CompProperties_SpringWater">
         <radius>3</radius>
-        <dryTile>SoilRich</dryTile>      
+        <dryTile>TKKN_RiverDeposit</dryTile>      
         <wetTile>TKKN_HotSpringsWater</wetTile>      
         <deepTile>WaterDeep</deepTile>      
-        <spawnProp>PlantWildHealroot</spawnProp>
+        <spawnProp>Plant_Healroot</spawnProp>
         <temperature>20</temperature>
 		<weight>2000</weight>
 		<commonBiome></commonBiome>		
@@ -316,7 +318,10 @@
     </graphicData>
     <altitudeLayer>Building</altitudeLayer>
     <passability>Impassable</passability>
-	<minifiedDef>MinifiedFurniture</minifiedDef>
+	<minifiedDef>MinifiedThing</minifiedDef>
+    <thingCategories>
+      <li>BuildingsPower</li>
+    </thingCategories>	
     <blockWind>true</blockWind>
     <castEdgeShadows>true</castEdgeShadows>
 		<scatterableOnMapGen>false</scatterableOnMapGen>
@@ -328,13 +333,14 @@
       <WorkToBuild>500</WorkToBuild>
       <Flammability>1.0</Flammability>
       <Beauty>-30</Beauty>
+      <Mass>10</Mass>
     </statBases>
     <tickerType>Normal</tickerType>
     <description>Produces electricity from steam vents in lava fields. Must be placed on a steam vent.</description>
     <size>(3,3)</size>
     <costList>
       <Steel>100</Steel>
-      <Component>1</Component>
+      <ComponentIndustrial>1</ComponentIndustrial>
     </costList>
     <comps>
       <li Class="CompProperties_Power">
@@ -363,7 +369,7 @@
     <constructionSkillPrerequisite>4</constructionSkillPrerequisite>
   </ThingDef>
   
-<ThingDef ParentName="BuildingBase">
+<!-- ThingDef ParentName="BuildingBase">
     <defName>TKKN_Well</defName>
     <label>well</label>
     <thingClass>Building</thingClass>
@@ -377,7 +383,7 @@
     </graphicData>
     <altitudeLayer>Building</altitudeLayer>
     <passability>Impassable</passability>
-	<minifiedDef>MinifiedFurniture</minifiedDef>
+	<minifiedDef>MinifiedThing</minifiedDef>
     <blockWind>true</blockWind>
     <castEdgeShadows>true</castEdgeShadows>
 		<scatterableOnMapGen>false</scatterableOnMapGen>
@@ -406,5 +412,5 @@
     </building>
     <constructEffect>ConstructWood</constructEffect>
     <designationHotKey>Misc6</designationHotKey>
-  </ThingDef>
+  </ThingDef -->
   </Defs>

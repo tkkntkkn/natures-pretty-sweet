@@ -2,9 +2,50 @@
 <Defs>
 
 	<TerrainDef ParentName="FloorBase">
-		<defName>TKKN_DirtPath</defName>
-        <label>DirtPath</label>
-        <texturePath>Terrain/Surfaces/PackedDirt</texturePath>
+        <defName>TKKN_SandPath</defName>
+        <label>sand path</label>
+        <texturePath>TKKN_NPS/Surfaces/PackedSand</texturePath>
+        <edgeType>FadeRough</edgeType>
+        <renderPrecedence>350</renderPrecedence>
+        <pathCost>4</pathCost>
+		<affordances>
+		  <li>Light</li>
+		  <li>Medium</li>
+		  <li>Heavy</li>
+		  <li>Diggable</li>
+		</affordances>
+        <statBases>
+            <Beauty>0</Beauty>
+            <Cleanliness>0</Cleanliness>
+        </statBases>
+        <scatterType>SoftDry</scatterType>
+        <generatedFilth />
+        <fertility>0</fertility>
+        <holdSnow>true</holdSnow>
+        <takeFootprints>False</takeFootprints>
+    </TerrainDef>
+	 <TerrainDef ParentName="FloorBase">
+        <defName>TKKN_DirtPath</defName>
+        <label>dirt path</label>
+        <texturePath>TKKN_NPS/Surfaces/PackedDirt</texturePath>
+        <edgeType>FadeRough</edgeType>
+        <renderPrecedence>350</renderPrecedence>
+        <pathCost>4</pathCost>
+		<affordances>
+		  <li>Light</li>
+		  <li>Medium</li>
+		  <li>Heavy</li>
+		  <li>Diggable</li>
+		</affordances>
+        <statBases>
+            <Beauty>0</Beauty>
+            <Cleanliness>0</Cleanliness>
+        </statBases>
+        <scatterType>SoftDry</scatterType>
+        <generatedFilth />
+        <fertility>0</fertility>
+        <holdSnow>true</holdSnow>
+        <takeFootprints>False</takeFootprints>
     </TerrainDef>
 	
 	
@@ -20,11 +61,14 @@
             <Beauty>+1</Beauty>
             <Cleanliness>-2</Cleanliness>
         </statBases>
-        <terrainFilthDef>FilthDirt</terrainFilthDef>
-        <fertility>0</fertility>
+        <generatedFilth>Filth_Dirt</generatedFilth>
+        <fertility>0.1</fertility>
         <takeFootprints>True</takeFootprints>
         <acceptFilth>false</acceptFilth>
         <avoidWander>true</avoidWander>
+		<extraNonDraftedPerceivedPathCost>80</extraNonDraftedPerceivedPathCost>
+		<extraDraftedPerceivedPathCost>8</extraDraftedPerceivedPathCost>
+		
     </TerrainDef>
     <TerrainDef>
         <defName>TKKN_Lava</defName>
@@ -48,6 +92,8 @@
         <tags>
             <li>Lava</li>
         </tags>
+		<extraNonDraftedPerceivedPathCost>200</extraNonDraftedPerceivedPathCost>
+		<extraDraftedPerceivedPathCost>30</extraDraftedPerceivedPathCost>
     </TerrainDef>
     <TerrainDef>
         <defName>TKKN_LavaDeep</defName>
@@ -72,7 +118,7 @@
             <li>Lava</li>
         </tags>
     </TerrainDef>
-    <TerrainDef>
+      <TerrainDef>
         <defName>TKKN_ColdSpringsWater</defName>
         <label>cold spring</label>
         <texturePath>TKKN_NPS/Surfaces/springWater</texturePath>
@@ -81,7 +127,7 @@
         <renderPrecedence>398</renderPrecedence>
         <pathCost>12</pathCost>
         <acceptFilth>false</acceptFilth>
-        <fertility>0</fertility>
+        <fertility>0.1</fertility>
         <avoidWander>true</avoidWander>
         <changeable>false</changeable>
         <holdSnow>false</holdSnow>
@@ -94,6 +140,8 @@
             <li>Water</li>
             <li>Spring</li>
         </tags>
+		<extraNonDraftedPerceivedPathCost>180</extraNonDraftedPerceivedPathCost>
+		<extraDraftedPerceivedPathCost>18</extraDraftedPerceivedPathCost>
     </TerrainDef>
     <TerrainDef>
         <defName>TKKN_HotSpringsWater</defName>
@@ -104,7 +152,7 @@
         <renderPrecedence>398</renderPrecedence>
         <pathCost>12</pathCost>
         <acceptFilth>false</acceptFilth>
-        <fertility>0</fertility>
+        <fertility>0.1</fertility>
         <avoidWander>true</avoidWander>
         <changeable>false</changeable>
         <holdSnow>false</holdSnow>
@@ -117,79 +165,8 @@
             <li>Water</li>
             <li>Spring</li>
         </tags>
-    </TerrainDef>
-    <!-- compatability stuff, remove later -->
-    <TerrainDef>
-        <defName>TKKN_ColdSprings</defName>
-        <label>cold spring (old do not use)</label>
-        <texturePath>TKKN_NPS/Surfaces/springWater</texturePath>
-        <waterDepthShader>Map/WaterDepth</waterDepthShader>
-        <edgeType>Water</edgeType>
-        <renderPrecedence>398</renderPrecedence>
-        <pathCost>12</pathCost>
-        <acceptFilth>false</acceptFilth>
-        <fertility>0</fertility>
-        <avoidWander>true</avoidWander>
-        <changeable>false</changeable>
-        <holdSnow>false</holdSnow>
-        <takeSplashes>true</takeSplashes>
-        <statBases>
-            <Beauty>+2</Beauty>
-        </statBases>
-        <tags>
-            <li>River</li>
-            <li>Water</li>
-            <li>Spring</li>
-        </tags>
-    </TerrainDef>
-    <TerrainDef>
-        <defName>TKKN_HotSprings</defName>
-        <label>hot spring (old do not use)</label>
-        <texturePath>TKKN_NPS/Surfaces/springWater</texturePath>
-        <waterDepthShader>Map/WaterDepth</waterDepthShader>
-        <edgeType>Water</edgeType>
-        <renderPrecedence>398</renderPrecedence>
-        <pathCost>12</pathCost>
-        <acceptFilth>false</acceptFilth>
-        <fertility>0</fertility>
-        <avoidWander>true</avoidWander>
-        <changeable>false</changeable>
-        <holdSnow>false</holdSnow>
-        <takeSplashes>true</takeSplashes>
-        <statBases>
-            <Beauty>+2</Beauty>
-        </statBases>
-        <tags>
-            <li>River</li>
-            <li>Water</li>
-            <li>Spring</li>
-        </tags>
-    </TerrainDef>
-    <TerrainDef>
-        <defName>BridgeTKKN_SpringsWater</defName>
-        <label>spring water (under bridge)</label>
-        <texturePath>TKKN_NPS/Surfaces/springWater</texturePath>
-        <waterDepthShader>Map/WaterDepth</waterDepthShader>
-        <edgeType>Water</edgeType>
-        <renderPrecedence>398</renderPrecedence>
-        <pathCost>12</pathCost>
-        <acceptFilth>false</acceptFilth>
-        <fertility>0</fertility>
-        <avoidWander>true</avoidWander>
-        <changeable>false</changeable>
-        <holdSnow>false</holdSnow>
-        <takeSplashes>true</takeSplashes>
-        <statBases>
-            <Beauty>+2</Beauty>
-        </statBases>
-        <affordances>
-            <li>Light</li>
-        </affordances>
-        <tags>
-            <li>River</li>
-            <li>Water</li>
-            <li>Spring</li>
-        </tags>
+		<extraNonDraftedPerceivedPathCost>180</extraNonDraftedPerceivedPathCost>
+		<extraDraftedPerceivedPathCost>18</extraDraftedPerceivedPathCost>
     </TerrainDef>
     <TerrainDef>
         <defName>TKKN_SoilWet</defName>
@@ -212,7 +189,7 @@
             <Beauty>+1</Beauty>
             <Cleanliness>-2</Cleanliness>
         </statBases>
-        <terrainFilthDef>FilthDirt</terrainFilthDef>
+        <generatedFilth>Filth_Dirt</generatedFilth>
         <fertility>1.8</fertility>
         <takeFootprints>True</takeFootprints>
         <acceptFilth>True</acceptFilth>
@@ -240,7 +217,7 @@
             <Beauty>+1</Beauty>
             <Cleanliness>-2</Cleanliness>
         </statBases>
-        <terrainFilthDef>FilthDirt</terrainFilthDef>
+        <generatedFilth>Filth_Dirt</generatedFilth>
         <fertility>2.2</fertility>
         <takeFootprints>True</takeFootprints>
         <acceptFilth>True</acceptFilth>
@@ -269,7 +246,7 @@
             <li>Wet</li>
             <li>WetRain</li>
         </tags>
-        <terrainFilthDef>FilthSand</terrainFilthDef>
+        <generatedFilth>Filth_Sand</generatedFilth>
         <fertility>2</fertility>
         <takeFootprints>True</takeFootprints>
         <acceptFilth>True</acceptFilth>
@@ -293,7 +270,7 @@
             <li>Wet</li>
             <li>WetRain</li>
         </tags>
-        <terrainFilthDef>FilthSand</terrainFilthDef>
+        <generatedFilth>Filth_Sand</generatedFilth>
         <fertility>0</fertility>
         <takeFootprints>True</takeFootprints>
         <acceptFilth>True</acceptFilth>
@@ -312,7 +289,7 @@
             <Cleanliness>-1</Cleanliness>
         </statBases>
         <scatterType>SoftDry</scatterType>
-        <terrainFilthDef />
+        <generatedFilth />
         <fertility>0</fertility>
         <holdSnow>false</holdSnow>
         <takeFootprints>False</takeFootprints>
@@ -332,7 +309,7 @@
             <Cleanliness>-1</Cleanliness>
         </statBases>
         <scatterType>SoftDry</scatterType>
-        <terrainFilthDef />
+        <generatedFilth />
         <fertility>0</fertility>
         <takeFootprints>False</takeFootprints>
         <tags>
@@ -360,7 +337,7 @@
             <li>GrowSoil</li>
             <li>Diggable</li>
         </affordances>
-        <terrainFilthDef>FilthDirt</terrainFilthDef>
+        <generatedFilth>Filth_Dirt</generatedFilth>
         <fertility>1.8</fertility>
         <takeFootprints>True</takeFootprints>
         <acceptFilth>false</acceptFilth>
@@ -389,7 +366,7 @@
             <li>GrowSoil</li>
             <li>Diggable</li>
         </affordances>
-        <terrainFilthDef>FilthDirt</terrainFilthDef>
+        <generatedFilth>Filth_Dirt</generatedFilth>
         <fertility>2</fertility>
         <takeFootprints>True</takeFootprints>
         <acceptFilth>false</acceptFilth>

@@ -4,25 +4,18 @@
       <defName>LeftTentacle</defName>
       <label>left tentacle</label>
       <hitPoints>90</hitPoints>
-      <oldInjuryBaseChance>0.08</oldInjuryBaseChance>
       <skinCovered>true</skinCovered>
-      <dontSuggestAmputation>true</dontSuggestAmputation>
-      <bleedingRateMultiplier>2</bleedingRateMultiplier>
    </BodyPartDef>
    <BodyPartDef>
       <defName>RightTentacle</defName>
       <label>right tentacle</label>
       <hitPoints>90</hitPoints>
-      <oldInjuryBaseChance>0.08</oldInjuryBaseChance>
       <skinCovered>true</skinCovered>
-      <dontSuggestAmputation>true</dontSuggestAmputation>
-      <bleedingRateMultiplier>2</bleedingRateMultiplier>
    </BodyPartDef>
    <BodyPartDef>
       <defName>Snailhead</defName>
       <label>head</label>
       <hitPoints>200</hitPoints>
-      <oldInjuryBaseChance>0</oldInjuryBaseChance>
       <skinCovered>true</skinCovered>
       <tags>
          <li>BreathingPathway</li>
@@ -34,16 +27,12 @@
       <defName>SnailShell</defName>
       <label>snail shell</label>
       <hitPoints>3000</hitPoints>
-      <oldInjuryBaseChance>0</oldInjuryBaseChance>
       <skinCovered>false</skinCovered>
-      <isAlive>true</isAlive>
-      <bleedingRateMultiplier>0</bleedingRateMultiplier>
    </BodyPartDef>
    <BodyPartDef>
       <defName>Lung</defName>
       <label>lung</label>
       <hitPoints>90</hitPoints>
-      <oldInjuryBaseChance>0.08</oldInjuryBaseChance>
       <skinCovered>false</skinCovered>
       <tags>
          <li>BreathingSource</li>
@@ -54,7 +43,6 @@
       <defName>Kidney</defName>
       <label>kidney</label>
       <hitPoints>90</hitPoints>
-      <oldInjuryBaseChance>0.08</oldInjuryBaseChance>
       <skinCovered>false</skinCovered>
       <tags>
          <li>BloodFiltrationKidney</li>
@@ -80,22 +68,26 @@
                <depth>Inside</depth>
             </li>
             <li>
-               <def>LeftLung</def>
+               <def>Lung</def>
+			   <customLabel>left lung</customLabel>
                <coverage>0.04</coverage>
                <depth>Inside</depth>
             </li>
             <li>
-               <def>RightLung</def>
+               <def>Lung</def>
+			   <customLabel>right lung</customLabel>
                <coverage>0.04</coverage>
                <depth>Inside</depth>
             </li>
             <li>
-               <def>LeftKidney</def>
+               <def>Kidney</def>
+			   <customLabel>left kidney</customLabel>
                <coverage>0.03</coverage>
                <depth>Inside</depth>
             </li>
             <li>
-               <def>RightKidney</def>
+               <def>Kidney</def>
+			   <customLabel>right kidney</customLabel>
                <coverage>0.03</coverage>
                <depth>Inside</depth>
             </li>
@@ -129,11 +121,13 @@
                            </parts>
                         </li>
                         <li>
-                           <def>LeftEye</def>
+				   <def>Eye</def>
+				   <customLabel>left eye</customLabel>
                            <coverage>0.12</coverage>
                         </li>
                         <li>
-                           <def>RightEye</def>
+				   <def>Eye</def>
+				   <customLabel>right eye</customLabel>
                            <coverage>0.12</coverage>
                         </li>
                         <li>
@@ -159,7 +153,6 @@
       <label>foot</label>
       <hitPoints>300</hitPoints>
       <frostbiteVulnerability>0.5</frostbiteVulnerability>
-      <oldInjuryBaseChance>0.08</oldInjuryBaseChance>
       <skinCovered>true</skinCovered>
       <tags>
          <li>MovingLimbSegment</li>
@@ -219,13 +212,14 @@
                      <depth>Inside</depth>
                   </li>
                   <li>
-                     <def>LeftEye</def>
+				   <def>Eye</def>
+				   <customLabel>left eye</customLabel>
                      <coverage>0.15</coverage>
 					 <depth>Outside</depth>
                   </li>
                   <li>
-                     <def>RightEye</def>
-                     <coverage>0.15</coverage>
+				   <def>Eye</def>
+				   <customLabel>right eye</customLabel>
 					 <depth>Outside</depth>
                   </li>
                   <li>

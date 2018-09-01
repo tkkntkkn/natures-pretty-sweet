@@ -1,7 +1,8 @@
-﻿using System;
+﻿using RimWorld;
+using System;
+using UnityEngine;
 using Verse;
 using Harmony;
-using RimWorld;
 
 namespace TKKN_NPS
 {
@@ -20,7 +21,7 @@ namespace TKKN_NPS
 			{
 				return;
 			}
-
+			
 			ThingWeatherReaction mod = __instance.def.GetModExtension<ThingWeatherReaction>();
 			Map map = __instance.Map;
 
@@ -30,22 +31,43 @@ namespace TKKN_NPS
 			if (__instance.AmbientTemperature > 21)
 			{
 				Watcher watcher = map.GetComponent<Watcher>();
-				cellData cell = watcher.cellWeatherAffects[__instance.Position];
-				if (cell != null)
+				cellData cell;
+				if (watcher.cellWeatherAffects[__instance.Position] != null)
 				{
-					if (!String.IsNullOrEmpty(mod.floweringGraphicPath) && cell.howWetPlants > 60)
+					cell = watcher.cellWeatherAffects[__instance.Position];
+					Vector2 location = Find.WorldGrid.LongLatOf(__instance.MapHeld.Tile);
+					Season season = GenDate.Season((long)Find.TickManager.TicksAbs, location);
+				
+					if (!String.IsNullOrEmpty(mod.floweringGraphicPath) && ((cell.howWetPlants > 60 && map.weatherManager.RainRate <= .001f) || season == Season.Spring))
 					{
-						id = "flowering";
+						id += "flowering";
 						path = mod.floweringGraphicPath;
 					}
 
-					if (!String.IsNullOrEmpty(mod.droughtGraphicPath) && cell.howWetPlants < 30)
+					if (!String.IsNullOrEmpty(mod.droughtGraphicPath) && cell.howWetPlants < 20)
 					{
-						id = "drought";
+						id += "drought";
 						path = mod.droughtGraphicPath;
+					} else
+					if (__instance.def.plant.leaflessGraphic != null && cell.howWetPlants < 20)
+					{
+						id += "drought";
+						path = __instance.def.plant.leaflessGraphic.path;
 					}
 				}
-
+			}
+			if (path != "")
+			{
+				if (!map.GetComponent<Watcher>().graphicHolder.ContainsKey(id))
+				{
+					//only load the image once.
+					map.GetComponent<Watcher>().graphicHolder.Add(id, GraphicDatabase.Get(__instance.def.graphicData.graphicClass, path, __instance.def.graphic.Shader, __instance.def.graphicData.drawSize, __instance.def.graphicData.color, __instance.def.graphicData.colorTwo));
+				}
+				if (map.GetComponent<Watcher>().graphicHolder.ContainsKey(id))
+				{
+					__result = map.GetComponent<Watcher>().graphicHolder[id];
+				}
+				return;
 			}
 
 			if (Settings.showCold)
@@ -89,8 +111,6 @@ namespace TKKN_NPS
 			}
 
 
-
-
 			if (!map.GetComponent<Watcher>().graphicHolder.ContainsKey(id))
 			{
 				//only load the image once.
@@ -100,8 +120,12 @@ namespace TKKN_NPS
 			{
 				__result = map.GetComponent<Watcher>().graphicHolder[id];
 			}
+			return;
+
+
 
 		}
+
 
 	}
 

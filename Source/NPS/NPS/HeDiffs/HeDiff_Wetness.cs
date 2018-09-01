@@ -20,7 +20,8 @@ namespace TKKN_NPS
 		public override void Tick()
 		{
 			base.Tick();
-			if (!Settings.allowPawnsToGetWet)
+			
+			if (!Settings.allowPawnsToGetWet || !this.pawn.Position.IsValid || this.pawn.MapHeld == null || !this.pawn.Position.InBounds(this.pawn.MapHeld))
 			{
 				return;
 			}
@@ -28,28 +29,17 @@ namespace TKKN_NPS
 			float wetness = this.wetnessRate();
 			if (wetness > 0)
 			{
-				Log.Warning("pawn " + base.pawn.Name.ToString());
-				Log.Warning("wetness "+wetness.ToString());
-				Log.Warning("Severity "+this.Severity.ToString());
 				this.Severity += wetness / 1000;
 				this.wetnessLevel += wetness;
 				if (this.wetnessLevel < 0)
 				{
 					this.wetnessLevel = 0;
 				}
-				if (this.Severity > .62 && (this.ageTicks % 250 == 0))
+				if (this.Severity > .62 && (this.ageTicks % 500 == 0))
 				{
-					FilthMaker.MakeFilth(this.pawn.Position, this.pawn.Map, ThingDef.Named("TKKN_FilthPuddle"), 1);
+					FilthMaker.MakeFilth(this.pawn.Position, this.pawn.MapHeld, ThingDef.Named("TKKN_FilthPuddle"), 1);
 					this.Severity -= .3f;
 				}
-
-			}
-
-			if (this.Severity > 0)
-			{
-				FloatRange floatRange = pawn.ComfortableTemperatureRange();
-				FloatRange floatRange2 = pawn.SafeTemperatureRange();
-				Log.Warning("Getting temps " + floatRange.ToString() + " " + floatRange2.ToString());
 
 			}
 
@@ -59,27 +49,22 @@ namespace TKKN_NPS
 		{
 			float rate = 0f;
 			//check if the pawn is in water
-			TerrainDef terrain = this.pawn.Position.GetTerrain(this.pawn.Map);
-			if (terrain.HasTag("Water")){
+			TerrainDef terrain = this.pawn.Position.GetTerrain(this.pawn.MapHeld);
+			if (terrain.HasTag("TKKN_Swim")){
 				//deep water gets them soaked.
-				if (terrain.defName.ToLower().Contains("deep")){
-					this.Severity = 1f;
-					rate = 0f;
-					return rate;
-				} else {
-			//		rate = .1f;
-				}
+				rate = .1f;
+				return rate;
 			}
 
 			//check if the pawn is wet from the weather
 			bool roofed = this.pawn.Map.roofGrid.Roofed(this.pawn.Position);
 			if (!roofed && this.pawn.Map.weatherManager.curWeather.rainRate > .001f)
 			{
-				rate = this.pawn.Map.weatherManager.curWeather.rainRate;
+				rate = this.pawn.Map.weatherManager.curWeather.rainRate / 10;
 			}
 			if (!roofed && this.pawn.Map.weatherManager.curWeather.snowRate > .001f)
 			{
-				rate = this.pawn.Map.weatherManager.curWeather.snowRate / 10;
+				rate = this.pawn.Map.weatherManager.curWeather.snowRate / 100;
 			}
 			if (this.wetnessLevel == 0f)
 			{
