@@ -11,8 +11,8 @@
 		</targetTags>
 			<workerClass>TKKN_NPS.IncidentWorker_WildFlowerBloom</workerClass>
 			<gameCondition>TKKN_WildFlowerBloom</gameCondition>
-			<letterLabel>Wild Flower Bloom</letterLabel>
-			<letterText>Tons of wild flowers are blooming! \n\nThis will boost the mood of anyone outside to see them, and might trigger allergies.</letterText>
+			<letterLabel>TKKN_NPS_WildFlowerBloom</letterLabel>
+			<letterText>TKKN_NPS_WildFlowerBloomTxt</letterText>
 			<letterDef>PositiveEvent</letterDef>
 			<baseChance>1.5</baseChance>
 			<minRefireDays>15</minRefireDays>
@@ -32,8 +32,8 @@
 		</targetTags>
 			<workerClass>TKKN_NPS.IncidentWorker_Superbloom</workerClass>
 			<gameCondition>TKKN_Superbloom</gameCondition>
-			<letterLabel>TKKN_NPS_WildFlowerBloom</letterLabel>
-			<letterText>A massive blooming of wild flowers and plants are blooming! \n\nThis will boost the mood of anyone outside to see them, and might trigger allergies.</letterText>
+			<letterLabel>TKKN_NPS_Superbloom</letterLabel>
+			<letterText>TKKN_NPS_SuperbloomTxt</letterText>
 			<letterDef>PositiveEvent</letterDef>
 			<baseChance>1.2</baseChance>
 			<minRefireDays>15</minRefireDays>
@@ -44,19 +44,20 @@
 		<tale>TKKN_Superbloom</tale>
 	</IncidentDef>
 	
-	
-	
+	<!-- migration using only special herd animals -->
 	<IncidentDef>
-		<defName>TKKN_TumblnweedMigration</defName>
-		<label>tumbleweeds passing through</label>
+		<defName>TKKN_SpecialHerdMigration</defName>
+		<label>herd migration</label>
 		<category>Misc</category>
 		<targetTags>
 			<li>Map_PlayerHome</li>
 		</targetTags>
-		<workerClass>TKKN_NPS.IncidentWorker_TumbleweedMigration</workerClass>
-		<baseChance>0.8</baseChance>
-		<letterLabel>tumbleweeds passing through</letterLabel>
-		<letterText>A large patch of tumbleweeds is blowing through!</letterText>
+		<workerClass>TKKN_NPS.TKKN_SpecialHerdMigration</workerClass>
+		<baseChance>0</baseChance>
+		<letterLabel>Animal migration: {0}</letterLabel>
+		<letterText>A group of {0} is passing through the area.\n\nThey won't attack unless provoked.</letterText>
 		<letterDef>NeutralEvent</letterDef>
 	</IncidentDef>
+
+	
 </Defs>
