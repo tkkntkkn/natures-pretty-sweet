@@ -1,16 +1,17 @@
-﻿using RimWorld;
-using Verse;
-using System.Linq;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using RimWorld;
+using Verse;
 using Verse.AI;
 using Verse.AI.Group;
 
 namespace TKKN_NPS
 {
-
-	public class IncidentWorker_TumbleweedMigration : IncidentWorker
+	public class TKKN_SpecialHerdMigration : IncidentWorker
 	{
 		private static readonly IntRange AnimalsCount = new IntRange(50, 70);
+		public Map map;
 
 		protected override bool CanFireNowSub(IncidentParms parms)
 		{
@@ -19,14 +20,20 @@ namespace TKKN_NPS
 			PawnKindDef pawnKindDef;
 			IntVec3 intVec;
 			IntVec3 intVec2;
-			return this.TryFindAnimalKind(map.Tile, out pawnKindDef) && this.TryFindStartAndEndCells(map, out intVec, out intVec2);
+			if (map.Biome.HasModExtension<BiomeSeasonalSettings>())
+			{
+				return this.TryFindAnimalKind(map.Tile, out pawnKindDef) && this.TryFindStartAndEndCells(map, out intVec, out intVec2);
+			}
+			return false;
 		}
 		private bool TryFindAnimalKind(int tile, out PawnKindDef animalKind)
 		{
+			BiomeSeasonalSettings mod = map.Biome.GetModExtension<BiomeSeasonalSettings>();
+			List<PawnKindDef> specialHerds = mod.specialHerds;
 
 			return (from k in DefDatabase<PawnKindDef>.AllDefs
-					where k.defName == "TKKN_Tumbleweed"
-					select k).TryRandomElementByWeight((PawnKindDef x) => x.RaceProps.wildness, out animalKind); ;
+					where specialHerds.Contains(k) && k.RaceProps.CanDoHerdMigration && Find.World.tileTemperatures.SeasonAndOutdoorTemperatureAcceptableFor(tile, k.race)
+					select k).TryRandomElementByWeight<PawnKindDef>((Func<PawnKindDef, float>)((PawnKindDef x) => x.RaceProps.wildness), out animalKind);
 		}
 		protected override bool TryExecuteWorker(IncidentParms parms)
 		{
@@ -58,7 +65,7 @@ namespace TKKN_NPS
 		}
 		private bool TryFindStartAndEndCells(Map map, out IntVec3 start, out IntVec3 end)
 		{
-			if (!RCellFinder.TryFindRandomPawnEntryCell(out start, map, CellFinder.EdgeRoadChance_Animal, null))
+			if (!RCellFinder.TryFindRandomPawnEntryCell(out start, map, CellFinder.EdgeRoadChance_Animal, false))
 			{
 				end = IntVec3.Invalid;
 				return false;
@@ -82,7 +89,7 @@ namespace TKKN_NPS
 
 		private List<Pawn> GenerateAnimals(PawnKindDef animalKind, int tile)
 		{
-			int randomInRange = IncidentWorker_TumbleweedMigration.AnimalsCount.RandomInRange;
+			int randomInRange = TKKN_SpecialHerdMigration.AnimalsCount.RandomInRange;
 			List<Pawn> list = new List<Pawn>();
 			for (int i = 0; i < randomInRange; i++)
 			{
@@ -93,7 +100,6 @@ namespace TKKN_NPS
 			return list;
 		}
 	}
-
 
 	public class IncidentWorker_Dustdevil : IncidentWorker
 	{

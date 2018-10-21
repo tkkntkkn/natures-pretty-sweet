@@ -373,7 +373,7 @@
     <label>wild greens</label>
     <description>Bitter, leavy greens and flowers harvested from wild plants.</description>
     <graphicData>
-      <texPath>TKKN_NPS/Things/Food/Wildgreens</texPath>
+      <texPath>TKKN_NPS/Things/Food/WildGreens</texPath>
       <graphicClass>Graphic_StackCount</graphicClass>
     </graphicData>
     <statBases>

@@ -40,8 +40,8 @@
       </statBases>
       <pathCost>18</pathCost>
       <graphicData>
-         <texPath>TKKN_NPS/Things/Harvestable_Misc/VarientHarvestable/Barnacles</texPath>
-         <graphicClass>Graphic_Single</graphicClass>
+         <texPath>TKKN_NPS/Things/HarvestableMisc/VarientHarvestable/Barnacles</texPath>
+         <graphicClass>Graphic_Random</graphicClass>
 		 <!-- maybe this will stop it from blowing in the wing -->
   		 <shaderType>Cutout</shaderType>
       </graphicData>
@@ -55,7 +55,7 @@
          <growDays>3</growDays>
          <dieIfLeafless>true</dieIfLeafless>
          <harvestWork>60</harvestWork>
-         <immatureGraphicPath>Things/Harvestable_Misc/Barnacles</immatureGraphicPath>
+         <immatureGraphicPath>TKKN_NPS/Things/HarvestableMisc/Barnacles</immatureGraphicPath>
          <visualSizeRange>
             <min>0.3</min>
             <max>1.4</max>
@@ -124,7 +124,7 @@
       </plant>
    </ThingDef>
    <ThingDef ParentName="PlantBase">
-      <defName>TKKN_PlantWaterCress</defName>
+      <defName>TKKN_PlantWatercress</defName>
       <label>watercress</label>
       <description>Also known as yellowcress. Edible aquatic plant species that's sweeter in the winter</description>
       <statBases>

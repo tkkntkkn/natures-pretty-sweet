@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Patch>
+ <Operation Class="PatchOperationInsert">
+      <xpath>/Defs/IncidentDef[defName = "HerdMigration"]</xpath>
+      <value>
+		  <allowedBiomes>
+			<li>TKKN_Grasslands</li>
+			<li>TKKN_Oasis</li>
+			<li>TKKN_Savanna</li>
+		</allowedBiomes>
+	   </value>
+	</Operation>
+</Patch>

@@ -9,20 +9,34 @@ namespace TKKN_NPS
 	{
 		public Season lastChanged;
 
-		public List<ThingDef> bloomPlants;
+		public List<BiomePlantRecord> specialPlants;
+
+		//weather settings
 		public List<WeatherCommonalityRecord> springWeathers;
 		public List<WeatherCommonalityRecord> summerWeathers;
 		public List<WeatherCommonalityRecord> fallWeathers;
 		public List<WeatherCommonalityRecord> winterWeathers;
+
+		//incident settings
+		public List<ThingDef> bloomPlants;
+		public List<PawnKindDef> specialHerds;
 		public List<TKKN_IncidentCommonalityRecord> springEvents;
 		public List<TKKN_IncidentCommonalityRecord> summerEvents;
 		public List<TKKN_IncidentCommonalityRecord> fallEvents;
 		public List<TKKN_IncidentCommonalityRecord> winterEvents;
+
+		//disease settings
 		public List<BiomeDiseaseRecord> springDiseases;
 		public List<BiomeDiseaseRecord> summerDiseases;
 		public List<BiomeDiseaseRecord> fallDiseases;
 		public List<BiomeDiseaseRecord> winterDiseases;
-		public List<BiomePlantRecord> specialPlants;
+
+		//spring settings
+		public int maxSprings;
+		public float springSpawnChance;
+		public bool springsSurviveDrought;
+		public bool springsSurviveSummer;
+
 
 		public bool plantsAdded;
 		public bool plantCacheUpdated;
