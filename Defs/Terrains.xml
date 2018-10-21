@@ -178,6 +178,7 @@
         <scatterType>Rocky</scatterType>
         <affordances>
             <li>Light</li>
+      <li>Medium</li>
             <li>Heavy</li>
             <li>GrowSoil</li>
             <li>Diggable</li>
@@ -206,6 +207,7 @@
         <scatterType>Rocky</scatterType>
         <affordances>
             <li>Light</li>
+      <li>Medium</li>
             <li>Heavy</li>
             <li>GrowSoil</li>
             <li>Diggable</li>
@@ -238,6 +240,7 @@
         </statBases>
         <affordances>
             <li>Light</li>
+      <li>Medium</li>
             <li>Heavy</li>
             <li>GrowSoil</li>
             <li>Diggable</li>
@@ -333,6 +336,7 @@
         </tags>
         <affordances>
             <li>Light</li>
+      <li>Medium</li>
             <li>Heavy</li>
             <li>GrowSoil</li>
             <li>Diggable</li>
@@ -362,6 +366,7 @@
         </tags>
         <affordances>
             <li>Light</li>
+      <li>Medium</li>
             <li>Heavy</li>
             <li>GrowSoil</li>
             <li>Diggable</li>
