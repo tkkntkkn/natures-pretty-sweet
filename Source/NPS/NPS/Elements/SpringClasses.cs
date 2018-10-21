@@ -95,8 +95,6 @@ namespace TKKN_NPS
 		private List<IntVec3> boundaryCellsRough = new List<IntVec3>();
 		private List<IntVec3> affectableCellsAtmosphere = new List<IntVec3>();
 
-		
-
 		public int getID()
 		{
 			string numOnly = this.parent.ThingID.Replace(this.parent.def.defName, "");

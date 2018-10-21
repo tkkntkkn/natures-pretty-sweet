@@ -46,5 +46,6 @@ namespace TKKN_NPS
 		public static ThingDef TKKN_PlantCatTails;
 		public static ThingDef TKKN_PlantWildflowers;
 		public static ThingDef TKKN_PlantLilypad;
+		public static ThingDef TKKN_PlantWatercress;
 	}
 }

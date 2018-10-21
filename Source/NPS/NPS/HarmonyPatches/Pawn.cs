@@ -141,8 +141,11 @@ namespace TKKN_NPS
 				}
 
 				//pack down the soil.
-				cellData cell = watcher.cellWeatherAffects[pawn.Position];
-				cell.doPack();
+				if (pawn.pather.MovingNow)
+				{
+					cellData cell = watcher.cellWeatherAffects[pawn.Position];
+					cell.doPack();
+				}
 				if (Settings.allowPlantEffects)
 				{
 					//this will be handled by the terrain changing in doPack

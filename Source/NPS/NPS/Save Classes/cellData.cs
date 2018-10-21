@@ -272,16 +272,20 @@ namespace TKKN_NPS
 		{
 			//only pack dirt right now. TO DO: Add sand.
 			//don't pack if there's a growing zone.
+
+			if (this.howPacked > 1000)
+			{
+				this.howPacked = 1000;
+			}
 			if (this.howPacked > 0)
 			{
-				Log.Warning("unpacking");
 				this.howPacked--;
 			}
-			else if(this.howPacked == 0 && this.currentTerrain.defName == "TKKN_DirtPath")
+			else if(this.howPacked == 500 && this.currentTerrain.defName == "TKKN_DirtPath")
 			{
 				this.changeTerrain(RimWorld.TerrainDefOf.Soil);
 			}
-			else if (this.howPacked == 0 && this.currentTerrain.defName == "TKKN_SandPath")
+			else if (this.howPacked == 500 && this.currentTerrain.defName == "TKKN_SandPath")
 			{
 				this.changeTerrain(RimWorld.TerrainDefOf.Sand);
 			}
@@ -309,8 +313,9 @@ namespace TKKN_NPS
 			}
 			*/
 
-			if (this.howPacked > 3000)
+			if (this.howPacked > 1000 )
 			{
+				this.howPacked = 1000;
 				if (baseTerrain.defName == "Soil")
 				{
 					TerrainDef packed = TerrainDef.Named("TKKN_DirtPath");

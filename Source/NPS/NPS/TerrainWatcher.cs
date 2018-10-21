@@ -37,18 +37,22 @@ namespace TKKN_NPS
 		public int cycleIndex;
 		public int MaxPuddles = 50;
 		public int totalPuddles = 0;
+		public int totalSprings = 0;
 
 		public Dictionary<string, Graphic> graphicHolder = new Dictionary<string, Graphic>();
 		public float[] frostGrid;
 
 		public ModuleBase frostNoise;
 
+		public BiomeSeasonalSettings biomeSettings;
+
 //		public Map mapRef;
 
 		/* STANDARD STUFF */
 		public Watcher(Map map) : base(map)
 		{
-		
+			this.biomeSettings = map.Biome.GetModExtension<BiomeSeasonalSettings>();
+
 		}
 
 		public override void MapComponentTick()
@@ -80,7 +84,6 @@ namespace TKKN_NPS
 				}
 			}
 
-			BiomeSeasonalSettings biomeSettings = map.Biome.GetModExtension<BiomeSeasonalSettings>();
 			if (biomeSettings != null)
 			{
 				Vector2 location = Find.WorldGrid.LongLatOf(map.Tile);
@@ -305,8 +308,9 @@ namespace TKKN_NPS
 						this.floodCellsList[level].Add(thiscell.Key);
 					}
 				}
-				if (thiscell.Value.baseTerrain.HasTag("TKKN_Swim"))
+				if (thiscell.Value.baseTerrain.HasTag("Water") && thiscell.Value.baseTerrain.defName.ToLower().Contains("deep"))
 				{
+
 					this.swimmingCellsList.Add(thiscell.Key);
 				}
 				if (thiscell.Value.baseTerrain.HasTag("Lava")) {
@@ -353,9 +357,27 @@ namespace TKKN_NPS
 		public void spawnSpecialElements(IntVec3 c)
 		{
 			TerrainDef terrain = c.GetTerrain(map);
+			
+
+			//defaults
+			int maxSprings = 3;
+			float springSpawnChance = .8f;
+
+			if (biomeSettings != null)
+			{
+				maxSprings = biomeSettings.maxSprings;
+				springSpawnChance = biomeSettings.springSpawnChance;
+			}
+
 			foreach (ElementSpawnDef element in DefDatabase<ElementSpawnDef>.AllDefs)
 			{
 				bool canSpawn = true;
+				bool isSpring = element.thingDef.defName.Contains("Spring");
+
+				if (isSpring && maxSprings <= totalSprings) {
+					canSpawn = false;
+				}
+
 				foreach (string biome in element.forbiddenBiomes)
 				{
 					if (map.Biome.defName == biome)
@@ -378,7 +400,6 @@ namespace TKKN_NPS
 				{
 					continue;
 				}
-//				Log.Error(element.thingDef.defName + " " +map.Biome.defName);
 
 
 				foreach (string allowed in element.terrainValidationAllowed)
@@ -398,11 +419,14 @@ namespace TKKN_NPS
 					}
 				}
 
+				if (isSpring && canSpawn && Rand.Value < springSpawnChance) {
+					Thing thing = (Thing)ThingMaker.MakeThing(element.thingDef, null);
+					GenSpawn.Spawn(thing, c, map);
+					totalSprings++;
+				}
 
-				if (canSpawn && Rand.Value < .0001f)
+				if (!isSpring && canSpawn && Rand.Value < .0001f)
 				{
-
-
 					Thing thing = (Thing)ThingMaker.MakeThing(element.thingDef, null);
 					GenSpawn.Spawn(thing, c, map);
 				}
@@ -553,7 +577,7 @@ namespace TKKN_NPS
 			}
 			cellData cell = this.cellWeatherAffects[c];
 
-			if (this.ticks % 100 == 0)
+			if (this.ticks % 20 == 0)
 			{
 				cell.unpack();
 			}
@@ -996,7 +1020,7 @@ namespace TKKN_NPS
 
 		private void doTides()
 		{
-			//nots to future me: use this.howManyTideSteps - 1 so we always have a little bit of wet sand, or else it looks stupid.
+			//notes to future me: use this.howManyTideSteps - 1 so we always have a little bit of wet sand, or else it looks stupid.
 			if (!this.doCoast || !Settings.doTides || this.ticks % 100 != 0)
 			{
 				return;

@@ -21,30 +21,18 @@ namespace TKKN_NPS.HarmonyPatches
 			{
 				//verify that the plant can grow on this terrain.
 				TerrainDef terrain = c.GetTerrain(map);
-				if (terrain.HasTag("TKKN_SpecialPlants"))
+				ThingWeatherReaction weatherReaction = plantDef.GetModExtension<ThingWeatherReaction>();
+				if (weatherReaction != null && weatherReaction.allowedTerrains != null)
 				{
-					if (plantDef.defName == "TKKN_PlantLilypad")
+					if (!weatherReaction.allowedTerrains.Contains(terrain))
 					{
-						Log.Warning("has tag");
+						__result = false;
 					}
-					ThingWeatherReaction weatherReaction = plantDef.GetModExtension<ThingWeatherReaction>();
-					if (weatherReaction != null && weatherReaction.allowedTerrains != null)
+					else
 					{
-						if (plantDef.defName == "TKKN_PlantLilypad")
-						{
-							Log.Warning("has weatherReaction");
-						}
-						if (!weatherReaction.allowedTerrains.Contains(terrain))
-						{
-							if (plantDef.defName == "TKKN_PlantLilypad")
-							{
-								Log.Warning("can't plant here");
-							}
-							__result = false;
-						}
+						Log.Warning("planting " + plantDef.defName);
 					}
 				}
-
 			}
 
 		}

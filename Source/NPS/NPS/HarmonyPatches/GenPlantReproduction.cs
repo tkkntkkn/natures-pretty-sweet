@@ -88,11 +88,10 @@ namespace TKKN_NPS
 					//check if we're on water or salt.
 					TerrainDef terrain = c.GetTerrain(map);
 					BiomeSeasonalSettings biomeSet = map.Biome.GetModExtension<BiomeSeasonalSettings>();
-					if (terrain.HasTag("TKKN_SpecialPlants") && biomeSet.specialPlants != null)
+					if (biomeSet.specialPlants != null)
 					{
 						//spawn any special plants
 						WildPlantSpawner.tmpPossiblePlants
-
 
 					this.CalculatePlantsWhichCanGrowAt(c, WildPlantSpawner.tmpPossiblePlants, cavePlants, plantDensity);
 						if (!WildPlantSpawner.tmpPossiblePlants.Any())
