@@ -9,19 +9,19 @@
    <Operation Class="PatchOperationInsert">
       <xpath>/Defs/ThingDef[defName = "Plant_Dandelion"]/plant/harvestTag</xpath>
       <value>Standard</value>
-	</Operation
+	</Operation>
    <Operation Class="PatchOperationInsert">
       <xpath>/Defs/ThingDef[defName = "Plant_Dandelion"]/plant/harvestedThingDef</xpath>
       <value>TKKN_WildGreens</value>
-	</Operation
+	</Operation>
    <Operation Class="PatchOperationInsert">
       <xpath>/Defs/ThingDef[defName = "Plant_Dandelion"]/plant/harvestYield</xpath>
       <value>3</value>
-	</Operation
+	</Operation>
    <Operation Class="PatchOperationReplace">
       <xpath>/Defs/ThingDef[defName = "Plant_Dandelion"]/description</xpath>
       <value>A tiny, edible yellow flower which grows in large clusters. Though it is often considered a weed, dandelions in bloom are quite beautiful.</value>
-	</Operation
+	</Operation>
    <Operation Class="PatchOperationAddModExtension">
       <xpath>/Defs/ThingDef[defName = "TKKN_PlantWildRice"]</xpath>
       <value>
