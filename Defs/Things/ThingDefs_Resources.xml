@@ -368,6 +368,49 @@
     </comps>
   </ThingDef>
 
+    <ThingDef ParentName="PlantFoodRawBase">
+    <defName>TKKN_WildGreens</defName>
+    <label>wild greens</label>
+    <description>Bitter, leavy greens and flowers harvested from wild plants.</description>
+    <graphicData>
+      <texPath>TKKN_NPS/Things/Food/Wildgreens</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+    </graphicData>
+    <statBases>
+      <MarketValue>.2</MarketValue>
+    </statBases>
+    <ingestible>
+      <foodType>Seed</foodType>
+    </ingestible>
+    <comps>
+      <li Class="CompProperties_Rottable">
+        <daysToRotStart>30</daysToRotStart>
+        <rotDestroys>true</rotDestroys>
+      </li>
+    </comps>
+  </ThingDef>
+  
+    <ThingDef ParentName="PlantFoodRawBase">
+    <defName>TKKN_ShellfishMeat</defName>
+    <label>shellfish meat</label>
+    <description>Meat from shellfish.</description>
+    <graphicData>
+      <texPath>TKKN_NPS/Things/Food/ShellfishMeat</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+    </graphicData>
+    <statBases>
+      <MarketValue>.2</MarketValue>
+    </statBases>
+    <ingestible>
+      <foodType>AnimalProduct</foodType>
+    </ingestible>
+    <comps>
+      <li Class="CompProperties_Rottable">
+        <daysToRotStart>15</daysToRotStart>
+        <rotDestroys>true</rotDestroys>
+      </li>
+    </comps>
+  </ThingDef>	
 	
   <ThingDef ParentName="PlantFoodRawBase">
     <defName>TKKN_Cattails</defName>
