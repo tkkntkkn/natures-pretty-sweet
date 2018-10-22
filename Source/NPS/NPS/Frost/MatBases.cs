@@ -13,7 +13,7 @@ namespace TKKN_NPS
 			get {
 				Material frost = new Material(Verse.MatBases.Snow);
 				frost.mainTexture = MatBases.frostTexture;
-				Log.Error(frost.shader.name);
+			//	Log.Error(frost.shader.name);
 				/*
 				
 				Color col = frost.color;

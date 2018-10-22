@@ -477,7 +477,7 @@ namespace TKKN_NPS
 					if(loot != null){
 						GenSpawn.Spawn(loot, location, this.map);
 					} else {
-						Log.Error(allowed[leaveWhat2]);
+					//	Log.Error(allowed[leaveWhat2]);
 					}
 						
 				}

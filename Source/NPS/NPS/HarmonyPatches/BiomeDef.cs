@@ -62,7 +62,7 @@ namespace TKKN_NPS
 			BiomeSeasonalSettings biomeSettings = __instance.GetModExtension<BiomeSeasonalSettings>();
 			if (biomeSettings != null && biomeSettings.diseaseCacheUpdated == false)
 			{
-				Log.Error("updating cachedDiseaseCommonalities");
+				Log.Warning("updating cachedDiseaseCommonalities");
 				Traverse.Create(__instance).Field("cachedDiseaseCommonalities").SetValue(null);
 				biomeSettings.diseaseCacheUpdated = true;
 			}

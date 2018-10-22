@@ -116,6 +116,7 @@ namespace TKKN_NPS
 			}
 
 			rate -= timeDrying / 250;
+			Log.Warning(rate.ToString());
 			return rate;
 		}
 	}
