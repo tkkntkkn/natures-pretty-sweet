@@ -49,15 +49,15 @@
       <plant>
          <harvestTag>Standard</harvestTag>
          <harvestedThingDef>TKKN_ShellfishMeat</harvestedThingDef>
-         <harvestYield>3</harvestYield>
-         <fertilityMin>0</fertilityMin>
+         <harvestYield>10</harvestYield>
+         <fertilityMin>.0001</fertilityMin>
          <fertilitySensitivity>0</fertilitySensitivity>
          <growDays>3</growDays>
          <dieIfLeafless>true</dieIfLeafless>
          <harvestWork>60</harvestWork>
          <immatureGraphicPath>TKKN_NPS/Things/HarvestableMisc/Barnacles</immatureGraphicPath>
          <visualSizeRange>
-            <min>0.3</min>
+            <min>0.8</min>
             <max>1.4</max>
          </visualSizeRange>
          <topWindExposure>0.4</topWindExposure>
@@ -79,7 +79,7 @@
       <hideAtSnowDepth>0.1</hideAtSnowDepth>
       <ingestible/>
       <plant>
-         <fertilityMin>0</fertilityMin>
+         <fertilityMin>.0001</fertilityMin>
          <fertilitySensitivity>0</fertilitySensitivity>
          <growDays>3</growDays>
          <dieIfLeafless>true</dieIfLeafless>
@@ -110,7 +110,7 @@
          <harvestTag>Standard</harvestTag>
          <harvestedThingDef>TKKN_WildGreens</harvestedThingDef>
          <harvestYield>3</harvestYield>
-         <fertilityMin>0</fertilityMin>
+         <fertilityMin>.0001</fertilityMin>
          <fertilitySensitivity>0</fertilitySensitivity>
          <growDays>3</growDays>
          <dieIfLeafless>true</dieIfLeafless>
@@ -142,7 +142,7 @@
          <harvestTag>Standard</harvestTag>
          <harvestedThingDef>TKKN_WildGreens</harvestedThingDef>
          <harvestYield>3</harvestYield>
-         <fertilityMin>0</fertilityMin>
+         <fertilityMin>.0001</fertilityMin>
          <fertilitySensitivity>0</fertilitySensitivity>
          <growDays>3</growDays>
          <dieIfLeafless>true</dieIfLeafless>

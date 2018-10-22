@@ -76,12 +76,7 @@
          <li>WaterMovingShallow</li>
       </terrainValidationAllowed>
       <forbiddenBiomes>
-         <li>TKKN_Desert</li>
-         <li>TKKN_VolcanicFlow</li>
-         <li>TKKN_Oasis</li>
-         <li>Desert</li>
          <li>Ocean</li>
-         <li>IceSheet</li>
          <li>SeaIce</li>
          <li>Lakes</li>
       </forbiddenBiomes>
@@ -100,14 +95,9 @@
          <li>WaterMovingShallow</li>
       </terrainValidationAllowed>
       <forbiddenBiomes>
-         <li>TKKN_Desert</li>
          <li>TKKN_VolcanicFlow</li>
-         <li>TKKN_Oasis</li>
-         <li>Desert</li>
          <li>Ocean</li>
-         <li>IceSheet</li>
          <li>SeaIce</li>
-         <li>Tundra</li>
          <li>Lake</li>
       </forbiddenBiomes>
       <allowedBiomes/>

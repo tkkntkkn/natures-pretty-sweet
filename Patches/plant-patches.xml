@@ -13,7 +13,6 @@
 			<harvestTag>Standard</harvestTag>
 			<harvestedThingDef>TKKN_WildGreens</harvestedThingDef>
 			<harvestYield>5</harvestYield>
-			<harvestYield>10</harvestYield>
 			<harvestWork>100</harvestWork>
 			<harvestAfterGrowth>0.10</harvestAfterGrowth>
 		</plant>
