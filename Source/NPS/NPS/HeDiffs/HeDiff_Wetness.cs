@@ -23,7 +23,7 @@ namespace TKKN_NPS
 			
 			if (!Settings.allowPawnsToGetWet || !this.pawn.Position.IsValid || this.pawn.MapHeld == null || !this.pawn.Position.InBounds(this.pawn.MapHeld))
 			{
-				return;
+				return; 
 			}
 
 			float wetness = this.wetnessRate();
@@ -35,7 +35,7 @@ namespace TKKN_NPS
 				{
 					this.wetnessLevel = 0;
 				}
-				if (this.Severity > .62 && (this.ageTicks % 500 == 0))
+				if (this.Severity > .62 && (this.ageTicks % 1000 == 0))
 				{
 					FilthMaker.MakeFilth(this.pawn.Position, this.pawn.MapHeld, ThingDef.Named("TKKN_FilthPuddle"), 1);
 					this.Severity -= .3f;
@@ -50,30 +50,44 @@ namespace TKKN_NPS
 			float rate = 0f;
 			//check if the pawn is in water
 			TerrainDef terrain = this.pawn.Position.GetTerrain(this.pawn.MapHeld);
-			if (terrain.HasTag("TKKN_Swim")){
+			if (terrain != null && terrain.HasTag("TKKN_Wet")){
 				//deep water gets them soaked.
-				rate = .1f;
-				return rate;
+				if (terrain.HasTag("TKKN_Swim"))
+				{
+					if (this.Severity < .65f)
+					{
+						this.Severity = .65f;
+					}
+					rate = .2f;
+					return rate;
+				}
+				else
+				{
+					rate = .05f;
+				}
+
 			}
 
+
 			//check if the pawn is wet from the weather
-			bool roofed = this.pawn.Map.roofGrid.Roofed(this.pawn.Position);
-			if (!roofed && this.pawn.Map.weatherManager.curWeather.rainRate > .001f)
+			bool roofed = this.pawn.MapHeld.roofGrid.Roofed(this.pawn.Position);
+			if (!roofed && this.pawn.MapHeld.weatherManager.curWeather.rainRate > .001f)
 			{
-				rate = this.pawn.Map.weatherManager.curWeather.rainRate / 10;
+				rate = this.pawn.MapHeld.weatherManager.curWeather.rainRate / 10;
 			}
-			if (!roofed && this.pawn.Map.weatherManager.curWeather.snowRate > .001f)
+			if (!roofed && this.pawn.MapHeld.weatherManager.curWeather.snowRate > .001f)
 			{
-				rate = this.pawn.Map.weatherManager.curWeather.snowRate / 100;
+				rate = this.pawn.MapHeld.weatherManager.curWeather.snowRate / 100;
 			}
-			if (this.wetnessLevel == 0f)
+
+			if (rate == 0f)
+			{
+				timeDrying++;
+			}
+			else
 			{
 				timeDrying = 0;
 				return rate;
-			}
-
-			if (rate == 0f) {
-				timeDrying++;
 			}
 
 			//dry the pawn.
@@ -84,7 +98,11 @@ namespace TKKN_NPS
 			//check if the pawn is near a heat source
 			foreach (IntVec3 c in GenAdj.CellsAdjacentCardinal(pawn))
 			{
-				List<Thing> things = c.GetThingList(pawn.Map);
+				if (!c.InBounds(pawn.MapHeld) || !c.IsValid)
+				{
+					continue;
+				}
+				List<Thing> things = c.GetThingList(pawn.MapHeld);
 				for (int i = 0; i < things.Count; i++)
 				{
 					Thing thing = things[i];

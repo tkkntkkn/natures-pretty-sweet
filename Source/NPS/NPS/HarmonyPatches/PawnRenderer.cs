@@ -24,19 +24,17 @@ namespace TKKN_NPS
 			}
 
 
-			if (!pawn.RaceProps.Humanlike)
+			if (!pawn.RaceProps.Humanlike || pawn.MapHeld == null)
 			{
 				return;
 			}
 			TerrainDef terrain = pawn.Position.GetTerrain(pawn.MapHeld);
-			if (terrain.HasTag("TKKN_Swim"))
-			{
-				renderBody = false;
+			if (terrain != null){
+				if (terrain.HasTag("TKKN_Swim"))
+				{
+					renderBody = false;
+				}
 			}
-
-			
-			return;
-
 		}
 	}
 

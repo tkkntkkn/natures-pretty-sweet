@@ -35,7 +35,7 @@ namespace TKKN_NPS
 		{
 			Predicate<IntVec3> validator = delegate (IntVec3 pos)
 			{
-				if (pos.GetTerrain(pawn.MapHeld).HasTag("Water"))
+				if (pos.GetTerrain(pawn.MapHeld).HasTag("TKKN_Wet"))
 				{
 					return false;
 				}
@@ -119,7 +119,7 @@ namespace TKKN_NPS
 				if (c2 is IntVec3 cell && cell.IsValid)
 				{
 					TerrainDef terrain = cell.GetTerrain(pawn.Map);
-					if (terrain.HasTag("Water") && terrain.defName.Contains("Deep"))
+					if (terrain.HasTag("TKKN_Swim"))
 					{
 						return c2;
 

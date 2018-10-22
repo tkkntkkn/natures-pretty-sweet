@@ -462,7 +462,7 @@ namespace TKKN_NPS
 			if (currentTerrain == this.Props.wetTile) {
 				return false;
 			}
-			if (currentTerrain.HasTag("Water"))
+			if (currentTerrain.HasTag("TKKN_Wet"))
 			{
 				return false;
 			}

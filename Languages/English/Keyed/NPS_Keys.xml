@@ -17,6 +17,9 @@
   <LetterLabelUpdateNotes1>NPS has updated!</LetterLabelUpdateNotes1>
   <LetterLabelUpdateNotes1Text>The biggest changes: 2 new biomes (require new save). Seasonal weather, disease, and incidents. Humans create walking paths. Plants will dry out and die (doesn't affect biomes that aren't arid, and doesn't affect plants in a growing zone).</LetterLabelUpdateNotes1Text>
   
+  
+  <TKKN_NPS_DrowningText>Someone is drowning!</TKKN_NPS_DrowningText>
+  
   <TKKN_NPS_TreasureWashedUpText>Treasure has washed up on the beach! Get it before it washes away.</TKKN_NPS_TreasureWashedUpText>
   <TKKN_NPS_TreasureFloodedUpText>Recent flooding has left behind treasure! Get it before it washes away.</TKKN_NPS_TreasureFloodedUpText>
   <TKKN_NPS_UltraRareWashedUpText>Ultra rare treasure has washed up on the beach! Get it before it washes away.</TKKN_NPS_UltraRareWashedUpText>

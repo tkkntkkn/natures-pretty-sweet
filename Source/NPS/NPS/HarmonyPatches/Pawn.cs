@@ -54,13 +54,13 @@ namespace TKKN_NPS
 		public static void DyingCheck(Pawn pawn, TerrainDef terrain)
 		{
 			//drowning == immobile and in water
-			if (pawn.RaceProps.Humanlike && pawn.health.Downed && terrain.HasTag("Water"))
+			if (pawn.RaceProps.Humanlike && pawn.health.Downed && terrain.HasTag("TKKN_Wet"))
 			{
-				float damage = .1f;
+				float damage = .05f;
 				//if they're awake, take less damage
 				if (!pawn.health.capacities.CanBeAwake)
 				{
-					damage = .05f;
+					damage = .01f;
 				}
 
 				//heavier clothing hurts them more
@@ -70,8 +70,16 @@ namespace TKKN_NPS
 				{
 					weight += apparel[i].HitPoints / 100;
 				}
-				damage += weight / 10;
+				damage += weight / 50;
 				HealthUtility.AdjustSeverity(pawn, HediffDef.Named("TKKN_Drowning"), damage);
+
+				if (pawn.Faction.IsPlayer)
+				{
+					string text = "TKKN_NPS_DrowningText".Translate();
+					Messages.Message(text, MessageTypeDefOf.NeutralEvent);
+
+				}
+
 			}
 		}
 		public static void MakeWet(Pawn pawn)
@@ -100,7 +108,7 @@ namespace TKKN_NPS
 				else
 				{
 					TerrainDef currentTerrain = c.GetTerrain(map);
-					if (currentTerrain.HasTag("Water")){
+					if (currentTerrain.HasTag("TKKN_Wet")){
 						isWet = true;
 					}
 				}

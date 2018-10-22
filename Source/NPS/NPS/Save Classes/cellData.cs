@@ -237,7 +237,7 @@ namespace TKKN_NPS
 				changeTerrain(weather.tideTerrain);
 			}
 
-			if (weather.tideTerrain != null && weather.tideTerrain.HasTag("Water"))
+			if (weather.tideTerrain != null && weather.tideTerrain.HasTag("TKKN_Wet"))
 			{
 				this.clearLoot();
 			}
@@ -380,7 +380,7 @@ namespace TKKN_NPS
 					GenSpawn.Spawn(ThingMaker.MakeThing(ThingDefOf.TKKN_LavaRock), location, map);
 				} else if (baseTerrain.defName == "TKKN_SandBeachWetSalt") {
 					GenSpawn.Spawn(ThingMaker.MakeThing(ThingDefOf.TKKN_crab), location, map);
-				} else if (currentTerrain.HasTag("Water"))
+				} else if (currentTerrain.HasTag("TKKN_Wet"))
 				{
 					MoteMaker.MakeWaterSplash(location.ToVector3(), this.map, 1, 1);
 				}

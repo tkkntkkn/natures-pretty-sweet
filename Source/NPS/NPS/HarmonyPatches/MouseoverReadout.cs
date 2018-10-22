@@ -68,6 +68,12 @@ namespace TKKN_NPS
 				num += 19f;
 
 				rect = new Rect(BotLeft.x, (float)UI.screenHeight - BotLeft.y - num, 999f, 999f);
+				string label6 = "TKKN_Wet " + cell.currentTerrain.HasTag("TKKN_Wet") + "TKKN_Swim " + cell.currentTerrain.HasTag("TKKN_Swim");
+				Widgets.Label(rect, label6);
+				num += 19f;
+				
+
+				rect = new Rect(BotLeft.x, (float)UI.screenHeight - BotLeft.y - num, 999f, 999f);
 				string label5 = "Cell Info: howWet " + cell.howWet.ToString() +  " | How Wet (Plants) " + cell.howWetPlants.ToString() + " | How Packed " + cell.howPacked.ToString();
 				if (cell.weather != null)
 				{

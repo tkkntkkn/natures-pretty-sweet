@@ -25,6 +25,7 @@ namespace TKKN_NPS
 						TerrainDef terrain = pawn.Position.GetTerrain(pawn.MapHeld);
 						if (terrain != null && terrain.HasTag("TKKN_Swim"))
 						{
+
 							return false;
 						}
 					}

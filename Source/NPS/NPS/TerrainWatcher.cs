@@ -220,7 +220,7 @@ namespace TKKN_NPS
 							}
 						}
 					}
-					else if (terrain.HasTag("Water") && terrain.defName != "WaterOceanShallow" && terrain.defName != "WaterOceanDeep")
+					else if (terrain.HasTag("TKKN_Wet") && terrain.defName != "WaterOceanShallow" && terrain.defName != "WaterOceanDeep")
 					{
 						for (int j = 0; j < this.howManyFloodSteps; j++)
 						{
@@ -231,7 +231,7 @@ namespace TKKN_NPS
 								if (bankCheck.InBounds(map))
 								{
 									TerrainDef bankCheckTerrain = bankCheck.GetTerrain(this.map);
-									if (!bankCheckTerrain.HasTag("Water") && terrain.defName != "TKKN_SandBeachWetSalt")// || ((terrain.defName == "WaterDeep" || terrain.defName == "WaterDeep" || terrain.defName == "WaterMovingDeep") && bankCheckTerrain.defName != terrain.defName))
+									if (!bankCheckTerrain.HasTag("TKKN_Wet") && terrain.defName != "TKKN_SandBeachWetSalt")// || ((terrain.defName == "WaterDeep" || terrain.defName == "WaterDeep" || terrain.defName == "WaterMovingDeep") && bankCheckTerrain.defName != terrain.defName))
 									{
 										//see if this cell has already been done, because we can have each cell in multiple flood levels.
 										cellData bankCell;
@@ -308,7 +308,7 @@ namespace TKKN_NPS
 						this.floodCellsList[level].Add(thiscell.Key);
 					}
 				}
-				if (thiscell.Value.baseTerrain.HasTag("Water") && thiscell.Value.baseTerrain.defName.ToLower().Contains("deep"))
+				if (thiscell.Value.baseTerrain.HasTag("TKKN_Swim"))
 				{
 
 					this.swimmingCellsList.Add(thiscell.Key);
@@ -409,8 +409,9 @@ namespace TKKN_NPS
 						canSpawn = true;
 						break;
 					}
+					canSpawn = false;
 				}
-				foreach (string notAllowed in element.terrainValidationAllowed)
+				foreach (string notAllowed in element.terrainValidationDisallowed)
 				{
 					if (terrain.HasTag(notAllowed))
 					{
@@ -539,7 +540,7 @@ namespace TKKN_NPS
 				{
 					IntVec3 c = makeWater[j];
 					cellData cell = this.cellWeatherAffects[c];
-					if (!cell.baseTerrain.HasTag("Water") && cell.baseTerrain.defName != "Marsh")
+					if (!cell.baseTerrain.HasTag("TKKN_Wet"))
 					{
 						cell.baseTerrain = TerrainDefOf.TKKN_RiverDeposit;
 					}
@@ -634,7 +635,7 @@ namespace TKKN_NPS
 
 
 			#region Rain
-			if(Settings.showRain && !cell.currentTerrain.HasTag("Water"))
+			if(Settings.showRain && !cell.currentTerrain.HasTag("TKKN_Wet"))
 			{
 				//if it's raining in this cell:
 				if (!roofed && this.map.weatherManager.curWeather.rainRate > .001f)
