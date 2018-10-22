@@ -12,6 +12,7 @@ namespace TKKN_NPS
 	{
 		private static readonly IntRange AnimalsCount = new IntRange(50, 70);
 		public Map map;
+		public BiomeSeasonalSettings mod;
 
 		protected override bool CanFireNowSub(IncidentParms parms)
 		{
@@ -22,13 +23,17 @@ namespace TKKN_NPS
 			IntVec3 intVec2;
 			if (map.Biome.HasModExtension<BiomeSeasonalSettings>())
 			{
+				mod = map.Biome.GetModExtension<BiomeSeasonalSettings>();
+				if (mod.specialHerds == null)
+				{
+					return false;
+				}
 				return this.TryFindAnimalKind(map.Tile, out pawnKindDef) && this.TryFindStartAndEndCells(map, out intVec, out intVec2);
 			}
 			return false;
 		}
 		private bool TryFindAnimalKind(int tile, out PawnKindDef animalKind)
 		{
-			BiomeSeasonalSettings mod = map.Biome.GetModExtension<BiomeSeasonalSettings>();
 			List<PawnKindDef> specialHerds = mod.specialHerds;
 
 			return (from k in DefDatabase<PawnKindDef>.AllDefs

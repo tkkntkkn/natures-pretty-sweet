@@ -51,7 +51,6 @@ namespace TKKN_NPS
 		/* STANDARD STUFF */
 		public Watcher(Map map) : base(map)
 		{
-			this.biomeSettings = map.Biome.GetModExtension<BiomeSeasonalSettings>();
 
 		}
 
@@ -127,6 +126,7 @@ namespace TKKN_NPS
 		{
 			
 			base.FinalizeInit();
+			this.biomeSettings = map.Biome.GetModExtension<BiomeSeasonalSettings>();
 			this.rebuildCellLists();
 			// this.map.GetComponent<FrostGrid>().Regenerate(); 
 			if (TKKN_Holder.modsPatched.ToArray().Count() > 0)

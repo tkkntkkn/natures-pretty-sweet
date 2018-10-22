@@ -58,7 +58,7 @@ namespace TKKN_NPS
 					{
 						this.Severity = .65f;
 					}
-					rate = .2f;
+					rate = .3f;
 					return rate;
 				}
 				else

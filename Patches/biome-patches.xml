@@ -8,7 +8,7 @@
             <wildPlants>
                 <TKKN_PlantCatTails>1.3</TKKN_PlantCatTails>
                 <TKKN_PlantWatercress>1.2</TKKN_PlantWatercress>
-                <TKKN_Barnacles>2</TKKN_Barnacles>
+                <TKKN_PlantBarnacles>2</TKKN_PlantBarnacles>
             </wildPlants>
         </value>
     </Operation>
@@ -18,7 +18,7 @@
             <wildPlants>
                 <TKKN_PlantCatTails>1.3</TKKN_PlantCatTails>
                 <TKKN_PlantWatercress>1.2</TKKN_PlantWatercress>
-                <TKKN_Barnacles>2</TKKN_Barnacles>
+                <TKKN_PlantBarnacles>2</TKKN_PlantBarnacles>
             </wildPlants>
         </value>
     </Operation>
@@ -28,7 +28,7 @@
             <wildPlants>
                 <TKKN_PlantCatTails>1.6</TKKN_PlantCatTails>
                 <TKKN_PlantWatercress>1.6</TKKN_PlantWatercress>
-                <TKKN_Barnacles>2</TKKN_Barnacles>
+                <TKKN_PlantBarnacles>2</TKKN_PlantBarnacles>
             </wildPlants>
         </value>
     </Operation>
@@ -39,7 +39,7 @@
             <wildPlants>
                 <TKKN_PlantCatTails>1.3</TKKN_PlantCatTails>
                 <TKKN_PlantWildRice>1.2</TKKN_PlantWildRice>
-                <TKKN_Barnacles>2</TKKN_Barnacles>
+                <TKKN_PlantBarnacles>2</TKKN_PlantBarnacles>
             </wildPlants>
         </value>
     </Operation>
@@ -50,7 +50,7 @@
                 <TKKN_PlantWildRice>1.4</TKKN_PlantWildRice>
                 <TKKN_PlantCatTails>1.6</TKKN_PlantCatTails>
                 <TKKN_PlantLilypad>1.4</TKKN_PlantLilypad>
-                <TKKN_Barnacles>2</TKKN_Barnacles>
+                <TKKN_PlantBarnacles>2</TKKN_PlantBarnacles>
             </wildPlants>
         </value>
     </Operation>
@@ -62,7 +62,7 @@
                 <TKKN_PlantWildRice>1.4</TKKN_PlantWildRice>
                 <TKKN_PlantCatTails>1.6</TKKN_PlantCatTails>
                 <TKKN_PlantLilypad>1.4</TKKN_PlantLilypad>
-                <TKKN_Barnacles>2</TKKN_Barnacles>
+                <TKKN_PlantBarnacles>2</TKKN_PlantBarnacles>
             </wildPlants>
         </value>
     </Operation>
@@ -73,7 +73,7 @@
                 <TKKN_PlantWildRice>1.8</TKKN_PlantWildRice>
                 <TKKN_PlantCatTails>2</TKKN_PlantCatTails>
                 <TKKN_PlantLilypad>1.8</TKKN_PlantLilypad>
-                <TKKN_Barnacles>2</TKKN_Barnacles>
+                <TKKN_PlantBarnacles>2</TKKN_PlantBarnacles>
             </wildPlants>
         </value>
     </Operation>
@@ -85,7 +85,7 @@
             <wildPlants>
                 <TKKN_PlantCatTails>1.2</TKKN_PlantCatTails>
                 <TKKN_PlantLilypad>1.2</TKKN_PlantLilypad>
-                <TKKN_Barnacles>1.4</TKKN_Barnacles>
+                <TKKN_PlantBarnacles>1.4</TKKN_PlantBarnacles>
                 <TKKN_PlantCactusPricklyPear>.1</TKKN_PlantCactusPricklyPear>
                 <TKKN_PlantCactusSanPedro>.1</TKKN_PlantCactusSanPedro>
                 <TKKN_PlantCactusBarrel>.1</TKKN_PlantCactusBarrel>
@@ -103,7 +103,7 @@
             <wildPlants>
                 <TKKN_PlantCatTails>1</TKKN_PlantCatTails>
                 <TKKN_PlantLilypad>1</TKKN_PlantLilypad>
-                <TKKN_Barnacles>1.4</TKKN_Barnacles>
+                <TKKN_PlantBarnacles>1.4</TKKN_PlantBarnacles>
                 <TKKN_PlantCactusPricklyPear>.1</TKKN_PlantCactusPricklyPear>
                 <TKKN_PlantCactusSanPedro>.1</TKKN_PlantCactusSanPedro>
                 <TKKN_PlantCactusBarrel>.1</TKKN_PlantCactusBarrel>
@@ -123,7 +123,7 @@
                 <TKKN_PlantCatTails>.8</TKKN_PlantCatTails>
                 <TKKN_PlantCatTails>.8</TKKN_PlantCatTails>
                 <TKKN_PlantLilypad>.8</TKKN_PlantLilypad>
-                <TKKN_Barnacles>1.4</TKKN_Barnacles>
+                <TKKN_PlantBarnacles>1.4</TKKN_PlantBarnacles>
                 <TKKN_PlantCactusPricklyPear>.05</TKKN_PlantCactusPricklyPear>
                 <TKKN_PlantCactusSanPedro>.05</TKKN_PlantCactusSanPedro>
                 <TKKN_PlantCactusBarrel>.05</TKKN_PlantCactusBarrel>
@@ -138,7 +138,7 @@
                 <TKKN_PlantCatTails>.8</TKKN_PlantCatTails>
                 <TKKN_PlantLilypad>.8</TKKN_PlantLilypad>
                 <TKKN_SaltCrystal>.8</TKKN_SaltCrystal>
-                <TKKN_Barnacles>1.4</TKKN_Barnacles>
+                <TKKN_PlantBarnacles>1.4</TKKN_PlantBarnacles>
                 <TKKN_PlantCactusPricklyPear>.1</TKKN_PlantCactusPricklyPear>
                 <TKKN_PlantCactusSanPedro>.1</TKKN_PlantCactusSanPedro>
                 <TKKN_PlantCactusBarrel>.1</TKKN_PlantCactusBarrel>
@@ -158,7 +158,7 @@
                 <TKKN_PlantCatTails>.8</TKKN_PlantCatTails>
                 <TKKN_PlantCatTails>.8</TKKN_PlantCatTails>
                 <TKKN_PlantLilypad>.8</TKKN_PlantLilypad>
-                <TKKN_Barnacles>1.4</TKKN_Barnacles>
+                <TKKN_PlantBarnacles>1.4</TKKN_PlantBarnacles>
                 <TKKN_PlantCactusPricklyPear>.05</TKKN_PlantCactusPricklyPear>
                 <TKKN_PlantCactusSanPedro>.05</TKKN_PlantCactusSanPedro>
                 <TKKN_PlantCactusBarrel>.05</TKKN_PlantCactusBarrel>
