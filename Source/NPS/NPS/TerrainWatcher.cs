@@ -177,7 +177,7 @@ namespace TKKN_NPS
 					cellData cell = new cellData();
 					cell.location = c;
 					cell.baseTerrain = terrain;
-					cell.howWetPlants = 50;
+					cell.howWetPlants = 70;
 
 					if (cell.originalTerrain != null)
 					{
@@ -335,8 +335,10 @@ namespace TKKN_NPS
 			List<ThingDef> list = new List<ThingDef>()
 			{
 				ThingDef.Named("TKKN_SaltCrystal"),
+				ThingDef.Named("TKKN_PlantBarnacles"),
 			};
 
+			//salt crystals:
 			TerrainDef terrain = c.GetTerrain(map);
 			if (terrain.defName == "TKKN_SaltField" || terrain.defName == "TKKN_SandBeachWetSalt") {
 				if (c.GetEdifice(map) == null && c.GetCover(map) == null && Rand.Value < .003f)
@@ -352,6 +354,24 @@ namespace TKKN_NPS
 					GenSpawn.Spawn(plant, c, map);
 				}
 			}
+
+			//barnacles and other ocean stuff
+			if (terrain.defName == "TKKN_SandBeachWetSalt")
+			{
+				if (c.GetEdifice(map) == null && c.GetCover(map) == null && Rand.Value < .003f)
+				{
+					ThingDef thingDef = ThingDef.Named("TKKN_PlantBarnacles");
+					Plant plant = (Plant)ThingMaker.MakeThing(thingDef, null);
+					plant.Growth = Rand.Range(0.07f, 1f);
+					if (plant.def.plant.LimitedLifespan)
+					{
+						plant.Age = Rand.Range(0, Mathf.Max(plant.def.plant.LifespanTicks - 50, 0));
+					}
+
+					GenSpawn.Spawn(plant, c, map);
+				}
+			}
+
 		}
 
 		public void spawnSpecialElements(IntVec3 c)
