@@ -42,10 +42,11 @@
       <graphicData>
          <texPath>TKKN_NPS/Things/HarvestableMisc/VarientHarvestable/Barnacles</texPath>
          <graphicClass>Graphic_Random</graphicClass>
-		 <!-- maybe this will stop it from blowing in the wing -->
+		 <!-- maybe this will stop it from blowing in the wind -->
   		 <shaderType>Cutout</shaderType>
       </graphicData>
       <ingestible/>
+		  <selectable>true</selectable>
       <plant>
          <harvestTag>Standard</harvestTag>
          <harvestedThingDef>TKKN_ShellfishMeat</harvestedThingDef>
@@ -106,6 +107,7 @@
       </graphicData>
       <hideAtSnowDepth>0.6</hideAtSnowDepth>
       <ingestible/>
+		  <selectable>true</selectable>
       <plant>
          <harvestTag>Standard</harvestTag>
          <harvestedThingDef>TKKN_WildGreens</harvestedThingDef>
@@ -138,6 +140,7 @@
       </graphicData>
       <hideAtSnowDepth>0.6</hideAtSnowDepth>
       <ingestible/>
+		  <selectable>true</selectable>
       <plant>
          <harvestTag>Standard</harvestTag>
          <harvestedThingDef>TKKN_WildGreens</harvestedThingDef>
