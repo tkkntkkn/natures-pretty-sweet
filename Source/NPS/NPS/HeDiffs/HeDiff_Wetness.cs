@@ -42,7 +42,11 @@ namespace TKKN_NPS
 				}
 
 			}
+			else
+			{
+				this.Severity += wetness / 1000;
 
+			}
 		}
 
 		public float wetnessRate()
@@ -93,7 +97,7 @@ namespace TKKN_NPS
 			//dry the pawn.
 			if (pawn.AmbientTemperature > 0)
 			{
-				rate -= pawn.AmbientTemperature / 100;
+				rate -= pawn.AmbientTemperature / 200;
 			}
 			//check if the pawn is near a heat source
 			foreach (IntVec3 c in GenAdj.CellsAdjacentCardinal(pawn))
@@ -110,7 +114,7 @@ namespace TKKN_NPS
 					if (heater != null)
 					{
 
-						rate -= heater.Props.heatPerSecond / 100;
+						rate -= heater.Props.heatPerSecond / 5000;
 					}
 				}
 			}
