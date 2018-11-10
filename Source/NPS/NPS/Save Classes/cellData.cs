@@ -14,7 +14,7 @@ namespace TKKN_NPS
 		public Map map;
 		public int howPacked = 0;
 		public int howWet = 0;
-		public float howWetPlants = 30;
+		public float howWetPlants = 60;
 		public float temperature = -9999;
 		public float frostLevel = 0;
 		public TerrainDef baseTerrain;
@@ -28,6 +28,8 @@ namespace TKKN_NPS
 		public bool isFlooded = false;
 		public bool isFrozen = false;
 		public bool isThawed = true;
+
+		public int packAt = 500;
 
 		public int tideLevel = -1;
 		public HashSet<int> floodLevel = new HashSet<int>();
@@ -270,22 +272,19 @@ namespace TKKN_NPS
 
 		public void unpack()
 		{
-			//only pack dirt right now. TO DO: Add sand.
-			//don't pack if there's a growing zone.
-
-			if (this.howPacked > 1000)
+			if (this.howPacked > this.packAt)
 			{
-				this.howPacked = 1000;
+				this.howPacked = this.packAt;
 			}
 			if (this.howPacked > 0)
 			{
 				this.howPacked--;
 			}
-			else if(this.howPacked == 500 && this.currentTerrain.defName == "TKKN_DirtPath")
+			else if(this.howPacked == (this.packAt / 2) && this.currentTerrain.defName == "TKKN_DirtPath")
 			{
 				this.changeTerrain(RimWorld.TerrainDefOf.Soil);
 			}
-			else if (this.howPacked == 500 && this.currentTerrain.defName == "TKKN_SandPath")
+			else if (this.howPacked == (this.packAt / 2) && this.currentTerrain.defName == "TKKN_SandPath")
 			{
 				this.changeTerrain(RimWorld.TerrainDefOf.Sand);
 			}
@@ -293,8 +292,6 @@ namespace TKKN_NPS
 
 		public void doPack()
 		{
-			//only pack dirt right now. TO DO: Add sand.
-			//don't hurt things in growing zone
 			Zone_Growing zone = this.map.zoneManager.ZoneAt(this.location) as Zone_Growing;
 			if (zone != null && (currentTerrain.defName != "TKKN_DirtPath" || currentTerrain.defName != "TKKN_SandPath"))
 			{
@@ -313,9 +310,9 @@ namespace TKKN_NPS
 			}
 			*/
 
-			if (this.howPacked > 1000 )
+			if (this.howPacked > this.packAt)
 			{
-				this.howPacked = 1000;
+				this.howPacked = this.packAt;
 				if (baseTerrain.defName == "Soil")
 				{
 					TerrainDef packed = TerrainDef.Named("TKKN_DirtPath");

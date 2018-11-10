@@ -56,11 +56,11 @@ namespace TKKN_NPS
 			//drowning == immobile and in water
 			if (pawn.RaceProps.Humanlike && pawn.health.Downed && terrain.HasTag("TKKN_Wet"))
 			{
-				float damage = .05f;
+				float damage = .005f;
 				//if they're awake, take less damage
 				if (!pawn.health.capacities.CanBeAwake)
 				{
-					damage = .01f;
+					damage = .001f;
 				}
 
 				//heavier clothing hurts them more
@@ -68,9 +68,9 @@ namespace TKKN_NPS
 				float weight = 0f;
 				for (int i = 0; i < apparel.Count; i++)
 				{
-					weight += apparel[i].HitPoints / 100;
+					weight += apparel[i].HitPoints / 1000;
 				}
-				damage += weight / 50;
+				damage += weight / 500;
 				HealthUtility.AdjustSeverity(pawn, HediffDef.Named("TKKN_Drowning"), damage);
 
 				if (pawn.Faction.IsPlayer)
@@ -148,8 +148,8 @@ namespace TKKN_NPS
 					map.snowGrid.AddDepth(pawn.Position, (float)-.05);
 				}
 
-				//pack down the soil.
-				if (pawn.pather.MovingNow)
+				//pack down the soil only if the pawn is moving AND is in our colony
+				if (pawn.pather.MovingNow && pawn.IsColonist)
 				{
 					cellData cell = watcher.cellWeatherAffects[pawn.Position];
 					cell.doPack();
