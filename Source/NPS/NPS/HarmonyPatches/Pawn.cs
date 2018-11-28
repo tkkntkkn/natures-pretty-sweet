@@ -40,6 +40,7 @@ namespace TKKN_NPS
 				return;
 			}
 
+
 			if (!__instance.Dead)
 			{
 				if (!Find.TickManager.Paused)
@@ -54,13 +55,22 @@ namespace TKKN_NPS
 		public static void DyingCheck(Pawn pawn, TerrainDef terrain)
 		{
 			//drowning == immobile and in water
+			if (pawn == null || terrain == null)
+			{
+				return;
+			}
 			if (pawn.RaceProps.Humanlike && pawn.health.Downed && terrain.HasTag("TKKN_Wet"))
 			{
-				float damage = .005f;
+				float damage = .0005f;
 				//if they're awake, take less damage
 				if (!pawn.health.capacities.CanBeAwake)
 				{
-					damage = .001f;
+					if (terrain.HasTag("TKKN_Swim")){
+						damage = .0001f;
+					}
+					else {
+						return;
+					}
 				}
 
 				//heavier clothing hurts them more
@@ -68,9 +78,9 @@ namespace TKKN_NPS
 				float weight = 0f;
 				for (int i = 0; i < apparel.Count; i++)
 				{
-					weight += apparel[i].HitPoints / 1000;
+					weight += apparel[i].HitPoints / 10000;
 				}
-				damage += weight / 500;
+				damage += weight / 5000;
 				HealthUtility.AdjustSeverity(pawn, HediffDef.Named("TKKN_Drowning"), damage);
 
 				if (pawn.Faction.IsPlayer)
