@@ -9,9 +9,12 @@
   <TKKN_NPS_LavaHasEruptedNearby>Lava Eruption!</TKKN_NPS_LavaHasEruptedNearby>
   <TKKN_NPS_LavaHasEruptedNearbyTxt>Lava is bubbling to the surface! Move your stuff away from the lava before it's damaged.</TKKN_NPS_LavaHasEruptedNearbyTxt>
 
-  <TKKN_NPS_WildFlowerBloom>Wildflowers are blooming!</TKKN_NPS_WildFlowerBloom>
+  <TKKN_NPS_DroughtLbl>drought</TKKN_NPS_DroughtLbl>
+  <TKKN_NPS_DroughTxt>There's no rain in the forecast for a very long time.</TKKN_NPS_DroughTxt>
+
+  <TKKN_NPS_WildFlowerBloomLbl>Wildflowers are blooming!</TKKN_NPS_WildFlowerBloomLbl>
   <TKKN_NPS_WildFlowerBloomTxt>An unusual amount of wildflowers are blooming! Make sure you go outside to see it. Watch out for allergies!</TKKN_NPS_WildFlowerBloomTxt>
-  <TKKN_NPS_Superbloom>Superbloom!</TKKN_NPS_Superbloom>
+  <TKKN_NPS_SuperbloomLbl>Superbloom!</TKKN_NPS_SuperbloomLbl>
   <TKKN_NPS_SuperbloomTxt>An record setting amount of wildflowers are blooming! Make sure you go outside to see it. Watch out for allergies!</TKKN_NPS_SuperbloomTxt>
   
   <LetterLabelUpdateNotes1>NPS has updated!</LetterLabelUpdateNotes1>

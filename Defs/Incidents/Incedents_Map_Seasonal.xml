@@ -11,7 +11,7 @@
 		</targetTags>
 			<workerClass>TKKN_NPS.IncidentWorker_WildFlowerBloom</workerClass>
 			<gameCondition>TKKN_WildFlowerBloom</gameCondition>
-			<letterLabel>TKKN_NPS_WildFlowerBloom</letterLabel>
+			<letterLabel>TKKN_NPS_WildFlowerBloomLbl</letterLabel>
 			<letterText>TKKN_NPS_WildFlowerBloomTxt</letterText>
 			<letterDef>PositiveEvent</letterDef>
 			<baseChance>1.5</baseChance>
@@ -32,7 +32,7 @@
 		</targetTags>
 			<workerClass>TKKN_NPS.IncidentWorker_Superbloom</workerClass>
 			<gameCondition>TKKN_Superbloom</gameCondition>
-			<letterLabel>TKKN_NPS_Superbloom</letterLabel>
+			<letterLabel>TKKN_NPS_SuperbloomLbl</letterLabel>
 			<letterText>TKKN_NPS_SuperbloomTxt</letterText>
 			<letterDef>PositiveEvent</letterDef>
 			<baseChance>1.2</baseChance>

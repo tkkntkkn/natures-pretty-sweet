@@ -207,8 +207,6 @@ namespace TKKN_NPS
 
 	public class IncidentWorker_Bloom : IncidentWorker_TKKN_Weather
 	{
-		public string label;
-		public string text;
 		public ThingDef thingDef;
 		bool relevantSetting = Settings.allowPlantEffects;
 
@@ -242,9 +240,9 @@ namespace TKKN_NPS
 				return false;
 			}
 
+			
 
-
-			Find.LetterStack.ReceiveLetter(this.label, this.text, LetterDefOf.NeutralEvent);
+			Find.LetterStack.ReceiveLetter(this.def.letterLabel.Translate(), this.def.letterText.Translate(), this.def.letterDef);
 
 
 			return true;
@@ -275,7 +273,7 @@ namespace TKKN_NPS
 				return false;
 			}
 
-			Find.LetterStack.ReceiveLetter(this.label, this.text, LetterDefOf.NeutralEvent);
+			Find.LetterStack.ReceiveLetter(this.def.letterLabel.Translate(), this.def.letterText.Translate(), this.def.letterDef);
 
 
 			return true;

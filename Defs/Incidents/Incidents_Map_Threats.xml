@@ -23,8 +23,8 @@
       </targetTags>
   	  <workerClass>TKKN_NPS.IncidentWorker_Drought</workerClass>
       <gameCondition>TKKN_Drought</gameCondition>
-      <letterLabel>drought</letterLabel>
-      <letterText>There's no rain in the forecast... for a very long time.</letterText>
+      <letterLabel>TKKN_NPS_DroughtLbl</letterLabel>
+      <letterText>TKKN_NPS_DroughtTxt</letterText>
       <letterDef>ThreatSmall</letterDef>
       <baseChance>1.2</baseChance>
       <minRefireDays>0</minRefireDays>
