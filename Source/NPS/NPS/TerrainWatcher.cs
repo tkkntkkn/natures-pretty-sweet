@@ -87,14 +87,16 @@ namespace TKKN_NPS
 			{
 				Vector2 location = Find.WorldGrid.LongLatOf(map.Tile);
 				Season season = GenDate.Season((long)Find.TickManager.TicksAbs, location);
+				Quadrum quadrum = GenDate.Quadrum((long)Find.TickManager.TicksAbs, location.x);
 
-				if (biomeSettings.lastChanged != season)
+				if (biomeSettings.lastChanged != season && biomeSettings.lastChangedQ != quadrum)
 				{
-					Log.Warning("Updating seasonal settings");
-					biomeSettings.setWeatherBySeason(map, season);
-					biomeSettings.setDiseaseBySeason(season);
-					biomeSettings.setIncidentsBySeason(season);
+//					Log.Warning("Updating seasonal settings");
+					biomeSettings.setWeatherBySeason(map, season, quadrum);
+					biomeSettings.setDiseaseBySeason(season, quadrum);
+					biomeSettings.setIncidentsBySeason(season, quadrum);
 					biomeSettings.lastChanged = season;
+					biomeSettings.lastChangedQ = quadrum;
 				}
 			}
 
@@ -598,7 +600,7 @@ namespace TKKN_NPS
 			}
 			cellData cell = this.cellWeatherAffects[c];
 
-			if (this.ticks % 20 == 0)
+			if (this.ticks % 3 == 0)
 			{
 				cell.unpack();
 			}
@@ -610,7 +612,6 @@ namespace TKKN_NPS
 
 			bool gettingWet = false;
 			cell.gettingWet = false;
-			bool isMelt = false;
 
 			//check if the terrain has been floored
 			DesignationCategoryDef cats = currentTerrain.designationCategory;
@@ -1067,6 +1068,10 @@ namespace TKKN_NPS
 				IntVec3 c = cellsToChange[i];
 				cellData cell = this.cellWeatherAffects[c];
 				cell.setTerrain("tide");
+				if (Rand.Value < .001)
+				{
+					this.spawnSpecialPlants(c);
+				}
 			}
 
 			if (tideType == "high")

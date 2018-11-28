@@ -8,6 +8,7 @@ namespace TKKN_NPS
 	public class BiomeSeasonalSettings : DefModExtension
 	{
 		public Season lastChanged;
+		public Quadrum lastChangedQ;
 
 		public List<BiomePlantRecord> specialPlants;
 
@@ -37,6 +38,8 @@ namespace TKKN_NPS
 		public bool springsSurviveDrought;
 		public bool springsSurviveSummer;
 
+		//misc settings
+		public int wetPlantStart = 50;
 
 		public bool plantsAdded;
 		public bool plantCacheUpdated;
@@ -60,7 +63,7 @@ namespace TKKN_NPS
 			return true;
 		}
 
-		public void setWeatherBySeason(Map map, Season season)
+		public void setWeatherBySeason(Map map, Season season, Quadrum quadrum)
 		{
 			if (Season.Spring == season)
 			{
@@ -78,10 +81,33 @@ namespace TKKN_NPS
 			{
 				map.Biome.baseWeatherCommonalities = this.winterWeathers;
 			}
+			else
+			{
+				if (Quadrum.Aprimay == quadrum)
+				{
+					Log.Warning("Doing spring");
+					map.Biome.baseWeatherCommonalities = this.springWeathers;
+				}
+				else if (Quadrum.Decembary == quadrum)
+				{
+					Log.Warning("Doing winter");
+					map.Biome.baseWeatherCommonalities = this.winterWeathers;
+				}
+				else if (Quadrum.Jugust == quadrum)
+				{
+					Log.Warning("Doing fall");
+					map.Biome.baseWeatherCommonalities = this.fallWeathers;
+				}
+				else if (Quadrum.Septober == quadrum)
+				{
+					Log.Warning("Doing summer");
+					map.Biome.baseWeatherCommonalities = this.summerWeathers;
+				}
+			}
 			return;
 		}
 
-		public void setDiseaseBySeason(Season season)
+		public void setDiseaseBySeason(Season season, Quadrum quadrum)
 		{
 			List<BiomeDiseaseRecord> seasonalDiseases = new List<BiomeDiseaseRecord>();
 			if (Season.Spring == season && this.springDiseases != null)
@@ -100,6 +126,25 @@ namespace TKKN_NPS
 			{
 				seasonalDiseases = this.winterDiseases;
 			}
+			else
+			{
+				if (Quadrum.Aprimay == quadrum && this.springDiseases != null)
+				{
+					seasonalDiseases = this.springDiseases;
+				}
+				else if (Quadrum.Decembary == quadrum && this.winterDiseases != null)
+				{
+					seasonalDiseases = this.winterDiseases;
+				}
+				else if (Quadrum.Jugust == quadrum && this.summerDiseases != null)
+				{
+					seasonalDiseases = this.summerDiseases;
+				}
+				else if (Quadrum.Septober == quadrum && this.fallDiseases != null)
+				{
+					seasonalDiseases = this.fallDiseases;
+				}
+			}
 
 			for (int i = 0; i < seasonalDiseases.Count; i++)
 			{
@@ -111,7 +156,7 @@ namespace TKKN_NPS
 
 		}
 
-		public void setIncidentsBySeason(Season season)
+		public void setIncidentsBySeason(Season season, Quadrum quadrum)
 		{
 			List<TKKN_IncidentCommonalityRecord> seasonalIncidents = new List<TKKN_IncidentCommonalityRecord>();
 			if (Season.Spring == season && this.springEvents != null)
@@ -129,6 +174,25 @@ namespace TKKN_NPS
 			else if (Season.Winter == season && this.winterEvents != null)
 			{
 				seasonalIncidents = this.winterEvents;
+			}
+			else
+			{
+				if (Quadrum.Aprimay == quadrum && this.springEvents != null)
+				{
+					seasonalIncidents = this.springEvents;
+				}
+				else if (Quadrum.Decembary == quadrum && this.winterEvents != null)
+				{
+					seasonalIncidents = this.winterEvents;
+				}
+				else if (Quadrum.Jugust == quadrum && this.summerEvents != null)
+				{
+					seasonalIncidents = this.summerEvents;
+				}
+				else if (Quadrum.Septober == quadrum && this.fallEvents != null)
+				{
+					seasonalIncidents = this.fallEvents;
+				}
 			}
 
 			for (int i = 0; i < seasonalIncidents.Count; i++){

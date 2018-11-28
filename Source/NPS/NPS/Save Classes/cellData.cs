@@ -274,7 +274,7 @@ namespace TKKN_NPS
 		{
 			if (this.howPacked > this.packAt)
 			{
-				this.howPacked = this.packAt;
+//				this.howPacked = this.packAt;
 			}
 			if (this.howPacked > 0)
 			{
@@ -312,7 +312,7 @@ namespace TKKN_NPS
 
 			if (this.howPacked > this.packAt)
 			{
-				this.howPacked = this.packAt;
+			//	this.howPacked = this.packAt;
 				if (baseTerrain.defName == "Soil")
 				{
 					TerrainDef packed = TerrainDef.Named("TKKN_DirtPath");
@@ -476,7 +476,6 @@ namespace TKKN_NPS
 					} else {
 					//	Log.Error(allowed[leaveWhat2]);
 					}
-						
 				}
 
 			}
