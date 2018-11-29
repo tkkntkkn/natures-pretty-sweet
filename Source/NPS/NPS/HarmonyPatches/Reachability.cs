@@ -3,7 +3,7 @@ using Verse;
 using Verse.AI;
 using Harmony;
 
-5
+
 namespace TKKN_NPS
 {
 	[HarmonyPatch(typeof(Reachability), "CanReach", new Type[] { typeof(IntVec3), typeof(LocalTargetInfo), typeof(PathEndMode), typeof(TraverseParms) })]

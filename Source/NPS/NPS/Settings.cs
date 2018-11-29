@@ -40,7 +40,9 @@ namespace TKKN_NPS
 
 
 		public static bool showTempOverlay {
-			get => Settings.showCold && Settings.showHot;
+			get {
+				return Settings.showCold && Settings.showHot;
+			}
 		}
 		static Settings()
 		{

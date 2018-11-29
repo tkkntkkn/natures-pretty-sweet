@@ -116,9 +116,8 @@ namespace TKKN_NPS
 					return IntVec3.Invalid;
 				}
 
-				if (c2 is IntVec3 cell && cell.IsValid)
-				{
-					TerrainDef terrain = cell.GetTerrain(pawn.Map);
+				if (c2 is IntVec3 && c2.IsValid){
+					TerrainDef terrain = c2.GetTerrain(pawn.Map);
 					if (terrain.HasTag("TKKN_Swim"))
 					{
 						return c2;

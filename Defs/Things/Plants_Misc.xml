@@ -54,14 +54,13 @@
          <fertilityMin>.0001</fertilityMin>
          <fertilitySensitivity>0</fertilitySensitivity>
          <growDays>3</growDays>
-         <dieIfLeafless>true</dieIfLeafless>
+         <dieIfLeafless>false</dieIfLeafless>
          <harvestWork>60</harvestWork>
          <immatureGraphicPath>TKKN_NPS/Things/HarvestableMisc/Barnacles</immatureGraphicPath>
          <visualSizeRange>
-            <min>0.8</min>
+            <min>1.2</min>
             <max>1.4</max>
          </visualSizeRange>
-         <topWindExposure>0.4</topWindExposure>
       </plant>
    </ThingDef>   
    <ThingDef ParentName="PlantBase">

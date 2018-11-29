@@ -30,7 +30,7 @@ namespace TKKN_NPS.HarmonyPatches
 					}
 					else
 					{
-						Log.Warning("planting " + plantDef.defName);
+//						Log.Warning("planting " + plantDef.defName);
 					}
 				}
 			}
