@@ -98,6 +98,8 @@
 		<Plant_TreeBamboo>0.3</Plant_TreeBamboo>
 		<Plant_Clivia>0.07</Plant_Clivia>
 		<Plant_Rafflesia>0.0008</Plant_Rafflesia>		 
+		<TKKN_SaltCrystal>2</TKKN_SaltCrystal>
+		<TKKN_PlantBarnacles>2</TKKN_PlantBarnacles>
       </wildPlants>
       <wildAnimals>
          <Rat>0.8</Rat>

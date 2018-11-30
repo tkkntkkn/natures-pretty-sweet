@@ -362,6 +362,7 @@ namespace TKKN_NPS
 			{
 				if (c.GetEdifice(map) == null && c.GetCover(map) == null && Rand.Value < .003f)
 				{
+					Log.Warning("Spawning Barnacle");
 					ThingDef thingDef = ThingDef.Named("TKKN_PlantBarnacles");
 					Plant plant = (Plant)ThingMaker.MakeThing(thingDef, null);
 					plant.Growth = Rand.Range(0.07f, 1f);

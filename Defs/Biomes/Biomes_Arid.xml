@@ -71,6 +71,18 @@
 		<Plant_TreePoplar>0.45</Plant_TreePoplar>
 		<Plant_Agave>0.25</Plant_Agave>
 		<Plant_Bush>0.25</Plant_Bush>
+		<TKKN_PlantCatTails>1</TKKN_PlantCatTails>
+		<TKKN_PlantLilypad>1</TKKN_PlantLilypad>
+		<TKKN_PlantCactusPricklyPear>.1</TKKN_PlantCactusPricklyPear>
+		<TKKN_PlantCactusSanPedro>.1</TKKN_PlantCactusSanPedro>
+		<TKKN_PlantCactusBarrel>.1</TKKN_PlantCactusBarrel>
+		<TKKN_PlantDesertShrubA>.2</TKKN_PlantDesertShrubA>
+		<TKKN_PlantDesertShrubB>.2</TKKN_PlantDesertShrubB>
+		<TKKN_PlantSucculants>.1</TKKN_PlantSucculants>
+		<TKKN_TreeOcotillo>.2</TKKN_TreeOcotillo>
+		<TKKN_PlantWildCorn>.1</TKKN_PlantWildCorn>
+		<TKKN_SaltCrystal>2</TKKN_SaltCrystal>
+		<TKKN_PlantBarnacles>2</TKKN_PlantBarnacles>
 	</wildPlants>
     <wildAnimals>
       <Gazelle>0.1</Gazelle>
@@ -157,6 +169,8 @@
 	   <TKKN_PlantWildRice>.6</TKKN_PlantWildRice>
 	   <TKKN_PlantCatTails>.6</TKKN_PlantCatTails>
 	   <TKKN_PlantLilypad>.5</TKKN_PlantLilypad>
+		<TKKN_SaltCrystal>2</TKKN_SaltCrystal>
+		<TKKN_PlantBarnacles>2</TKKN_PlantBarnacles>
 		<Plant_PincushionCactus>.5</Plant_PincushionCactus>
 		<Plant_Dandelion>0.2</Plant_Dandelion>
 		<Plant_TreePalm>0.3</Plant_TreePalm>
@@ -263,6 +277,8 @@
 	   <TKKN_PlantWildRice>.6</TKKN_PlantWildRice>
 	   <TKKN_PlantCatTails>.6</TKKN_PlantCatTails>
 	   <TKKN_PlantLilypad>.5</TKKN_PlantLilypad>
+		<TKKN_SaltCrystal>2</TKKN_SaltCrystal>
+		<TKKN_PlantBarnacles>2</TKKN_PlantBarnacles>
     </wildPlants>
     <wildAnimals>
       <Muffalo>1</Muffalo>
@@ -370,6 +386,8 @@
 	   <TKKN_PlantWildRice>2.2</TKKN_PlantWildRice>
 	   <TKKN_PlantCatTails>2.3</TKKN_PlantCatTails>
 	   <TKKN_PlantLilypad>2.2</TKKN_PlantLilypad>
+		<TKKN_SaltCrystal>2</TKKN_SaltCrystal>
+		<TKKN_PlantBarnacles>2</TKKN_PlantBarnacles>
     </wildPlants>
     <wildAnimals>
       <Muffalo>0.3</Muffalo>

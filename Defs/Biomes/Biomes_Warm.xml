@@ -81,6 +81,8 @@
 	   <TKKN_PlantWildRice>.6</TKKN_PlantWildRice>
 	   <TKKN_PlantCatTails>.6</TKKN_PlantCatTails>
 	   <TKKN_PlantLilypad>.5</TKKN_PlantLilypad>
+		<TKKN_SaltCrystal>2</TKKN_SaltCrystal>
+		<TKKN_PlantBarnacles>2</TKKN_PlantBarnacles>
     </wildPlants>
     <wildAnimals>
       <Muffalo>1</Muffalo>
@@ -186,6 +188,8 @@
 		<!-- because these are special, aritfically inflate their numbers -->
 	   <TKKN_PlantWildRice>2.2</TKKN_PlantWildRice>
 	   <TKKN_PlantCatTails>2.3</TKKN_PlantCatTails>
+		<TKKN_SaltCrystal>2</TKKN_SaltCrystal>
+		<TKKN_PlantBarnacles>2</TKKN_PlantBarnacles>
 	   <TKKN_PlantLilypad>2.2</TKKN_PlantLilypad>
     </wildPlants>
     <wildAnimals>

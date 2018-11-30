@@ -208,6 +208,7 @@ namespace TKKN_NPS
 				}
 			} else if (overrideType == "dry")
 			{
+				this.howWetPlants = 100;
 				floodTerrain = baseTerrain;
 				changeTerrain(floodTerrain);
 			}
@@ -219,7 +220,12 @@ namespace TKKN_NPS
 				if (!floodTerrain.HasTag("Water"))
 				{
 					this.isFlooded = false;
+					this.howWetPlants = 100;
 					this.leaveLoot();
+				}
+				else
+				{
+					this.clearLoot();
 				}
 			}
 		}
@@ -477,7 +483,37 @@ namespace TKKN_NPS
 					//	Log.Error(allowed[leaveWhat2]);
 					}
 				}
+			} else 
+			//grow water and shore plants:
+			if (Rand.Value < .1)
+			{
+				Log.Warning("spawning plants?");
+				List<ThingDef> plants = this.map.Biome.AllWildPlants;
+				for (int i = plants.Count - 1; i >= 0; i--)
+				{
+					//spawn some water plants:
+					ThingDef plantDef = plants[i];
+					Log.Warning(plantDef.defName);
+					if (plantDef.HasModExtension<ThingWeatherReaction>())
+					{
+						TerrainDef terrain = currentTerrain;
+						ThingWeatherReaction thingWeather = plantDef.GetModExtension<ThingWeatherReaction>();
+						List<TerrainDef> okTerrains = thingWeather.allowedTerrains;
+						if (okTerrains != null && !okTerrains.Contains<TerrainDef>(currentTerrain))
+						{
+							Log.Warning("spawning plants! " + plantDef.defName);
+							Plant plant = (Plant)ThingMaker.MakeThing(plantDef, null);
+							plant.Growth = Rand.Range(0.07f, 1f);
+							if (plant.def.plant.LimitedLifespan)
+							{
+								plant.Age = Rand.Range(0, Mathf.Max(plant.def.plant.LifespanTicks - 50, 0));
+							}
+							continue;
+						}
+					}
 
+
+				}
 			}
 		}
 
@@ -529,6 +565,20 @@ namespace TKKN_NPS
 				if (remove.Contains(things[i].def.defName))
 				{
 					things[i].Destroy();
+				}
+
+				//remove any plants that might've grown:
+				Plant plant = things[i] as Plant; ;
+				if (plant != null) {
+					if (plant.def.HasModExtension<ThingWeatherReaction>()) {
+						TerrainDef terrain = currentTerrain;
+						ThingWeatherReaction thingWeather = plant.def.GetModExtension<ThingWeatherReaction>();
+						List<TerrainDef> okTerrains = thingWeather.allowedTerrains;
+						if (!okTerrains.Contains<TerrainDef>(currentTerrain))
+						{
+							plant.Destroy();
+						}
+					}
 				}
 			}
 		}

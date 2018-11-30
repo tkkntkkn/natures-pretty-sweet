@@ -70,6 +70,8 @@
             <Plant_TreePoplar>0.45</Plant_TreePoplar>
             <Plant_Agave>0.25</Plant_Agave>
             <Plant_Bush>0.25</Plant_Bush>
+		<TKKN_SaltCrystal>2</TKKN_SaltCrystal>
+		<TKKN_PlantBarnacles>2</TKKN_PlantBarnacles>
         </wildPlants>
         <wildAnimals>
             <Gazelle>0.1</Gazelle>
@@ -162,6 +164,8 @@
             <Plant_TreeBamboo>0.3</Plant_TreeBamboo>
             <Plant_Agave>0.3</Plant_Agave>
             <Plant_Bush>0.25</Plant_Bush>
+		<TKKN_SaltCrystal>2</TKKN_SaltCrystal>
+		<TKKN_PlantBarnacles>2</TKKN_PlantBarnacles>
         </wildPlants>
         <wildAnimals>
             <Gazelle>1</Gazelle>
