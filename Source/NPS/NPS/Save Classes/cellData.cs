@@ -236,7 +236,15 @@ namespace TKKN_NPS
 			{
 				return;
 			}
-			if (currentTerrain != baseTerrain)
+			if (overrideType == "dry")
+			{
+				changeTerrain(baseTerrain);
+			}
+			else if (overrideType == "wet")
+			{
+				changeTerrain(weather.tideTerrain);
+			}
+			else if (currentTerrain != baseTerrain)
 			{
 				changeTerrain(baseTerrain);
 			}
@@ -245,13 +253,15 @@ namespace TKKN_NPS
 				changeTerrain(weather.tideTerrain);
 			}
 
-			if (weather.tideTerrain != null && weather.tideTerrain.HasTag("TKKN_Wet"))
-			{
-				this.clearLoot();
-			}
-			else
-			{
-				this.leaveLoot();
+			if (weather.tideTerrain != null) {
+				if (currentTerrain.HasTag("TKKN_Wet"))
+				{
+					this.clearLoot();
+				}
+				else
+				{
+					this.leaveLoot();
+				}
 			}
 		}
 		public void doFrostOverlay(string action)
@@ -382,6 +392,7 @@ namespace TKKN_NPS
 				if (baseTerrain.defName == "TKKN_Lava"){
 					GenSpawn.Spawn(ThingMaker.MakeThing(ThingDefOf.TKKN_LavaRock), location, map);
 				} else if (baseTerrain.defName == "TKKN_SandBeachWetSalt") {
+					Log.Warning("Spawning crab");
 					GenSpawn.Spawn(ThingMaker.MakeThing(ThingDefOf.TKKN_crab), location, map);
 				} else if (currentTerrain.HasTag("TKKN_Wet"))
 				{
@@ -484,31 +495,36 @@ namespace TKKN_NPS
 					}
 				}
 			} else 
+
 			//grow water and shore plants:
-			if (Rand.Value < .1)
+			if (leaveSomething < 0.01f && location.GetPlant(map) == null && location.GetCover(this.map) == null)
 			{
-				Log.Warning("spawning plants?");
+				Log.Warning("Looking at " + location.ToString() + " on " + currentTerrain.defName.ToString());
 				List<ThingDef> plants = this.map.Biome.AllWildPlants;
 				for (int i = plants.Count - 1; i >= 0; i--)
 				{
 					//spawn some water plants:
 					ThingDef plantDef = plants[i];
-					Log.Warning(plantDef.defName);
 					if (plantDef.HasModExtension<ThingWeatherReaction>())
 					{
 						TerrainDef terrain = currentTerrain;
 						ThingWeatherReaction thingWeather = plantDef.GetModExtension<ThingWeatherReaction>();
 						List<TerrainDef> okTerrains = thingWeather.allowedTerrains;
-						if (okTerrains != null && !okTerrains.Contains<TerrainDef>(currentTerrain))
+						if (plantDef.defName == "TKKN_PlantBarnacles")
 						{
-							Log.Warning("spawning plants! " + plantDef.defName);
+							Log.Warning("Looking at " + plantDef.defName + " at " + location.ToString() + " on " + currentTerrain.defName.ToString());
+						}
+						if (okTerrains != null && okTerrains.Contains<TerrainDef>(currentTerrain))
+						{
+							Log.Warning("Spawning " + plantDef.defName + " at " + location.ToString() + " on " + currentTerrain.defName.ToString());
 							Plant plant = (Plant)ThingMaker.MakeThing(plantDef, null);
 							plant.Growth = Rand.Range(0.07f, 1f);
 							if (plant.def.plant.LimitedLifespan)
 							{
 								plant.Age = Rand.Range(0, Mathf.Max(plant.def.plant.LifespanTicks - 50, 0));
 							}
-							continue;
+							GenSpawn.Spawn(plant, location, map);
+							break;
 						}
 					}
 
@@ -519,7 +535,10 @@ namespace TKKN_NPS
 
 		private void clearLoot()
 		{
-
+			if (!location.IsValid)
+			{
+				return;
+			}
 			List<Thing> things = location.GetThingList(this.map);
 			List<string> remove = new List<string>(){
 				"FilthSlime",
@@ -565,6 +584,7 @@ namespace TKKN_NPS
 				if (remove.Contains(things[i].def.defName))
 				{
 					things[i].Destroy();
+					continue;
 				}
 
 				//remove any plants that might've grown:

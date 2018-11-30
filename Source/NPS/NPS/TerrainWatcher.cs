@@ -126,6 +126,12 @@ namespace TKKN_NPS
 
 		public override void FinalizeInit()
 		{
+			/*
+			List<ThingDef> plants = map.Biome.AllWildPlants;
+			foreach(ThingDef plant in plants ){
+				Log.Warning("Wild plant: " + plant.defName);
+			}
+			*/
 			
 			base.FinalizeInit();
 			this.biomeSettings = map.Biome.GetModExtension<BiomeSeasonalSettings>();
@@ -331,7 +337,6 @@ namespace TKKN_NPS
 
 
 		}
-
 		public void spawnSpecialPlants(IntVec3 c)
 		{
 			List<ThingDef> list = new List<ThingDef>()
@@ -1062,17 +1067,27 @@ namespace TKKN_NPS
 				return;
 			}
 
-
 			List < IntVec3> cellsToChange = this.tideCellsList[this.tideLevel];
 			for (int i = 0; i < cellsToChange.Count; i++)
 			{
 				IntVec3 c = cellsToChange[i];
 				cellData cell = this.cellWeatherAffects[c];
+				if (tideType == "high")
+				{
+					cell.overrideType = "wet";
+				}
+				else if (tideType == "low")
+				{
+					cell.overrideType = "dry";
+				}
 				cell.setTerrain("tide");
+
+				/*
 				if (Rand.Value < .001)
 				{
 					this.spawnSpecialPlants(c);
 				}
+				*/
 			}
 
 			if (tideType == "high")

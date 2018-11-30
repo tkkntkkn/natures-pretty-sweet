@@ -58,8 +58,8 @@
          <harvestWork>60</harvestWork>
          <immatureGraphicPath>TKKN_NPS/Things/HarvestableMisc/Barnacles</immatureGraphicPath>
          <visualSizeRange>
-            <min>1.2</min>
-            <max>1.4</max>
+            <min>1.4</min>
+            <max>1.8</max>
          </visualSizeRange>
       </plant>
    </ThingDef>   
@@ -101,7 +101,7 @@
       </statBases>
       <pathCost>18</pathCost>
       <graphicData>
-         <texPath>TKKN_NPS/Things/Plant/CatTails</texPath>
+         <texPath>TKKN_NPS/Things/Plant/VarientHarvestable/CatTails</texPath>
          <graphicClass>Graphic_Random</graphicClass>
       </graphicData>
       <hideAtSnowDepth>0.6</hideAtSnowDepth>
@@ -117,6 +117,7 @@
          <dieIfLeafless>true</dieIfLeafless>
          <harvestWork>60</harvestWork>
          <maxMeshCount>4</maxMeshCount>
+         <immatureGraphicPath>TKKN_NPS/Things/Plant/CatTails</immatureGraphicPath>
          <visualSizeRange>
             <min>0.7</min>
             <max>0.85</max>

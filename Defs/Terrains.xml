@@ -274,7 +274,7 @@
             <li>WetRain</li>
         </tags>
         <generatedFilth>Filth_Sand</generatedFilth>
-        <fertility>0</fertility>
+        <fertility>.001</fertility>
         <takeFootprints>True</takeFootprints>
         <acceptFilth>True</acceptFilth>
         <avoidWander>True</avoidWander>
