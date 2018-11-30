@@ -16,7 +16,7 @@ namespace TKKN_NPS
 			// don't enter on deep water
 			__result = CellFinder.TryFindRandomReachableCellNear(root, map, (float)radius, TraverseParms.For(TraverseMode.NoPassClosedDoors, Danger.Deadly, false), (Predicate<IntVec3>)((IntVec3 c) => c.Standable(map) && !c.GetTerrain(map).HasTag("TKKN_Lava") && !c.GetTerrain(map).HasTag("TKKN_Swim")  && (extraValidator == null || extraValidator(c))), (Predicate<Region>)null, out result, 999999);
 //			Log.Warning("result " + result.ToString());
-			return true;
+			return false;
 		}
 	}
 
