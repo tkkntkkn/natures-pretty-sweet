@@ -36,6 +36,285 @@ Fall: very wet.
 Winter: wet.
 -->
     <!-- BiomeSeasonalSettings -->
+	<!-- Biome Special -->
+	
+ <Operation Class="PatchOperationAddModExtension">
+        <xpath>/Defs/BiomeDef[defName = "TKKN_VolcanicFlow"]</xpath>
+        <value>
+            <li Class="TKKN_NPS.BiomeSeasonalSettings">
+                <!-- springSettings -->
+                <maxSprings>
+					2
+				</maxSprings>
+                <springSpawnChance>
+					.5
+				</springSpawnChance>
+                <springsSurviveDrought>
+					true
+				</springsSurviveDrought>
+                <springsSurviveSummer>
+					true
+				</springsSurviveSummer>
+                <!-- /springSettings -->
+				<wetPlantStart>50</wetPlantStart>
+                <bloomPlants>
+                    <li>Plant_Healroot</li>
+                    <li>Plant_Berry</li>
+                    <li>TKKN_PlantCatTails</li>
+                    <li>TKKN_PlantWildRice</li>
+                </bloomPlants>
+                <specialPlants></specialPlants>
+                <springEvents>
+                    <TKKN_WildFlowerBloom>1</TKKN_WildFlowerBloom>
+                    <TKKN_Drought>0</TKKN_Drought>
+                    <AnimalInsanityMass>1.5</AnimalInsanityMass>
+                    <AnimalInsanitySingle>6</AnimalInsanitySingle>
+                    <HeatWave>8</HeatWave>
+                    <ColdSnap>2</ColdSnap>
+                    <CropBlight>.6</CropBlight>
+                    <Alphabeavers>.2</Alphabeavers>
+                    <Flashstorm>.2</Flashstorm>
+                </springEvents>
+                <summerEvents>
+                    <TKKN_Drought>.5</TKKN_Drought>
+                    <HerdMigration>.2</HerdMigration>
+                    <AnimalInsanityMass>2.5</AnimalInsanityMass>
+                    <AnimalInsanitySingle>8</AnimalInsanitySingle>
+                    <HeatWave>8</HeatWave>
+                    <ColdSnap>1</ColdSnap>
+                    <CropBlight>.65</CropBlight>
+                    <Alphabeavers>.5</Alphabeavers>
+                    <Flashstorm>.2</Flashstorm>
+                </summerEvents>
+                <fallEvents>
+                    <TKKN_Drought>0</TKKN_Drought>
+                    <TKKN_WildFlowerBloom>0</TKKN_WildFlowerBloom>
+                    <AnimalInsanityMass>1.5</AnimalInsanityMass>
+                    <AnimalInsanitySingle>6</AnimalInsanitySingle>
+                    <HeatWave>5</HeatWave>
+                    <ColdSnap>2</ColdSnap>
+                    <CropBlight>.55</CropBlight>
+                    <Alphabeavers>.4</Alphabeavers>
+                    <Flashstorm>.2</Flashstorm>
+                </fallEvents>
+                <winterEvents>
+                    <TKKN_Drought>0</TKKN_Drought>
+                    <TKKN_WildFlowerBloom>0</TKKN_WildFlowerBloom>
+                    <AnimalInsanityMass>1</AnimalInsanityMass>
+                    <AnimalInsanitySingle>4.5</AnimalInsanitySingle>
+                    <HeatWave>3</HeatWave>
+                    <ColdSnap>2</ColdSnap>
+                    <CropBlight>.35</CropBlight>
+                    <Alphabeavers>.5</Alphabeavers>
+                    <Flashstorm>.1</Flashstorm>
+                </winterEvents>
+                <springWeathers>
+					<Clear>10</Clear>
+					<Fog>1</Fog>
+					<Rain>3</Rain>
+					<DryThunderstorm>0.3</DryThunderstorm>
+					<RainyThunderstorm>1</RainyThunderstorm>
+					<FoggyRain>2</FoggyRain>
+					<SnowGentle>0</SnowGentle>
+					<SnowHard>0</SnowHard>
+                    <TKKN_WindStorm>0</TKKN_WindStorm>
+                    <TKKN_Overcast>3</TKKN_Overcast>
+					<TKKN_LavaSmoke>7</TKKN_LavaSmoke>
+                </springWeathers>
+                <summerWeathers>
+					<Clear>10</Clear>
+					<Fog>1</Fog>
+					<Rain>8</Rain>
+					<DryThunderstorm>1</DryThunderstorm>
+					<RainyThunderstorm>5</RainyThunderstorm>
+					<FoggyRain>8</FoggyRain>
+					<SnowGentle>0</SnowGentle>
+					<SnowHard>0</SnowHard>
+                    <TKKN_WindStorm>0</TKKN_WindStorm>
+                    <TKKN_Overcast>0</TKKN_Overcast>
+					<TKKN_LavaSmoke>7</TKKN_LavaSmoke>
+                </summerWeathers>
+                <fallWeathers>
+					<Clear>10</Clear>
+					<Fog>8</Fog>
+					<Rain>3</Rain>
+					<DryThunderstorm>0.3</DryThunderstorm>
+					<RainyThunderstorm>3</RainyThunderstorm>
+					<FoggyRain>2</FoggyRain>
+					<SnowGentle>0</SnowGentle>
+					<SnowHard>0</SnowHard>
+                    <TKKN_WindStorm>0</TKKN_WindStorm>
+                    <TKKN_Overcast>3</TKKN_Overcast>
+					<TKKN_LavaSmoke>7</TKKN_LavaSmoke>
+                </fallWeathers>
+                <winterWeathers>
+					<Clear>10</Clear>
+					<Fog>1</Fog>
+					<Rain>1</Rain>
+					<DryThunderstorm>0.3</DryThunderstorm>
+					<RainyThunderstorm>1</RainyThunderstorm>
+					<FoggyRain>1</FoggyRain>
+					<SnowGentle>4</SnowGentle>
+					<SnowHard>4</SnowHard>
+                    <TKKN_WindStorm>0</TKKN_WindStorm>
+                    <TKKN_Overcast>3</TKKN_Overcast>
+					<TKKN_LavaSmoke>7</TKKN_LavaSmoke>
+                </winterWeathers>
+                 <springDiseases>
+                    <li>
+                        <diseaseInc>TKKN_Disease_Common_Cold</diseaseInc>
+                        <commonality>100</commonality>
+                    </li>
+                    <li>
+                        <diseaseInc>TKKN_Disease_Animal_Common_Cold</diseaseInc>
+                        <commonality>100</commonality>
+                    </li>
+                    <li>
+                        <diseaseInc>TKKN_Disease_Allergies</diseaseInc>
+                        <commonality>100</commonality>
+                    </li>
+                    <li>
+                        <diseaseInc>TKKN_Disease_Animal_Allergies</diseaseInc>
+                        <commonality>100</commonality>
+                    </li>
+                    <li>
+                        <diseaseInc>Disease_Flu</diseaseInc>
+                        <commonality>100</commonality>
+                    </li>
+                    <li>
+                        <diseaseInc>Disease_AnimalFlu</diseaseInc>
+                        <commonality>100</commonality>
+                    </li>
+                    <li>
+                        <diseaseInc>Disease_Plague</diseaseInc>
+                        <commonality>70</commonality>
+                    </li>
+                    <li>
+                        <diseaseInc>Disease_Malaria</diseaseInc>
+                        <commonality>80</commonality>
+                    </li>
+                    <li>
+                        <diseaseInc>Disease_SleepingSickness</diseaseInc>
+                        <commonality>70</commonality>
+                    </li>
+                </springDiseases>
+                <summerDiseases>
+                    <li>
+                        <diseaseInc>TKKN_Disease_Common_Cold</diseaseInc>
+                        <commonality>60</commonality>
+                    </li>
+                    <li>
+                        <diseaseInc>TKKN_Disease_Animal_Common_Cold</diseaseInc>
+                        <commonality>60</commonality>
+                    </li>
+                    <li>
+                        <diseaseInc>TKKN_Disease_Allergies</diseaseInc>
+                        <commonality>80</commonality>
+                    </li>
+                    <li>
+                        <diseaseInc>TKKN_Disease_Animal_Allergies</diseaseInc>
+                        <commonality>80</commonality>
+                    </li>
+                    <li>
+                        <diseaseInc>Disease_Flu</diseaseInc>
+                        <commonality>80</commonality>
+                    </li>
+                    <li>
+                        <diseaseInc>Disease_AnimalFlu</diseaseInc>
+                        <commonality>80</commonality>
+                    </li>
+                    <li>
+                        <diseaseInc>Disease_Plague</diseaseInc>
+                        <commonality>130</commonality>
+                    </li>
+                    <li>
+                        <diseaseInc>Disease_Malaria</diseaseInc>
+                        <commonality>180</commonality>
+                    </li>
+                    <li>
+                        <diseaseInc>Disease_SleepingSickness</diseaseInc>
+                        <commonality>150</commonality>
+                    </li>
+                </summerDiseases>
+                <fallDiseases>
+                    <li>
+                        <diseaseInc>TKKN_Disease_Common_Cold</diseaseInc>
+                        <commonality>100</commonality>
+                    </li>
+                    <li>
+                        <diseaseInc>TKKN_Disease_Animal_Common_Cold</diseaseInc>
+                        <commonality>100</commonality>
+                    </li>
+                    <li>
+                        <diseaseInc>TKKN_Disease_Allergies</diseaseInc>
+                        <commonality>90</commonality>
+                    </li>
+                    <li>
+                        <diseaseInc>TKKN_Disease_Animal_Allergies</diseaseInc>
+                        <commonality>90</commonality>
+                    </li>
+                    <li>
+                        <diseaseInc>Disease_Flu</diseaseInc>
+                        <commonality>100</commonality>
+                    </li>
+                    <li>
+                        <diseaseInc>Disease_AnimalFlu</diseaseInc>
+                        <commonality>100</commonality>
+                    </li>
+                    <li>
+                        <diseaseInc>Disease_Plague</diseaseInc>
+                        <commonality>100</commonality>
+                    </li>
+                    <li>
+                        <diseaseInc>Disease_Malaria</diseaseInc>
+                        <commonality>120</commonality>
+                    </li>
+                    <li>
+                        <diseaseInc>Disease_SleepingSickness</diseaseInc>
+                        <commonality>110</commonality>
+                    </li>
+                </fallDiseases>
+                <winterDiseases>
+                    <li>
+                        <diseaseInc>TKKN_Disease_Common_Cold</diseaseInc>
+                        <commonality>100</commonality>
+                    </li>
+                    <li>
+                        <diseaseInc>TKKN_Disease_Animal_Common_Cold</diseaseInc>
+                        <commonality>100</commonality>
+                    </li>
+                    <li>
+                        <diseaseInc>TKKN_Disease_Allergies</diseaseInc>
+                        <commonality>50</commonality>
+                    </li>
+                    <li>
+                        <diseaseInc>TKKN_Disease_Animal_Allergies</diseaseInc>
+                        <commonality>50</commonality>
+                    </li>
+                    <li>
+                        <diseaseInc>Disease_Flu</diseaseInc>
+                        <commonality>100</commonality>
+                    </li>
+                    <li>
+                        <diseaseInc>Disease_AnimalFlu</diseaseInc>
+                        <commonality>100</commonality>
+                    </li>
+                    <li>
+                        <diseaseInc>Disease_Plague</diseaseInc>
+                        <commonality>60</commonality>
+                    </li>
+                    <li>
+                        <diseaseInc>Disease_Malaria</diseaseInc>
+                        <commonality>70</commonality>
+                    </li>
+                    <li>
+                        <diseaseInc>Disease_SleepingSickness</diseaseInc>
+                        <commonality>70</commonality>
+                    </li>
+                </winterDiseases>
+            </li>
+        </value>
+    </Operation>
     <!-- Biome_WarmArid -->
     <Operation Class="PatchOperationAddModExtension">
         <xpath>/Defs/BiomeDef[defName = "AridShrubland"]</xpath>
@@ -55,6 +334,7 @@ Winter: wet.
 					false
 				</springsSurviveSummer>
                 <!-- /springSettings -->
+				<wetPlantStart>30</wetPlantStart>
                 <bloomPlants>
                     <li>Plant_Agave</li>
                     <li>Plant_Berry</li>
@@ -253,6 +533,7 @@ Winter: wet.
 					false
 				</springsSurviveSummer>
                 <!-- /springSettings -->
+<wetPlantStart>30</wetPlantStart>
                 <bloomPlants>
                     <li>Plant_Agave</li>
                     <li>Plant_Dandelion</li>
@@ -373,6 +654,7 @@ Winter: wet.
 					false
 				</springsSurviveSummer>
                 <!-- /springSettings -->
+<wetPlantStart>30</wetPlantStart>
                 <bloomPlants>
                     <li>Plant_PincushionCactus</li>
                     <li>Plant_Dandelion</li>
@@ -447,6 +729,7 @@ Winter: wet.
 					false
 				</springsSurviveSummer>
                 <!-- /springSettings -->
+<wetPlantStart>30</wetPlantStart>
                 <bloomPlants>
                     <li>Plant_PincushionCactus</li>
                     <li>Plant_Dandelion</li>
@@ -542,6 +825,7 @@ Winter: wet.
 					false
 				</springsSurviveSummer>
                 <!-- /springSettings -->
+<wetPlantStart>50</wetPlantStart>
                 <bloomPlants>
                     <li>Plant_Agave</li>
                     <li>Plant_Dandelion</li>
@@ -666,6 +950,7 @@ Winter: wet.
 					true
 				</springsSurviveSummer>
                 <!-- /springSettings -->
+<wetPlantStart>50</wetPlantStart>
                 <bloomPlants>
                     <li>Plant_Healroot</li>
                     <li>Plant_Berry</li>
@@ -938,6 +1223,7 @@ Winter: wet.
 					true
 				</springsSurviveSummer>
                 <!-- /springSettings -->
+<wetPlantStart>50</wetPlantStart>
                 <bloomPlants>
                     <li>Plant_Healroot</li>
                     <li>Plant_Berry</li>
@@ -1210,6 +1496,7 @@ Winter: wet.
 					true
 				</springsSurviveSummer>
                 <!-- /springSettings -->
+				<wetPlantStart>50</wetPlantStart>
                 <bloomPlants>
                     <li>Plant_Moss</li>
                     <li>Plant_Berry</li>
@@ -1226,8 +1513,8 @@ Winter: wet.
                     <li>Rhinoceros</li>
                 </specialHerds>
                 <springEvents>
-                    <TKKN_SpecialHerdMigration>1.5</TKKN_SpecialHerdMigration>
-                    <HerdMigration>1.5</HerdMigration>
+                    <TKKN_SpecialHerdMigration>2</TKKN_SpecialHerdMigration>
+                    <HerdMigration>2</HerdMigration>
                     <TKKN_WildFlowerBloom>.2</TKKN_WildFlowerBloom>
                     <TKKN_Drought>.5</TKKN_Drought>
                     <AnimalInsanityMass>1.3</AnimalInsanityMass>
@@ -1254,8 +1541,8 @@ Winter: wet.
                 </summerEvents>
                 <fallEvents>
                     <TKKN_Drought>1</TKKN_Drought>
-                    <HerdMigration>1.5</HerdMigration>
-                    <TKKN_SpecialHerdMigration>1.5</TKKN_SpecialHerdMigration>
+                    <HerdMigration>2.5</HerdMigration>
+                    <TKKN_SpecialHerdMigration>2.5</TKKN_SpecialHerdMigration>
                     <TKKN_DustDevil>0</TKKN_DustDevil>
                     <TKKN_WildFlowerBloom>0</TKKN_WildFlowerBloom>
                     <AnimalInsanityMass>1.3</AnimalInsanityMass>
@@ -1267,7 +1554,7 @@ Winter: wet.
                     <Flashstorm>.2</Flashstorm>
                 </fallEvents>
                 <winterEvents>
-                    <TKKN_Drought>1.5</TKKN_Drought>
+                    <TKKN_Drought>2</TKKN_Drought>
                     <HerdMigration>.2</HerdMigration>
                     <TKKN_SpecialHerdMigration>.2</TKKN_SpecialHerdMigration>
                     <TKKN_WildFlowerBloom>0</TKKN_WildFlowerBloom>
@@ -1293,19 +1580,19 @@ Winter: wet.
                     <SnowHard>0</SnowHard>
                 </springWeathers>
                 <summerWeathers>
-                    <Clear>26</Clear>
+                    <Clear>10</Clear>
                     <Fog>1</Fog>
-                    <Rain>1</Rain>
+                    <Rain>8</Rain>
                     <DryThunderstorm>1</DryThunderstorm>
-                    <RainyThunderstorm>81</RainyThunderstorm>
-                    <TKKN_WindStorm>1</TKKN_WindStorm>
+                    <RainyThunderstorm>8</RainyThunderstorm>
+                    <TKKN_WindStorm>2</TKKN_WindStorm>
                     <TKKN_Windy>2</TKKN_Windy>
-                    <FoggyRain>1</FoggyRain>
+                    <FoggyRain>6</FoggyRain>
                     <SnowGentle>0</SnowGentle>
                     <SnowHard>0</SnowHard>
                 </summerWeathers>
                 <fallWeathers>
-                    <Clear>16</Clear>
+                    <Clear>15</Clear>
                     <Fog>1</Fog>
                     <Rain>2</Rain>
                     <DryThunderstorm>1</DryThunderstorm>
@@ -1317,16 +1604,16 @@ Winter: wet.
                     <SnowHard>0</SnowHard>
                 </fallWeathers>
                 <winterWeathers>
-                    <Clear>11</Clear>
+                    <Clear>25</Clear>
                     <Fog>1</Fog>
-                    <Rain>8</Rain>
-                    <DryThunderstorm>4</DryThunderstorm>
-                    <RainyThunderstorm>8</RainyThunderstorm>
-                    <TKKN_WindStorm>1</TKKN_WindStorm>
+                    <Rain>0.5</Rain>
+                    <DryThunderstorm>3</DryThunderstorm>
+                    <RainyThunderstorm>0.5</RainyThunderstorm>
+                    <TKKN_WindStorm>0.5</TKKN_WindStorm>
                     <TKKN_Windy>2</TKKN_Windy>
-                    <FoggyRain>6</FoggyRain>
-                    <SnowGentle>6</SnowGentle>
-                    <SnowHard>6</SnowHard>
+                    <FoggyRain>.5</FoggyRain>
+                    <SnowGentle>.5</SnowGentle>
+                    <SnowHard>.5</SnowHard>
                 </winterWeathers>
                 <springDiseases>
                     <li>
@@ -1473,6 +1760,7 @@ Winter: wet.
 					true
 				</springsSurviveSummer>
                 <!-- /springSettings -->
+<wetPlantStart>50</wetPlantStart>
                 <bloomPlants>
                     <li>Plant_Moss</li>
                     <li>Plant_Berry</li>
@@ -1718,6 +2006,7 @@ Winter: wet.
 					true
 				</springsSurviveSummer>
                 <!-- /springSettings -->
+<wetPlantStart>50</wetPlantStart>
                 <bloomPlants>
                     <li>Plant_Grass</li>
                     <li>Plant_Berry</li>
@@ -1971,6 +2260,7 @@ Winter: wet.
 					true
 				</springsSurviveSummer>
                 <!-- /springSettings -->
+<wetPlantStart>70</wetPlantStart>
                 <bloomPlants>
                     <li>Plant_Chokevine</li>
                     <li>Plant_Berry</li>
@@ -2216,6 +2506,7 @@ Winter: wet.
 					true
 				</springsSurviveSummer>
                 <!-- /springSettings -->
+<wetPlantStart>50</wetPlantStart>
                 <bloomPlants>
                     <li>Plant_Moss</li>
                     <li>Plant_Berry</li>
@@ -2465,6 +2756,7 @@ Winter: wet.
 					true
 				</springsSurviveSummer>
                 <!-- /springSettings -->
+<wetPlantStart>50</wetPlantStart>
                 <bloomPlants>
                     <li>Plant_Moss</li>
                     <li>Plant_Berry</li>
@@ -2699,6 +2991,7 @@ Winter: wet.
 					true
 				</springsSurviveSummer>
                 <!-- /springSettings -->
+<wetPlantStart>50</wetPlantStart>
                 <bloomPlants>
                     <li>Plant_HealrootWild</li>
                     <li>Plant_Berry</li>
@@ -2957,6 +3250,7 @@ Winter: wet.
 					true
 				</springsSurviveSummer>
                 <!-- /springSettings -->
+<wetPlantStart>70</wetPlantStart>
                 <bloomPlants>
                     <li>Plant_Moss</li>
                     <li>Plant_Berry</li>
