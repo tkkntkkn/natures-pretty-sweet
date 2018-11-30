@@ -65,7 +65,7 @@ namespace TKKN_NPS
 				//if they're awake, take less damage
 				if (!pawn.health.capacities.CanBeAwake)
 				{
-					if (terrain.HasTag("TKKN_Swim")){
+					if (terrain.HasTag("TKKN_Swim")) {
 						damage = .0001f;
 					}
 					else {
@@ -83,12 +83,17 @@ namespace TKKN_NPS
 				damage += weight / 5000;
 				HealthUtility.AdjustSeverity(pawn, HediffDef.Named("TKKN_Drowning"), damage);
 
-				if (pawn.Faction.IsPlayer)
+				HediffDef hediffDef = HediffDefOf.TKKN_Drowning;
+				if (pawn.Faction.IsPlayer && pawn.health.hediffSet.GetFirstHediffOfDef(hediffDef) == null && pawn.RaceProps.Humanlike)
 				{
 					string text = "TKKN_NPS_DrowningText".Translate();
 					Messages.Message(text, MessageTypeDefOf.NeutralEvent);
 
 				}
+
+			}
+			else if (pawn.RaceProps.Humanlike && pawn.health.hediffSet.GetFirstHediffOfDef(HediffDefOf.TKKN_Drowning) != null) {
+				pawn.health.RemoveHediff(pawn.health.hediffSet.GetFirstHediffOfDef(HediffDefOf.TKKN_Drowning));
 
 			}
 		}

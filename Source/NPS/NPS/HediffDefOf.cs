@@ -11,7 +11,8 @@ namespace TKKN_NPS
 		public static HediffDef TKKN_coldspring_chill_out;
 
 		public static HediffDef TKKN_Wetness;
-		
+		public static HediffDef TKKN_Drowning;
+
 
 	}
 }
