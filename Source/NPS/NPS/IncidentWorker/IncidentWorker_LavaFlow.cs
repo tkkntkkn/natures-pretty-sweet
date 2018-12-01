@@ -15,7 +15,7 @@ namespace TKKN_NPS
 			Map map = (Map)parms.target;
 			IntVec3 intVec = CellFinder.RandomNotEdgeCell(15, map);
 
-			if (Settings.allowLavaEruption)
+			if (!Settings.allowLavaEruption)
 			{
 				return false;
 			}
