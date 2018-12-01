@@ -296,11 +296,11 @@ namespace TKKN_NPS
 			{
 				this.howPacked--;
 			}
-			else if(this.howPacked == (this.packAt / 2) && this.currentTerrain.defName == "TKKN_DirtPath")
+			else if(this.howPacked <= (this.packAt / 2) && this.currentTerrain.defName == "TKKN_DirtPath")
 			{
 				this.changeTerrain(RimWorld.TerrainDefOf.Soil);
 			}
-			else if (this.howPacked == (this.packAt / 2) && this.currentTerrain.defName == "TKKN_SandPath")
+			else if (this.howPacked <= (this.packAt / 2) && this.currentTerrain.defName == "TKKN_SandPath")
 			{
 				this.changeTerrain(RimWorld.TerrainDefOf.Sand);
 			}
@@ -476,8 +476,8 @@ namespace TKKN_NPS
 						"AIPersonaCore",
 						"MechSerumHealer",
 						"MechSerumNeurotrainer",
-						"AdvancedComponent",
-						"GlitterworldMedicine",
+						"ComponentSpacer",
+						"MedicineUltratech",
 						"ThrumboHorn",
 					};
 					string text = "TKKN_NPS_UltraRareWashedUpText".Translate();
@@ -497,9 +497,8 @@ namespace TKKN_NPS
 			} else 
 
 			//grow water and shore plants:
-			if (leaveSomething < 0.01f && location.GetPlant(map) == null && location.GetCover(this.map) == null)
+			if (leaveSomething < 0.002f && location.GetPlant(map) == null && location.GetCover(this.map) == null)
 			{
-				Log.Warning("Looking at " + location.ToString() + " on " + currentTerrain.defName.ToString());
 				List<ThingDef> plants = this.map.Biome.AllWildPlants;
 				for (int i = plants.Count - 1; i >= 0; i--)
 				{
@@ -510,13 +509,8 @@ namespace TKKN_NPS
 						TerrainDef terrain = currentTerrain;
 						ThingWeatherReaction thingWeather = plantDef.GetModExtension<ThingWeatherReaction>();
 						List<TerrainDef> okTerrains = thingWeather.allowedTerrains;
-						if (plantDef.defName == "TKKN_PlantBarnacles")
-						{
-							Log.Warning("Looking at " + plantDef.defName + " at " + location.ToString() + " on " + currentTerrain.defName.ToString());
-						}
 						if (okTerrains != null && okTerrains.Contains<TerrainDef>(currentTerrain))
 						{
-							Log.Warning("Spawning " + plantDef.defName + " at " + location.ToString() + " on " + currentTerrain.defName.ToString());
 							Plant plant = (Plant)ThingMaker.MakeThing(plantDef, null);
 							plant.Growth = Rand.Range(0.07f, 1f);
 							if (plant.def.plant.LimitedLifespan)
@@ -555,8 +549,8 @@ namespace TKKN_NPS
 				"Hyperweave",
 				"Kibble",
 				"SimpleProstheticLeg",
-				"Medicine",
-				"Component",
+				"MedicineIndustrial",
+				"ComponentIndustrial",
 				"Neutroamine",
 				"Chemfuel",
 				"MealSurvivalPack",
@@ -574,8 +568,8 @@ namespace TKKN_NPS
 				"AIPersonaCore",
 				"MechSerumHealer",
 				"MechSerumNeurotrainer",
-				"AdvancedComponent",
-				"GlitterworldMedicine",
+				"ComponentSpacer",
+				"MedicineUltratech",
 				"ThrumboHorn",
 			};
 
@@ -596,8 +590,11 @@ namespace TKKN_NPS
 						List<TerrainDef> okTerrains = thingWeather.allowedTerrains;
 						if (!okTerrains.Contains<TerrainDef>(currentTerrain))
 						{
+							Log.Warning("Destroying " + plant.def.defName + " at " + location.ToString() + " on " + currentTerrain.defName);
 							plant.Destroy();
 						}
+					} else {
+						plant.Destroy();
 					}
 				}
 			}

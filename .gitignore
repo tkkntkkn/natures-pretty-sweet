@@ -7,6 +7,8 @@ Assemblies/*
 Source/NPS/NPS/obj
 Source/NPS/NPS/bin
 Source/NPS/.vs
+*.sln
+*.csproj
 
 
 # User-specific files
