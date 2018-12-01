@@ -130,7 +130,7 @@ namespace TKKN_NPS
 			Scribe_Values.Look(ref Settings.showHot, "allowPlantEffects", true, true);
 			Scribe_Values.Look(ref Settings.showRain, "showRain", true, true);
 			Scribe_Values.Look(ref Settings.doTides, "doTides", true, true);
-			Scribe_Values.Look(ref Settings.doTides, "allowPawnsToGetWet", true, true);
+			Scribe_Values.Look(ref Settings.allowPawnsToGetWet, "allowPawnsToGetWet", true, true);
 			Scribe_Values.Look(ref Settings.showDevReadout, "showDevReadout", false, true);
 			Scribe_Values.Look(ref Settings.spawnLavaOnlyInBiome, "spawnLavaOnlyInBiome", false, true);
 			Scribe_Values.Look(ref Settings.allowLavaEruption, "allowLavaEruption", true, true);
