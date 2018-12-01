@@ -106,7 +106,10 @@ namespace TKKN_NPS
 
 		public void DoCellSteadyEffects()
 		{
-
+			if (this.howWetPlants < 0)
+			{
+				this.howWetPlants = 0;
+			}
 		}
 
 		public void setWetTerrain()
@@ -378,7 +381,7 @@ namespace TKKN_NPS
 
 		private void changeTerrain(TerrainDef terrain)
 		{
-			if (terrain != null)
+			if (terrain != null && terrain != currentTerrain)
 			{
 				this.map.terrainGrid.SetTerrain(location, terrain);
 			}

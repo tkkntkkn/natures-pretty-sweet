@@ -85,22 +85,18 @@ namespace TKKN_NPS
 			{
 				if (Quadrum.Aprimay == quadrum)
 				{
-					Log.Warning("Doing spring");
 					map.Biome.baseWeatherCommonalities = this.springWeathers;
 				}
 				else if (Quadrum.Decembary == quadrum)
 				{
-					Log.Warning("Doing winter");
 					map.Biome.baseWeatherCommonalities = this.winterWeathers;
 				}
 				else if (Quadrum.Jugust == quadrum)
 				{
-					Log.Warning("Doing fall");
 					map.Biome.baseWeatherCommonalities = this.fallWeathers;
 				}
 				else if (Quadrum.Septober == quadrum)
 				{
-					Log.Warning("Doing summer");
 					map.Biome.baseWeatherCommonalities = this.summerWeathers;
 				}
 			}

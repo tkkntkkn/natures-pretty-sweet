@@ -1003,36 +1003,36 @@ Winter: wet.
                     <Flashstorm>.1</Flashstorm>
                 </winterEvents>
                 <springWeathers>
-					<Clear>18</Clear>
+					<Clear>10</Clear>
 					<Fog>1</Fog>
-					<Rain>3</Rain>
+					<Rain>8</Rain>
 					<DryThunderstorm>0.3</DryThunderstorm>
-					<RainyThunderstorm>1</RainyThunderstorm>
-					<FoggyRain>2</FoggyRain>
+					<RainyThunderstorm>5</RainyThunderstorm>
+					<FoggyRain>5</FoggyRain>
 					<SnowGentle>0</SnowGentle>
 					<SnowHard>0</SnowHard>
                     <TKKN_WindStorm>0</TKKN_WindStorm>
                     <TKKN_Overcast>3</TKKN_Overcast>
                 </springWeathers>
                 <summerWeathers>
-					<Clear>17</Clear>
+					<Clear>8</Clear>
 					<Fog>1</Fog>
-					<Rain>2</Rain>
+					<Rain>8</Rain>
 					<DryThunderstorm>0.3</DryThunderstorm>
-					<RainyThunderstorm>2</RainyThunderstorm>
-					<FoggyRain>2</FoggyRain>
+					<RainyThunderstorm>10</RainyThunderstorm>
+					<FoggyRain>8</FoggyRain>
 					<SnowGentle>0</SnowGentle>
 					<SnowHard>0</SnowHard>
                     <TKKN_WindStorm>0</TKKN_WindStorm>
                     <TKKN_Overcast>0</TKKN_Overcast>
                 </summerWeathers>
                 <fallWeathers>
-					<Clear>18</Clear>
+					<Clear>10</Clear>
 					<Fog>2</Fog>
-					<Rain>3</Rain>
+					<Rain>8</Rain>
 					<DryThunderstorm>0.3</DryThunderstorm>
-					<RainyThunderstorm>3</RainyThunderstorm>
-					<FoggyRain>2</FoggyRain>
+					<RainyThunderstorm>5</RainyThunderstorm>
+					<FoggyRain>5</FoggyRain>
 					<SnowGentle>0</SnowGentle>
 					<SnowHard>0</SnowHard>
                     <TKKN_WindStorm>0</TKKN_WindStorm>
@@ -1041,10 +1041,10 @@ Winter: wet.
                 <winterWeathers>
 					<Clear>18</Clear>
 					<Fog>1</Fog>
-					<Rain>1</Rain>
+					<Rain>3</Rain>
 					<DryThunderstorm>0.3</DryThunderstorm>
 					<RainyThunderstorm>1</RainyThunderstorm>
-					<FoggyRain>1</FoggyRain>
+					<FoggyRain>8</FoggyRain>
 					<SnowGentle>4</SnowGentle>
 					<SnowHard>4</SnowHard>
                     <TKKN_WindStorm>0</TKKN_WindStorm>

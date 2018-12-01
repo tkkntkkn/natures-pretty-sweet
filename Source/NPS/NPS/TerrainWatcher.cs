@@ -38,6 +38,7 @@ namespace TKKN_NPS
 		public int MaxPuddles = 50;
 		public int totalPuddles = 0;
 		public int totalSprings = 0;
+		public float humidity = 0f;
 
 		public Dictionary<string, Graphic> graphicHolder = new Dictionary<string, Graphic>();
 		public float[] frostGrid;
@@ -66,6 +67,12 @@ namespace TKKN_NPS
 			//environmental changes
 			if (Settings.doWeather)
 			{
+				//set up humidity
+				float baseHumidity = (map.TileInfo.rainfall + 1) * (map.TileInfo.temperature + 1) * (map.TileInfo.swampiness + 1);
+				float currentHumidity = (1 + map.weatherManager.curWeather.rainRate) * (1 + map.mapTemperature.OutdoorTemp);
+				this.humidity = ((baseHumidity + currentHumidity) / 1000) + 18;
+
+
 				// this.checkRandomTerrain(); triggering on atmosphere affects
 				this.doTides();
 				this.doFloods();
@@ -82,26 +89,11 @@ namespace TKKN_NPS
 					this.cycleIndex++;
 				}
 			}
+			this.updateBiomeSettings();
 
-			if (biomeSettings != null)
-			{
-				Vector2 location = Find.WorldGrid.LongLatOf(map.Tile);
-				Season season = GenDate.Season((long)Find.TickManager.TicksAbs, location);
-				Quadrum quadrum = GenDate.Quadrum((long)Find.TickManager.TicksAbs, location.x);
 
-				if (biomeSettings.lastChanged != season && biomeSettings.lastChangedQ != quadrum)
-				{
-//					Log.Warning("Updating seasonal settings");
-					biomeSettings.setWeatherBySeason(map, season, quadrum);
-					biomeSettings.setDiseaseBySeason(season, quadrum);
-					biomeSettings.setIncidentsBySeason(season, quadrum);
-					biomeSettings.lastChanged = season;
-					biomeSettings.lastChangedQ = quadrum;
-				}
-			}
 
 		}
-
 	
 		public override void ExposeData()
 		{
@@ -122,8 +114,6 @@ namespace TKKN_NPS
 			Scribe_Values.Look<bool>(ref this.bugFixFrostIsRemoved, "bugFixFrostIsRemoved", this.bugFixFrostIsRemoved, true);
 		}
 
-
-
 		public override void FinalizeInit()
 		{
 			/*
@@ -135,6 +125,8 @@ namespace TKKN_NPS
 			
 			base.FinalizeInit();
 			this.biomeSettings = map.Biome.GetModExtension<BiomeSeasonalSettings>();
+			this.updateBiomeSettings(true);
+
 			this.rebuildCellLists();
 			// this.map.GetComponent<FrostGrid>().Regenerate(); 
 			if (TKKN_Holder.modsPatched.ToArray().Count() > 0)
@@ -591,12 +583,31 @@ namespace TKKN_NPS
 
 		}
 
+		private void updateBiomeSettings(bool force = false)
+		{
+			if (this.biomeSettings != null)
+			{
+				Vector2 location = Find.WorldGrid.LongLatOf(map.Tile);
+				Season season = GenDate.Season((long)Find.TickManager.TicksAbs, location);
+				Quadrum quadrum = GenDate.Quadrum((long)Find.TickManager.TicksAbs, location.x);
+
+				if (force == true || (biomeSettings.lastChanged != season && biomeSettings.lastChangedQ != quadrum))
+				{
+					Log.Warning("Updating seasonal settings");
+					biomeSettings.setWeatherBySeason(map, season, quadrum);
+					biomeSettings.setDiseaseBySeason(season, quadrum);
+					biomeSettings.setIncidentsBySeason(season, quadrum);
+					biomeSettings.lastChanged = season;
+					biomeSettings.lastChangedQ = quadrum;
+				}
+			}
+		}
 
 		#endregion
 
 
 		#region effect by terrain
-		
+
 		public void doCellEnvironment(IntVec3 c)
 		{
 			if (!this.cellWeatherAffects.ContainsKey(c))
@@ -604,6 +615,7 @@ namespace TKKN_NPS
 				return;
 			}
 			cellData cell = this.cellWeatherAffects[c];
+			cell.DoCellSteadyEffects();
 
 			if (this.ticks % 3 == 0)
 			{
@@ -664,7 +676,7 @@ namespace TKKN_NPS
 			if(Settings.showRain && !cell.currentTerrain.HasTag("TKKN_Wet"))
 			{
 				//if it's raining in this cell:
-				if (!roofed && this.map.weatherManager.curWeather.rainRate > .001f)
+				if (!roofed && this.map.weatherManager.curWeather.rainRate > .0001f)
 				{
 					if (this.floodThreat < 1090000) {
 						this.floodThreat += 1 + 2 * (int)Math.Round(this.map.weatherManager.curWeather.rainRate);
@@ -738,11 +750,11 @@ namespace TKKN_NPS
 				{
 					if (this.map.weatherManager.curWeather.rainRate > 0)
 					{
-						cell.howWetPlants += this.map.weatherManager.curWeather.rainRate;
+						cell.howWetPlants += this.map.weatherManager.curWeather.rainRate * 2;
 					}
 					else if (this.map.weatherManager.curWeather.snowRate > 0)
 					{
-						cell.howWetPlants += this.map.weatherManager.curWeather.snowRate;
+						cell.howWetPlants += this.map.weatherManager.curWeather.snowRate * 2;
 					}
 				}
 			}
@@ -750,7 +762,7 @@ namespace TKKN_NPS
 			{
 				if (this.map.mapTemperature.OutdoorTemp > 20)
 				{
-					cell.howWetPlants += -1 * (this.map.mapTemperature.OutdoorTemp / 200);
+					cell.howWetPlants += -1 * ((this.map.mapTemperature.OutdoorTemp / humidity)/10);
 					if(cell.howWetPlants <= 0){
 						if (cell.currentTerrain.HasModExtension<TerrainWeatherReactions>())
 						{
@@ -800,21 +812,13 @@ namespace TKKN_NPS
 			}
 			else if (cell.howWet > -1)
 			{
-				if (this.map.mapTemperature.OutdoorTemp > 20)
-				{
-					cell.howWetPlants += -1 * (this.map.mapTemperature.OutdoorTemp/10);
-				}
-				else
-				{
-					cell.howWetPlants += -(float) .1;
-				}
 				cell.howWet--;
 			}
 
 			//PUDDLES
-				Thing puddle = (Thing)(from t in c.GetThingList(this.map)
-								   where t.def.defName == "TKKN_FilthPuddle"
-								   select t).FirstOrDefault<Thing>();
+			Thing puddle = (Thing)(from t in c.GetThingList(this.map)
+				where t.def.defName == "TKKN_FilthPuddle"
+				select t).FirstOrDefault<Thing>();
 
 			if (cell.howWet == 3 && !isCold && this.MaxPuddles > this.totalPuddles && cell.currentTerrain.defName != "TKKN_SandBeachWetSalt")
 			{
