@@ -30,7 +30,7 @@
         <texturePath>TKKN_NPS/Surfaces/PackedDirt</texturePath>
         <edgeType>FadeRough</edgeType>
         <renderPrecedence>350</renderPrecedence>
-        <pathCost>4</pathCost>
+        <pathCost>1</pathCost>
 		<affordances>
 		  <li>Light</li>
 		  <li>Medium</li>
@@ -140,6 +140,9 @@
             <li>Water</li>
             <li>Spring</li>
         </tags>
+		<affordances>
+		  <li>MovingFluid</li>
+		</affordances>
 		<extraNonDraftedPerceivedPathCost>180</extraNonDraftedPerceivedPathCost>
 		<extraDraftedPerceivedPathCost>18</extraDraftedPerceivedPathCost>
     </TerrainDef>
@@ -165,6 +168,9 @@
             <li>Water</li>
             <li>Spring</li>
         </tags>
+		<affordances>
+		  <li>MovingFluid</li>
+		</affordances>
 		<extraNonDraftedPerceivedPathCost>180</extraNonDraftedPerceivedPathCost>
 		<extraDraftedPerceivedPathCost>18</extraDraftedPerceivedPathCost>
     </TerrainDef>
@@ -365,8 +371,9 @@
             <li>WetFlood</li>
         </tags>
         <affordances>
+			<li>MovingFluid</li>
             <li>Light</li>
-      <li>Medium</li>
+			<li>Medium</li>
             <li>Heavy</li>
             <li>GrowSoil</li>
             <li>Diggable</li>
