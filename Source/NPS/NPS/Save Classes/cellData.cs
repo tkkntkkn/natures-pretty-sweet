@@ -152,7 +152,6 @@ namespace TKKN_NPS
 				return;
 			}
 
-
 			if (this.temperature < 0  && this.temperature < this.weather.freezeAt && this.weather.freezeTerrain != null)
 			{
 				if (this.isFlooded && this.weather.freezeTerrain != currentTerrain)

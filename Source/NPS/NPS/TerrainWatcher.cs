@@ -174,7 +174,6 @@ namespace TKKN_NPS
 				this.cellWeatherAffects = new Dictionary<IntVec3, cellData>();
 				foreach (IntVec3 c in tmpTerrain)
 				{
-
 					TerrainDef terrain = c.GetTerrain(map);
 
 					if (!c.InBounds(map))
@@ -798,14 +797,22 @@ namespace TKKN_NPS
 			if (cell.howWet < 3 && Settings.showRain && (cell.isMelt || gettingWet))
 			{
 				cell.howWet += 2;
-
 			}
 			else if (cell.howWet > -1)
 			{
+				if (this.map.mapTemperature.OutdoorTemp > 20)
+				{
+					cell.howWetPlants += -1 * (this.map.mapTemperature.OutdoorTemp/10);
+				}
+				else
+				{
+					cell.howWetPlants += -(float) .1;
+				}
 				cell.howWet--;
 			}
+
 			//PUDDLES
-			Thing puddle = (Thing)(from t in c.GetThingList(this.map)
+				Thing puddle = (Thing)(from t in c.GetThingList(this.map)
 								   where t.def.defName == "TKKN_FilthPuddle"
 								   select t).FirstOrDefault<Thing>();
 
@@ -1252,7 +1259,6 @@ namespace TKKN_NPS
 		}
 	
 
-		
 		#endregion
 	}
 }

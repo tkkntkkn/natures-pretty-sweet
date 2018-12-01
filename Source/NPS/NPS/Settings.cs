@@ -79,6 +79,7 @@ namespace TKKN_NPS
 
 			//Game Play Settings
 
+
 			list.CheckboxLabeled(
 				"TKKN_allowLavaEruption_title".Translate(),
 				ref Settings.allowLavaEruption,
