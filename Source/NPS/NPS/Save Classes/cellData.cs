@@ -55,18 +55,18 @@ namespace TKKN_NPS
 
 		public void setTerrain(string type) {
 			//Make sure it hasn't been made a floor or a floor hasn't been removed.
-			if (weather == null)
-			{
-				return;
-			}
 			if (!currentTerrain.HasModExtension<TerrainWeatherReactions>())
 			{
 				this.baseTerrain = currentTerrain;
-				return;
 			}
-			else if (!baseTerrain.HasModExtension<TerrainWeatherReactions>())
+			else if (!baseTerrain.HasModExtension<TerrainWeatherReactions>() && this.baseTerrain != currentTerrain)
 			{
 				this.baseTerrain = currentTerrain;
+			}
+
+			if (weather == null)
+			{
+				return;
 			}
 
 			//change the terrain
