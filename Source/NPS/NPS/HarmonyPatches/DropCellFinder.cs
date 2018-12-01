@@ -14,7 +14,6 @@ namespace TKKN_NPS
 		[HarmonyPrefix]
 		public static bool Prefix(Map map, IntVec3 __result)
 		{
-			Log.Warning("RandomDropSpot doing");
 			///Predicate<IntVec3> validator, Map map, float roadChance, out IntVec3 result
 			// don't drop on deep water
 			__result = CellFinderLoose.RandomCellWith((IntVec3 c) => c.Standable(map) && !c.GetTerrain(map).HasTag("TKKN_Swim") && !c.Roofed(map) && !c.Fogged(map), map, 1000);

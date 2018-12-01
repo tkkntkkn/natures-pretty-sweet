@@ -22,10 +22,6 @@ namespace TKKN_NPS
 					if (!PatchStartPath.PawnCanOccupy(pawn.Position, pawn) && !PatchStartPath.TryRecoverFromUnwalkablePosition(true, pawn)) {
 						return false;
 					}
-					//just get it out
-//					Log.Warning(pawn.def.defName + " start path ");
-//					Log.Warning(PatchStartPath.PawnCanOccupy(pawn.Position, pawn).ToString());
-//					Log.Warning(PatchStartPath.TryRecoverFromUnwalkablePosition(true, pawn).ToString());
 				}
 			}
 			return true;
@@ -43,10 +39,6 @@ namespace TKKN_NPS
 					{
 						return true;
 					}
-					if (error)
-					{
-						Log.Warning(pawn + " on unwalkable cell " + pawn.Position + ". Teleporting to " + intVec, false);
-					}
 					pawn.Position = intVec;
 					pawn.Notify_Teleported(true, false);
 					flag = true;
@@ -56,7 +48,6 @@ namespace TKKN_NPS
 			if (!flag)
 			{
 				pawn.Destroy(DestroyMode.Vanish);
-				Log.Error(pawn.ToStringSafe() + " on unwalkable cell " + pawn.Position + ". Could not find walkable position nearby. Destroyed.", false);
 			}
 			return flag;
 		}

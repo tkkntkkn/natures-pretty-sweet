@@ -593,7 +593,7 @@ namespace TKKN_NPS
 
 				if (force == true || (biomeSettings.lastChanged != season && biomeSettings.lastChangedQ != quadrum))
 				{
-					Log.Warning("Updating seasonal settings");
+//					Log.Warning("Updating seasonal settings");
 					biomeSettings.setWeatherBySeason(map, season, quadrum);
 					biomeSettings.setDiseaseBySeason(season, quadrum);
 					biomeSettings.setIncidentsBySeason(season, quadrum);
