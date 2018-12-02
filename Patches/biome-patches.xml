@@ -119,40 +119,6 @@
 			<TKKN_TreeOcotillo>.05</TKKN_TreeOcotillo>
         </value>
     </Operation>
-    <Operation Class="PatchOperationAdd">
-        <xpath>/Defs/BiomeDef[defName = "TKKN_Desert"]/wildPlants</xpath>
-        <value>
-			<TKKN_PlantCatTails>.8</TKKN_PlantCatTails>
-			<TKKN_PlantLilypad>.8</TKKN_PlantLilypad>
-			<TKKN_SaltCrystal>.8</TKKN_SaltCrystal>
-			<TKKN_PlantBarnacles>1.4</TKKN_PlantBarnacles>
-			<TKKN_PlantCactusPricklyPear>.1</TKKN_PlantCactusPricklyPear>
-			<TKKN_PlantCactusSanPedro>.1</TKKN_PlantCactusSanPedro>
-			<TKKN_PlantCactusBarrel>.1</TKKN_PlantCactusBarrel>
-			<TKKN_PlantDesertShrubA>.2</TKKN_PlantDesertShrubA>
-			<TKKN_PlantDesertShrubB>.2</TKKN_PlantDesertShrubB>
-			<TKKN_PlantSucculants>.1</TKKN_PlantSucculants>
-			<TKKN_TreeOcotillo>.2</TKKN_TreeOcotillo>
-			<TKKN_PlantWildCorn>.1</TKKN_PlantWildCorn>
-        </value>
-    </Operation>
-    <Operation Class="PatchOperationAdd">
-        <xpath>/Defs/BiomeDef[defName = "TKKN_Oasis"]/wildPlants</xpath>
-        <value>
-			<TKKN_PlantCatTails>.8</TKKN_PlantCatTails>
-			<TKKN_PlantLilypad>.8</TKKN_PlantLilypad>
-			<TKKN_PlantBarnacles>1.4</TKKN_PlantBarnacles>
-			<TKKN_SaltCrystal>2</TKKN_SaltCrystal>
-			<TKKN_PlantCactusPricklyPear>.05</TKKN_PlantCactusPricklyPear>
-			<TKKN_PlantCactusSanPedro>.05</TKKN_PlantCactusSanPedro>
-			<TKKN_PlantCactusBarrel>.05</TKKN_PlantCactusBarrel>
-			<TKKN_PlantDesertShrubA>.05</TKKN_PlantDesertShrubA>
-			<TKKN_PlantDesertShrubB>.05</TKKN_PlantDesertShrubB>
-			<TKKN_PlantSucculants>.05</TKKN_PlantSucculants>
-			<TKKN_TreeOcotillo>.05</TKKN_TreeOcotillo>
-			<TKKN_PlantWildCorn>.05</TKKN_PlantWildCorn>
-        </value>
-    </Operation>
     <!-- end add new plants -->
 
     <!-- add new animals -->

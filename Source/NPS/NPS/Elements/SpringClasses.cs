@@ -366,8 +366,8 @@ namespace TKKN_NPS
 			if (c.GetEdifice(map) == null && c.GetCover(map) == null)
 			{
 				IEnumerable<ThingDef> source = from def in list
-											   where def.CanEverPlantAt(c, map)
-											   select def;
+						where def.CanEverPlantAt(c, map)
+						select def;
 
 				if (source.Any<ThingDef>())
 				{

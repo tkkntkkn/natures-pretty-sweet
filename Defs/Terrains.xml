@@ -141,7 +141,7 @@
             <li>Spring</li>
         </tags>
 		<affordances>
-		  <li>MovingFluid</li>
+			<li>Bridgeable</li>
 		</affordances>
 		<extraNonDraftedPerceivedPathCost>180</extraNonDraftedPerceivedPathCost>
 		<extraDraftedPerceivedPathCost>18</extraDraftedPerceivedPathCost>
@@ -169,7 +169,7 @@
             <li>Spring</li>
         </tags>
 		<affordances>
-		  <li>MovingFluid</li>
+			<li>Bridgeable</li>
 		</affordances>
 		<extraNonDraftedPerceivedPathCost>180</extraNonDraftedPerceivedPathCost>
 		<extraDraftedPerceivedPathCost>18</extraDraftedPerceivedPathCost>
@@ -371,10 +371,9 @@
             <li>WetFlood</li>
         </tags>
         <affordances>
-			<li>MovingFluid</li>
+			<li>Bridgeable</li>
             <li>Light</li>
 			<li>Medium</li>
-            <li>Heavy</li>
             <li>GrowSoil</li>
             <li>Diggable</li>
         </affordances>
@@ -402,7 +401,34 @@
             <TKKN_BlockLava>4</TKKN_BlockLava>
         </costList>
     </TerrainDef>
-    <TerrainDef ParentName="FloorBase">
+	
+
+  <TerrainDef Abstract="True" ParentName="FloorBase" Name="SpecialTileBase">
+	<renderPrecedence>220</renderPrecedence>
+	<description>Carefully-cut and fit fancy tiles. They are pretty to look at, but they take a long time to lay.</description>
+	<texturePath>Terrain/Surfaces/GenericFloorTile</texturePath>
+	<statBases>
+	  <WorkToBuild>1100</WorkToBuild>
+	  <Beauty>1</Beauty>
+	</statBases>
+	<designatorDropdown>Floor_Special_Tile</designatorDropdown>
+	<constructionSkillPrerequisite>3</constructionSkillPrerequisite>
+  </TerrainDef>
+  
+  <TerrainDef Abstract="True" ParentName="FloorBase" Name="SpecialPlankBase">
+	<renderPrecedence>220</renderPrecedence>
+	<description>Carefully-cut and fit fancy planks. They are pretty to look at, but they take a long time to lay.</description>
+	<texturePath>Terrain/Surfaces/WoodFloor</texturePath>
+	<statBases>
+	  <WorkToBuild>1100</WorkToBuild>
+	  <Beauty>1</Beauty>
+	</statBases>
+	<designatorDropdown>Floor_Special_Plank</designatorDropdown>
+	<constructionSkillPrerequisite>3</constructionSkillPrerequisite>
+  </TerrainDef>
+  
+	
+    <TerrainDef ParentName="SpecialPlankBase">
         <defName>TKKN_FloorRedWood</defName>
         <label>red wood floor</label>
         <texturePath>Terrain/Surfaces/WoodFloor</texturePath>
@@ -411,7 +437,8 @@
             <RedWoodLog>4</RedWoodLog>
         </costList>
     </TerrainDef>
-    <TerrainDef ParentName="TileStoneBase">
+	
+    <TerrainDef ParentName="SpecialPlankBase">
         <defName>TKKN_FloorPertrifiedWood</defName>
         <label>petrified wood floor</label>
         <color>(66,44,4)</color>
@@ -419,15 +446,27 @@
             <TKKN_PetrifiedWood>4</TKKN_PetrifiedWood>
         </costList>
     </TerrainDef>
-    <TerrainDef ParentName="FloorBase">
+
+    <TerrainDef ParentName="SpecialPlankBase">
+        <defName>TKKN_FloorPertrifiedWood</defName>
+        <label>petrified wood tile floor</label>
+        <color>(66,44,4)</color>
+        <costList>
+            <TKKN_PetrifiedWood>6</TKKN_PetrifiedWood>
+        </costList>
+    </TerrainDef>
+	
+	
+    <TerrainDef ParentName="SpecialTileBase">
         <defName>TKKN_FloorAmber</defName>
-        <label>amber floor</label>
+        <label>amber tile floor</label>
         <texturePath>Terrain/Surfaces/GenericFloorTile</texturePath>
         <color>(224,147,4)</color>
         <costList>
-            <TKKN_Amber>4</TKKN_Amber>
+            <TKKN_Amber>6</TKKN_Amber>
         </costList>
     </TerrainDef>
+	
     <TerrainDef ParentName="FloorBase">
         <defName>TKKN_Salted_Earth</defName>
         <label>salted earth</label>

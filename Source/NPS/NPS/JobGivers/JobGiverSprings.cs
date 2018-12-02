@@ -9,9 +9,9 @@ using Verse.AI.Group;
 // NOTE: The job that puts pawns in springs when they're too hot is in harmonypatches/jobgiverspringspatch.cs
 
 
-
 namespace TKKN_NPS
 {
+	
 	public class JobGiver_Dryoff : ThinkNode_JobGiver
 	{
 		protected override Job TryGiveJob(Pawn pawn)
