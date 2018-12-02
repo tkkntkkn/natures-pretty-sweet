@@ -259,10 +259,9 @@
     </stuffProps>
   </ThingDef>
 
-  <!-- LAVA ROCK -->
+  <!-- ================ Basalt ================ -->
   
-  
-  <ThingDef ParentName="UglyRockBase">
+  <ThingDef ParentName="UglyRockBase" Name="TKKN_LavaRockBase">
     <defName>TKKN_LavaRock</defName>
     <label>basalt</label>
     <description>Lava that has cooled into a black rock with flecks of lava glass.</description>
@@ -275,7 +274,28 @@
     <building>
       <mineableThing>TKKN_ChunkLava</mineableThing>
       <mineableDropChance>0.25</mineableDropChance>
+      <smoothedThing>TKKN_SmoothedLavaRock</smoothedThing>
     </building>
+  </ThingDef>
+
+  <ThingDef ParentName="TKKN_LavaRockBase">
+    <defName>TKKN_SmoothedLavaRock</defName>
+    <label>smoothed basalt</label>
+    <description>Lava that has cooled into a black rock with flecks of lava glass. The flaky rock has been polished to a flat, smooth surface.</description>
+    <graphicData>
+      <texPath>Things/Building/Linked/RockSmooth_Atlas</texPath>
+    </graphicData>
+    <statBases>
+      <Beauty>4</Beauty>
+      <MarketValue>25</MarketValue>
+    </statBases>
+    <building>
+      <isNaturalRock>false</isNaturalRock>
+      <canBuildNonEdificesUnder>true</canBuildNonEdificesUnder>
+      <smoothedThing />
+    </building>
+    <saveCompressible>false</saveCompressible>
+    <repairEffect>Repair</repairEffect>
   </ThingDef>
   
   <ThingDef ParentName="ChunkRockBase">
@@ -285,7 +305,7 @@
       <color>(50,50,50)</color>
     </graphicData>
     <statBases>
-      <Mass>18</Mass>
+      <Mass>20</Mass>
     </statBases>
     <soundDrop>ChunkRock_Drop</soundDrop>
     <butcherProducts>
@@ -293,35 +313,29 @@
     </butcherProducts>
   </ThingDef>
   
-
-
   <ThingDef ParentName="StoneBlocksBase">
     <defName>TKKN_BlockLava</defName>
     <label>basalt blocks</label>
-    <description>Blocks of solid lava rock. Dark rock that glitters with streaks of lava glass.</description>
+    <description>Blocks of solid basalt.</description>
     <graphicData>
       <color>(50,50,50)</color>
     </graphicData>
     <statBases>
-      <MarketValue>2.4</MarketValue>
-      <Mass>.9</Mass>
-      <SharpDamageMultiplier>0.5</SharpDamageMultiplier>
+      <Mass>1.25</Mass>
+      <SharpDamageMultiplier>0.75</SharpDamageMultiplier>
     </statBases>
     <stuffProps>
-      <color>(50,50,50)</color>
+      <color>(105,95,97)</color>
+      <soundImpactStuff>BulletImpact_Ground</soundImpactStuff>
+      <soundMeleeHitSharp>MeleeHit_Stone</soundMeleeHitSharp>
+      <soundMeleeHitBlunt>MeleeHit_Stone</soundMeleeHitBlunt>
       <stuffAdjective>basalt</stuffAdjective>
       <statFactors>
-        <Beauty>2</Beauty>  
-        <MarketValue>0.48</MarketValue>
-        <MaxHitPoints>1.3</MaxHitPoints>
-				<WorkToBuild>15.0</WorkToBuild>
-				<WorkToMake>15.1</WorkToMake>
+        <MaxHitPoints>2</MaxHitPoints>
       </statFactors>
     </stuffProps>
   </ThingDef>
 
- 
-  
 	<RecipeDef ParentName="MakeStoneBlocksBase">
 		<defName>MakeStoneBlocksLavaRock</defName>
 		<label>make basalt blocks</label>
@@ -345,6 +359,9 @@
 			<TKKN_BlockLava>10</TKKN_BlockLava>
 		</products>
 	</RecipeDef>
+	
+	
+
 <!-- END LAVA ROCK -->
   
   <ThingDef ParentName="PlantFoodRawBase">
