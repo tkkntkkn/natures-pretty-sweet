@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
 
-	<TerrainDef ParentName="FloorBase">
+	<TerrainDef>
         <defName>TKKN_SandPath</defName>
         <label>sand path</label>
         <texturePath>TKKN_NPS/Surfaces/PackedSand</texturePath>
+		<layerable>true</layerable>
         <edgeType>FadeRough</edgeType>
         <renderPrecedence>350</renderPrecedence>
         <pathCost>4</pathCost>
@@ -24,9 +25,11 @@
         <holdSnow>true</holdSnow>
         <takeFootprints>False</takeFootprints>
     </TerrainDef>
-	 <TerrainDef ParentName="FloorBase">
+	
+	 <TerrainDef>
         <defName>TKKN_DirtPath</defName>
         <label>dirt path</label>
+		<layerable>true</layerable>
         <texturePath>TKKN_NPS/Surfaces/PackedDirt</texturePath>
         <edgeType>FadeRough</edgeType>
         <renderPrecedence>350</renderPrecedence>
@@ -118,61 +121,35 @@
             <li>Lava</li>
         </tags>
     </TerrainDef>
-      <TerrainDef>
+      <TerrainDef ParentName="WaterShallowBase">
         <defName>TKKN_ColdSpringsWater</defName>
         <label>cold spring</label>
         <texturePath>TKKN_NPS/Surfaces/springWater</texturePath>
-        <waterDepthShader>Map/WaterDepth</waterDepthShader>
-        <edgeType>Water</edgeType>
-        <renderPrecedence>398</renderPrecedence>
-        <pathCost>12</pathCost>
-        <acceptFilth>false</acceptFilth>
-        <fertility>0.1</fertility>
-        <avoidWander>true</avoidWander>
-        <changeable>false</changeable>
-        <holdSnow>false</holdSnow>
-        <takeSplashes>true</takeSplashes>
-        <statBases>
+		<waterDepthShader>Map/WaterDepth</waterDepthShader>
+		<renderPrecedence>394</renderPrecedence>
+		<driesTo>Gravel</driesTo>
+		<statBases>
             <Beauty>+2</Beauty>
         </statBases>
         <tags>
-            <li>River</li>
-            <li>Water</li>
             <li>Spring</li>
         </tags>
-		<affordances>
-			<li>Bridgeable</li>
-		</affordances>
-		<extraNonDraftedPerceivedPathCost>180</extraNonDraftedPerceivedPathCost>
-		<extraDraftedPerceivedPathCost>18</extraDraftedPerceivedPathCost>
+		<fertility>0.001</fertility>
     </TerrainDef>
-    <TerrainDef>
+    <TerrainDef ParentName="WaterShallowBase">
         <defName>TKKN_HotSpringsWater</defName>
         <label>hot spring</label>
         <texturePath>TKKN_NPS/Surfaces/springWater</texturePath>
-        <waterDepthShader>Map/WaterDepth</waterDepthShader>
-        <edgeType>Water</edgeType>
-        <renderPrecedence>398</renderPrecedence>
-        <pathCost>12</pathCost>
-        <acceptFilth>false</acceptFilth>
-        <fertility>0.1</fertility>
-        <avoidWander>true</avoidWander>
-        <changeable>false</changeable>
-        <holdSnow>false</holdSnow>
-        <takeSplashes>true</takeSplashes>
+		<waterDepthShader>Map/WaterDepth</waterDepthShader>
+		<renderPrecedence>394</renderPrecedence>
+		<driesTo>Gravel</driesTo>
         <statBases>
             <Beauty>+2</Beauty>
         </statBases>
         <tags>
-            <li>River</li>
-            <li>Water</li>
             <li>Spring</li>
         </tags>
-		<affordances>
-			<li>Bridgeable</li>
-		</affordances>
-		<extraNonDraftedPerceivedPathCost>180</extraNonDraftedPerceivedPathCost>
-		<extraDraftedPerceivedPathCost>18</extraDraftedPerceivedPathCost>
+		<fertility>0.001</fertility>
     </TerrainDef>
     <TerrainDef>
         <defName>TKKN_SoilWet</defName>
@@ -246,7 +223,7 @@
         </statBases>
         <affordances>
             <li>Light</li>
-      <li>Medium</li>
+			<li>Medium</li>
             <li>Heavy</li>
             <li>GrowSoil</li>
             <li>Diggable</li>
