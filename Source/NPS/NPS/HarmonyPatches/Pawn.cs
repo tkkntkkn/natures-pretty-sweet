@@ -51,6 +51,36 @@ namespace TKKN_NPS
 					PatchTickPawn.DyingCheck(__instance, terrain);
 				}
 			}
+
+			if (__instance == null || !__instance.Spawned || __instance.Dead || (__instance.RaceProps.Humanlike && __instance.needs == null))
+			{
+				return;
+			}
+			HediffDef hediffDef = new HediffDef();
+			if (terrain.defName == "TKKN_HotSpringsWater")
+			{
+				if (__instance.needs.comfort != null)
+				{
+					__instance.needs.comfort.lastComfortUseTick--;
+				}
+				hediffDef = HediffDefOf.TKKN_hotspring_chill_out;
+				if (__instance.health.hediffSet.GetFirstHediffOfDef(hediffDef) == null)
+				{
+					Hediff hediff = HediffMaker.MakeHediff(hediffDef, __instance, null);
+					__instance.health.AddHediff(hediff, null, null);
+				}
+			}
+			if (terrain.defName == "TKKN_ColdSpringsWater")
+			{
+				__instance.needs.rest.TickResting(.05f);
+				hediffDef = HediffDefOf.TKKN_coldspring_chill_out;
+				if (__instance.health.hediffSet.GetFirstHediffOfDef(hediffDef, false) == null)
+				{
+					Hediff hediff = HediffMaker.MakeHediff(hediffDef, __instance, null);
+					__instance.health.AddHediff(hediff, null, null);
+				}
+			}
+
 		}
 		public static void DyingCheck(Pawn pawn, TerrainDef terrain)
 		{
@@ -141,7 +171,7 @@ namespace TKKN_NPS
 		{
 			BattleLogEntry_DamageTaken battleLogEntry_DamageTaken = new BattleLogEntry_DamageTaken(pawn, RulePackDefOf.DamageEvent_Fire, null);
 			Find.BattleLog.Add(battleLogEntry_DamageTaken);
-			DamageInfo dinfo = new DamageInfo(DamageDefOf.Flame, 100, -1f, 0, null, null, null, DamageInfo.SourceCategory.ThingOrUnknown, pawn);
+			DamageInfo dinfo = new DamageInfo(RimWorld.DamageDefOf.Flame, 100, -1f, 0, null, null, null, DamageInfo.SourceCategory.ThingOrUnknown, pawn);
 			dinfo.SetBodyRegion(BodyPartHeight.Undefined, BodyPartDepth.Outside);
 			pawn.TakeDamage(dinfo).AssociateWithLog(battleLogEntry_DamageTaken);
 		}
@@ -205,43 +235,5 @@ namespace TKKN_NPS
 			}
 		}
 	}
-	[HarmonyPatch(typeof(Pawn))]
-	[HarmonyPatch("TickRare")]
-	class PatchTickRarePawn
-	{
-
-		[HarmonyPostfix]
-		public static void Postfix(Pawn __instance)
-		{
-			if (__instance == null || !__instance.Spawned || __instance.Dead ||(__instance.RaceProps.Humanlike && __instance.needs == null))
-			{
-				return;
-			}
-			HediffDef hediffDef = new HediffDef();
-			TerrainDef terrain = __instance.Position.GetTerrain(__instance.Map);
-			if (terrain.defName == "TKKN_HotSpringsWater")
-			{
-				if (__instance.needs.comfort != null)
-				{
-					__instance.needs.comfort.lastComfortUseTick--;
-				}
-				hediffDef = HediffDefOf.TKKN_hotspring_chill_out;
-				if (__instance.health.hediffSet.GetFirstHediffOfDef(hediffDef) == null)
-				{
-					Hediff hediff = HediffMaker.MakeHediff(hediffDef, __instance, null);
-					__instance.health.AddHediff(hediff, null, null);
-				}
-			}
-			if (terrain.defName == "TKKN_ColdSpringsWater")
-			{
-				__instance.needs.rest.CurLevel++;
-				hediffDef = HediffDefOf.TKKN_coldspring_chill_out;
-				if (__instance.health.hediffSet.GetFirstHediffOfDef(hediffDef, false) == null)
-				{
-					Hediff hediff = HediffMaker.MakeHediff(hediffDef, __instance, null);
-					__instance.health.AddHediff(hediff, null, null);
-				}
-			}
-		}
-	}
+	
 }
