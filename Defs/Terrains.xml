@@ -8,7 +8,7 @@
 		<layerable>true</layerable>
         <edgeType>FadeRough</edgeType>
         <renderPrecedence>350</renderPrecedence>
-        <pathCost>4</pathCost>
+        <pathCost>2</pathCost>
 		<affordances>
 		  <li>Light</li>
 		  <li>Medium</li>
