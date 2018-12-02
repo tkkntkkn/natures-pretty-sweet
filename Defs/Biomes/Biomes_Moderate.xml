@@ -8,6 +8,8 @@
     <animalDensity>2.8</animalDensity>
     <plantDensity>0.55</plantDensity>
 	<implemented>true</implemented>
+    <forageability>1</forageability>
+    <foragedFood>RawBerries</foragedFood>
     <settlementSelectionWeight>1</settlementSelectionWeight>
     <texture>TKKN_NPS/World/Biomes/Redwoods</texture>
         <soundsAmbient>

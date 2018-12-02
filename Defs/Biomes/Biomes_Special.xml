@@ -8,6 +8,8 @@
       <animalDensity>0.25</animalDensity>
       <plantDensity>0.1</plantDensity>
 	  <implemented>true</implemented>
+		<forageability>.25</forageability>
+		<foragedFood>RawBerries</foragedFood>
       <settlementSelectionWeight>.6</settlementSelectionWeight>
       <texture>TKKN_NPS/World/Biomes/Lavatropical</texture>
       <soundsAmbient>

@@ -7,7 +7,9 @@
         <workerClass>TKKN_NPS.NPS_BiomeWorker_Desert</workerClass>
         <animalDensity>0.25</animalDensity>
         <plantDensity>0.05</plantDensity>
-        <settlementSelectionWeight>0.65</settlementSelectionWeight>
+        <settlementSelectionWeight>0.55</settlementSelectionWeight>
+		<forageability>0.15</forageability>
+		<foragedFood>RawAgave</foragedFood>
         <texture>TKKN_NPS/World/Biomes/Saltfields</texture>
         <implemented>true</implemented>
         <diseaseMtbDays>80</diseaseMtbDays>
@@ -97,7 +99,9 @@
         <workerClass>TKKN_NPS.NPS_BiomeWorker_Oasis</workerClass>
         <animalDensity>0.35</animalDensity>
         <plantDensity>0.05</plantDensity>
-        <settlementSelectionWeight>0.65</settlementSelectionWeight>
+		<forageability>0.9</forageability>
+		<foragedFood>RawAgave</foragedFood>
+        <settlementSelectionWeight>0.9</settlementSelectionWeight>
         <texture>TKKN_NPS/World/Biomes/Oasis</texture>
         <implemented>true</implemented>
         <diseaseMtbDays>80</diseaseMtbDays>

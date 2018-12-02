@@ -9,6 +9,8 @@
     <plantDensity>0.8</plantDensity>
    <settlementSelectionWeight>0.95</settlementSelectionWeight>
 	<implemented>true</implemented>
+    <forageability>1.2</forageability>
+    <foragedFood>RawBerries</foragedFood>
     <texture>TKKN_NPS/World/Biomes/Grasslands</texture>
     <soundsAmbient>
       <li>AmbientNightInsects_Standard</li>
@@ -113,7 +115,9 @@
     <animalDensity>1.8</animalDensity>
     <plantDensity>0.8</plantDensity>
 	<implemented>true</implemented>
-   <settlementSelectionWeight>0.95</settlementSelectionWeight>
+    <forageability>1.2</forageability>
+    <foragedFood>RawBerries</foragedFood>
+    <settlementSelectionWeight>0.95</settlementSelectionWeight>
     <texture>TKKN_NPS/World/Biomes/Savanna</texture>
     <soundsAmbient>
       <li>AmbientNightInsects_Standard</li>
