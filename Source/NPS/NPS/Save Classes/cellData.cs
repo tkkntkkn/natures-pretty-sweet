@@ -29,7 +29,7 @@ namespace TKKN_NPS
 		public bool isFrozen = false;
 		public bool isThawed = true;
 
-		public int packAt = 500;
+		public int packAt = 750;
 
 		public int tideLevel = -1;
 		public HashSet<int> floodLevel = new HashSet<int>();
@@ -290,9 +290,20 @@ namespace TKKN_NPS
 
 		public void unpack()
 		{
+			if (!Settings.doDirtPath)
+			{
+				if (this.currentTerrain.defName == "TKKN_DirtPath") {
+					this.changeTerrain(RimWorld.TerrainDefOf.Soil);
+				}
+				if (this.currentTerrain.defName == "TKKN_SandPath")
+				{
+					this.changeTerrain(RimWorld.TerrainDefOf.Sand);
+				}
+				return;
+			}
 			if (this.howPacked > this.packAt)
 			{
-//				this.howPacked = this.packAt;
+				this.howPacked = this.packAt;
 			}
 			if (this.howPacked > 0)
 			{
@@ -310,23 +321,19 @@ namespace TKKN_NPS
 
 		public void doPack()
 		{
+			if (!Settings.doDirtPath)
+			{
+				return;
+			}
 			Zone_Growing zone = this.map.zoneManager.ZoneAt(this.location) as Zone_Growing;
 			if (zone != null && (currentTerrain.defName != "TKKN_DirtPath" || currentTerrain.defName != "TKKN_SandPath"))
 			{
 				return;
 			}           
 			//don't pack if there's a growing zone.
-			if (baseTerrain.defName == "Soil" || baseTerrain.defName == "Sand") {
+			if (baseTerrain.defName == "Soil" || baseTerrain.defName == "Sand" || baseTerrain.texturePath == "Terrain/Surfaces/RoughStone") {
 				this.howPacked++;
 			}
-			/*
-			if (currentTerrain.defName == "PackedDirt")
-			{
-				TerrainDef packed1 = TerrainDef.Named("Soil");
-				this.changeTerrain(packed1);
-				this.baseTerrain = packed1;
-			}
-			*/
 
 			if (this.howPacked > this.packAt)
 			{
@@ -344,6 +351,17 @@ namespace TKKN_NPS
 					this.baseTerrain = packed;
 				}
 			}
+
+			if (baseTerrain.texturePath == "Terrain/Surfaces/RoughStone" && this.howPacked > this.packAt * 10)
+			{
+				string thisName = baseTerrain.defName;
+				thisName.Replace("_Rough", "_Smooth");
+				thisName.Replace("_SmoothHewn", "_Smooth");
+				TerrainDef packed = TerrainDef.Named(thisName);
+				this.changeTerrain(packed);
+				this.baseTerrain = packed;
+			}
+
 		}
 		/*
 		public void doFrostOverlay(string action) {

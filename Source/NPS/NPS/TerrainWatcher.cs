@@ -617,7 +617,7 @@ namespace TKKN_NPS
 			cellData cell = this.cellWeatherAffects[c];
 			cell.DoCellSteadyEffects();
 
-			if (this.ticks % 3 == 0)
+			if (this.ticks % 2 == 0)
 			{
 				cell.unpack();
 			}

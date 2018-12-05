@@ -31,6 +31,7 @@ namespace TKKN_NPS
 		public static bool allowPawnsToGetWet = true;
 		public static bool showRain = true;
 		public static bool doWeather = true;
+		public static bool doDirtPath = true;
 		public static bool regenCells = false;
 		public static bool doTides = true;		
 		public static bool showDevReadout = false;
@@ -75,7 +76,12 @@ namespace TKKN_NPS
 				ref Settings.doTides,
 				"TKKN_doTides_text".Translate());
 			list.Gap(12f);
-
+			list.CheckboxLabeled(
+				"TKKN_doDirtPath_title".Translate(),
+				ref Settings.doDirtPath,
+				"TKKN_doDirtPath_text".Translate());
+			list.Gap(12f);
+			
 
 			//Game Play Settings
 
@@ -124,7 +130,8 @@ namespace TKKN_NPS
 		public override void ExposeData()
 		{
 			base.ExposeData();
-
+			
+			Scribe_Values.Look(ref Settings.doDirtPath, "doDirtPath", true, true);
 			Scribe_Values.Look(ref Settings.showHot, "showHot", true, true);
 			Scribe_Values.Look(ref Settings.showCold, "showCold", true, true);
 			Scribe_Values.Look(ref Settings.showHot, "allowPlantEffects", true, true);
