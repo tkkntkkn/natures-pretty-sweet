@@ -110,6 +110,10 @@ namespace TKKN_NPS
 				}
 			}
 
+            if (String.IsNullOrEmpty(path)) //Need to check if the path is null/empty in case showCold is false and temp is below flower/drought temp
+            {
+                return;
+            }
 
 			if (!map.GetComponent<Watcher>().graphicHolder.ContainsKey(id))
 			{
