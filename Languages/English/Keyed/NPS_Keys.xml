@@ -60,7 +60,11 @@
   <TKKN_doWeather_text>If unchecked, none of the below will happen. If checked, only the ones checked below will happen.</TKKN_doWeather_text>
   <TKKN_doTides_title>Do Tides</TKKN_doTides_title>
   <TKKN_doTides_text>Oceans will rise and fall</TKKN_doTides_text>
+  
+  <TKKN_doDirtPath_title>Make dirt paths</TKKN_doDirtPath_title>
+  <TKKN_doDirtPath_text>Pawns pack dirt and sand, and smooth rock floors, as they walk</TKKN_doDirtPath_text>
 
+  
   <TKKN_showTempReadout_title>Show temperature readout</TKKN_showTempReadout_title>
   <TKKN_showTempReadout_text>Show temperature readout in the bottom left</TKKN_showTempReadout_text>
   
