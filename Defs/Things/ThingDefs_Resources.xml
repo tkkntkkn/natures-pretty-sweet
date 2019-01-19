@@ -292,6 +292,7 @@
     <building>
       <isNaturalRock>false</isNaturalRock>
       <canBuildNonEdificesUnder>true</canBuildNonEdificesUnder>
+	  <smoothedThing/>
     </building>
     <saveCompressible>false</saveCompressible>
     <repairEffect>Repair</repairEffect>
