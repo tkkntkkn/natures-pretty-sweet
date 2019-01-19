@@ -54,17 +54,34 @@ namespace TKKN_NPS
 		}
 
 		public void setTerrain(string type) {
-			//Make sure it hasn't been made a floor or a floor hasn't been removed.
-			if (!currentTerrain.HasModExtension<TerrainWeatherReactions>())
-			{
-				this.baseTerrain = currentTerrain;
-			}
-			else if (!baseTerrain.HasModExtension<TerrainWeatherReactions>() && this.baseTerrain != currentTerrain)
-			{
-				this.baseTerrain = currentTerrain;
-			}
-
-			if (weather == null)
+            if (this.map == null) return;
+            //Make sure it hasn't been made a floor or a floor hasn't been removed.
+            if (!currentTerrain.HasModExtension<TerrainWeatherReactions>())
+            {
+                this.baseTerrain = currentTerrain;
+            }
+            else if (!baseTerrain.HasModExtension<TerrainWeatherReactions>() && this.baseTerrain != currentTerrain)
+            {
+                this.baseTerrain = currentTerrain;
+            }
+            else //If the terrain has extentions, make sure the current terrain is one of the possible extentions of the base terrain.  
+				 //If the current terrain isn't an extention of the base, the terrain has been modified (ie Moisture Pump) or terraformed, and the current terrain should replace the base terrain.
+            {
+                var terrainReactions = baseTerrain.GetModExtension<TerrainWeatherReactions>();
+                if (terrainReactions != null)
+                {
+                    if (terrainReactions.tideTerrain != currentTerrain &&
+                        terrainReactions.floodTerrain != currentTerrain &&
+                        terrainReactions.wetTerrain != currentTerrain &&
+                        terrainReactions.freezeTerrain != currentTerrain &&
+                        terrainReactions.dryTerrain != currentTerrain &&
+                        terrainReactions.baseOverride != currentTerrain)
+                    {
+                        this.baseTerrain = currentTerrain;
+                    }
+                }
+            }
+            if (weather == null)
 			{
 				return;
 			}
