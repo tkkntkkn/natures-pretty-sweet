@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<HediffDef>
+		<defName>TKKN_Thirst</defName>
+		<hediffClass>TKKN_NPS.Hediff_Thirst</hediffClass>
+		<label>thirst</label>
+		<stages>
+		  <li>
+			<label></label>
+			<minSeverity>0</minSeverity>
+		  </li>
+		  <li>
+			<label>dry mouth</label>
+			<minSeverity>0.04</minSeverity>
+		  </li>
+		  <li>
+			<label>thirsty</label>
+			<minSeverity>0.35</minSeverity>
+		  </li>
+		  <li>
+			<label>parched</label>
+			<minSeverity>0.62</minSeverity>
+		  </li>
+		  <li>
+			<label>dehydrated</label>
+			<minSeverity>0.8</minSeverity>
+		  </li>
+		</stages>
+	</HediffDef>
+
+	<HediffDef>
+		<defName>TKKN_Sweat</defName>
+		<hediffClass>TKKN_NPS.Hediff_Sweat</hediffClass>
+		<label>sweatiness</label>
+		<stages>
+		  <li>
+			<label></label>
+			<minSeverity>0</minSeverity>
+		  </li>
+		  <li>
+			<label>glowing</label>
+			<minSeverity>0.04</minSeverity>
+		  </li>
+		  <li>
+			<label>moist</label>
+			<minSeverity>0.35</minSeverity>
+		  </li>
+		  <li>
+			<label>sticky</label>
+			<minSeverity>0.62</minSeverity>
+		  </li>
+		  <li>
+			<label>dripping</label>
+			<minSeverity>0.8</minSeverity>
+		  </li>
+		</stages>
+	</HediffDef>
+
+	<HediffDef>
+		<defName>TKKN_Sunburn</defName>
+		<hediffClass>TKKN_NPS.Hediff_Sunburn</hediffClass>
+		<label>sunburn</label>
+		<stages>
+		  <li>
+			<label></label>
+			<minSeverity>0</minSeverity>
+		  </li>
+		  <li>
+			<label>tanned</label>
+			<minSeverity>0.35</minSeverity>
+		  </li>
+		  <li>
+			<label>pink</label>
+			<minSeverity>0.62</minSeverity>
+		  </li>
+		  <li>
+			<label>red</label>
+			<minSeverity>0.8</minSeverity>
+		  </li>
+		</stages>
+	</HediffDef>	
+	
+	<HediffDef ParentName="InjuryBase">
+		<defName>TKKN_Sunburn</defName>
+		<hediffClass>TKKN_NPS.Hediff_Sunburn</hediffClass>
+		<label>sunburn</label>
+		<labelNoun>a sunburn</labelNoun>
+		<comps>
+			<li Class="HediffCompProperties_TendDuration">
+				<labelTendedWell>soothed</labelTendedWell>
+			</li>
+		  <li Class="HediffCompProperties_Infecter">
+			<infectionChance>0.10</infectionChance>
+		  </li>
+		  <li Class="HediffCompProperties_GetsPermanent">
+			<permanentLabel>sunburn scar</permanentLabel>
+		  </li>
+		</comps>
+		<injuryProps>
+		  <painPerSeverity>0.00875</painPerSeverity>
+		  <averagePainPerSeverityPermanent>0.00025</averagePainPerSeverityPermanent>
+		  <canMerge>true</canMerge>
+		</injuryProps>
+	</HediffDef>
+
+	
+	<HediffDef>
+		<defName>TKKN_Wetness</defName>
+		<hediffClass>TKKN_NPS.Hediff_Wetness</hediffClass>
+		<label>wetness</label>
+		<stages>
+		  <li>
+			<label></label>
+			<minSeverity>0</minSeverity>
+		  </li>
+		  <li>
+			<label>damp</label>
+			<minSeverity>0.04</minSeverity>
+		  </li>
+		  <li>
+			<label>soggy</label>
+			<minSeverity>0.35</minSeverity>
+		  </li>
+		  <li>
+			<label>wet</label>
+			<minSeverity>0.62</minSeverity>
+		  </li>
+		  <li>
+			<label>soaked</label>
+			<minSeverity>0.8</minSeverity>
+		  </li>
+		</stages>
+	</HediffDef>
+
+	
+  <HediffDef>
+    <defName>TKKN_Drowning</defName>
+    <label>drowning</label>
+    <lethalSeverity>1</lethalSeverity>
+    <scenarioCanAdd>true</scenarioCanAdd>
+    <stages>
+       <li>
+        <label>treading water</label>
+        <minSeverity>0.2</minSeverity>
+        <capMods>
+          <li>
+            <capacity>Moving</capacity>
+            <offset>-0.1</offset>
+          </li>
+          <li>
+            <capacity>Manipulation</capacity>
+            <offset>-0.2</offset>
+          </li>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>-0.10</offset>
+          </li>
+        </capMods>
+      </li>
+      <li>
+        <label>floundering</label>
+        <minSeverity>0.35</minSeverity>
+        <painOffset>0.15</painOffset>
+        <capMods>
+          <li>
+            <capacity>Moving</capacity>
+            <offset>-0.3</offset>
+          </li>
+          <li>
+            <capacity>Manipulation</capacity>
+            <offset>-0.5</offset>
+          </li>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>-0.20</offset>
+          </li>
+        </capMods>
+      </li>
+      <li>
+        <label>drowning</label>
+        <minSeverity>0.62</minSeverity>
+        <lifeThreatening>true</lifeThreatening>
+        <painOffset>0.30</painOffset>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <setMax>0.1</setMax>
+          </li>
+        </capMods>
+      </li>
+    </stages>
+  </HediffDef>
+</Defs>

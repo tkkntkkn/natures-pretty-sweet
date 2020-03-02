@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<!-- =========================== Good ============================-->
+
+	<IncidentDef>
+		<defName>TKKN_WildFlowerBloom</defName>
+		<label>wild flower bloom</label>
+		<category>Misc</category>
+		<targetTags>
+		  <li>Map_PlayerHome</li>
+		</targetTags>
+			<workerClass>TKKN_NPS.IncidentWorker_WildFlowerBloom</workerClass>
+			<gameCondition>TKKN_WildFlowerBloom</gameCondition>
+			<letterLabel>TKKN_NPS_WildFlowerBloomLbl</letterLabel>
+			<letterText>TKKN_NPS_WildFlowerBloomTxt</letterText>
+			<letterDef>PositiveEvent</letterDef>
+			<baseChance>1.5</baseChance>
+			<minRefireDays>15</minRefireDays>
+			<durationDays>
+				<min>0.125</min>
+				<max>0.35</max>
+			</durationDays>
+		<tale>TKKN_WildFlowerBloom</tale>
+	</IncidentDef>
+	
+	<IncidentDef>
+		<defName>TKKN_Superbloom</defName>
+		<label>superbloom</label>
+		<category>Misc</category>
+		<targetTags>
+		  <li>Map_PlayerHome</li>
+		</targetTags>
+			<workerClass>TKKN_NPS.IncidentWorker_Superbloom</workerClass>
+			<gameCondition>TKKN_Superbloom</gameCondition>
+			<letterLabel>TKKN_NPS_SuperbloomLbl</letterLabel>
+			<letterText>TKKN_NPS_SuperbloomTxt</letterText>
+			<letterDef>PositiveEvent</letterDef>
+			<baseChance>1.2</baseChance>
+			<minRefireDays>15</minRefireDays>
+			<durationDays>
+				<min>0.125</min>
+				<max>0.35</max>
+			</durationDays>
+		<tale>TKKN_Superbloom</tale>
+	</IncidentDef>
+	
+	<!-- migration using only special herd animals -->
+	<IncidentDef>
+		<defName>TKKN_SpecialHerdMigration</defName>
+		<label>herd migration</label>
+		<category>Misc</category>
+		<targetTags>
+			<li>Map_PlayerHome</li>
+		</targetTags>
+		<workerClass>TKKN_NPS.TKKN_SpecialHerdMigration</workerClass>
+		<baseChance>0</baseChance>
+		<letterLabel>Animal migration: {0}</letterLabel>
+		<letterText>A group of {0} is passing through the area.\n\nThey won't attack unless provoked.</letterText>
+		<letterDef>NeutralEvent</letterDef>
+	</IncidentDef>
+
+	
+</Defs>

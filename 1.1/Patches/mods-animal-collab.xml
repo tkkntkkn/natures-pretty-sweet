@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Patch>
+   <Operation Class="PatchOperationSequence">
+      <success>Always</success>
+      <operations>
+         <li Class="TKKN_NPS.PatchOperationFindModByName">
+            <mod>AnimalCollabProj</mod>
+         </li>
+         <li Class="PatchOperationInsert">
+            <xpath>*/BiomeDef[defName = "TKKN_Desert"]</xpath>
+            <value>
+               <wildAnimals>
+                  <ACPThornyDevil>0.04</ACPThornyDevil>
+                  <ACPWildDog>0.04</ACPWildDog>
+               </wildAnimals>
+            </value>
+         </li>
+         <li Class="PatchOperationInsert">
+            <xpath>*/BiomeDef[defName = "TKKN_Oasis"]</xpath>
+            <value>
+               <wildAnimals>
+                  <ACPChipmunk>0.1</ACPChipmunk>
+                  <ACPBlackbear>0.04</ACPBlackbear>
+                  <ACPBlackRhinoceros>0.08</ACPBlackRhinoceros>
+                  <ACPLion>0.04</ACPLion>
+                  <ACPCheetah>0.08</ACPCheetah>
+                  <ACPDuck>0.08</ACPDuck>
+                  <ACPHippopotamus>0.08</ACPHippopotamus>
+               </wildAnimals>
+            </value>
+         </li>
+         <li Class="PatchOperationInsert">
+            <xpath>*/BiomeDef[defName = "TKKN_RedwoodForest"]</xpath>
+            <value>
+               <wildAnimals>
+                  <ACPChipmunk>1.0</ACPChipmunk>
+                  <ACPBlackbear>0.4</ACPBlackbear>
+                  <ACPDuck>0.4</ACPDuck>
+                  <ACPRedPanda>0.08</ACPRedPanda>
+               </wildAnimals>
+            </value>
+         </li>
+         <li Class="PatchOperationInsert">
+            <xpath>*/BiomeDef[defName = "TKKN_VolcanicFlow"]</xpath>
+            <value>
+               <wildAnimals>
+                  <ACPMajoreraGoat>0.1</ACPMajoreraGoat>
+                  <ACPAcidAnt>1</ACPAcidAnt>
+                  <ACPKomodo>1</ACPKomodo>
+               </wildAnimals>
+            </value>
+         </li>
+      </operations>
+   </Operation>
+</Patch>

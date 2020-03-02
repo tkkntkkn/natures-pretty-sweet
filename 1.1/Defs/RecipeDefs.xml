@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<RecipeDef>
+		<defName>MakeChemfuelFromRedWood</defName>
+		<label>make chemfuel from redwood logs</label>
+		<description>Make a batch of chemfuel by gasifying redwood logs.</description>
+		<jobString>Refining chemfuel from redwood.</jobString>
+		<effectWorking>Cremate</effectWorking>
+		<soundWorking>Recipe_Cremate</soundWorking>
+		<workAmount>2500</workAmount>
+		<workSkill>Intellectual</workSkill>
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>RedWoodLog</li>
+					</thingDefs>
+				</filter>
+				<count>85</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>RedWoodLog</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<products>
+			<Chemfuel>35</Chemfuel>
+		</products>
+	</RecipeDef>
+</Defs>

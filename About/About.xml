@@ -3,7 +3,11 @@
 <ModMetaData>
 	<name>Nature's Pretty Sweet</name>
 	<author>tkkntkkn</author>
-	<targetVersion>1.0.2059</targetVersion>
+   <supportedVersions>
+      <li>1.0</li>
+      <li>1.1</li>
+   </supportedVersions>
+   <packageId>tkkntkkn.nps</packageId>
 	<description>			
 TKKNTKKN's Nature's Pretty Sweet adds additional terrain elements, weather and biomes. It also updates the map in response to weather, giving a more wild, untamed and alive feeling to the world.
 

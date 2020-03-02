@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <ThoughtDef>
+    <defName>TKKN_WildFlowerBloom</defName>
+    <gameCondition>TKKN_WildFlowerBloom</gameCondition>
+    <stages>
+      <li>
+        <label>Wildflowers are Blooming</label>
+        <description>Spring is finally here!</description>
+        <baseMoodEffect>5</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+  
+  <ThoughtDef>
+    <defName>TKKN_Superbloom</defName>
+    <gameCondition>TKKN_Superbloom</gameCondition>
+    <stages>
+      <li>
+        <label>It's a Superbloom!</label>
+        <description>I can't believe how many flowers there are!</description>
+        <baseMoodEffect>15</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+  
+
+  
+  
+  </Defs>
