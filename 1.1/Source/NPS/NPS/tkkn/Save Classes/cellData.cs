@@ -13,8 +13,8 @@ namespace TKKN_NPS
 		public IntVec3 location;
 		public Map map;
 		public int howPacked = 0;
-		public int howWet = 0;
-		public float howWetPlants = 60;
+		public float howWet = 0; // 0 = dry, 5 = base, 10 = flood.
+//		public float howWetPlants = 60;
 		public float temperature = -9999;
 		public float frostLevel = 0;
 		public TerrainDef baseTerrain;
@@ -22,10 +22,8 @@ namespace TKKN_NPS
 
 		public string overrideType = "";
 
-		public bool gettingWet = false;
-		public bool isWet = false;
+//		public bool gettingWet = false;
 		public bool isMelt = false;
-		public bool isFlooded = false;
 		public bool isFrozen = false;
 		public bool isThawed = true;
 
@@ -53,8 +51,10 @@ namespace TKKN_NPS
 			get { return this.location.GetTerrain(this.map); }
 		}
 
-		public void setTerrain(string type) {
-			//Make sure it hasn't been made a floor or a floor hasn't been removed.
+
+		public void SetTerrain() {
+
+			// Make sure it hasn't been made a floor or a floor hasn't been removed.
 			if (!currentTerrain.HasModExtension<TerrainWeatherReactions>())
 			{
 				this.baseTerrain = currentTerrain;
@@ -69,224 +69,89 @@ namespace TKKN_NPS
 				return;
 			}
 
-			//change the terrain
-			if (type == "frozen") {
-				this.setFrozenTerrain();
-			} else if (type == "dry")
+			if (IsFlooded() && weather.floodTerrain != null)
 			{
-				this.setWetTerrain();
-			} else if (type == "wet")
-			{
-				this.setWetTerrain();
-			}
-			else if (type == "thaw")
-			{
-				if (isFrozen == true)
+				if (IsCold())
 				{
-					this.howWet = 1;
-					this.setWetTerrain();
-					isFrozen = false;
+					//set to the frozen version of the flooded terrain.
+					changeTerrain(weather.floodTerrain.GetModExtension<TerrainWeatherReactions>().freezeTerrain);
+				}
+				else {
+					changeTerrain(weather.floodTerrain);
+				}
+			}
+
+			else if (IsWet() && weather.wetTerrain != null)
+			{
+				if (IsCold())
+				{
+					//set to the frozen version of the wet terrain
+					changeTerrain(weather.wetTerrain.GetModExtension<TerrainWeatherReactions>().freezeTerrain);
 				}
 				else
 				{
-					this.setFrozenTerrain();
+					this.DoLoot(currentTerrain, weather.wetTerrain);
+					changeTerrain(weather.wetTerrain);
 				}
-			}
-			else if (type == "flooded")
-			{
-				this.setFloodedTerrain();
-			}
-			else if (type == "tide")
-			{
-				this.setTidesTerrain();
-			}
-
-			this.overrideType = "";
-		}
-
-		public void DoCellSteadyEffects()
-		{
-			if (this.howWetPlants < 0)
-			{
-				this.howWetPlants = 0;
-			}
-		}
-
-		public void setWetTerrain()
-		{
-			if (!Settings.showRain)
-			{
-				return;
-			}
-
-			if (weather.wetTerrain != null && currentTerrain != weather.wetTerrain && howWet > weather.wetAt)
-			{
-				changeTerrain(weather.wetTerrain);
-				if (baseTerrain.defName == "TKKN_Lava")
-				{
-					this.map.GetComponent<Watcher>().lavaCellsList.Remove(location);
-				}
-				isWet = true;
-				rainSpawns();
-			}
-			else if (howWet == 0 && currentTerrain != baseTerrain && isWet && !isFlooded){
-				changeTerrain(baseTerrain);
-				if (baseTerrain.defName == "TKKN_Lava")
-				{
-					this.map.GetComponent<Watcher>().lavaCellsList.Add(location);
-				}
-				isWet = false;
-				howWet = -1;
-			}
-			else if (howWet == -1 && weather.dryTerrain != null && !isFlooded)
-			{
-				if (currentTerrain != weather.dryTerrain || baseTerrain != weather.dryTerrain)
-				{
-					isWet = false;
-					baseTerrain = weather.dryTerrain;
-					changeTerrain(weather.dryTerrain);
-				}
-			}
-			//			*/
-		}
-	
-		public void setFrozenTerrain() {
-			if (!Settings.showCold) {
-				return;
-			}
-
-			if (this.temperature < 0  && this.temperature < this.weather.freezeAt && this.weather.freezeTerrain != null)
-			{
-				if (this.isFlooded && this.weather.freezeTerrain != currentTerrain)
-				{
-					if (currentTerrain.HasModExtension<TerrainWeatherReactions>())
-					{
-						TerrainWeatherReactions curWeather = currentTerrain.GetModExtension<TerrainWeatherReactions>();
-						this.changeTerrain(curWeather.freezeTerrain);
-					}
-				}
-				else if(!this.isFrozen)
-				{
-					this.changeTerrain(weather.freezeTerrain);
-					if (baseTerrain.defName == "TKKN_Lava")
-					{
-						this.map.GetComponent<Watcher>().lavaCellsList.Remove(location);
-					}
-
-				}
-				this.isFrozen = true;
-				this.isThawed = false;
-			}
-			else  if (temperature > 0)
-			{
-				if (!this.isThawed)
-				{
-					if (this.baseTerrain.defName == "TKKN_Lava")
-					{
-						this.map.GetComponent<Watcher>().lavaCellsList.Add(location);
-					}
-					this.isFrozen = false;
-					this.isThawed = true;
-					this.changeTerrain(baseTerrain);
-				}
-			}
-		}
-
-		public void setFloodedTerrain()
-		{
-			if (!Settings.showRain)
-			{
-				return;
-			}
-
-			TerrainDef floodTerrain = weather.floodTerrain;
-			if (isFrozen)
-			{
-				TerrainWeatherReactions currWeather = currentTerrain.GetModExtension<TerrainWeatherReactions>();
-				TerrainDef frozenTerrain = currWeather.freezeTerrain;
-				if (frozenTerrain != null)
-				{
-					changeTerrain(frozenTerrain);
-				}
-			} else if (overrideType == "dry")
-			{
-				this.howWetPlants = 100;
-				floodTerrain = baseTerrain;
-				changeTerrain(floodTerrain);
-			}
-			else if (floodTerrain != null && currentTerrain != floodTerrain)
-			{
-				changeTerrain(floodTerrain);
-
-				this.isFlooded = true;
-				if (!floodTerrain.HasTag("Water"))
-				{
-					this.isFlooded = false;
-					this.howWetPlants = 100;
-					this.leaveLoot();
-				}
-				else
-				{
-					this.clearLoot();
-				}
-			}
-		}
-
-		public void setTidesTerrain()
-		{
-			if (!Settings.doTides)
-			{
-				return;
-			}
-			if (overrideType == "dry")
-			{
-				changeTerrain(baseTerrain);
-			}
-			else if (overrideType == "wet")
-			{
-				changeTerrain(weather.tideTerrain);
-			}
-			else if (currentTerrain != baseTerrain)
-			{
-				changeTerrain(baseTerrain);
 			}
 			else
 			{
-				changeTerrain(weather.tideTerrain);
-			}
-
-			if (weather.tideTerrain != null) {
-				if (currentTerrain.HasTag("TKKN_Wet"))
+				if (IsCold() && weather.freezeTerrain != null)
 				{
-					this.clearLoot();
+					changeTerrain(weather.freezeTerrain);
+				}
+				else if (weather.dryTerrain != null)
+				{
+					this.DoLoot(currentTerrain, weather.dryTerrain);
+					changeTerrain(weather.dryTerrain);
 				}
 				else
 				{
-					this.leaveLoot();
+					this.DoLoot(currentTerrain, baseTerrain);
+					changeTerrain(baseTerrain);
 				}
 			}
 		}
-		public void doFrostOverlay(string action)
-		{
-			if (!location.InBounds(this.map))
-			{
-				return;
-			}
-			//KEEPING TO REMOVE OLD WAY OF DOING FROST
-				Thing overlayIce = (Thing)(from t in location.GetThingList(this.map)
-									   where t.def.defName == "TKKN_IceOverlay"
-									   select t).FirstOrDefault<Thing>();
-			if (overlayIce != null)
-			{
-				if (isFrozen)
-				{
-					isMelt = true;
-				}
-				overlayIce.Destroy();
-			}
+
+		public bool IsWet() {
+			int dampAt = weather.wetAt + 6;
+			return this.howWet > dampAt && Settings.affectsWet;
 
 		}
-		
+
+		public bool IsFlooded()
+		{
+			return this.howWet == 10 && Settings.affectsWet;
+		}
+
+		public bool IsCold()
+		{
+			return this.temperature < 0 && Settings.affectsCold;
+		}
+
+
+		public void DoCellSteadyEffects(TerrainDef currentTerrain)
+		{
+
+			if (this.howWet < 0)
+			{
+				this.howWet = 0;
+			}
+			if (this.howWet > 10)
+			{
+				this.howWet = 10;
+			}
+
+			//unpack soil so paths are not permenant
+			this.unpack();
+			
+			//check if the terrain has been floored
+			DesignationCategoryDef cats = currentTerrain.designationCategory;
+			if (cats != null && cats.defName == "Floors")
+			{
+				this.baseTerrain = currentTerrain;
+			}
+		}
 
 		public void unpack()
 		{
@@ -309,11 +174,11 @@ namespace TKKN_NPS
 			{
 				this.howPacked--;
 			}
-			else if(this.howPacked <= (this.packAt / 2) && this.currentTerrain.defName == "TKKN_DirtPath")
+			else if(this.howPacked <= (this.packAt) && this.currentTerrain.defName == "TKKN_DirtPath")
 			{
 				this.changeTerrain(RimWorld.TerrainDefOf.Soil);
 			}
-			else if (this.howPacked <= (this.packAt / 2) && this.currentTerrain.defName == "TKKN_SandPath")
+			else if (this.howPacked <= (this.packAt) && this.currentTerrain.defName == "TKKN_SandPath")
 			{
 				this.changeTerrain(RimWorld.TerrainDefOf.Sand);
 			}
@@ -363,45 +228,22 @@ namespace TKKN_NPS
 			}
 
 		}
-		/*
-		public void doFrostOverlay(string action) {
-			if (action == "add")
-			{
-				if (!Settings.showCold) {
-					return;
-				}
-				Thing overlayIce = (Thing)(from t in location.GetThingList(this.map)
-										   where t.def.defName == "TKKN_IceOverlay"
-										   select t).FirstOrDefault<Thing>();
-				if ((weather.freezeTerrain == null || currentTerrain != weather.freezeTerrain || weather.isSalty) && !currentTerrain.HasTag("Water") && overlayIce == null)
-				{
-					Thing ice = ThingMaker.MakeThing(ThingDefOf.TKKN_IceOverlay, null);
-					GenSpawn.Spawn(ice, location, map);
-				}
-			}
-			else
-			{
-				Thing overlayIce = (Thing)(from t in location.GetThingList(this.map)
-										   where t.def.defName == "TKKN_IceOverlay"
-										   select t).FirstOrDefault<Thing>();
-				if (overlayIce != null)
-				{
-					if (isFrozen)
-					{
-						isMelt = true;
-					}
-					overlayIce.Destroy();
-				}
-
-			}
-		}
-		*/
 
 		private void changeTerrain(TerrainDef terrain)
 		{
 			if (terrain != null && terrain != currentTerrain)
 			{
 				this.map.terrainGrid.SetTerrain(location, terrain);
+				if (terrain.defName != "TKKN_Lava")
+				{
+					this.map.GetComponent<Watcher>().lavaCellsList.Remove(location);
+				}
+				if (terrain.defName == "TKKN_Lava")
+				{
+					this.map.GetComponent<Watcher>().lavaCellsList.Add(location);
+				}
+
+
 			}
 		}
 
@@ -424,6 +266,47 @@ namespace TKKN_NPS
 				MoteMaker.ThrowSmoke(location.ToVector3(), this.map, 5);
 			}
 }
+
+		private void SpawnElement() {
+			if (Rand.Value > .0001f)
+			{
+				return;
+			}
+			string defName = "";
+			if (currentTerrain.defName == "TKKN_Lava")
+			{
+				defName = "TKKN_LavaRock";
+			}
+			else if (currentTerrain.defName == "TKKN_LavaRock_RoughHewn" && this.map.Biome.defName == "TKKN_VolcanicFlow")
+			{
+				defName = "TKKN_SteamVent";
+			}
+
+			if (defName != "")
+			{
+				Thing check = (Thing)(from t in location.GetThingList(this.map)
+									  where t.def.defName == defName
+									  select t).FirstOrDefault<Thing>();
+				if (check == null)
+				{
+					Thing thing = (Thing)ThingMaker.MakeThing(ThingDef.Named(defName), null);
+					GenSpawn.Spawn(thing, location, map);
+				}
+			}
+		}
+
+		private void DoLoot(TerrainDef currentTerrain, TerrainDef newTerrain)
+		{
+			if (currentTerrain.HasTag("Water") && newTerrain.HasTag("Water"))
+			{
+				this.leaveLoot();
+			}
+			else
+			{
+				this.clearLoot();
+			}
+
+		}
 
 		private void leaveLoot()
 		{
@@ -627,27 +510,37 @@ namespace TKKN_NPS
 			Scribe_Values.Look<int>(ref this.tideLevel, "tideLevel", this.tideLevel, true);
 			Scribe_Collections.Look<int>(ref this.floodLevel, "floodLevel", LookMode.Value);
 			Scribe_Values.Look<int>(ref this.howPacked, "howPacked", this.howPacked, true);
-			Scribe_Values.Look<int>(ref this.howWet, "howWet", this.howWet, true);
-			Scribe_Values.Look<float>(ref this.howWetPlants, "howWetPlants", this.howWetPlants, true);
+			Scribe_Values.Look<float>(ref this.howWet, "howWet", this.howWet, true);
 			Scribe_Values.Look<float>(ref this.frostLevel, "frostLevel", this.frostLevel, true);
-			Scribe_Values.Look<bool>(ref this.isWet, "isWet", this.isWet, true);
-			Scribe_Values.Look<bool>(ref this.isFlooded, "isFlooded", this.isFlooded, true);
 			Scribe_Values.Look<bool>(ref this.isMelt, "isMelt", this.isMelt, true);
 			Scribe_Values.Look<string>(ref this.overrideType, "overrideType", this.overrideType, true);
-
 			Scribe_Values.Look<bool>(ref this.isThawed, "isThawed", this.isThawed, true);
-
-			
-
 			Scribe_Values.Look<IntVec3>(ref this.location, "location", this.location, true);
 			Scribe_Values.Look<float>(ref this.temperature, "temperature", -999, true);
 			Scribe_Defs.Look<TerrainDef>(ref this.baseTerrain, "baseTerrain");
-
 			Scribe_Defs.Look<TerrainDef>(ref this.originalTerrain, "originalTerrain");
-			
+
+		}
 
 
 
+
+
+
+		public void doFrostOverlay(string action)
+		{
+			if (!location.InBounds(this.map))
+			{
+				return;
+			}
+			//KEEPING TO REMOVE OLD WAY OF DOING FROST
+			Thing overlayIce = (Thing)(from t in location.GetThingList(this.map)
+									   where t.def.defName == "TKKN_IceOverlay"
+									   select t).FirstOrDefault<Thing>();
+			if (overlayIce != null)
+			{
+				overlayIce.Destroy();
+			}
 		}
 
 	}

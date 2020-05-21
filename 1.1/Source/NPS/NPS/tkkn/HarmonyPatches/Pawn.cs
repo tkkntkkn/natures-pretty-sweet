@@ -3,7 +3,7 @@ using HarmonyLib;
 using RimWorld;
 using System;
 using System.Collections.Generic;
-
+/*
 namespace TKKN_NPS
 {
 	
@@ -187,7 +187,7 @@ namespace TKKN_NPS
 			if (pawn.Position.InBounds(map) && pawn.RaceProps.Humanlike)
 			{
 				//damage plants and remove snow/frost where they are. This will hopefully generate paths as pawns walk :)
-				if (watcher.checkIfCold(pawn.Position))
+				if (watcher.CheckIfCold(pawn.Position))
 				{
 					map.GetComponent<FrostGrid>().AddDepth(pawn.Position, (float)-.05);
 					map.snowGrid.AddDepth(pawn.Position, (float)-.05);
@@ -215,7 +215,7 @@ namespace TKKN_NPS
 				Map map = pawn.Map;
 				Watcher watcher = map.GetComponent<Watcher>();
 
-				bool isCold = watcher.checkIfCold(pawn.Position);
+				bool isCold = watcher.CheckIfCold(pawn.Position);
 				if (isCold)
 				{
 					IntVec3 head = pawn.Position;
@@ -237,3 +237,4 @@ namespace TKKN_NPS
 	}
 	
 }
+*/

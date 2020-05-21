@@ -26,11 +26,20 @@ namespace TKKN_NPS
 		public static bool spawnLavaOnlyInBiome = true;
 		public static bool allowLavaEruption = true;
 		public static bool allowPlantEffects = true;
+
+		//terrain effects:
+		public static bool affectsCold = true;
+		public static bool affectsWet = true;
+		public static bool affectsHot = true;
+
+
+
 		public static bool showCold = true;
 		public static bool showHot = true;
+		public static bool showRain = true;
+
 		public static bool allowPawnsToGetWet = true;
 		public static bool allowPawnsSwim = true;
-		public static bool showRain = true;
 		public static bool doWeather = true;
 		public static bool doDirtPath = true;
 		public static bool regenCells = false;

@@ -3,7 +3,7 @@ using System;
 using UnityEngine;
 using Verse;
 using HarmonyLib;
-
+/*
 namespace TKKN_NPS
 {
 	//swap out plant graphics based on seasonal effects
@@ -37,23 +37,28 @@ namespace TKKN_NPS
 					cell = watcher.cellWeatherAffects[__instance.Position];
 					Vector2 location = Find.WorldGrid.LongLatOf(__instance.MapHeld.Tile);
 					Season season = GenDate.Season((long)Find.TickManager.TicksAbs, location);
-				
-					if (!String.IsNullOrEmpty(mod.floweringGraphicPath) && ((cell.howWetPlants > 60 && map.weatherManager.RainRate <= .001f) || season == Season.Spring))
+
+					float minWetnessToLive = (__instance.def.plant.fertilityMin * 5) + (__instance.def.plant.fertilitySensitivity * 2f);
+					float minWetnessToFlower = (__instance.def.plant.fertilityMin * 5) + (__instance.def.plant.fertilitySensitivity * 3f);
+
+
+					if (!String.IsNullOrEmpty(mod.floweringGraphicPath) && ((cell.howWet > minWetnessToFlower) || season == Season.Spring))
 					{
 						id += "flowering";
 						path = mod.floweringGraphicPath;
 					}
 
-					if (!String.IsNullOrEmpty(mod.droughtGraphicPath) && cell.howWetPlants < 20)
-					{
+					if (cell.howWet < minWetnessToLive){
 						id += "drought";
-						path = mod.droughtGraphicPath;
-					} else
-					if (__instance.def.plant.leaflessGraphic != null && cell.howWetPlants < 20)
-					{
-						id += "drought";
-						path = __instance.def.plant.leaflessGraphic.path;
-					}
+						if (!String.IsNullOrEmpty(mod.droughtGraphicPath))
+						{
+							path = mod.droughtGraphicPath;
+						}
+						else if(__instance.def.plant.leaflessGraphic != null)
+						{
+							path = __instance.def.plant.leaflessGraphic.path;
+						}
+					} 
 				}
 			}
 			if (path != "")
@@ -130,3 +135,4 @@ namespace TKKN_NPS
 	}
 
 }
+*/

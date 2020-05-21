@@ -55,6 +55,7 @@ namespace TKKN_NPS
 
 		}
 
+
 		public override void MapComponentTick()
 		{
 			this.ticks++;
@@ -74,8 +75,8 @@ namespace TKKN_NPS
 
 
 				// this.checkRandomTerrain(); triggering on atmosphere affects
-				this.doTides();
-				this.doFloods();
+				this.DoTides();
+				this.DoFloods();
 				int num = Mathf.RoundToInt((float)this.map.Area * 0.0006f);
 				int area = this.map.Area;
 				for (int i = 0; i < num; i++)
@@ -85,7 +86,7 @@ namespace TKKN_NPS
 						this.cycleIndex = 0;
 					}
 					IntVec3 c = this.map.cellsInRandomOrder.Get(this.cycleIndex);
-					this.doCellEnvironment(c);
+					this.DoCellEnvironment(c);
 					this.cycleIndex++;
 				}
 			}
@@ -176,7 +177,7 @@ namespace TKKN_NPS
 					cellData cell = new cellData();
 					cell.location = c;
 					cell.baseTerrain = terrain;
-					cell.howWetPlants = 70;
+					cell.howWet = 6;
 
 					if (cell.originalTerrain != null)
 					{
@@ -328,6 +329,7 @@ namespace TKKN_NPS
 
 
 		}
+
 		public void spawnSpecialPlants(IntVec3 c)
 		{
 			List<ThingDef> list = new List<ThingDef>()
@@ -526,7 +528,7 @@ namespace TKKN_NPS
 					}
 				}
 				//bring to current tide levels
-				string tideLevel = getTideLevel();
+				string tideLevel = GetTideLevel();
 				int max = 0;
 				if (tideLevel == "normal")
 				{
@@ -543,14 +545,15 @@ namespace TKKN_NPS
 					{
 						IntVec3 c = makeSand[j];
 						cellData cell = this.cellWeatherAffects[c];
-						cell.setTerrain("tide");
+						cell.howWet = 10;
+						cell.SetTerrain();
 					}
 				}
 				this.tideLevel = max;
 
 			}
 
-			string flood = getFloodType();
+			string flood = GetFloodType();
 
 			for (int i = 0; i < this.howManyFloodSteps; i++)
 			{
@@ -565,19 +568,17 @@ namespace TKKN_NPS
 					}
 					if (flood == "high")
 					{
-						cell.setTerrain("flooded");
+						cell.howWet = 10;
 					}
 					else if (flood == "low")
 					{
-						cell.overrideType = "dry";
-						cell.setTerrain("flooded");
+						cell.howWet = 0;
 					} else if (i < howManyFloodSteps/2) {
-						cell.setTerrain("flooded");
+						cell.howWet = 10;
 					} else {
-						cell.overrideType = "dry";
-						cell.setTerrain("flooded");
+						cell.howWet = 0;
 					}
-
+					cell.SetTerrain();
 				}
 			}
 
@@ -608,219 +609,51 @@ namespace TKKN_NPS
 
 		#region effect by terrain
 
-		public void doCellEnvironment(IntVec3 c)
+		public cellData GetCell(IntVec3 c)
 		{
 			if (!this.cellWeatherAffects.ContainsKey(c))
 			{
-				return;
+				return null;
 			}
-			cellData cell = this.cellWeatherAffects[c];
-			cell.DoCellSteadyEffects();
 
-			if (this.ticks % 2 == 0)
+			if (!c.InBounds(this.map))
 			{
-				cell.unpack();
+				return null;
+			}
+
+			return this.cellWeatherAffects[c];
+		}
+
+		public void DoCellEnvironment(IntVec3 c)
+		{
+			cellData cell = this.GetCell(c);
+			if (cell == null)
+			{
+				return;
 			}
 
 			TerrainDef currentTerrain = c.GetTerrain(this.map);
+			cell.DoCellSteadyEffects(currentTerrain);
+
 			Room room = c.GetRoom(this.map, RegionType.Set_All);
-			bool roofed = this.map.roofGrid.Roofed(c);
-			bool flag2 = room != null && room.UsesOutdoorTemperature;
 
-			bool gettingWet = false;
-			cell.gettingWet = false;
+			this.SetCellTemperature(cell, room);
+			this.SetCellWetness(cell, c);
+			cell.SetTerrain();
 
-			//check if the terrain has been floored
-			DesignationCategoryDef cats = currentTerrain.designationCategory;
-			if (cats != null)
-			{
-				if (cats.defName == "Floors")
-				{
-					cell.baseTerrain = currentTerrain;
-				}
-			}
+			//frost effect
+			float frostRate = 0.46f * (-1 * cell.temperature / 10);
+			CreepFrostAt(c, frostRate, map);
 
-			//spawn special things
-			if (Rand.Value < .0001f)
-			{
-				if (c.InBounds(this.map))
-				{
+			//damage plants
+			this.HurtPlants(cell, c, false, true);
 
-					string defName = "";
-
-					if (currentTerrain.defName == "TKKN_Lava")
-					{
-						defName = "TKKN_LavaRock";
-					}
-					else if (currentTerrain.defName == "TKKN_LavaRock_RoughHewn" && this.map.Biome.defName == "TKKN_VolcanicFlow")
-					{
-						defName = "TKKN_SteamVent";
-					}
-
-					if (defName != "")
-					{
-						Thing check = (Thing)(from t in c.GetThingList(this.map)
-											  where t.def.defName == defName
-											  select t).FirstOrDefault<Thing>();
-						if (check == null)
-						{
-							Thing thing = (Thing)ThingMaker.MakeThing(ThingDef.Named(defName), null);
-							GenSpawn.Spawn(thing, c, map);
-						}
-					}
-				}
-			}
-
-
-			#region Rain
-			if(Settings.showRain && !cell.currentTerrain.HasTag("TKKN_Wet"))
-			{
-				//if it's raining in this cell:
-				if (!roofed && this.map.weatherManager.curWeather.rainRate > .0001f)
-				{
-					if (this.floodThreat < 1090000) {
-						this.floodThreat += 1 + 2 * (int)Math.Round(this.map.weatherManager.curWeather.rainRate);
-					}
-					gettingWet = true;
-					cell.gettingWet = true;
-					cell.setTerrain("wet");
-				} else if (Settings.showRain && !roofed && this.map.weatherManager.curWeather.snowRate > .001f)
-				{
-					gettingWet = true;
-					cell.gettingWet = true;
-					cell.setTerrain("wet");
-				}
-				else
-				{
-					if (this.map.weatherManager.curWeather.rainRate == 0)
-					{
-						this.floodThreat--;
-					}
-					//DRY GROUND
-					cell.setTerrain("dry");
-				}
-			}
-			#endregion
-
-			#region Cold
-			bool isCold = this.checkIfCold(c);
-			if (isCold)
-			{
-				cell.setTerrain("frozen");
-			}
-			else
-			{
-				cell.setTerrain("thaw");
-			}
-
-			#region Frost
-
-			if (isCold)
-			{
-				//handle frost based on snowing
-				if (!roofed && this.map.weatherManager.SnowRate > 0.001f)
-				{
-					this.map.GetComponent<FrostGrid>().AddDepth(c, this.map.weatherManager.SnowRate * -.01f);
-				}
-				else
-				{
-					CreepFrostAt(c, 0.46f * .3f, map);
-				}
-			}
-			else
-			{
-				float frosty = cell.temperature  * -.025f;
-//				float frosty = this.map.mapTemperature.OutdoorTemp * -.03f;
-				this.map.GetComponent<FrostGrid>().AddDepth(c, frosty);
-				if (this.map.GetComponent<FrostGrid>().GetDepth(c) > .3f) {
-					// cell.isMelt = true;
-				}
-			}
-
-
-			#endregion
-
-			#region plant damage
-
-			//HANDLE PLANT DAMAGES:
-			if (gettingWet)
-			{
-				//note - removed ismelt because the dirt shouldn't dry out in winter, and snow wets the ground then.
-				if (cell.howWetPlants < (float)100)
-				{
-					if (this.map.weatherManager.curWeather.rainRate > 0)
-					{
-						cell.howWetPlants += this.map.weatherManager.curWeather.rainRate * 2;
-					}
-					else if (this.map.weatherManager.curWeather.snowRate > 0)
-					{
-						cell.howWetPlants += this.map.weatherManager.curWeather.snowRate * 2;
-					}
-				}
-			}
-			else
-			{
-				if (this.map.mapTemperature.OutdoorTemp > 20)
-				{
-					cell.howWetPlants += -1 * ((this.map.mapTemperature.OutdoorTemp / humidity)/10);
-					if(cell.howWetPlants <= 0){
-						if (cell.currentTerrain.HasModExtension<TerrainWeatherReactions>())
-						{
-							TerrainWeatherReactions weather = cell.currentTerrain.GetModExtension<TerrainWeatherReactions>();
-							if (weather.dryTerrain == null)
-							{
-								//only hurt plants on terrain that's not wet.
-								this.hurtPlants(c, false, true);
-							}
-						}
-						else
-						{
-							this.hurtPlants(c, false, true);
-						}
-					}
-				}
-			}
-
-			#endregion
-			/* MAKE THIS A WEATHER
-			#region heat
-			Thing overlayHeat = (Thing)(from t in c.GetThingList(this.map)
-										where t.def.defName == "TKKN_HeatWaver"
-										select t).FirstOrDefault<Thing>();
-			if (this.checkIfHot(c))
-			{
-				if (overlayHeat == null && Settings.showHot)
-				{
-					Thing heat = ThingMaker.MakeThing(ThingDefOf.TKKN_HeatWaver, null);
-					GenSpawn.Spawn(heat, c, map);
-				}
-			}
-			else
-			{
-				if (overlayHeat != null)
-				{
-					overlayHeat.Destroy();
-				}
-			}
-			#endregion
-			*/
-
-			#region Puddles
-			if (cell.howWet < 3 && Settings.showRain && (cell.isMelt || gettingWet))
-			{
-				cell.howWet += 2;
-			}
-			else if (cell.howWet > -1)
-			{
-				cell.howWet--;
-			}
-
-			//PUDDLES
+			//spawn puddles
 			Thing puddle = (Thing)(from t in c.GetThingList(this.map)
-				where t.def.defName == "TKKN_FilthPuddle"
-				select t).FirstOrDefault<Thing>();
+								   where t.def.defName == "TKKN_FilthPuddle"
+								   select t).FirstOrDefault<Thing>();
 
-			if (cell.howWet == 3 && !isCold && this.MaxPuddles > this.totalPuddles && cell.currentTerrain.defName != "TKKN_SandBeachWetSalt")
+			if (cell.IsWet() && !cell.IsCold() && this.MaxPuddles > this.totalPuddles && cell.currentTerrain.defName != "TKKN_SandBeachWetSalt")
 			{
 				if (puddle == null)
 				{
@@ -833,95 +666,52 @@ namespace TKKN_NPS
 				puddle.Destroy();
 				this.totalPuddles--;
 			}
-			cell.isMelt = false;
-			#endregion
-
-			/*CELL SHOULD BE HANDLING THIS NOW:
-			//since it changes, make sure the lava list is still good:
-
-			if (currentTerrain.defName == "TKKN_Lava") {
-				this.lavaCellsList.Add(c);
-			} else {
-				this.lavaCellsList.Remove(c);
-			}
-			*/
 
 			this.cellWeatherAffects[c] = cell;
 		}
 
-		public bool checkIfCold(IntVec3 c)
+		public void SetCellTemperature(cellData cell, Room room)
 		{
-			if (!Settings.showCold) {
-				return false;
-			}
-			if (!this.cellWeatherAffects.ContainsKey(c))
+			if (!Settings.showCold)
 			{
-				return false;
+				cell.temperature = 0;
 			}
-			cellData cell = this.cellWeatherAffects[c];
-			Room room = c.GetRoom(this.map, RegionType.Set_All);
-			bool flag2 = room != null && room.UsesOutdoorTemperature;
-
-			bool isCold = false;
-			if (room == null || flag2)
+			bool useOutdoorTemp = (room == null) || (room != null && room.UsesOutdoorTemperature);
+			if (useOutdoorTemp)
 			{
-				
 				cell.temperature = this.map.mapTemperature.OutdoorTemp;
-				if (this.map.mapTemperature.OutdoorTemp < 0f)
-				{
-					isCold = true;
-				}
+			} else {
+				float temperature = room.Temperature;
+				cell.temperature = temperature;
 			}
-			if (room != null)
-			{
-				if (!flag2)
-				{
-					float temperature = room.Temperature;
-					cell.temperature = temperature;
-					if (temperature < 0f)
-					{
-						isCold = true;
-					}
-				}
-			}
-
-			return isCold;
 		}
 
-		private bool checkIfHot(IntVec3 c)
+		public void SetCellWetness(cellData cell, IntVec3 c)
 		{
-			if (!Settings.showHot)
+			bool roofed = this.map.roofGrid.Roofed(c);
+			#region Rain
+			if (Settings.showRain && !cell.currentTerrain.HasTag("TKKN_Wet"))
 			{
-				return false;
-			}
-
-			cellData cell = this.cellWeatherAffects[c];
-			Room room = c.GetRoom(this.map, RegionType.Set_All);
-			bool flag2 = room != null && room.UsesOutdoorTemperature;
-
-			bool isHot = false;
-			if (room == null || flag2)
-			{
-				cell.temperature = this.map.mapTemperature.OutdoorTemp;
-				if (this.map.mapTemperature.OutdoorTemp > 37f)
+				//add wetness from snow/rain
+				if (!roofed)
 				{
-					isHot = true;
-				}
-			}
-			if (room != null)
-			{
-				if (!flag2)
-				{
-					float temperature = room.Temperature;
-					cell.temperature = temperature;
-					if (temperature > 37f)
+					float adjustWetness = this.map.weatherManager.curWeather.rainRate + this.map.weatherManager.curWeather.snowRate - 1;
+					cell.howWet += adjustWetness;
+					if (this.floodThreat < 1090000)
 					{
-						isHot = true;
+						this.floodThreat += 1 + 2 * (int)Math.Round(adjustWetness);
 					}
 				}
-			}
 
-			return isHot;
+				//evaporate wetness
+				cell.howWet -= .1f;
+				if (cell.IsCold())
+				{
+					//if it's not cold, make things dry faster
+					cell.howWet -= (cell.temperature / humidity) / 100;
+				}
+			}
+			#endregion
 		}
 
 		public static void CreepFrostAt(IntVec3 c, float baseAmount, Map map)
@@ -933,24 +723,16 @@ namespace TKKN_NPS
 			float num = map.GetComponent<Watcher>().frostNoise.GetValue(c);
 			num += 1f;
 			num *= 0.5f;
-			if (num < 0.5f)
-			{
-				num = 0.5f;
-			}
 			float depthToAdd = baseAmount * num;
 
 			map.GetComponent<FrostGrid>().AddDepth(c, depthToAdd);
 		}
 
-		public string getFloodType()
+		public string GetFloodType()
 		{
 			string flood = "normal";
 			Season season = GenLocalDate.Season(this.map);
-			if (this.floodThreat > 1000000)
-			{
-				flood = "high";
-			}
-			else if (season.Label() == "spring")
+			if (this.floodThreat > 1000000 || season.Label() == "spring")
 			{
 				flood = "high";
 			}
@@ -966,44 +748,35 @@ namespace TKKN_NPS
 			return flood;
 		}
 
-		public void doFloods()
+		public void DoFloods()
 		{
 			if (this.ticks % 300 != 0) {
 				int half = (int)Math.Round((this.howManyFloodSteps - 1M) / 2);
 				int max = this.howManyFloodSteps - 1;
 
-				
-				string flood = this.getFloodType();
-				
-
-
-				string overrideType = "";
+				string flood = this.GetFloodType();
+				int adjustWet = 0;
 				if (this.floodLevel < max && flood == "high")
 				{
-					overrideType = "wet";
+					this.floodLevel++;
+					adjustWet = 10;
 				}
 				else if (this.floodLevel > 0 && flood == "low")
 				{
-					overrideType = "dry";
+					this.floodLevel--;
+					adjustWet = 0;
 				}
 				else if (this.floodLevel < half && flood == "normal")
 				{
-					overrideType = "wet";
+					this.floodLevel++;
+					adjustWet = 10;
 				}
 				else if (this.floodLevel > half && flood == "normal")
 				{
-					overrideType = "dry";
+					this.floodLevel--;
+					adjustWet = 0;
 				}
-
-				if (this.floodLevel == this.howManyFloodSteps && flood == "high")
-				{
-					return;
-				}
-				else if (this.floodLevel == 0 && flood == "low")
-				{
-					return;
-				}
-				else if (this.floodLevel == half && flood == "normal")
+				else
 				{
 					return;
 				}
@@ -1014,33 +787,13 @@ namespace TKKN_NPS
 				{
 					IntVec3 c = cellsToChange[i];
 					cellData cell = this.cellWeatherAffects[c];
-					if (overrideType != "")
-					{
-						cell.overrideType = overrideType;
-					}
-					cell.setTerrain("flooded");
-				}
-
-				if (this.floodLevel < max && flood == "high")
-				{
-					this.floodLevel++;
-				}
-				else if (this.floodLevel > 0 && flood == "low")
-				{
-					this.floodLevel--;
-				}
-				else if (this.floodLevel < half && flood == "normal")
-				{
-					this.floodLevel++;
-				}
-				else if (this.floodLevel > half && flood == "normal")
-				{
-					this.floodLevel--;
+					cell.howWet += adjustWet;
+					cell.SetTerrain();
 				}
 			}
 		}
 
-		private string getTideLevel()
+		private string GetTideLevel()
 		{
 			if (this.map.gameConditionManager.ConditionIsActive(GameConditionDefOf.Eclipse))
 			{
@@ -1057,7 +810,7 @@ namespace TKKN_NPS
 			return "normal";
 		}
 
-		private void doTides()
+		private void DoTides()
 		{
 			//notes to future me: use this.howManyTideSteps - 1 so we always have a little bit of wet sand, or else it looks stupid.
 			if (!this.doCoast || !Settings.doTides || this.ticks % 100 != 0)
@@ -1065,7 +818,7 @@ namespace TKKN_NPS
 				return;
 			}
 
-			string tideType = getTideLevel();
+			string tideType = GetTideLevel();
 			int half = (int) Math.Round((this.howManyTideSteps - 1M) / 2);
 			int max = this.howManyTideSteps - 1;
 
@@ -1085,35 +838,21 @@ namespace TKKN_NPS
 				cellData cell = this.cellWeatherAffects[c];
 				if (tideType == "high")
 				{
-					cell.overrideType = "wet";
+					cell.howWet = 10;
 				}
 				else if (tideType == "low")
 				{
-					cell.overrideType = "dry";
+					cell.howWet = 7;
 				}
-				cell.setTerrain("tide");
-
-				/*
-				if (Rand.Value < .001)
-				{
-					this.spawnSpecialPlants(c);
-				}
-				*/
+				cell.SetTerrain();
 			}
 
-			if (tideType == "high")
+			if (tideType == "high" && this.tideLevel < max)
 			{
-				if (this.tideLevel < max )
-				{
-					this.tideLevel++;
-				}
+				this.tideLevel++;
 			}
-			else if (tideType == "low")
+			else if (tideType == "low" && this.tideLevel > 0)
 			{
-				if (this.tideLevel > 0)
-				{
-					this.tideLevel--;
-				}
 			}
 			else if (tideType == "normal")
 			{
@@ -1128,21 +867,20 @@ namespace TKKN_NPS
 			}
 		}
 
-		public void hurtPlants(IntVec3 c, bool onlyLow, bool saveHarvest)
+		public void HurtPlants(cellData cell, IntVec3 c, bool onlyLow, bool saveHarvest)
 		{
-
 			if (!Settings.allowPlantEffects || this.ticks % 150 != 0)
 			{
 				return;
 			}
 
-			//don't hurt things in growing zone
+			//don't hurt plants in growing zone
 			Zone_Growing zone = this.map.zoneManager.ZoneAt(c) as Zone_Growing;
 			if (zone != null)
 			{
 				return;
 			}
-			
+
 			List<Thing> things = c.GetThingList(this.map);
 			foreach (Thing thing in things.ToList())
 			{
@@ -1151,11 +889,19 @@ namespace TKKN_NPS
 				{
 					continue;
 				}
+				//see if the plant can survive here:
+				float minWetnessToLive = (plant.def.plant.fertilityMin * 5) + (plant.def.plant.fertilitySensitivity * 2f);
+				if (cell.howWet >= minWetnessToLive)
+				{
+					continue;
+				}
+				//don't hurt trees
 				bool isLow = true;
 				if (onlyLow)
 				{
 					isLow = (thing.def.altitudeLayer == AltitudeLayer.LowPlant);
 				}
+				//don't hurt harvestables
 				bool isHarvestable = true;
 				if (saveHarvest)
 				{
@@ -1173,7 +919,6 @@ namespace TKKN_NPS
 
 		#endregion
 
-		#endregion
 		#region effects by pawns
 		public void checkThingsforLava()
 		{
@@ -1190,29 +935,6 @@ namespace TKKN_NPS
 					removeFromLava.Add(c);
 					continue;
 				}
-
-
-
-				//moving this to a harmony patch
-				/*
-				List<Thing> things = c.GetThingList(this.map);
-				for (int j = things.Count - 1; j >= 0; j--)
-				{
-					//thing.TryAttachFire(5);
-					FireUtility.TryStartFireIn(c, this.map, 5f);
-
-					Thing thing = things[j];
-					float statValue = thing.GetStatValue(StatDefOf.Flammability, true);
-					bool alt = thing.def.altitudeLayer == AltitudeLayer.Item;
-					if (statValue == 0f && alt == true)
-					{
-						if (!thing.Destroyed && thing.def.destroyable)
-						{
-							thing.Destroy(DestroyMode.Vanish);
-						}
-					}
-				}
-				*/
 			}
 
 			foreach (IntVec3 c in removeFromLava)
@@ -1261,7 +983,19 @@ namespace TKKN_NPS
 				n++;
 			}
 		}
-	
+
+		public bool CheckIfCold(IntVec3 c)
+		{
+			if (!Settings.affectsCold){
+				return false;
+			}
+			cellData cell = GetCell(c);
+			if (cell != null)
+			{
+				return cell.IsCold();
+			}
+			return false;
+		}
 
 		#endregion
 	}
