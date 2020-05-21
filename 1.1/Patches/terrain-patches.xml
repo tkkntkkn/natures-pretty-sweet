@@ -187,7 +187,7 @@
       <xpath>*/TerrainDef[defName = "TKKN_SandBeachWetSalt"]</xpath>
       <value>
          <li Class="TKKN_NPS.TerrainWeatherReactions">
-            <floodTerrain>WaterOceanShallow</floodTerrain
+            <floodTerrain>WaterOceanShallow</floodTerrain>
             <wetTerrain />
             <freezeTerrain />
             <freezeAt />

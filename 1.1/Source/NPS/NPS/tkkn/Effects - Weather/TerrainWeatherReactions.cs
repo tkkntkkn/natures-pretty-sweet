@@ -8,7 +8,6 @@ namespace TKKN_NPS
 {
 	public class TerrainWeatherReactions : DefModExtension
 	{
-		public TerrainDef tideTerrain;
 		public TerrainDef floodTerrain;
 		public TerrainDef wetTerrain;
 		public TerrainDef freezeTerrain;
