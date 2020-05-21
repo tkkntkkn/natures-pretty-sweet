@@ -9,6 +9,7 @@ Source/NPS/NPS/bin
 Source/NPS/.vs
 *.sln
 *.csproj
+*/Assemblies/*
 
 
 # User-specific files
