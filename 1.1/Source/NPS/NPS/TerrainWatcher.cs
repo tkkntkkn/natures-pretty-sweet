@@ -17,9 +17,7 @@ namespace TKKN_NPS
 		public bool regenCellLists = true;
 		public Dictionary<IntVec3, cellData> cellWeatherAffects = new Dictionary<IntVec3, cellData>();
 
-		//rebuild every save to keep file size down
-		public List<List<IntVec3>> tideCellsList = new List<List<IntVec3>>();
-		public List<List<IntVec3>> floodCellsList = new List<List<IntVec3>>();
+		//rebuild every save load to keep file size down
 		public HashSet<IntVec3> lavaCellsList = new HashSet<IntVec3>();
 		public List<IntVec3> swimmingCellsList = new List<IntVec3>();
 
@@ -47,7 +45,7 @@ namespace TKKN_NPS
 
 		public BiomeSeasonalSettings biomeSettings;
 
-//		public Map mapRef;
+		//		public Map mapRef;
 
 		/* STANDARD STUFF */
 		public Watcher(Map map) : base(map)
@@ -61,22 +59,34 @@ namespace TKKN_NPS
 			this.ticks++;
 			base.MapComponentTick();
 
-			
+
 			//run through saved terrain and check it
 			this.checkThingsforLava();
 
 			//environmental changes
 			if (Settings.doWeather)
 			{
-				//set up humidity
+				//update humidity
 				float baseHumidity = (map.TileInfo.rainfall + 1) * (map.TileInfo.temperature + 1) * (map.TileInfo.swampiness + 1);
 				float currentHumidity = (1 + map.weatherManager.curWeather.rainRate) * (1 + map.mapTemperature.OutdoorTemp);
 				this.humidity = ((baseHumidity + currentHumidity) / 1000) + 18;
 
+				//rare tick
+				if (this.ticks % 250 == 0)
+				{
+					this.DoTides();
+					this.DoFloods();
+				}
 
+				//get random cells that we want to affect from our list.
+				foreach (cellData cell in RandomValues(cellWeatherAffects).Take(Settings.cellBatchNumber))
+				{
+					this.DoCellEnvironment(cell);
+
+				}
+
+				/*
 				// this.checkRandomTerrain(); triggering on atmosphere affects
-				this.DoTides();
-				this.DoFloods();
 				int num = Mathf.RoundToInt((float)this.map.Area * 0.0006f);
 				int area = this.map.Area;
 				for (int i = 0; i < num; i++)
@@ -86,16 +96,27 @@ namespace TKKN_NPS
 						this.cycleIndex = 0;
 					}
 					IntVec3 c = this.map.cellsInRandomOrder.Get(this.cycleIndex);
-					this.DoCellEnvironment(c);
 					this.cycleIndex++;
 				}
+				*/
 			}
 			this.updateBiomeSettings();
 
 
 
 		}
-	
+
+		public IEnumerable<TValue> RandomValues<TKey, TValue>(IDictionary<TKey, TValue> dict)
+		{
+			System.Random rand = new System.Random();
+			List<TValue> values = Enumerable.ToList(dict.Values);
+			int size = dict.Count;
+			while (true)
+			{
+				yield return values[rand.Next(size)];
+			}
+		}
+
 		public override void ExposeData()
 		{
 			base.ExposeData();
@@ -123,7 +144,7 @@ namespace TKKN_NPS
 				Log.Warning("Wild plant: " + plant.defName);
 			}
 			*/
-			
+
 			base.FinalizeInit();
 			this.biomeSettings = map.Biome.GetModExtension<BiomeSeasonalSettings>();
 			this.updateBiomeSettings(true);
@@ -135,22 +156,21 @@ namespace TKKN_NPS
 				Log.Message("TKKN NPS: Loaded patches for: " + string.Join(", ", TKKN_Holder.modsPatched.ToArray()));
 			}
 		}
-		
+
 
 		#region runs on setup
 		public void rebuildCellLists()
 		{
+			//rebuild lookup lists.
+			this.lavaCellsList = new HashSet<IntVec3>();
+			this.swimmingCellsList = new List<IntVec3>();
 
-			if (Settings.regenCells == true)
-			{
-				this.regenCellLists = Settings.regenCells;
-			}
-
+			this.regenCellLists = Settings.regenCells;
 
 			/*
 			#region devonly
 			this.regenCellLists = true;
-			Log.Error("DEV STUFF IS ON");
+			Log.Error("TKKN DEV STUFF IS ON");
 			this.cellWeatherAffects = new Dictionary<IntVec3, cellData>();
 			#endregion
 			*/
@@ -167,26 +187,16 @@ namespace TKKN_NPS
 				this.cellWeatherAffects = new Dictionary<IntVec3, cellData>();
 				foreach (IntVec3 c in tmpTerrain)
 				{
-					TerrainDef terrain = c.GetTerrain(map);
-
 					if (!c.InBounds(map))
 					{
 						continue;
 					}
 
-					cellData cell = new cellData();
-					cell.location = c;
-					cell.baseTerrain = terrain;
-					cell.howWet = 6;
-
-					if (cell.originalTerrain != null)
+					TerrainDef terrain = c.GetTerrain(map);
+					AddToCellList(c, terrain);
+					if (IsLavaTerrain(terrain))
 					{
-						cell.originalTerrain = terrain;
-					}
-
-					if (terrain.defName == "TKKN_Lava")
-					{
-						//fix for lava pathing. If lava is near lava, make it impassable.
+						//fix for lava pathing. If lava is near lava, switch it to deep lava, making it impassable and less likely for pawns to traverse it.
 						bool edgeLava = false;
 						int num = GenRadial.NumCellsInRadius(1);
 						for (int i = 0; i < num; i++)
@@ -195,7 +205,7 @@ namespace TKKN_NPS
 							if (lavaCheck.InBounds(map))
 							{
 								TerrainDef lavaCheckTerrain = lavaCheck.GetTerrain(this.map);
-								if (lavaCheckTerrain.defName != "TKKN_Lava" && lavaCheckTerrain.defName != "TKKN_LavaDeep")
+								if (!IsLavaTerrain(lavaCheckTerrain))
 								{
 									edgeLava = true;
 								}
@@ -206,21 +216,21 @@ namespace TKKN_NPS
 							this.map.terrainGrid.SetTerrain(c, TerrainDefOf.TKKN_LavaDeep);
 						}
 					}
-					else if (rot.IsValid && (terrain.defName == "Sand" || terrain.defName == "TKKN_SandBeachWetSalt"))
+					else if (rot.IsValid && IsOceanTerrain(terrain, true))
 					{
-						//get all the sand pieces that are touching water.
+						//Set up tides - get all the ocean pieces that are touching land and assign them a tide level, so the tide will move in and out
 						for (int j = 0; j < this.howManyTideSteps; j++)
 						{
 							IntVec3 waterCheck = this.adjustForRotation(rot, c, j);
-							if (waterCheck.InBounds(map) && waterCheck.GetTerrain(map).defName == "WaterOceanShallow")
+							if (waterCheck.InBounds(map) && IsOceanTerrain(waterCheck.GetTerrain(map), true))
 							{
 								this.map.terrainGrid.SetTerrain(c, TerrainDefOf.TKKN_SandBeachWetSalt);
-								cell.tideLevel = j;
+								cellWeatherAffects[c].tideStep = j;
 								break;
 							}
 						}
 					}
-					else if (terrain.HasTag("TKKN_Wet") && terrain.defName != "WaterOceanShallow" && terrain.defName != "WaterOceanDeep")
+					else if (IsFreshWaterTerrain(terrain))
 					{
 						for (int j = 0; j < this.howManyFloodSteps; j++)
 						{
@@ -231,52 +241,29 @@ namespace TKKN_NPS
 								if (bankCheck.InBounds(map))
 								{
 									TerrainDef bankCheckTerrain = bankCheck.GetTerrain(this.map);
-									if (!bankCheckTerrain.HasTag("TKKN_Wet") && terrain.defName != "TKKN_SandBeachWetSalt")// || ((terrain.defName == "WaterDeep" || terrain.defName == "WaterDeep" || terrain.defName == "WaterMovingDeep") && bankCheckTerrain.defName != terrain.defName))
+									if (!IsRiverBank(bankCheckTerrain))
 									{
 										//see if this cell has already been done, because we can have each cell in multiple flood levels.
 										cellData bankCell;
-										if (this.cellWeatherAffects.ContainsKey(bankCheck))
+										if (!this.cellWeatherAffects.ContainsKey(bankCheck))
 										{
-											bankCell = this.cellWeatherAffects[bankCheck];
+											AddToCellList(bankCheck, bankCheckTerrain);
 										}
-										else
-										{
-											bankCell = new cellData();
-											bankCell.location = bankCheck;
-											bankCell.baseTerrain = bankCheckTerrain;
-										}
+										bankCell = this.cellWeatherAffects[bankCheck];
 										bankCell.floodLevel.Add(j);
 									}
 								}
 							}
 						}
-
 					}
-
 					//Spawn special elements:
 					this.spawnSpecialElements(c);
 					this.spawnSpecialPlants(c);
-
-					this.cellWeatherAffects[c] = cell;
 				}
-
 			}
 
 
-			//rebuild lookup lists.
-			this.lavaCellsList = new HashSet<IntVec3>();
-			this.swimmingCellsList = new List<IntVec3>();			
-			this.tideCellsList = new List<List<IntVec3>>();
-			this.floodCellsList = new List<List<IntVec3>>();
 
-			for (int k = 0; k < this.howManyTideSteps; k++)
-			{
-				this.tideCellsList.Add(new List<IntVec3>());
-			}
-			for (int k = 0; k < this.howManyFloodSteps; k++)
-			{
-				this.floodCellsList.Add(new List<IntVec3>());
-			}
 
 			FrostGrid frostGrid = map.GetComponent<FrostGrid>();
 
@@ -288,46 +275,65 @@ namespace TKKN_NPS
 					thiscell.Value.doFrostOverlay("remove");
 				}
 				//temp fix until I can figure out why regenerate wasn't working
-//				frostGrid.SetDepth(thiscell.Value.location, 0);
+				//				frostGrid.SetDepth(thiscell.Value.location, 0);
 				frostGrid.SetDepth(thiscell.Value.location, thiscell.Value.frostLevel);
-
-				if (thiscell.Value.baseTerrain.defName == "TKKN_ColdSprings") {
-					thiscell.Value.baseTerrain = TerrainDefOf.TKKN_ColdSpringsWater;
-				}
-				if (thiscell.Value.baseTerrain.defName == "TKKN_HotSprings")
-				{
-					thiscell.Value.baseTerrain = TerrainDefOf.TKKN_HotSpringsWater;
-				}
-				if (thiscell.Value.tideLevel > -1)
-				{
-					this.tideCellsList[thiscell.Value.tideLevel].Add(thiscell.Key);
-				}
-				if (thiscell.Value.floodLevel.Count != 0)
-				{
-					foreach (int level in thiscell.Value.floodLevel) {
-						this.floodCellsList[level].Add(thiscell.Key);
-					}
-				}
-				if (thiscell.Value.baseTerrain.HasTag("TKKN_Swim"))
-				{
-
-					this.swimmingCellsList.Add(thiscell.Key);
-				}
-				if (thiscell.Value.baseTerrain.HasTag("Lava")) {
-					//future me: to do: split lava actions into ones that will affect pawns and ones that won't, since pawns can't walk on deep lava
-					this.lavaCellsList.Add(thiscell.Key);
-				}
 			}
 			bugFixFrostIsRemoved = true;
 
 			if (this.regenCellLists)
 			{
-				this.setUpTidesBanks();
+				this.SetUpTidesBanks();
 				this.regenCellLists = false;
 			}
+		}
+
+		public void AddToCellList(IntVec3 c)
+		{
+			if (!c.InBounds(map))
+			{
+				return;
+			}
+			TerrainDef terrain = c.GetTerrain(map);
+			AddToCellList(c, terrain);
+		}
 
 
+		public void AddToCellList(IntVec3 c, TerrainDef terrain)
+		{
+			cellData cell = new cellData(terrain, c);
+			this.cellWeatherAffects[c] = cell;
+		}
 
+		/// <summary>
+		/// Checks if the terrain is lava by matching the terrain defName
+		/// </summary>
+		public bool IsLavaTerrain(TerrainDef terrain)
+		{
+			return terrain.defName == "TKKN_Lava" || terrain.defName == "TKKN_LavaDeep";
+		}
+
+		/// <summary>
+		/// Checks if the terrain is Ocean by matching to TKKN_Ocean. Accepts a bool that returns only shallow Ocean water
+		/// </summary>
+		public bool IsOceanTerrain(TerrainDef terrain, bool ignoreDeep = false)
+		{
+			return terrain.HasTag("TKKN_Ocean") && !(ignoreDeep && !terrain.HasTag("ShallowWater"));
+		}
+
+		/// <summary>
+		/// Checks if the terrain is fresh water
+		/// </summary>
+		public bool IsFreshWaterTerrain(TerrainDef terrain)
+		{
+			return terrain.HasTag("TKKN_Wet") && terrain.HasTag("ShallowWater") && !terrain.HasTag("TKKN_Ocean");
+		}
+		/// <summary>
+		/// Checks if the terrain is fresh water
+		/// </summary>
+		public bool IsRiverBank(TerrainDef terrain)
+		{
+			//TKKN_SandBeachWetSalt - this is to keep the areas where the river meets the sea neater.
+			return !terrain.HasTag("TKKN_Wet") && terrain.defName != "TKKN_SandBeachWetSalt";
 		}
 
 		public void spawnSpecialPlants(IntVec3 c)
@@ -378,7 +384,7 @@ namespace TKKN_NPS
 		public void spawnSpecialElements(IntVec3 c)
 		{
 			TerrainDef terrain = c.GetTerrain(map);
-			
+
 
 			//defaults
 			int maxSprings = 3;
@@ -408,7 +414,7 @@ namespace TKKN_NPS
 					}
 				}
 
-				
+
 				foreach (string biome in element.allowedBiomes)
 				{
 					if (map.Biome.defName != biome)
@@ -508,80 +514,72 @@ namespace TKKN_NPS
 			return newDirection;
 		}
 
-		private void setUpTidesBanks()
+		private void SetUpTidesBanks()
 		{
 			//set up tides and river banks for the first time:
-			if (this.doCoast)
+			if (this.doCoast && Settings.doTides)
 			{
-				//set up for low tide
-				this.tideLevel = 0;
-
-				for (int i = 0; i < this.howManyTideSteps; i++)
+				int steps = this.howManyTideSteps;
+				int max = GetMaxFlood(GetTideLevel(), steps);
+				for (int i = 0; i < steps; i++)
 				{
-					List<IntVec3> makeSand = this.tideCellsList[i];
-					for (int j = 0; j < makeSand.Count; j++)
+					IEnumerable<cellData> updateList = cellWeatherAffects.Select(key => key.Value).Where(cell => cell.tideStep == i);
+					foreach (cellData cell in updateList.ToList())
 					{
-						IntVec3 c = makeSand[j];
-						cellData cell = this.cellWeatherAffects[c];
 						cell.baseTerrain = TerrainDefOf.TKKN_SandBeachWetSalt;
-						this.map.terrainGrid.SetTerrain(c, TerrainDefOf.TKKN_SandBeachWetSalt);
-					}
-				}
-				//bring to current tide levels
-				string tideLevel = GetTideLevel();
-				int max = 0;
-				if (tideLevel == "normal")
-				{
-					max = (int)Math.Floor((this.howManyTideSteps - 1) / 2M);
-				}
-				else if (tideLevel == "high")
-				{
-					max = this.howManyTideSteps - 1;
-				}
-				for (int i = 0; i < max; i++)
-				{
-					List<IntVec3> makeSand = this.tideCellsList[i];
-					for (int j = 0; j < makeSand.Count; j++)
-					{
-						IntVec3 c = makeSand[j];
-						cellData cell = this.cellWeatherAffects[c];
-						cell.howWet = 10;
-						cell.SetTerrain();
+						cell.SetWetLevel();
+						if (i < max)
+						{
+							cell.SetWetLevel(20);
+						}
+						this.DoCellEnvironment(cell);
 					}
 				}
 				this.tideLevel = max;
-
 			}
 
-			string flood = GetFloodType();
-
-			for (int i = 0; i < this.howManyFloodSteps; i++)
+			if (Settings.doSeasonalFloods)
 			{
-				List<IntVec3> makeWater = this.floodCellsList[i];
-				for (int j = 0; j < makeWater.Count; j++)
+				int steps = this.howManyFloodSteps;
+				int max = GetMaxFlood(GetFloodType(), steps);
+				for (int i = 0; i < steps; i++)
 				{
-					IntVec3 c = makeWater[j];
-					cellData cell = this.cellWeatherAffects[c];
-					if (!cell.baseTerrain.HasTag("TKKN_Wet"))
+					IEnumerable<cellData> makeWater = GetFloodableCells(i);
+					foreach (cellData cell in makeWater.ToList())
 					{
-						cell.baseTerrain = TerrainDefOf.TKKN_RiverDeposit;
+						//set up riverbanks
+						if (!cell.baseTerrain.HasTag("TKKN_Wet"))
+						{
+							cell.baseTerrain = TerrainDefOf.TKKN_RiverDeposit;
+						}
+
+						cell.SetWetLevel();
+						if (i < max)
+						{
+							cell.SetWetLevel(20);
+						}
+						this.DoCellEnvironment(cell);
 					}
-					if (flood == "high")
-					{
-						cell.howWet = 10;
-					}
-					else if (flood == "low")
-					{
-						cell.howWet = 0;
-					} else if (i < howManyFloodSteps/2) {
-						cell.howWet = 10;
-					} else {
-						cell.howWet = 0;
-					}
-					cell.SetTerrain();
 				}
 			}
+		}
 
+		private IEnumerable<cellData> GetFloodableCells(int floodLevel)
+		{
+			return cellWeatherAffects.Select(key => key.Value).Where(cell => cell.floodLevel.Contains(floodLevel));
+		}
+
+		private int GetMaxFlood(string type, int steps){
+			int max = 0;
+			if (type == "normal")
+			{
+				max = (int)Math.Floor((steps - 1) / 2M);
+			}
+			else if (type == "high")
+			{
+				max = steps - 1;
+			}
+			return max;
 		}
 
 		private void updateBiomeSettings(bool force = false)
@@ -631,7 +629,14 @@ namespace TKKN_NPS
 			{
 				return;
 			}
+			DoCellEnvironment(cell, c);
+		}
 
+		public void DoCellEnvironment(cellData cell) {
+			DoCellEnvironment(cell, cell.location);
+		}
+
+		public void DoCellEnvironment(cellData cell, IntVec3 c){
 			TerrainDef currentTerrain = c.GetTerrain(this.map);
 			cell.DoCellSteadyEffects(currentTerrain);
 
@@ -695,7 +700,7 @@ namespace TKKN_NPS
 				//add wetness from snow/rain
 				if (!roofed)
 				{
-					float adjustWetness = this.map.weatherManager.curWeather.rainRate + this.map.weatherManager.curWeather.snowRate - 1;
+					float adjustWetness = this.map.weatherManager.curWeather.rainRate + this.map.weatherManager.curWeather.snowRate;
 					cell.howWet += adjustWetness;
 					if (this.floodThreat < 1090000)
 					{
@@ -708,7 +713,7 @@ namespace TKKN_NPS
 				if (cell.IsCold())
 				{
 					//if it's not cold, make things dry faster
-					cell.howWet -= (cell.temperature / humidity) / 100;
+					cell.howWet -= (cell.temperature / (humidity+1)) / 50;
 				}
 			}
 			#endregion
@@ -750,51 +755,35 @@ namespace TKKN_NPS
 
 		public void DoFloods()
 		{
-			if (this.ticks % 300 != 0) {
-				int half = (int)Math.Round((this.howManyFloodSteps - 1M) / 2);
-				int max = this.howManyFloodSteps - 1;
+			int steps = this.howManyFloodSteps;
+			string floodType = this.GetFloodType();
+			int max = GetMaxFlood(floodType, steps);
 
-				string flood = this.GetFloodType();
-				int adjustWet = 0;
-				if (this.floodLevel < max && flood == "high")
-				{
-					this.floodLevel++;
-					adjustWet = 10;
-				}
-				else if (this.floodLevel > 0 && flood == "low")
-				{
-					this.floodLevel--;
-					adjustWet = 0;
-				}
-				else if (this.floodLevel < half && flood == "normal")
-				{
-					this.floodLevel++;
-					adjustWet = 10;
-				}
-				else if (this.floodLevel > half && flood == "normal")
-				{
-					this.floodLevel--;
-					adjustWet = 0;
-				}
-				else
-				{
-					return;
-				}
-				
-				
-				List<IntVec3> cellsToChange = this.floodCellsList[this.floodLevel];
-				for (int i = 0; i < cellsToChange.Count; i++)
-				{
-					IntVec3 c = cellsToChange[i];
-					cellData cell = this.cellWeatherAffects[c];
-					cell.howWet += adjustWet;
-					cell.SetTerrain();
-				}
+			int adjustWet = 0;
+			if (this.floodLevel < max)
+			{
+				this.floodLevel++;
+				adjustWet = 20;
+			}
+			else
+			{
+				this.floodLevel--;
+			}
+
+
+			foreach (cellData cell in this.GetFloodableCells(this.floodLevel))
+			{
+				cell.howWet += adjustWet;
+				cell.SetTerrain();
 			}
 		}
 
 		private string GetTideLevel()
 		{
+			if (!Settings.doTides)
+			{
+				return "normal";
+			}
 			if (this.map.gameConditionManager.ConditionIsActive(GameConditionDefOf.Eclipse))
 			{
 				return "high";
@@ -813,57 +802,40 @@ namespace TKKN_NPS
 		private void DoTides()
 		{
 			//notes to future me: use this.howManyTideSteps - 1 so we always have a little bit of wet sand, or else it looks stupid.
-			if (!this.doCoast || !Settings.doTides || this.ticks % 100 != 0)
+			if (!this.doCoast || !Settings.doTides)
 			{
 				return;
 			}
 
 			string tideType = GetTideLevel();
-			int half = (int) Math.Round((this.howManyTideSteps - 1M) / 2);
-			int max = this.howManyTideSteps - 1;
-
-			if ((tideType == "normal" && tideLevel == half) || (tideType == "high" && tideLevel == max) || (tideType == "low" && tideLevel == 0))
+			int steps = this.howManyTideSteps;
+			int max = GetMaxFlood(tideType, steps);
+			if (tideLevel == max)
 			{
 				return;
 			}
-			if (tideType == "normal" && tideLevel == max) {
-				tideLevel--;
-				return;
-			}
 
-			List < IntVec3> cellsToChange = this.tideCellsList[this.tideLevel];
-			for (int i = 0; i < cellsToChange.Count; i++)
+			IEnumerable<cellData> updateList = cellWeatherAffects.Select(key => key.Value).Where(cell => cell.tideStep == this.tideLevel);
+			foreach(cellData cell in updateList)
 			{
-				IntVec3 c = cellsToChange[i];
-				cellData cell = this.cellWeatherAffects[c];
-				if (tideType == "high")
+				if (tideLevel < max)
 				{
-					cell.howWet = 10;
+					cell.SetFlooded();
 				}
-				else if (tideType == "low")
+				else if (tideLevel >= max)
 				{
-					cell.howWet = 7;
+					cell.SetWet();
 				}
 				cell.SetTerrain();
 			}
 
-			if (tideType == "high" && this.tideLevel < max)
+			if (tideLevel < max)
 			{
 				this.tideLevel++;
 			}
-			else if (tideType == "low" && this.tideLevel > 0)
+			else if (tideLevel > max)
 			{
-			}
-			else if (tideType == "normal")
-			{
-				if (this.tideLevel > half)
-				{
-					this.tideLevel--;
-				}
-				else if (this.tideLevel < half)
-				{
-					this.tideLevel++;
-				}
+				this.tideLevel--;
 			}
 		}
 

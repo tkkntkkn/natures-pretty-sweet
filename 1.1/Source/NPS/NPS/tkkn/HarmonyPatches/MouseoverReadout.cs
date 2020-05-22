@@ -4,7 +4,7 @@ using HarmonyLib;
 using System.Reflection;
 using System.Collections.Generic;
 using UnityEngine;
-/*
+
 namespace TKKN_NPS
 {
 
@@ -57,24 +57,18 @@ namespace TKKN_NPS
 
 				Watcher watcher = map.GetComponent<Watcher>();
 				cellData cell = watcher.cellWeatherAffects[c];
+				if (cell == null)
+				{
+					return;
+				}
 				rect = new Rect(BotLeft.x, (float)UI.screenHeight - BotLeft.y - num, 999f, 999f);
-				string label2 = "Temperature: " + cell.temperature;
+				string label2 = "Temperature: " + cell.temperature + " Rain Rate:" + map.weatherManager.curWeather.rainRate + " Humidity:" + watcher.humidity;
 				Widgets.Label(rect, label2);
 				num += 19f;
 
 				rect = new Rect(BotLeft.x, (float)UI.screenHeight - BotLeft.y - num, 999f, 999f);
-				string label4 = "Cell Info: Base Terrain " + cell.baseTerrain.defName + " Current Terrain " + cell.currentTerrain.defName + " | Wet " + cell.IsWet().ToString() + " | Melt " + cell.isMelt.ToString() + " | Flooded " + cell.IsFlooded().ToString() + " | Frozen " + cell.isFrozen.ToString() + " | Thawed " + cell.isThawed.ToString();
-				Widgets.Label(rect, label4);
-				num += 19f;
+				string label5 = "Cell Info: Base Terrain " + cell.baseTerrain.defName + " Current Terrain " + cell.currentTerrain.defName + " HowWet " + cell.howWet.ToString() + " | How Packed " + cell.howPacked.ToString();
 
-				rect = new Rect(BotLeft.x, (float)UI.screenHeight - BotLeft.y - num, 999f, 999f);
-				string label6 = "TKKN_Wet " + cell.currentTerrain.HasTag("TKKN_Wet") + "TKKN_Swim " + cell.currentTerrain.HasTag("TKKN_Swim");
-				Widgets.Label(rect, label6);
-				num += 19f;
-				
-
-				rect = new Rect(BotLeft.x, (float)UI.screenHeight - BotLeft.y - num, 999f, 999f);
-				string label5 = "Cell Info: howWet " + cell.howWet.ToString() +  " | How Packed " + cell.howPacked.ToString();
 				if (cell.weather != null)
 				{
 					if (cell.weather.wetTerrain != null)
@@ -97,6 +91,14 @@ namespace TKKN_NPS
 				Widgets.Label(rect, label5);
 				num += 19f;
 
+				rect = new Rect(BotLeft.x, (float)UI.screenHeight - BotLeft.y - num, 999f, 999f);
+				string label6 = "TKKN_Wet " + cell.currentTerrain.HasTag("TKKN_Wet") + "TKKN_Swim " + cell.currentTerrain.HasTag("TKKN_Swim");
+				Widgets.Label(rect, label6);
+				num += 19f;
+				
+
+
+
 			}
 
 
@@ -115,4 +117,3 @@ namespace TKKN_NPS
 	}
 }
 
-*/

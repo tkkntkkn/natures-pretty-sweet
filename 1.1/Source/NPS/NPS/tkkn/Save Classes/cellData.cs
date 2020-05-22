@@ -13,26 +13,46 @@ namespace TKKN_NPS
 		public IntVec3 location;
 		public Map map;
 		public int howPacked = 0;
-		public float howWet = 0; // 0 = dry, 5 = base, 10 = flood.
-//		public float howWetPlants = 60;
-		public float temperature = -9999;
+		public float howWet = 0; // 0 = dry, 5 = base, ~6+ = wet, 20 = flood.
+		public float temperature = 0; //in celsius
 		public float frostLevel = 0;
 		public TerrainDef baseTerrain;
 		public TerrainDef originalTerrain;
 
-		public string overrideType = "";
+		// configs:
+		private int wetFlood = 20;
+		private int wetWet = 6;
 
-//		public bool gettingWet = false;
-		public bool isMelt = false;
-		public bool isFrozen = false;
-		public bool isThawed = true;
+		public string overrideType = "";
 
 		public int packAt = 750;
 
-		public int tideLevel = -1;
+		//wet overrides - these are used for cells near large bodies of water that will flood them periodically.
+		//what step of the tide this is
+		public int tideStep = -1;
+		//how flooded the cell is. Cells can be affected by different floodlevels, so include them all here.
 		public HashSet<int> floodLevel = new HashSet<int>();
 
+		public cellData(TerrainDef terrain, IntVec3 c)
+		{
+			location = c;
+			baseTerrain = terrain;
+			originalTerrain = terrain;
 
+			SetWetLevel();
+
+			/*
+			if (thiscell.Value.baseTerrain.HasTag("TKKN_Swim"))
+			{
+				this.swimmingCellsList.Add(thiscell.Key);
+			}
+			if (thiscell.Value.baseTerrain.HasTag("Lava"))
+			{
+				//future me: to do: split lava actions into ones that will affect pawns and ones that won't, since pawns can't walk on deep lava
+				this.lavaCellsList.Add(thiscell.Key);
+			}
+			*/
+		}
 
 		public TerrainWeatherReactions weather
 		{
@@ -113,15 +133,44 @@ namespace TKKN_NPS
 			}
 		}
 
+		public void SetFlooded()
+		{
+			SetWetLevel(wetFlood);
+		}
+		public void SetWet()
+		{
+			SetWetLevel(weather.wetAt + wetWet + 3);
+		}
+		public void SetWetLevel()
+		{
+			if (currentTerrain.HasTag("TKKN_Wet"))
+			{
+				SetFlooded();
+			}
+
+			//default to 10 so the first few days are easier.
+			SetWetLevel(10);
+		}
+
+		public void SetWetLevel(float level)
+		{
+
+			this.howWet = level;
+		}
+
 		public bool IsWet() {
-			int dampAt = weather.wetAt + 6;
+			if (weather == null)
+			{
+				return false;
+			}
+			int dampAt = weather.wetAt + wetWet;
 			return this.howWet > dampAt && Settings.affectsWet;
 
 		}
 
 		public bool IsFlooded()
 		{
-			return this.howWet == 10 && Settings.affectsWet;
+			return this.howWet >= wetFlood && Settings.affectsWet;
 		}
 
 		public bool IsCold()
@@ -137,9 +186,9 @@ namespace TKKN_NPS
 			{
 				this.howWet = 0;
 			}
-			if (this.howWet > 10)
+			if (this.howWet > wetFlood)
 			{
-				this.howWet = 10;
+				this.howWet = wetFlood;
 			}
 
 			//unpack soil so paths are not permenant
@@ -297,7 +346,7 @@ namespace TKKN_NPS
 
 		private void DoLoot(TerrainDef currentTerrain, TerrainDef newTerrain)
 		{
-			if (currentTerrain.HasTag("Water") && newTerrain.HasTag("Water"))
+			if (currentTerrain.HasTag("Water") && !newTerrain.HasTag("Water"))
 			{
 				this.leaveLoot();
 			}
@@ -371,14 +420,14 @@ namespace TKKN_NPS
 					string text = "TKKN_NPS_TreasureWashedUpText".Translate();
 					Messages.Message(text, MessageTypeDefOf.NeutralEvent);
 				}
-				else if (leaveWhat > 0.02f)
+				else if (leaveWhat > 0.025f)
 				{
 					//leave ultrarare
 					allowed = new List<string>
 					{
 						"AIPersonaCore",
 						"MechSerumHealer",
-						"MechSerumNeurotrainer",
+					//	"MechSerumNeurotrainer",
 						"ComponentSpacer",
 						"MedicineUltratech",
 						"ThrumboHorn",
@@ -478,12 +527,16 @@ namespace TKKN_NPS
 
 			for (int i = things.Count - 1; i >= 0; i--)
 			{
+				if (things[i] == null)
+				{
+					continue;
+				}
 				if (remove.Contains(things[i].def.defName))
 				{
 					things[i].Destroy();
 					continue;
 				}
-
+/*
 				//remove any plants that might've grown:
 				Plant plant = things[i] as Plant; ;
 				if (plant != null) {
@@ -500,6 +553,7 @@ namespace TKKN_NPS
 						plant.Destroy();
 					}
 				}
+				*/
 			}
 		}
 
@@ -507,25 +561,17 @@ namespace TKKN_NPS
 		public void ExposeData()
 		{
 			
-			Scribe_Values.Look<int>(ref this.tideLevel, "tideLevel", this.tideLevel, true);
+			Scribe_Values.Look<int>(ref this.tideStep, "tideStep", this.tideStep, true);
 			Scribe_Collections.Look<int>(ref this.floodLevel, "floodLevel", LookMode.Value);
 			Scribe_Values.Look<int>(ref this.howPacked, "howPacked", this.howPacked, true);
 			Scribe_Values.Look<float>(ref this.howWet, "howWet", this.howWet, true);
 			Scribe_Values.Look<float>(ref this.frostLevel, "frostLevel", this.frostLevel, true);
-			Scribe_Values.Look<bool>(ref this.isMelt, "isMelt", this.isMelt, true);
 			Scribe_Values.Look<string>(ref this.overrideType, "overrideType", this.overrideType, true);
-			Scribe_Values.Look<bool>(ref this.isThawed, "isThawed", this.isThawed, true);
 			Scribe_Values.Look<IntVec3>(ref this.location, "location", this.location, true);
-			Scribe_Values.Look<float>(ref this.temperature, "temperature", -999, true);
+			Scribe_Values.Look<float>(ref this.temperature, "temperature", 0, true);
 			Scribe_Defs.Look<TerrainDef>(ref this.baseTerrain, "baseTerrain");
 			Scribe_Defs.Look<TerrainDef>(ref this.originalTerrain, "originalTerrain");
-
 		}
-
-
-
-
-
 
 		public void doFrostOverlay(string action)
 		{

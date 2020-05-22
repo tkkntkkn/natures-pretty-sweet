@@ -3,7 +3,6 @@ using HarmonyLib;
 using RimWorld;
 using System;
 using System.Collections.Generic;
-/*
 namespace TKKN_NPS
 {
 	
@@ -237,4 +236,3 @@ namespace TKKN_NPS
 	}
 	
 }
-*/

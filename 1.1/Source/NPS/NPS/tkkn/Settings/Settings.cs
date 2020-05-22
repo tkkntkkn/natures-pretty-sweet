@@ -43,12 +43,14 @@ namespace TKKN_NPS
 		public static bool doWeather = true;
 		public static bool doDirtPath = true;
 		public static bool regenCells = false;
-		public static bool doTides = true;		
+		public static bool doTides = true;
+		public static bool doSeasonalFloods = true;
 		public static bool showDevReadout = false;
 
 		public static bool showUpdateNotes = true;
 
-
+		public static int cellBatchNumber = 100;
+		public static string refCellBatchNumber = "";
 
 		public static bool showTempOverlay {
 			get {
@@ -65,6 +67,12 @@ namespace TKKN_NPS
 			list.Begin(inRect);
 
 			//Performance Settings
+			list.TextFieldNumericLabeled(
+				"Cell processing batch size (default 100)",
+				ref Settings.cellBatchNumber//,
+											//				"Limit how many cells are processed every tick for weather affects."
+				, ref Settings.refCellBatchNumber
+				);
 			list.CheckboxLabeled(
 				"TKKN_doWeather_title".Translate(),
 				ref Settings.doWeather,
