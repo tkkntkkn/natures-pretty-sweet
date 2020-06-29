@@ -128,28 +128,41 @@ namespace TKKN_NPS.Workers
 				}
 			}
 		}
+		/*
 		static public float AdjustWetBy(CellData cell)
 		{
 			return AdjustWetBy(cell.location, cell.map, cell.temperature, cell.humidity, cell.IsCold);
 		}
+		*/
 
-		static public float AdjustWetBy(IntVec3 c, Map map, float temperature, float humidity, bool isCold)
+//		static public float AdjustWetBy(IntVec3 c, Map map, float temperature, float humidity, bool isCold)
+		static public float AdjustWetBy(CellData cell)
 		{
 			float adjustWetness = 0f;
-			bool roofed = map.roofGrid.Roofed(c);
+			bool roofed = cell.map.roofGrid.Roofed(cell.location);
 
 			//add wetness from snow/rain
 			if (!roofed)
 			{
-				adjustWetness += (map.weatherManager.curWeather.rainRate + map.weatherManager.curWeather.snowRate) * 10;
+				adjustWetness += (cell.map.weatherManager.curWeather.rainRate + cell.map.weatherManager.curWeather.snowRate) * 10;
 			}
 
 			//evaporate wetness
 			adjustWetness -= 2.5f;
-			if (!isCold)
+			if (!cell.isCold)
 			{
 				//if it's not cold/dry, make things dry faster
-				adjustWetness -= (int)Math.Floor((temperature / (humidity + 1) ));
+				adjustWetness -= (int)Math.Floor((cell.temperature / (cell.humidity + 1) ));
+			}
+
+			if (cell.IsFlooded)
+			{
+				//flood cells should wet/dry slower
+				adjustWetness = adjustWetness / 2.5f;
+			} else if (!cell.IsWet && adjustWetness > 0)
+			{
+				//dry cells should wet faster (to help the soil affect show up in a reasonable time)
+				adjustWetness = adjustWetness * 1.25f;
 			}
 
 			return adjustWetness;
@@ -183,7 +196,7 @@ namespace TKKN_NPS.Workers
 				watcher.totalPuddles--;
 			}
 
-
+			return;
 			// TO DO - set this up to be configurable through defs.
 			//spawn special things when it rains.
 			if (Rand.Value < .0009)
