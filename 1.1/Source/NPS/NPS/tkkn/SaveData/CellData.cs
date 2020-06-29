@@ -20,17 +20,14 @@ namespace TKKN_NPS.SaveData
 		public float HowWet {
 			get { return howWet;  }
 			set {
-				float newWet = howWet + value;
-				if (newWet < 0) {
-					howWet = 0;
-					return;
-				}
-				if (newWet > wetCap)
-				{
-					howWet = wetCap;
-					return;
-				}
 				howWet = value;
+				if (value < 0) {
+					howWet = 0;
+				}
+				if (value > WetCap)
+				{
+					howWet = WetCap;
+				}
 			}
 		} 
 
@@ -44,10 +41,10 @@ namespace TKKN_NPS.SaveData
 		public TerrainDef originalTerrain;
 
 		// configs:
-		private int wetFlood = 90;
-		private int wetWet = 60;
-		public int packAt = 750;
-		private float wetCap
+		private readonly int wetFlood = 90;
+		private readonly int wetWet = 60;
+		public readonly int packAt = 750;
+		private float WetCap
 		{
 			get { return (float)(wetFlood * 1.25); }
 		}
@@ -211,7 +208,7 @@ namespace TKKN_NPS.SaveData
 		}
 		public void SetFlooded()
 		{
-			SetWetLevel(wetCap);
+			SetWetLevel(WetCap);
 		}
 
 		public void SetWet()
@@ -225,10 +222,13 @@ namespace TKKN_NPS.SaveData
 			if (TerrainWorker.IsWaterTerrain(currentTerrain))
 			{
 				SetFlooded();
+				return;
 			}
-
-			//default right under wet so the few days are easier.
-			SetWetLevel(wetWet - 5);
+			else if (!IsWet)
+			{
+				//default right under wet so the few days are easier.
+				SetWetLevel(wetWet - 5);
+			}
 		}
 
 		public void SetWetLevel(float level)
@@ -238,12 +238,12 @@ namespace TKKN_NPS.SaveData
 		}
 
 		public bool IsWet {
-			get { return weather != null ? howWet > wetWet : false; }
+			get { return weather != null ? HowWet > wetWet : false; }
 		}
 
 		public bool IsFlooded
 		{
-			get { return howWet >= wetFlood; }
+			get { return HowWet >= wetFlood; }
 		}
 
 

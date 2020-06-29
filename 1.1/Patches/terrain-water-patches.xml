@@ -110,7 +110,7 @@
       <xpath>/Defs/TerrainDef[defName = "WaterOceanShallow"]</xpath>
       <value>
          <li Class="TKKN_NPS.TerrainWeatherReactions">
-            <floodTerrain>TKKN_SandBeachWetSalt</floodTerrain>
+            <floodTerrain/>
             <wetTerrain />
             <freezeTerrain></freezeTerrain>
             <freezeAt></freezeAt>
@@ -139,7 +139,7 @@
       <xpath>Defs/TerrainDef[defName = "Marsh"]</xpath>
       <value>
          <li Class="TKKN_NPS.TerrainWeatherReactions">
-            <floodTerrain>WaterShallow</floodTerrain>
+            <floodTerrain />
             <wetTerrain/>
             <freezeTerrain>TKKN_MuddyIce</freezeTerrain>
             <freezeAt>0</freezeAt>

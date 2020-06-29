@@ -117,7 +117,7 @@ namespace TKKN_NPS.Workers
 			}
 
 
-			if (Settings.showRain && !TerrainWorker.IsWaterTerrain(cell.currentTerrain))
+			if (Settings.showRain && !TerrainWorker.IsWaterTerrain(cell.currentTerrain) && cell.tideStep == -1)
 			{
 				float adjustWetness = AdjustWetBy(cell);
 				cell.HowWet += adjustWetness;

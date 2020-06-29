@@ -10,9 +10,9 @@ using TKKN_NPS.SaveData;
 
 namespace TKKN_NPS.Workers
 {
-	class TideWorker : FloodWorker
+	class TideWorker : Worker
 	{
-		static new public int howManyFloodSteps = 13;
+		static public readonly int howManyTideSteps = 13;
 
 		/// <summary>
 		/// Sets the tide step level on every cell.
@@ -22,23 +22,25 @@ namespace TKKN_NPS.Workers
 			Map map = cell.map;
 			Watcher watcher = GetWatcher(map);
 
-			int max = GetMaxFlood(GetTideLevel(map));
+			int max = FloodWorker.GetMaxFlood(GetTideLevel(map), howManyTideSteps);
 
 			IntVec3 c = cell.location;
-			if (rot.IsValid && TerrainWorker.IsSandTerrain(cell.currentTerrain))
+			if (rot.IsValid && TerrainWorker.IsSandTerrain(cell.originalTerrain))
 			{
-				//get all the sand pieces that are touching water.
-				for (int j = 0; j < howManyFloodSteps; j++)
+				//find how far it is from water
+				for (int j = 1; j <= TideWorker.howManyTideSteps; j++)
 				{
-					IntVec3 waterCheck = adjustForRotation(rot, c, j);
-					if (waterCheck.InBounds(map) && TerrainWorker.IsOceanTerrain(waterCheck.GetTerrain(map), true))
-					{
-						cell.tideStep = j;
-					//	cell.originalTerrain = TerrainDefOf.TKKN_SandBeachWetSalt;
-						cell.baseTerrain = TerrainDefOf.TKKN_SandBeachWetSalt;
-						cell.SetWet();
-						cell.SetTerrain();
-						break;
+					IntVec3 tidalC = adjustForRotation(rot, c, j);
+					if (tidalC.InBounds(map)) {
+						TerrainDef tidalTerrain = tidalC.GetTerrain(map);						
+						if (TerrainWorker.IsOceanTerrain(tidalTerrain, true))
+						{
+							cell.tideStep = j;
+							cell.baseTerrain = TerrainDefOf.TKKN_SandBeachWetSalt;
+							cell.SetWet();
+							cell.SetTerrain();
+							break;
+						}
 					}
 				}
 			}
@@ -107,7 +109,7 @@ namespace TKKN_NPS.Workers
 			Watcher watcher = GetWatcher(map);
 			Dictionary<IntVec3, CellData> cellWeatherAffects = watcher.cellWeatherAffects;
 
-			int neutralTide = (int)Math.Floor((decimal)howManyFloodSteps / 2);
+			int neutralTide = (int)Math.Floor((decimal)howManyTideSteps / 2);
 			watcher.tideLevel = neutralTide;
 			IEnumerable <CellData> updateList = cellWeatherAffects.Select(key => key.Value).Where(cell => cell.tideStep > neutralTide).Where(cell => cell.IsFlooded == true);
 			foreach (CellData cell in updateList)
@@ -134,18 +136,13 @@ namespace TKKN_NPS.Workers
 			Watcher watcher = GetWatcher(map);
 			Dictionary<IntVec3, CellData> cellWeatherAffects = watcher.cellWeatherAffects;
 
-			//notes to future me: use howManyTideSteps - 1 so we always have a little bit of wet sand, or else it looks stupid.
 			if (!CanDoTides(watcher))
 			{
 				return;
 			}
 
 			string tideType = GetTideLevel(map);
-			int max = GetMaxFlood(tideType);
-			if (watcher.tideLevel == max)
-			{
-				return;
-			}
+			int max = FloodWorker.GetMaxFlood(tideType, howManyTideSteps);
 
 			IEnumerable<CellData> updateList = cellWeatherAffects.Select(key => key.Value).Where(cell => cell.tideStep == watcher.tideLevel);
 			foreach (CellData cell in updateList)
@@ -182,7 +179,7 @@ namespace TKKN_NPS.Workers
 			{
 				return "high";
 			}
-			else if (GenLocalDate.HourOfDay(map) > 4 && GenLocalDate.HourOfDay(map) < 8)
+			else if (GenLocalDate.HourOfDay(map) > 3 && GenLocalDate.HourOfDay(map) < 8)
 			{
 				return "low";
 			}

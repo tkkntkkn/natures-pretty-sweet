@@ -177,11 +177,11 @@ namespace TKKN_NPS
 				SpawnWorker.SpawnOasis(map);
 				LavaWorker.FixLava(map);
 
-				IEnumerable<IntVec3> tmpTerrain = map.AllCells.InRandomOrder();
+				IEnumerable<IntVec3> tmpTerrain = map.AllCells;
 				cellWeatherAffects = new Dictionary<IntVec3, CellData>();
 				Rot4 rot = Find.World.CoastDirectionAt(map.Tile);
 				doCoast = rot.IsValid;
-				tideLevel = TideWorker.GetMaxFlood(TideWorker.GetTideLevel(map));
+				tideLevel = FloodWorker.GetMaxFlood(TideWorker.GetTideLevel(map), TideWorker.howManyTideSteps);
 
 				foreach (IntVec3 c in tmpTerrain)
 				{

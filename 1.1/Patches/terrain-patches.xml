@@ -176,7 +176,7 @@
       <value>
          <li Class="TKKN_NPS.TerrainWeatherReactions">
             <floodTerrain>WaterOceanShallow</floodTerrain>
-            <wetTerrain />
+            <wetTerrain>TKKN_SandBeachWetSalt</wetTerrain>
             <freezeTerrain />
             <freezeAt />
             <isSalty>True</isSalty>

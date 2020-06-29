@@ -10,24 +10,25 @@ namespace TKKN_NPS.Workers
 {
 	class FloodWorker : Worker
 	{
-		static public int howManyFloodSteps = 5;
-		static public int middleStep = 3; //if howManyFloodSteps changes, change this.
+		static public readonly int howManyFloodSteps = 5;
+		static readonly private int middleStep = 3; //if howManyFloodSteps changes, change this.
 
 		static private IEnumerable<CellData> GetFloodableCells(int floodLevel, Dictionary<IntVec3, CellData> cellWeatherAffects)
 		{
 			return cellWeatherAffects.Select(key => key.Value).Where(cell => cell.floodLevel.Any());
 		}
 
-		static public int GetMaxFlood(string type)
+
+		static public int GetMaxFlood(string type, int howManySteps)
 		{
 			int max = 1;
 			if (type == "normal")
 			{
-				max = (int)Math.Floor((howManyFloodSteps + 1) / 2M);
+				max = (int)Math.Floor((howManySteps + 1) / 2M);
 			}
 			else if (type == "high")
 			{
-				max = howManyFloodSteps;
+				max = howManySteps;
 			}
 			return max;
 		}
@@ -37,7 +38,7 @@ namespace TKKN_NPS.Workers
 		{
 			Map map = cell.map;
 			Watcher watcher = GetWatcher(map);
-			int max = GetMaxFlood(GetFloodType(map, watcher.floodThreat));
+			int max = GetMaxFlood(GetFloodType(map, watcher.floodThreat), howManyFloodSteps);
 
 			//checking water instead of land because it's usually less cells.
 			if (TerrainWorker.IsFreshWaterTerrain(cell.originalTerrain))
@@ -81,16 +82,11 @@ namespace TKKN_NPS.Workers
 							IntVec3 floodPlainC = bankC + GenRadial.RadialPattern[k];
 							if (floodPlainC.InBounds(map))
 							{
-								TerrainDef floodPlainTerrain = floodPlainC.GetTerrain(map);
 								if (!watcher.cellWeatherAffects.TryGetValue(floodPlainC, out CellData floodPlainCell))
 								{
-									floodPlainCell = watcher.AddToCellList(floodPlainC, floodPlainTerrain);
+									floodPlainCell = watcher.AddToCellList(floodPlainC, floodPlainC.GetTerrain(map));
 								}
-								else
-								{
-									//use original so we can set the new terrain here.
-									floodPlainTerrain = floodPlainCell.originalTerrain;
-								}
+								TerrainDef floodPlainTerrain = floodPlainCell.originalTerrain;
 
 								if (TerrainWorker.IsLand(floodPlainTerrain))
 								{
@@ -99,14 +95,14 @@ namespace TKKN_NPS.Workers
 									if (floodPlainTerrain.fertility > 0)
 									{
 										floodPlainCell.baseTerrain = TerrainDefOf.TKKN_RiverDeposit;
-										floodPlainCell.baseTerrain = TerrainDefOf.TKKN_RiverDeposit;
+										floodPlainCell.SetTerrain();
 									}
 								}
 								else if (TerrainWorker.IsFreshWaterTerrain(floodPlainTerrain))
 								{
 									floodPlainCell.floodLevel.Add(middleStep - j);
 									floodPlainCell.baseTerrain = TerrainDefOf.TKKN_RiverDeposit;
-									cell.SetTerrain();
+									floodPlainCell.SetTerrain();
 								}
 							}
 						}
@@ -125,7 +121,7 @@ namespace TKKN_NPS.Workers
 			Dictionary<IntVec3, CellData> cellWeatherAffects = watcher.cellWeatherAffects;
 
 			string floodType = GetFloodType(map, watcher.floodThreat);
-			int max = GetMaxFlood(floodType);
+			int max = GetMaxFlood(floodType, howManyFloodSteps);
 			if (watcher.floodLevel < max)
 			{
 				watcher.floodLevel++;
