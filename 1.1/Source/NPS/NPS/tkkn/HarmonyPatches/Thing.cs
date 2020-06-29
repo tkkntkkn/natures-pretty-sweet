@@ -51,7 +51,7 @@ namespace TKKN_NPS
 			Watcher watcher = Worker.GetWatcher(map);
 			CellData cell = watcher.GetCell(c);
 
-			if (TerrainWorker.IsLava(cell.currentTerrain))
+			if (cell != null && TerrainWorker.IsLava(cell.currentTerrain))
 			{
 				FireUtility.TryStartFireIn(c, map, 5f);
 

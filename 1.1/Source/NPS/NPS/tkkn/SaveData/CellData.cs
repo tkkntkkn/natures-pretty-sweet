@@ -72,11 +72,12 @@ namespace TKKN_NPS.SaveData
 			this.originalTerrain = terrain;
 
 			SetWetLevel();
-
-			Room room = c.GetRoom(map, RegionType.Set_All);
+			/*
+			Room room = c.
+			(map, RegionType.Set_All);
 			WeatherBaseWorker.CalculateHumidity(this, room);
 			WeatherBaseWorker.CalculateTemperature(this, room);
-
+*/
 		}
 
 		public TerrainWeatherReactions weather
