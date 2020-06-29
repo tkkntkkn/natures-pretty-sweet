@@ -63,6 +63,8 @@ namespace TKKN_NPS
 				LavaWorker.DoLava(map);
 			}
 
+			/*
+			 * moved this to a game condition so the work isn't being done twice.
 			int num = Mathf.CeilToInt((float)map.Area * 0.0006f);
 			int area = map.Area;
 			for (int i = 0; i < num; i++)
@@ -75,6 +77,7 @@ namespace TKKN_NPS
 				DoCellEnvironment(c);
 				cycleIndex++;
 			}
+			*/
 
 			UpdateBiomeSettings();
 
@@ -138,10 +141,18 @@ namespace TKKN_NPS
 			base.FinalizeInit();
 			biomeSettings = map.Biome.GetModExtension<BiomeSeasonalSettings>();
 			UpdateBiomeSettings(true);
-			this.RebuildCellLists();
 
-			// this.map.GetComponent<FrostGrid>().Regenerate(); 
-			if (TKKN_Holder.modsPatched.ToArray().Count() > 0)
+			RebuildCellLists();
+			if (!map.gameConditionManager.ConditionIsActive(GameConditionDefOf.TKKN_NPS))
+			{
+				GameCondition_NPS nps = (GameCondition_NPS)GameConditionMaker.MakeCondition(GameConditionDefOf.TKKN_NPS);
+				nps.Permanent = true;
+				map.gameConditionManager.RegisterCondition(nps);
+			}
+			//RegisterCondition
+
+				// this.map.GetComponent<FrostGrid>().Regenerate(); 
+				if (TKKN_Holder.modsPatched.ToArray().Count() > 0)
 			{
 				Log.Message("TKKN NPS: Loaded patches for: " + string.Join(", ", TKKN_Holder.modsPatched.ToArray()));
 			}

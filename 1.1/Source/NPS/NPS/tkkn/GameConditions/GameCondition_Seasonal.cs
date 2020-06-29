@@ -4,6 +4,21 @@ using Verse;
 using RimWorld;
 using RimWorld.Planet;
 using UnityEngine;
+using TKKN_NPS.Workers;
+
+namespace TKKN_NPS
+{
+	public class GameCondition_NPS : GameCondition
+	{
+		public override string Label => "";
+		public override string LabelCap => "";
+		public override void DoCellSteadyEffects(IntVec3 c, Map map)
+		{
+			Watcher watcher = Worker.GetWatcher(map);
+			watcher.DoCellEnvironment(c);
+		}
+	}
+}
 
 namespace TKKN_NPS
 {

@@ -178,7 +178,7 @@ namespace TKKN_NPS.Workers
 		/// <returns>high, low, normal</returns>
 		public static string GetTideLevel(Map map)
 		{
-			if (map.gameConditionManager.ConditionIsActive(GameConditionDefOf.Eclipse))
+			if (map.gameConditionManager.ConditionIsActive(RimWorld.GameConditionDefOf.Eclipse))
 			{
 				return "high";
 			}
