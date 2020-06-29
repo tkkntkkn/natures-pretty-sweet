@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <TKKN_Windy.label>大风</TKKN_Windy.label>
+  <TKKN_Windy.description>狂风大作的一天。 强风帮助涡轮机，但阻碍射击。</TKKN_Windy.description>
+
+  <TKKN_Overcast.label>阴天</TKKN_Overcast.label>
+  <TKKN_Overcast.description>多云，但没有雨。</TKKN_Overcast.description>
+
+  <TKKN_ThickFog.label>雾霾</TKKN_ThickFog.label>
+  <TKKN_ThickFog.description>雾霾降低了远程武器的准确性。</TKKN_ThickFog.description>
+
+  <TKKN_LavaSmoke.label>火山灰霾</TKKN_LavaSmoke.label>
+  <TKKN_LavaSmoke.description>火山灰霾降低远程武器的精度并且有毒。</TKKN_LavaSmoke.description>
+
+  <TKKN_DustStorm.label>沙尘暴</TKKN_DustStorm.label>
+  <TKKN_DustStorm.description>风暴掀起了沙尘，降低了能见度和远程武器精准度。</TKKN_DustStorm.description>
+
+  <TKKN_DryDustStorm.label>干沙尘暴</TKKN_DryDustStorm.label>
+  <TKKN_DryDustStorm.description>强风和风暴掀起了沙尘，降低了能见度和远程武器精准度。</TKKN_DryDustStorm.description>
+
+
+</LanguageData>

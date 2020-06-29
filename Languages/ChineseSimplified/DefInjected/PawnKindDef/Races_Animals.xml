@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <TKKN_crab.label>巨蟹</TKKN_crab.label>
+  <TKKN_crab.labelPlural>巨蟹</TKKN_crab.labelPlural>
+  <TKKN_crab.lifeStages.0.label>巨蟹</TKKN_crab.lifeStages.0.label>
+  <TKKN_crab.lifeStages.0.labelPlural>巨蟹</TKKN_crab.lifeStages.0.labelPlural>
+  <TKKN_crab.lifeStages.0.labelMale>雄性巨蟹</TKKN_crab.lifeStages.0.labelMale>
+  <TKKN_crab.lifeStages.0.labelMalePlural>雄性巨蟹</TKKN_crab.lifeStages.0.labelMalePlural>
+  <TKKN_crab.lifeStages.0.labelFemale>雌性巨蟹</TKKN_crab.lifeStages.0.labelFemale>
+  <TKKN_crab.lifeStages.0.labelFemalePlural>雌性巨蟹</TKKN_crab.lifeStages.0.labelFemalePlural>
+  <TKKN_crab.lifeStages.1.label>巨蟹</TKKN_crab.lifeStages.1.label>
+  <TKKN_crab.lifeStages.1.labelPlural>巨蟹</TKKN_crab.lifeStages.1.labelPlural>
+  <TKKN_crab.lifeStages.1.labelMale>雄性巨蟹</TKKN_crab.lifeStages.1.labelMale>
+  <TKKN_crab.lifeStages.1.labelMalePlural>雄性巨蟹</TKKN_crab.lifeStages.1.labelMalePlural>
+  <TKKN_crab.lifeStages.1.labelFemale>雌性巨蟹</TKKN_crab.lifeStages.1.labelFemale>
+  <TKKN_crab.lifeStages.1.labelFemalePlural>雌性巨蟹</TKKN_crab.lifeStages.1.labelFemalePlural>
+  <TKKN_crab.lifeStages.2.label>巨蟹</TKKN_crab.lifeStages.2.label>
+  <TKKN_crab.lifeStages.2.labelPlural>巨蟹</TKKN_crab.lifeStages.2.labelPlural>
+  <TKKN_crab.lifeStages.2.labelMale>雄性巨蟹</TKKN_crab.lifeStages.2.labelMale>
+  <TKKN_crab.lifeStages.2.labelMalePlural>雄性巨蟹</TKKN_crab.lifeStages.2.labelMalePlural>
+  <TKKN_crab.lifeStages.2.labelFemale>雌性巨蟹</TKKN_crab.lifeStages.2.labelFemale>
+  <TKKN_crab.lifeStages.2.labelFemalePlural>雌性巨蟹</TKKN_crab.lifeStages.2.labelFemalePlural>
+  <TKKN_crab.labelMale>雄性巨蟹</TKKN_crab.labelMale>
+  <TKKN_crab.labelMalePlural>雄性巨蟹</TKKN_crab.labelMalePlural>
+  <TKKN_crab.labelFemale>雌性巨蟹</TKKN_crab.labelFemale>
+  <TKKN_crab.labelFemalePlural>雌性巨蟹</TKKN_crab.labelFemalePlural>
+
+  <!--[Duplicated] <TKKN_petlavarock.label>pet lava rock</TKKN_petlavarock.label>-->
+  <!--[Duplicated] <TKKN_petlavarock.labelPlural>pet lava rocks</TKKN_petlavarock.labelPlural>-->
+  <!--[Duplicated] <TKKN_petlavarock.lifeStages.0.label>pet lava pebble</TKKN_petlavarock.lifeStages.0.label>-->
+  <!--[Duplicated] <TKKN_petlavarock.lifeStages.0.labelPlural>pet lava pebbles</TKKN_petlavarock.lifeStages.0.labelPlural>-->
+  <!--[Duplicated] <TKKN_petlavarock.lifeStages.0.labelMale>male pet lava pebble</TKKN_petlavarock.lifeStages.0.labelMale>-->
+  <!--[Duplicated] <TKKN_petlavarock.lifeStages.0.labelMalePlural>male pet lava pebbles</TKKN_petlavarock.lifeStages.0.labelMalePlural>-->
+  <!--[Duplicated] <TKKN_petlavarock.lifeStages.0.labelFemale>female pet lava pebble</TKKN_petlavarock.lifeStages.0.labelFemale>-->
+  <!--[Duplicated] <TKKN_petlavarock.lifeStages.0.labelFemalePlural>female pet lava pebbles</TKKN_petlavarock.lifeStages.0.labelFemalePlural>-->
+  <!--[Duplicated] <TKKN_petlavarock.lifeStages.1.label>pet lava rock</TKKN_petlavarock.lifeStages.1.label>-->
+  <!--[Duplicated] <TKKN_petlavarock.lifeStages.1.labelPlural>pet lava rock</TKKN_petlavarock.lifeStages.1.labelPlural>-->
+  <!--[Duplicated] <TKKN_petlavarock.lifeStages.1.labelMale>pet lava rock</TKKN_petlavarock.lifeStages.1.labelMale>-->
+  <!--[Duplicated] <TKKN_petlavarock.lifeStages.1.labelMalePlural>male pet lava rocks</TKKN_petlavarock.lifeStages.1.labelMalePlural>-->
+  <!--[Duplicated] <TKKN_petlavarock.lifeStages.1.labelFemale>pet lava rock</TKKN_petlavarock.lifeStages.1.labelFemale>-->
+  <!--[Duplicated] <TKKN_petlavarock.lifeStages.1.labelFemalePlural>female pet lava rocks</TKKN_petlavarock.lifeStages.1.labelFemalePlural>-->
+  <!--[Duplicated] <TKKN_petlavarock.lifeStages.2.label>pet lava rock</TKKN_petlavarock.lifeStages.2.label>-->
+  <!--[Duplicated] <TKKN_petlavarock.lifeStages.2.labelPlural>pet lava rock</TKKN_petlavarock.lifeStages.2.labelPlural>-->
+  <!--[Duplicated] <TKKN_petlavarock.lifeStages.2.labelMale>pet lava rock</TKKN_petlavarock.lifeStages.2.labelMale>-->
+  <!--[Duplicated] <TKKN_petlavarock.lifeStages.2.labelMalePlural>male pet lava rocks</TKKN_petlavarock.lifeStages.2.labelMalePlural>-->
+  <!--[Duplicated] <TKKN_petlavarock.lifeStages.2.labelFemale>pet lava rock</TKKN_petlavarock.lifeStages.2.labelFemale>-->
+  <!--[Duplicated] <TKKN_petlavarock.lifeStages.2.labelFemalePlural>female pet lava rocks</TKKN_petlavarock.lifeStages.2.labelFemalePlural>-->
+  <!--[Duplicated] <TKKN_petlavarock.labelMale>pet lava rock</TKKN_petlavarock.labelMale>-->
+  <!--[Duplicated] <TKKN_petlavarock.labelMalePlural>pet lava rocks</TKKN_petlavarock.labelMalePlural>-->
+  <!--[Duplicated] <TKKN_petlavarock.labelFemale>pet lava rock</TKKN_petlavarock.labelFemale>-->
+  <!--[Duplicated] <TKKN_petlavarock.labelFemalePlural>pet lava rocks</TKKN_petlavarock.labelFemalePlural>-->
+
+  <TKKN_salamanders.label>蝾螈</TKKN_salamanders.label>
+  <TKKN_salamanders.labelPlural>蝾螈</TKKN_salamanders.labelPlural>
+  <TKKN_salamanders.lifeStages.0.label>蝾螈</TKKN_salamanders.lifeStages.0.label>
+  <TKKN_salamanders.lifeStages.0.labelPlural>蝾螈</TKKN_salamanders.lifeStages.0.labelPlural>
+  <TKKN_salamanders.lifeStages.0.labelMale>雄性蝾螈</TKKN_salamanders.lifeStages.0.labelMale>
+  <TKKN_salamanders.lifeStages.0.labelMalePlural>雄性蝾螈</TKKN_salamanders.lifeStages.0.labelMalePlural>
+  <TKKN_salamanders.lifeStages.0.labelFemale>雌性蝾螈</TKKN_salamanders.lifeStages.0.labelFemale>
+  <TKKN_salamanders.lifeStages.0.labelFemalePlural>雌性蝾螈</TKKN_salamanders.lifeStages.0.labelFemalePlural>
+  <TKKN_salamanders.lifeStages.1.label>蝾螈</TKKN_salamanders.lifeStages.1.label>
+  <TKKN_salamanders.lifeStages.1.labelPlural>蝾螈</TKKN_salamanders.lifeStages.1.labelPlural>
+  <TKKN_salamanders.lifeStages.1.labelMale>雄性蝾螈</TKKN_salamanders.lifeStages.1.labelMale>
+  <TKKN_salamanders.lifeStages.1.labelMalePlural>雄性蝾螈</TKKN_salamanders.lifeStages.1.labelMalePlural>
+  <TKKN_salamanders.lifeStages.1.labelFemale>雌性蝾螈</TKKN_salamanders.lifeStages.1.labelFemale>
+  <TKKN_salamanders.lifeStages.1.labelFemalePlural>雌性蝾螈</TKKN_salamanders.lifeStages.1.labelFemalePlural>
+  <TKKN_salamanders.lifeStages.2.label>蝾螈</TKKN_salamanders.lifeStages.2.label>
+  <TKKN_salamanders.lifeStages.2.labelPlural>蝾螈</TKKN_salamanders.lifeStages.2.labelPlural>
+  <TKKN_salamanders.lifeStages.2.labelMale>雄性蝾螈</TKKN_salamanders.lifeStages.2.labelMale>
+  <TKKN_salamanders.lifeStages.2.labelMalePlural>雄性蝾螈</TKKN_salamanders.lifeStages.2.labelMalePlural>
+  <TKKN_salamanders.lifeStages.2.labelFemale>雌性蝾螈</TKKN_salamanders.lifeStages.2.labelFemale>
+  <TKKN_salamanders.lifeStages.2.labelFemalePlural>雌性蝾螈</TKKN_salamanders.lifeStages.2.labelFemalePlural>
+  <TKKN_salamanders.labelMale>雄性蝾螈</TKKN_salamanders.labelMale>
+  <TKKN_salamanders.labelMalePlural>雄性蝾螈</TKKN_salamanders.labelMalePlural>
+  <TKKN_salamanders.labelFemale>雌性蝾螈</TKKN_salamanders.labelFemale>
+  <TKKN_salamanders.labelFemalePlural>雌性蝾螈</TKKN_salamanders.labelFemalePlural>
+
+  <TKKN_petlavarock.label>熔岩宠物</TKKN_petlavarock.label>
+  <TKKN_petlavarock.labelPlural>熔岩宠物</TKKN_petlavarock.labelPlural>
+  <TKKN_petlavarock.lifeStages.0.label>熔岩宠物</TKKN_petlavarock.lifeStages.0.label>
+  <TKKN_petlavarock.lifeStages.0.labelPlural>熔岩宠物</TKKN_petlavarock.lifeStages.0.labelPlural>
+  <TKKN_petlavarock.lifeStages.0.labelMale>雄性熔岩宠物</TKKN_petlavarock.lifeStages.0.labelMale>
+  <TKKN_petlavarock.lifeStages.0.labelMalePlural>雄性熔岩宠物</TKKN_petlavarock.lifeStages.0.labelMalePlural>
+  <TKKN_petlavarock.lifeStages.0.labelFemale>雌性熔岩宠物</TKKN_petlavarock.lifeStages.0.labelFemale>
+  <TKKN_petlavarock.lifeStages.0.labelFemalePlural>雌性熔岩宠物</TKKN_petlavarock.lifeStages.0.labelFemalePlural>
+  <TKKN_petlavarock.lifeStages.1.label>熔岩宠物</TKKN_petlavarock.lifeStages.1.label>
+  <TKKN_petlavarock.lifeStages.1.labelPlural>熔岩宠物</TKKN_petlavarock.lifeStages.1.labelPlural>
+  <TKKN_petlavarock.lifeStages.1.labelMale>熔岩宠物</TKKN_petlavarock.lifeStages.1.labelMale>
+  <TKKN_petlavarock.lifeStages.1.labelMalePlural>雄性熔岩宠物</TKKN_petlavarock.lifeStages.1.labelMalePlural>
+  <TKKN_petlavarock.lifeStages.1.labelFemale>熔岩宠物</TKKN_petlavarock.lifeStages.1.labelFemale>
+  <TKKN_petlavarock.lifeStages.1.labelFemalePlural>雌性熔岩宠物</TKKN_petlavarock.lifeStages.1.labelFemalePlural>
+  <TKKN_petlavarock.lifeStages.2.label>熔岩宠物</TKKN_petlavarock.lifeStages.2.label>
+  <TKKN_petlavarock.lifeStages.2.labelPlural>熔岩宠物</TKKN_petlavarock.lifeStages.2.labelPlural>
+  <TKKN_petlavarock.lifeStages.2.labelMale>熔岩宠物</TKKN_petlavarock.lifeStages.2.labelMale>
+  <TKKN_petlavarock.lifeStages.2.labelMalePlural>雄性熔岩宠物</TKKN_petlavarock.lifeStages.2.labelMalePlural>
+  <TKKN_petlavarock.lifeStages.2.labelFemale>熔岩宠物</TKKN_petlavarock.lifeStages.2.labelFemale>
+  <TKKN_petlavarock.lifeStages.2.labelFemalePlural>雌性熔岩宠物</TKKN_petlavarock.lifeStages.2.labelFemalePlural>
+  <TKKN_petlavarock.labelMale>熔岩宠物</TKKN_petlavarock.labelMale>
+  <TKKN_petlavarock.labelMalePlural>熔岩宠物</TKKN_petlavarock.labelMalePlural>
+  <TKKN_petlavarock.labelFemale>熔岩宠物</TKKN_petlavarock.labelFemale>
+  <TKKN_petlavarock.labelFemalePlural>熔岩宠物</TKKN_petlavarock.labelFemalePlural>
+
+  <TKKN_giantsnail.label>巨型蜗牛</TKKN_giantsnail.label>
+  <TKKN_giantsnail.labelPlural>巨型蜗牛</TKKN_giantsnail.labelPlural>
+  <TKKN_giantsnail.lifeStages.0.label>巨型蜗牛</TKKN_giantsnail.lifeStages.0.label>
+  <TKKN_giantsnail.lifeStages.0.labelPlural>巨型蜗牛</TKKN_giantsnail.lifeStages.0.labelPlural>
+  <TKKN_giantsnail.lifeStages.0.labelMale>雄性巨型蜗牛</TKKN_giantsnail.lifeStages.0.labelMale>
+  <TKKN_giantsnail.lifeStages.0.labelMalePlural>雄性巨型蜗牛</TKKN_giantsnail.lifeStages.0.labelMalePlural>
+  <TKKN_giantsnail.lifeStages.0.labelFemale>雌性巨型蜗牛</TKKN_giantsnail.lifeStages.0.labelFemale>
+  <TKKN_giantsnail.lifeStages.0.labelFemalePlural>雌性巨型蜗牛</TKKN_giantsnail.lifeStages.0.labelFemalePlural>
+  <TKKN_giantsnail.lifeStages.1.label>巨型蜗牛</TKKN_giantsnail.lifeStages.1.label>
+  <TKKN_giantsnail.lifeStages.1.labelPlural>巨型蜗牛</TKKN_giantsnail.lifeStages.1.labelPlural>
+  <TKKN_giantsnail.lifeStages.1.labelMale>雄性巨型蜗牛</TKKN_giantsnail.lifeStages.1.labelMale>
+  <TKKN_giantsnail.lifeStages.1.labelMalePlural>雄性巨型蜗牛</TKKN_giantsnail.lifeStages.1.labelMalePlural>
+  <TKKN_giantsnail.lifeStages.1.labelFemale>雌性巨型蜗牛</TKKN_giantsnail.lifeStages.1.labelFemale>
+  <TKKN_giantsnail.lifeStages.1.labelFemalePlural>雌性巨型蜗牛</TKKN_giantsnail.lifeStages.1.labelFemalePlural>
+  <TKKN_giantsnail.lifeStages.2.label>巨型蜗牛</TKKN_giantsnail.lifeStages.2.label>
+  <TKKN_giantsnail.lifeStages.2.labelPlural>巨型蜗牛</TKKN_giantsnail.lifeStages.2.labelPlural>
+  <TKKN_giantsnail.lifeStages.2.labelMale>雄性巨型蜗牛</TKKN_giantsnail.lifeStages.2.labelMale>
+  <TKKN_giantsnail.lifeStages.2.labelMalePlural>雄性巨型蜗牛</TKKN_giantsnail.lifeStages.2.labelMalePlural>
+  <TKKN_giantsnail.lifeStages.2.labelFemale>雌性巨型蜗牛</TKKN_giantsnail.lifeStages.2.labelFemale>
+  <TKKN_giantsnail.lifeStages.2.labelFemalePlural>雌性巨型蜗牛</TKKN_giantsnail.lifeStages.2.labelFemalePlural>
+  <TKKN_giantsnail.labelMale>雄性巨型蜗牛</TKKN_giantsnail.labelMale>
+  <TKKN_giantsnail.labelMalePlural>雄性巨型蜗牛</TKKN_giantsnail.labelMalePlural>
+  <TKKN_giantsnail.labelFemale>雌性巨型蜗牛</TKKN_giantsnail.labelFemale>
+  <TKKN_giantsnail.labelFemalePlural>雌性巨型蜗牛</TKKN_giantsnail.labelFemalePlural>
+
+
+  <!--[Duplicated] <TKKN_petlavarock.label>熔岩宠物</TKKN_petlavarock.label>-->
+  <!--[Duplicated] <TKKN_petlavarock.labelPlural>熔岩宠物</TKKN_petlavarock.labelPlural>-->
+  <!--[Duplicated] <TKKN_petlavarock.lifeStages.0.labelMale>雄性熔岩宠物</TKKN_petlavarock.lifeStages.0.labelMale>-->
+  <!--[Duplicated] <TKKN_petlavarock.lifeStages.0.labelMalePlural>雄性熔岩宠物</TKKN_petlavarock.lifeStages.0.labelMalePlural>-->
+  <!--[Duplicated] <TKKN_petlavarock.lifeStages.0.labelFemale>雌性熔岩宠物</TKKN_petlavarock.lifeStages.0.labelFemale>-->
+  <!--[Duplicated] <TKKN_petlavarock.lifeStages.0.labelFemalePlural>雌性熔岩宠物</TKKN_petlavarock.lifeStages.0.labelFemalePlural>-->
+  <!--[Duplicated] <TKKN_petlavarock.lifeStages.1.label>熔岩宠物</TKKN_petlavarock.lifeStages.1.label>-->
+  <!--[Duplicated] <TKKN_petlavarock.lifeStages.1.labelPlural>熔岩宠物</TKKN_petlavarock.lifeStages.1.labelPlural>-->
+  <!--[Duplicated] <TKKN_petlavarock.lifeStages.1.labelMale>熔岩宠物</TKKN_petlavarock.lifeStages.1.labelMale>-->
+  <!--[Duplicated] <TKKN_petlavarock.lifeStages.1.labelMalePlural>雄性熔岩宠物</TKKN_petlavarock.lifeStages.1.labelMalePlural>-->
+  <!--[Duplicated] <TKKN_petlavarock.lifeStages.1.labelFemale>熔岩宠物</TKKN_petlavarock.lifeStages.1.labelFemale>-->
+  <!--[Duplicated] <TKKN_petlavarock.lifeStages.1.labelFemalePlural>雌性熔岩宠物</TKKN_petlavarock.lifeStages.1.labelFemalePlural>-->
+  <!--[Duplicated] <TKKN_petlavarock.lifeStages.2.label>熔岩宠物</TKKN_petlavarock.lifeStages.2.label>-->
+  <!--[Duplicated] <TKKN_petlavarock.lifeStages.2.labelPlural>熔岩宠物</TKKN_petlavarock.lifeStages.2.labelPlural>-->
+  <!--[Duplicated] <TKKN_petlavarock.lifeStages.2.labelMale>熔岩宠物</TKKN_petlavarock.lifeStages.2.labelMale>-->
+  <!--[Duplicated] <TKKN_petlavarock.lifeStages.2.labelMalePlural>雄性熔岩宠物</TKKN_petlavarock.lifeStages.2.labelMalePlural>-->
+  <!--[Duplicated] <TKKN_petlavarock.lifeStages.2.labelFemale>熔岩宠物</TKKN_petlavarock.lifeStages.2.labelFemale>-->
+  <!--[Duplicated] <TKKN_petlavarock.lifeStages.2.labelFemalePlural>雌性熔岩宠物</TKKN_petlavarock.lifeStages.2.labelFemalePlural>-->
+  <!--[Duplicated] <TKKN_petlavarock.labelMale>熔岩宠物</TKKN_petlavarock.labelMale>-->
+  <!--[Duplicated] <TKKN_petlavarock.labelMalePlural>熔岩宠物</TKKN_petlavarock.labelMalePlural>-->
+  <!--[Duplicated] <TKKN_petlavarock.labelFemale>熔岩宠物</TKKN_petlavarock.labelFemale>-->
+  <!--[Duplicated] <TKKN_petlavarock.labelFemalePlural>熔岩宠物</TKKN_petlavarock.labelFemalePlural>-->
+
+</LanguageData>

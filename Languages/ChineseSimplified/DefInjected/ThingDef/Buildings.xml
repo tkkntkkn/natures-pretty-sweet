@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <TKKN_Sculpture_Shell.label>海贝壳</TKKN_Sculpture_Shell.label>
+  <TKKN_Sculpture_Shell.description>这个美丽而坚固的壳来自已经死掉的海洋生物。</TKKN_Sculpture_Shell.description>
+  <TKKN_Sculpture_Shell_Blueprint_Install.label>海贝壳（蓝图）</TKKN_Sculpture_Shell_Blueprint_Install.label>
+
+  <TKKN_RedwoodDead.label>红木</TKKN_RedwoodDead.label>
+  <TKKN_RedwoodDead.description>一棵巨大的，非常缓慢生长的树。它的根很浅，当它长得太大时，它颠覆了。\n\n产生红木，这是珍贵的稀有木材。</TKKN_RedwoodDead.description>
+
+  <TKKN_Lava_Spring.label>喷发的岩浆</TKKN_Lava_Spring.label>
+  <TKKN_Lava_Spring.description>喷涌的岩浆，硬化后成为熔岩石。</TKKN_Lava_Spring.description>
+
+  <TKKN_ColdSpring.label>冷泉</TKKN_ColdSpring.label>
+  <TKKN_ColdSpring.description>冰澈的地下水，这些水会让四周保持凉爽。</TKKN_ColdSpring.description>
+
+  <TKKN_OasisSpring.label>绿洲</TKKN_OasisSpring.label>
+  <TKKN_OasisSpring.description>冰澈的地下水，这些水会让四周保持凉爽。</TKKN_OasisSpring.description>
+
+  <TKKN_HotSpring.label>温泉</TKKN_HotSpring.label>
+  <TKKN_HotSpring.description>温暖的地热泉水，这些泉水具有治疗功效。</TKKN_HotSpring.description>
+
+  <TKKN_SteamVent.label>蒸汽喷泉</TKKN_SteamVent.label>
+  <TKKN_SteamVent.description>由熔岩而产生的天然蒸汽。</TKKN_SteamVent.description>
+
+  <TKKN_SteamGenerator.label>蒸汽发电机</TKKN_SteamGenerator.label>
+  <TKKN_SteamGenerator.description>用蒸汽喷泉发电，必须放置在蒸汽喷泉上。</TKKN_SteamGenerator.description>
+  <TKKN_SteamGenerator_Blueprint.label>蒸汽发电机（蓝图）</TKKN_SteamGenerator_Blueprint.label>
+  <TKKN_SteamGenerator_Blueprint_Install.label>蒸汽发电机（蓝图）</TKKN_SteamGenerator_Blueprint_Install.label>
+  <TKKN_SteamGenerator_Frame.label>蒸汽发电机（建造中）</TKKN_SteamGenerator_Frame.label>
+  <TKKN_SteamGenerator_Frame.description>用蒸汽喷泉发电，必须放置在蒸汽喷泉上。</TKKN_SteamGenerator_Frame.description>
+
+
+  <!-- ThingDef ParentName="BuildingNaturalBase">
+    <defName>TKKN_Lava_Spring</defName>
+    <label>Lava Flow</label>
+    <thingClass>TKKN_NPS.Lava_Spring</thingClass>
+    <description>Spews molten lava, which hardens into lava rock.</description>
+    <graphicData>
+      <texPath>TKKN_NPS/Things/Building/lavaSpring</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shadowData>
+        <volume>(0.25, 0.5, 0.25)</volume>
+        <offset>(0,0,-0.1)</offset>
+      </shadowData>
+      <damageData>
+        <rect>(0.2,0.2,0.6,0.6)</rect>
+      </damageData>
+    </graphicData>
+    <comps>
+      <li Class="CompProperties_Glower">
+        <glowRadius>12</glowRadius>
+        <glowColor>(128,148,0,60)</glowColor>
+      </li>
+      <li Class="TKKN_NPS.CompProperties_SpringLava">
+        <radius>5</radius>
+        <dryTile>TKKN_LavaRock_RoughHewn</dryTile>
+        <wetTile>TKKN_Lava</wetTile>      
+        <deepTile>TKKN_Lava</deepTile>
+        <spawnProp>TKKN_LavaRock</spawnProp>
+        <temperature>500</temperature>
+		<weight>200</weight>
+		<howOftenToChange>1000</howOftenToChange>
+		<commonBiome>TKKN_VolcanicFlow</commonBiome>
+      </li>
+    </comps>
+    <tickerType>Normal</tickerType>
+    <altitudeLayer>Floor</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <selectable>false</selectable>
+    <destroyable>true</destroyable>
+    <useHitPoints>false</useHitPoints>
+    <statBases>
+      <Flammability>0</Flammability>
+      <Beauty>150</Beauty>
+    </statBases>
+    <fillPercent>0.15</fillPercent>
+    <building>
+      <isEdifice>false</isEdifice>
+      <claimable>false</claimable>
+      <deconstructible>false</deconstructible>
+    </building>
+    
+    <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+    <pathCost>150</pathCost>
+    <rotatable>false</rotatable>
+  </ThingDef -->
+
+</LanguageData>
