@@ -23,35 +23,47 @@ namespace TKKN_NPS
 
 		public static readonly Dictionary<string, Texture2D> customWeathers;
 
+		//lava
 		public static bool spawnLavaOnlyInBiome = true;
 		public static bool allowLavaEruption = true;
-		public static bool allowPlantEffects = true;
+		public static bool DoLavaVisualEffects = true;
+		public static float LavaVisualEffectChance = .009f;
+		private static string LavaVisualEffectChanceBuffer;
+
+		//weather
+		public static bool doWeather = true;
+		public static bool showCold = true;
+		public static bool showHot = true;
+		public static bool showRain = true;
 
 		//terrain effects:
 		public static bool affectsCold = true;
 		public static bool affectsWet = true;
 		public static bool affectsHot = true;
 
-		public static bool showCold = true;
-		public static bool showHot = true;
-		public static bool showRain = true;
+		//plants:
+		public static bool allowPlantEffects = true;
 
+		//pawns:
 		public static bool allowPawnsToGetWet = true;
+		public static bool allowPawnsToFreezeRoast = true;
 		public static bool allowPawnsSwim = true;
-		public static bool doWeather = true;
+
+		//desire trails
 		public static bool doDirtPath = true;
+
+		//dev
 		public static bool regenCells = false;
-		public static bool doTides = true;
-		public static bool doSeasonalFloods = true;
-		public static bool DoDisasterFloods = true;
-
-		
 		public static bool showDevReadout = false;
-
 		public static bool showUpdateNotes = true;
 
-		public static int cellBatchNumber = 100;
-		public static string refCellBatchNumber = "";
+		//tides
+		public static bool doTides = true;
+
+		//floods
+		public static bool doSeasonalFloods = true;
+		public static bool DoDisasterFloods = true;
+		
 
 		public static bool showTempOverlay {
 			get {
@@ -67,13 +79,11 @@ namespace TKKN_NPS
 			Listing_Standard list = new Listing_Standard(GameFont.Small) { ColumnWidth = inRect.width / 2 };
 			list.Begin(inRect);
 
+			list.Label("Performance Settings");
 			//Performance Settings
-			list.TextFieldNumericLabeled(
-				"Cell processing batch size (default 100)",
-				ref Settings.cellBatchNumber//,
-											//				"Limit how many cells are processed every tick for weather affects."
-				, ref Settings.refCellBatchNumber
-				);
+
+			list.Gap(4f);
+			list.Label("Weather Effects:");
 			list.CheckboxLabeled(
 				"TKKN_doWeather_title".Translate(),
 				ref Settings.doWeather,
@@ -90,21 +100,43 @@ namespace TKKN_NPS
 				"TKKN_showRain_title".Translate(),
 				ref Settings.showRain,
 				"TKKN_showRain_text".Translate());
+
+			list.Gap(4f);
+			list.Label("Tide Effects:");
+
 			list.CheckboxLabeled(
 				"TKKN_doTides_title".Translate(),
 				ref Settings.doTides,
 				"TKKN_doTides_text".Translate());
+
+			list.Gap(4f);
+			list.Label("Lava:");
+
+			list.CheckboxLabeled(
+				"TKKN_DoLavaVisualEffects_title".Translate(),
+				ref Settings.DoLavaVisualEffects,
+				"TKKN_DoLavaVisualEffects_text".Translate());
+			list.TextFieldNumericLabeled(
+				"TKKN_LavaVisualEffectChance_title".Translate(),
+				ref Settings.LavaVisualEffectChance,
+				ref LavaVisualEffectChanceBuffer,
+				0,
+				.5f
+				);
+
+			//Game Play Settings
+
 			list.Gap(12f);
+			list.Label("Gameplay Settings:");
+			list.Gap(4f);
+			list.Label("Desire paths");
 			list.CheckboxLabeled(
 				"TKKN_doDirtPath_title".Translate(),
 				ref Settings.doDirtPath,
 				"TKKN_doDirtPath_text".Translate());
-			list.Gap(12f);
-			
 
-			//Game Play Settings
-
-
+			list.Gap(4f);
+			list.Label("Lava");
 			list.CheckboxLabeled(
 				"TKKN_allowLavaEruption_title".Translate(),
 				ref Settings.allowLavaEruption,
@@ -113,10 +145,16 @@ namespace TKKN_NPS
 				"TKKN_spawnLavaOnlyInBiome_title".Translate(),
 				ref Settings.spawnLavaOnlyInBiome,
 				"TKKN_spawnLavaOnlyInBiome_text".Translate());
+
+			list.Gap(4f);
+			list.Label("Plants");
 			list.CheckboxLabeled(
 				"TKKN_allowPlantEffects_title".Translate(),
 				ref Settings.allowPlantEffects,
 				"TKKN_allowPlantEffects_text".Translate());
+
+			list.Gap(4f);
+			list.Label("Pawns");
 			list.CheckboxLabeled(
 				"TKKN_allowPawnsToGetWet_title".Translate(),
 				ref Settings.allowPawnsToGetWet,
@@ -128,47 +166,69 @@ namespace TKKN_NPS
 
 
 			//Development stuff
-			list.Gap(30f);
-			
+			list.Gap(12f);
+			list.Label("Development:");
+
 			list.CheckboxLabeled(
 				"Show Update Notes?",
 				ref Settings.showUpdateNotes,
 				"");
-			list.Gap(30f);
-			list.CheckboxLabeled(
-				"TKKN_regen_title".Translate(),
-				ref Settings.regenCells,
-				"TKKN_regen_text".Translate());
-
 			list.CheckboxLabeled(
 				"TKKN_showTempReadout_title".Translate(),
 				ref Settings.showDevReadout,
 				"TKKN_showTempReadout_text".Translate());
-
-			
-
+			list.CheckboxLabeled(
+				"TKKN_regen_title".Translate(),
+				ref Settings.regenCells,
+				"TKKN_regen_text".Translate());
 			list.End();
 			
 		}
 		public override void ExposeData()
 		{
-			base.ExposeData();
-			
-			Scribe_Values.Look(ref Settings.doDirtPath, "doDirtPath", true, true);
-			Scribe_Values.Look(ref Settings.showHot, "showHot", true, true);
-			Scribe_Values.Look(ref Settings.showCold, "showCold", true, true);
-			Scribe_Values.Look(ref Settings.showHot, "allowPlantEffects", true, true);
-			Scribe_Values.Look(ref Settings.showRain, "showRain", true, true);
-			Scribe_Values.Look(ref Settings.affectsWet, "affectsWet", true, true);
-			Scribe_Values.Look(ref Settings.doTides, "doTides", true, true);
-			Scribe_Values.Look(ref Settings.allowPawnsToGetWet, "allowPawnsToGetWet", true, true);
-			Scribe_Values.Look(ref Settings.allowPawnsSwim, "allowPawnsSwim", true, true);
-			Scribe_Values.Look(ref Settings.showDevReadout, "showDevReadout", false, true);
-			Scribe_Values.Look(ref Settings.spawnLavaOnlyInBiome, "spawnLavaOnlyInBiome", false, true);
-			Scribe_Values.Look(ref Settings.allowLavaEruption, "allowLavaEruption", true, true);
-			Scribe_Values.Look(ref Settings.regenCells, "regenCells", true, true);
-			
+		base.ExposeData();
 
-		}
+		//lava
+		Scribe_Values.Look(ref Settings.spawnLavaOnlyInBiome, "spawnLavaOnlyInBiome", false, true);
+		Scribe_Values.Look(ref Settings.allowLavaEruption, "allowLavaEruption", true, true);
+		Scribe_Values.Look(ref Settings.DoLavaVisualEffects, "DoLavaVisualEffects", false, true);
+
+		//weather
+		Scribe_Values.Look(ref Settings.showHot, "showWeather", true, true);
+		Scribe_Values.Look(ref Settings.showHot, "showHot", true, true);
+		Scribe_Values.Look(ref Settings.showCold, "showCold", true, true);
+		Scribe_Values.Look(ref Settings.showRain, "showRain", true, true);
+
+		//terrain effects:
+		Scribe_Values.Look(ref Settings.affectsWet, "affectsWet", true, true);
+		Scribe_Values.Look(ref Settings.affectsCold, "affectsCold", true, true);
+		Scribe_Values.Look(ref Settings.affectsHot, "affectsHot", true, true);
+
+		//plants:
+		Scribe_Values.Look(ref Settings.allowPlantEffects, "allowPlantEffects", true, true);
+
+		//pawns:
+		Scribe_Values.Look(ref Settings.allowPawnsToGetWet, "allowPawnsToGetWet", true, true);
+		Scribe_Values.Look(ref Settings.allowPawnsSwim, "allowPawnsSwim", true, true);
+		Scribe_Values.Look(ref Settings.allowPawnsToFreezeRoast, "allowPawnsToFreezeRoast", true, true);
+
+		//desire path
+		Scribe_Values.Look(ref Settings.doDirtPath, "doDirtPath", true, true);
+
+		//tides
+		Scribe_Values.Look(ref Settings.doTides, "doTides", true, true);
+
+		//floods
+		Scribe_Values.Look(ref Settings.doSeasonalFloods, "doSeasonalFloods", false, true);
+		Scribe_Values.Look(ref Settings.DoDisasterFloods, "DoDisasterFloods", false, true);
+
+		//dev
+		Scribe_Values.Look(ref Settings.showDevReadout, "showDevReadout", false, true);
+		Scribe_Values.Look(ref Settings.regenCells, "regenCells", true, true);
+		Scribe_Values.Look(ref Settings.showUpdateNotes, "showUpdateNotes", false, true);
+
+
+
 	}
+}
 }

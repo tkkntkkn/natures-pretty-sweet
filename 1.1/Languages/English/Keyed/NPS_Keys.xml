@@ -1,72 +1,98 @@
-<?xml version="1.0" encoding="utf-8" ?>
-
+<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
 	<TKKN_NPS_RelaxHotSpring>Relaxing in a hot spring.</TKKN_NPS_RelaxHotSpring>
 	<TKKN_NPS_RelaxColdSpring>Chilling in a cold spring.</TKKN_NPS_RelaxColdSpring>
-
-
-
-  <TKKN_NPS_LavaHasEruptedNearby>Lava Eruption!</TKKN_NPS_LavaHasEruptedNearby>
-  <TKKN_NPS_LavaHasEruptedNearbyTxt>Lava is bubbling to the surface! Move your stuff away from the lava before it's damaged.</TKKN_NPS_LavaHasEruptedNearbyTxt>
-
-  <TKKN_NPS_DroughtLbl>drought</TKKN_NPS_DroughtLbl>
-  <TKKN_NPS_DroughTxt>There's no rain in the forecast for a very long time.</TKKN_NPS_DroughTxt>
-
-  <TKKN_NPS_WildFlowerBloomLbl>Wildflowers are blooming!</TKKN_NPS_WildFlowerBloomLbl>
-  <TKKN_NPS_WildFlowerBloomTxt>An unusual amount of wildflowers are blooming! Make sure you go outside to see it. Watch out for allergies!</TKKN_NPS_WildFlowerBloomTxt>
-  <TKKN_NPS_SuperbloomLbl>Superbloom!</TKKN_NPS_SuperbloomLbl>
-  <TKKN_NPS_SuperbloomTxt>An record setting amount of wildflowers are blooming! Make sure you go outside to see it. Watch out for allergies!</TKKN_NPS_SuperbloomTxt>
-  
-  <LetterLabelUpdateNotes1>NPS has updated!</LetterLabelUpdateNotes1>
-  <LetterLabelUpdateNotes1Text>The biggest changes: 2 new biomes (require new save). Seasonal weather, disease, and incidents. Humans create walking paths. Plants will dry out and die (doesn't affect biomes that aren't arid, and doesn't affect plants in a growing zone).</LetterLabelUpdateNotes1Text>
-  
-  
-  <TKKN_NPS_DrowningText>Someone is drowning!</TKKN_NPS_DrowningText>
-  
-  <TKKN_NPS_TreasureWashedUpText>Treasure has washed up on the beach! Get it before it washes away.</TKKN_NPS_TreasureWashedUpText>
-  <TKKN_NPS_TreasureFloodedUpText>Recent flooding has left behind treasure! Get it before it washes away.</TKKN_NPS_TreasureFloodedUpText>
-  <TKKN_NPS_UltraRareWashedUpText>Ultra rare treasure has washed up on the beach! Get it before it washes away.</TKKN_NPS_UltraRareWashedUpText>
-  <TKKN_NPS_UltraRareFloodedUpText>Recent flooding has left behind ultra rare treasure! Get it before it washes away.</TKKN_NPS_UltraRareFloodedUpText>
-
-  <!-- Frost -->
+	<TKKN_NPS_LavaHasEruptedNearby>Lava Eruption!</TKKN_NPS_LavaHasEruptedNearby>
+	<TKKN_NPS_LavaHasEruptedNearbyTxt>Lava is bubbling to the surface! Move your stuff away from the lava before it's damaged.</TKKN_NPS_LavaHasEruptedNearbyTxt>
+	<TKKN_NPS_DroughtLbl>drought</TKKN_NPS_DroughtLbl>
+	<TKKN_NPS_DroughTxt>There's no rain in the forecast for a very long time.</TKKN_NPS_DroughTxt>
+	<TKKN_NPS_WildFlowerBloomLbl>Wildflowers are blooming!</TKKN_NPS_WildFlowerBloomLbl>
+	<TKKN_NPS_WildFlowerBloomTxt>An unusual amount of wildflowers are blooming! Make sure you go outside to see it. Watch out for allergies!</TKKN_NPS_WildFlowerBloomTxt>
+	<TKKN_NPS_SuperbloomLbl>Superbloom!</TKKN_NPS_SuperbloomLbl>
+	<TKKN_NPS_SuperbloomTxt>An record setting amount of wildflowers are blooming! Make sure you go outside to see it. Watch out for allergies!</TKKN_NPS_SuperbloomTxt>
+	<LetterLabelUpdateNotes1>NPS has updated!</LetterLabelUpdateNotes1>
+	<LetterLabelUpdateNotes1Text>The biggest changes: 2 new biomes (require new save). Seasonal weather, disease, and incidents. Humans create walking paths. Plants will dry out and die (doesn't affect biomes that aren't arid, and doesn't affect plants in a growing zone).</LetterLabelUpdateNotes1Text>
+	<TKKN_NPS_DrowningText>Someone is drowning!</TKKN_NPS_DrowningText>
+	<TKKN_NPS_TreasureWashedUpText>Treasure has washed up on the beach! Get it before it washes away.</TKKN_NPS_TreasureWashedUpText>
+	<TKKN_NPS_TreasureFloodedUpText>Recent flooding has left behind treasure! Get it before it washes away.</TKKN_NPS_TreasureFloodedUpText>
+	<TKKN_NPS_UltraRareWashedUpText>Ultra rare treasure has washed up on the beach! Get it before it washes away.</TKKN_NPS_UltraRareWashedUpText>
+	<TKKN_NPS_UltraRareFloodedUpText>Recent flooding has left behind ultra rare treasure! Get it before it washes away.</TKKN_NPS_UltraRareFloodedUpText>
+	<!-- Frost -->
 	<FrostNone>No frost</FrostNone>
 	<FrostDusting>Frost (dusting)</FrostDusting>
 	<FrostThin>Frost (thin)</FrostThin>
 	<FrostMedium>Frost (medium)</FrostMedium>
 	<FrostThick>Frost (thick)</FrostThick>
-  
-  <!-- Titles -->
+	<!-- Titles -->
+	<TKKN_Birdwatching>Bird Watching</TKKN_Birdwatching>
+	<!-- Error Messages -->
+	<TKKN_NPS_MustPlaceOnSteamVent>You must place this on a steam vent</TKKN_NPS_MustPlaceOnSteamVent>
+	<!-- -->
+	<!-- Settings: -->
+	<!-- -->
+	<TKKN_allowPlantEffects_title>Allow Plant Effects</TKKN_allowPlantEffects_title>
+	<TKKN_allowPlantEffects_text>Plants will die when walked on, super bloom and wildflower blooms will happen, plants will die without water, plants will get snow on them in winter.</TKKN_allowPlantEffects_text>
+	<!-- Lava -->
+	<TKKN_spawnLavaOnlyInBiome_title>Lava eruptions outside of volcanic fields</TKKN_spawnLavaOnlyInBiome_title>
+	<TKKN_spawnLavaOnlyInBiome_text>Allow lava to erupt in almost every biome. Uncheck to make it so lava is only in the Volcanic Fields biome</TKKN_spawnLavaOnlyInBiome_text>
+	<TKKN_allowLavaEruption_title>Lava can erupt</TKKN_allowLavaEruption_title>
+	<TKKN_allowLavaEruption_text>Allow lava to erupt. Uncheck to remove the random eruption incidents</TKKN_allowLavaEruption_text>
+	<TKKN_DoLavaVisualEffects_text>Lava visual effects</TKKN_DoLavaVisualEffects_text>
+	<TKKN_DoLavaVisualEffects_title>Lava glows and throws smoke, uncheck or see below to stop this.</TKKN_DoLavaVisualEffects_title>
+	<TKKN_LavaVisualEffectChance_title>Chance to do visual effects</TKKN_LavaVisualEffectChance_title>
+	<TKKN_LavaVisualEffectChance_text>Reduce this number to have less visual effects. Default: .009</TKKN_LavaVisualEffectChance_text>
+	<!-- Weather -->
+	<TKKN_doWeather_title>Show weather effects (master)</TKKN_doWeather_title>
+	<TKKN_doWeather_text>If unchecked, none of the below will happen. If checked, only the ones checked below will happen.</TKKN_doWeather_text>
+	<TKKN_showHot_title>Show hot effects</TKKN_showHot_title>
+	<TKKN_showHot_text>When temperatures are hot, there will be visual indicators.</TKKN_showHot_text>
+	<TKKN_showCold_title>Show cold effects</TKKN_showCold_title>
+	<TKKN_showCold_text>When temperatures are cold, there will be visual indicators</TKKN_showCold_text>
+	<TKKN_showRain_title>Show rain effects</TKKN_showRain_title>
+	<TKKN_showRain_text>When it rains, the ground will get splatters and darken</TKKN_showRain_text>
+	<!-- Terrain effects -->
+	<TKKN_affectsCold_title>Terrains freeze</TKKN_affectsCold_title>
+	<TKKN_affectsCold_text>On change the map will update - frozen terrains will melt</TKKN_affectsCold_text>
+	<TKKN_affectsWet_title>Terrains change for wetness</TKKN_affectsWet_title>
+	<TKKN_affectsWet_text>On change the map will update - wet terrains will dry</TKKN_affectsWet_text>
+	<!--
+	<TKKN_affectsHot_title>Show rain effects</TKKN_affectsHot_title>
+	<TKKN_affectsHot_text>When it rains, the ground will get splatters and darken</TKKN_affectsHot_text>
+	-->
+	<!-- plants -->
+	<TKKN_allowPlantEffects_title>Allow plant effects</TKKN_allowPlantEffects_title>
+	<TKKN_allowPlantEffects_text>Plants will take damage during dry spells</TKKN_allowPlantEffects_text>
+	<TKKN_allowPlantVisualEffects_title>Plants change graphics</TKKN_allowPlantVisualEffects_title>
+	<TKKN_allowPlantVisualEffects_text>Plants will change graphics during droughts/spring. Does not affect plant health</TKKN_allowPlantVisualEffects_text>
+	
+	<!-- Pawns -->
+	<TKKN_allowPawnsToGetWet_title>Pawns get wet</TKKN_allowPawnsToGetWet_title>
+	<TKKN_allowPawnsToGetWet_text>Pawns get wet in water, rain, etc</TKKN_allowPawnsToGetWet_text>
+	<TKKN_allowPawnsToFreezeRoast_title>Pawns get hot/cold</TKKN_allowPawnsToFreezeRoast_title>
+	<TKKN_allowPawnsToFreezeRoast_text>Pawns can be harmed by heat and cold</TKKN_allowPawnsToFreezeRoast_text>
+	<TKKN_allowPawnsSwim_title>Pawns can swim and drown</TKKN_allowPawnsSwim_title>
+	<TKKN_allowPawnsSwim_text>In deep water pawns will swim. Only affects non-ocean creatures</TKKN_allowPawnsSwim_text>
 
-  <TKKN_Birdwatching>Bird Watching</TKKN_Birdwatching>
-  
-<!-- Error Messages -->
-  <TKKN_NPS_MustPlaceOnSteamVent>You must place this on a steam vent</TKKN_NPS_MustPlaceOnSteamVent>
+	<!-- Desire Trails -->
+	<TKKN_doDirtPath_title>Do Desire Trails</TKKN_doDirtPath_title>
+	<TKKN_doDirtPath_text>Dirt/sand will be compacted by walking, and stone will be smoothed</TKKN_doDirtPath_text>
+	
+	<!-- Dev -->
+	<TKKN_showTempReadout_title>Show debug readout</TKKN_showTempReadout_title>
+	<TKKN_showTempReadout_text>Show debug readout in the bottom left</TKKN_showTempReadout_text>
+	<TKKN_showUpdateNotes_title>Reshow the update notes</TKKN_showUpdateNotes_title>
+	<TKKN_showUpdateNotes_text>Redisplays the update notes. Requires restart</TKKN_showUpdateNotes_text>
+	<TKKN_regen_title>LEAVE ALONE: Regen cell lists</TKKN_regen_title>
+	<TKKN_regen_text>Regenerates terrain on the currently loaded map so you can get flooding, tides, and/or an oasis in a save made before this mod was added. After saving this setting, make a new save file for your game (in case things go badly), then reload the game. Once you reload, UNCHECK THIS BOX.</TKKN_regen_text>
 
-  
-<!-- Settings: -->  
-  <TKKN_allowPlantEffects_title>Allow Plant Effects</TKKN_allowPlantEffects_title>
-  <TKKN_allowPlantEffects_text>Plants will die when walked on, super bloom and wildflower blooms will happen, plants will die without water, plants will get snow on them in winter.</TKKN_allowPlantEffects_text>
-  <TKKN_spawnLavaOnlyInBiome_title>Lava eruptions outside of volcanic fields</TKKN_spawnLavaOnlyInBiome_title>
-  <TKKN_spawnLavaOnlyInBiome_text>Allow lava to erupt in almost every biome. Uncheck to make it so lava is only in the Volcanic Fields biome</TKKN_spawnLavaOnlyInBiome_text>
-  <TKKN_allowLavaEruption_title>Lava can erupt</TKKN_allowLavaEruption_title>
-  <TKKN_allowLavaEruption_text>Allow lava to erupt. Uncheck to remove the random eruption incidents</TKKN_allowLavaEruption_text>
-  <TKKN_showHot_title>Show hot effects</TKKN_showHot_title>
-  <TKKN_showHot_text>When temperatures are hot, there will be visual indicators.</TKKN_showHot_text>
-  <TKKN_showCold_title>Show cold effects</TKKN_showCold_title>
-  <TKKN_showCold_text>When temperatures are cold, there will be visual indicators</TKKN_showCold_text>
-  <TKKN_showRain_title>Show rain effects</TKKN_showRain_title>
-  <TKKN_showRain_text>When it rains, the ground will get splatters and darken</TKKN_showRain_text>
-  <TKKN_doWeather_title>Show weather effects (master)</TKKN_doWeather_title>
-  <TKKN_doWeather_text>If unchecked, none of the below will happen. If checked, only the ones checked below will happen.</TKKN_doWeather_text>
-  <TKKN_doTides_title>Do Tides</TKKN_doTides_title>
-  <TKKN_doTides_text>Oceans will rise and fall</TKKN_doTides_text>
+	<!-- floods -->
+	<TKKN_doSeasonalFloods_title>Do Seasonal Flooding</TKKN_doSeasonalFloods_title>
+	<TKKN_DoSeasonalFloods_text>Rivers and ponds will flood in spring and go low in summer</TKKN_DoSeasonalFloods_text>
+	<TKKN_DoDisasterFloods_title>Do Disaster Floods</TKKN_DoDisasterFloods_title>
+	<TKKN_DoDisasterFloods_text>Heavy rain will cause dangerous floods</TKKN_DoDisasterFloods_text>
 
-  <TKKN_showTempReadout_title>Show temperature readout</TKKN_showTempReadout_title>
-  <TKKN_showTempReadout_text>Show temperature readout in the bottom left</TKKN_showTempReadout_text>
-  
-  
-  <TKKN_regen_title>LEAVE ALONE: Regen cell lists</TKKN_regen_title>
-  <TKKN_regen_text>Regenerates terrain on the currently loaded map so you can get flooding, tides, and/or an oasis in a save made before this mod was added. After saving this setting, make a new save file for your game (in case things go badly), then reload the game. Once you reload, UNCHECK THIS BOX.</TKKN_regen_text>
-  
-  
+	<!-- Tides -->	
+	<TKKN_doTides_title>Do Tides</TKKN_doTides_title>
+	<TKKN_doTides_text>Oceans will rise and fall</TKKN_doTides_text>
+
 </LanguageData>
