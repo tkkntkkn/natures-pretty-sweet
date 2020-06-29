@@ -4,28 +4,59 @@ using UnityEngine;
 using Verse;
 using Verse.Noise;
 using System.Linq;
+using TKKN_NPS.Workers;
 
-
-namespace TKKN_NPS
+namespace TKKN_NPS.SaveData
 {
-	public class cellData : IExposable
+	public class CellData : IExposable
 	{
 		public IntVec3 location;
 		public Map map;
 		public int howPacked = 0;
-		public float howWet = 0; // 0 = dry, 5 = base, ~6+ = wet, 20 = flood.
+
+		private float howWet = 0;
+
+		// 0 = dry, >0-<60 = base, >60 - <90 = wet, 90+ = flood.
+		public float HowWet {
+			get { return howWet;  }
+			set {
+				float newWet = howWet + value;
+				if (newWet < 0) {
+					howWet = 0;
+					return;
+				}
+				if (newWet > wetCap)
+				{
+					howWet = wetCap;
+					return;
+				}
+				howWet = value;
+			}
+		} 
+
 		public float temperature = 0; //in celsius
 		public float frostLevel = 0;
+
+		public float humidity = 0;
+
+
 		public TerrainDef baseTerrain;
 		public TerrainDef originalTerrain;
 
 		// configs:
-		private int wetFlood = 20;
-		private int wetWet = 6;
+		private int wetFlood = 90;
+		private int wetWet = 60;
+		public int packAt = 750;
+		private float wetCap
+		{
+			get { return (float)(wetFlood * 1.25); }
+		}
 
 		public string overrideType = "";
 
-		public int packAt = 750;
+		public bool isCold {
+			get { return temperature< 0; }
+		}
 
 		//wet overrides - these are used for cells near large bodies of water that will flood them periodically.
 		//what step of the tide this is
@@ -33,25 +64,19 @@ namespace TKKN_NPS
 		//how flooded the cell is. Cells can be affected by different floodlevels, so include them all here.
 		public HashSet<int> floodLevel = new HashSet<int>();
 
-		public cellData(TerrainDef terrain, IntVec3 c)
+		public CellData(Map map, TerrainDef terrain, IntVec3 c)
 		{
-			location = c;
-			baseTerrain = terrain;
-			originalTerrain = terrain;
+			this.location = c;
+			this.map = map;
+			this.baseTerrain = terrain;
+			this.originalTerrain = terrain;
 
 			SetWetLevel();
 
-			/*
-			if (thiscell.Value.baseTerrain.HasTag("TKKN_Swim"))
-			{
-				this.swimmingCellsList.Add(thiscell.Key);
-			}
-			if (thiscell.Value.baseTerrain.HasTag("Lava"))
-			{
-				//future me: to do: split lava actions into ones that will affect pawns and ones that won't, since pawns can't walk on deep lava
-				this.lavaCellsList.Add(thiscell.Key);
-			}
-			*/
+			Room room = c.GetRoom(map, RegionType.Set_All);
+			WeatherBaseWorker.CalculateHumidity(this, room);
+			WeatherBaseWorker.CalculateTemperature(this, room);
+
 		}
 
 		public TerrainWeatherReactions weather
@@ -61,6 +86,21 @@ namespace TKKN_NPS
 				if (baseTerrain.HasModExtension<TerrainWeatherReactions>()) {
 					return baseTerrain.GetModExtension<TerrainWeatherReactions>();
 				} else {
+					return null;
+				}
+			}
+		}
+
+		public TerrainWeatherReactions weatherOrig
+		{
+			get
+			{
+				if (originalTerrain.HasModExtension<TerrainWeatherReactions>())
+				{
+					return originalTerrain.GetModExtension<TerrainWeatherReactions>();
+				}
+				else
+				{
 					return null;
 				}
 			}
@@ -89,147 +129,171 @@ namespace TKKN_NPS
 				return;
 			}
 
-			if (IsFlooded() && weather.floodTerrain != null)
-			{
-				if (IsCold())
-				{
-					//set to the frozen version of the flooded terrain.
-					changeTerrain(weather.floodTerrain.GetModExtension<TerrainWeatherReactions>().freezeTerrain);
-				}
-				else {
-					changeTerrain(weather.floodTerrain);
-				}
-			}
 
-			else if (IsWet() && weather.wetTerrain != null)
+			if (IsFlooded)
 			{
-				if (IsCold())
+				if (!SetFloodedTerrain())
 				{
-					//set to the frozen version of the wet terrain
-					changeTerrain(weather.wetTerrain.GetModExtension<TerrainWeatherReactions>().freezeTerrain);
+					SetWetTerrain();
 				}
-				else
-				{
-					this.DoLoot(currentTerrain, weather.wetTerrain);
-					changeTerrain(weather.wetTerrain);
-				}
+
 			}
-			else
+			else if (IsWet)
 			{
-				if (IsCold() && weather.freezeTerrain != null)
+				SetWetTerrain();
+			}
+			else if (IsCold)
+			{
+				if (weather.freezeTerrain != null)
 				{
 					changeTerrain(weather.freezeTerrain);
 				}
-				else if (weather.dryTerrain != null)
+			}
+			else 
+			{
+				if (weather.dryTerrain != null)
 				{
 					this.DoLoot(currentTerrain, weather.dryTerrain);
 					changeTerrain(weather.dryTerrain);
 				}
 				else
 				{
-					this.DoLoot(currentTerrain, baseTerrain);
-					changeTerrain(baseTerrain);
+					if (baseTerrain != currentTerrain)
+					{
+						this.DoLoot(currentTerrain, baseTerrain);
+						changeTerrain(baseTerrain);
+					}
 				}
 			}
 		}
 
+		public bool SetFloodedTerrain()
+		{
+
+			if (weather.floodTerrain != null)
+			{
+				if (IsCold)
+				{
+					//set to the frozen version of the flooded terrain.
+
+					changeTerrain(weather.floodTerrain.GetModExtension<TerrainWeatherReactions>().freezeTerrain);
+					return true;
+				}
+				else
+				{
+					changeTerrain(weather.floodTerrain);
+					return true;
+				}
+			}
+			return false;
+		}
+
+		public bool SetWetTerrain()
+		{
+			if (weather.wetTerrain != null)
+			{
+				if (IsCold)
+				{
+					//set to the frozen version of the wet terrain
+					changeTerrain(weather.wetTerrain.GetModExtension<TerrainWeatherReactions>().freezeTerrain);
+
+					return true;
+				}
+				else
+				{
+					DoLoot(currentTerrain, weather.wetTerrain);
+					changeTerrain(weather.wetTerrain);
+					return true;
+				}
+			}
+			return false;
+		}
 		public void SetFlooded()
 		{
-			SetWetLevel(wetFlood);
+			SetWetLevel(wetCap);
 		}
+
 		public void SetWet()
 		{
-			SetWetLevel(weather.wetAt + wetWet + 3);
+			SetWetLevel(wetWet+5);
 		}
+
+
 		public void SetWetLevel()
 		{
-			if (currentTerrain.HasTag("TKKN_Wet"))
+			if (TerrainWorker.IsWaterTerrain(currentTerrain))
 			{
 				SetFlooded();
 			}
 
-			//default to 10 so the first few days are easier.
-			SetWetLevel(10);
+			//default right under wet so the few days are easier.
+			SetWetLevel(wetWet - 5);
 		}
 
 		public void SetWetLevel(float level)
 		{
 
-			this.howWet = level;
+			HowWet = level;
 		}
 
-		public bool IsWet() {
-			if (weather == null)
-			{
-				return false;
-			}
-			int dampAt = weather.wetAt + wetWet;
-			return this.howWet > dampAt && Settings.affectsWet;
-
+		public bool IsWet {
+			get { return weather != null ? howWet > wetWet : false; }
 		}
 
-		public bool IsFlooded()
+		public bool IsFlooded
 		{
-			return this.howWet >= wetFlood && Settings.affectsWet;
+			get { return howWet >= wetFlood; }
 		}
 
-		public bool IsCold()
+
+		public bool IsCold
 		{
-			return this.temperature < 0 && Settings.affectsCold;
+			get { return temperature < 0 && Settings.affectsCold; }
 		}
 
 
 		public void DoCellSteadyEffects(TerrainDef currentTerrain)
 		{
 
-			if (this.howWet < 0)
-			{
-				this.howWet = 0;
-			}
-			if (this.howWet > wetFlood)
-			{
-				this.howWet = wetFlood;
-			}
-
 			//unpack soil so paths are not permenant
-			this.unpack();
+			Unpack();
 			
 			//check if the terrain has been floored
 			DesignationCategoryDef cats = currentTerrain.designationCategory;
 			if (cats != null && cats.defName == "Floors")
 			{
-				this.baseTerrain = currentTerrain;
+				baseTerrain = currentTerrain;
 			}
 		}
 
-		public void unpack()
+		public void Unpack()
 		{
 			if (!Settings.doDirtPath)
 			{
-				if (this.currentTerrain.defName == "TKKN_DirtPath") {
-					this.changeTerrain(RimWorld.TerrainDefOf.Soil);
+				if (currentTerrain.defName == "TKKN_DirtPath") {
+					changeTerrain(RimWorld.TerrainDefOf.Soil);
 				}
-				if (this.currentTerrain.defName == "TKKN_SandPath")
+				if (currentTerrain.defName == "TKKN_SandPath")
 				{
-					this.changeTerrain(RimWorld.TerrainDefOf.Sand);
+					changeTerrain(RimWorld.TerrainDefOf.Sand);
 				}
 				return;
 			}
-			if (this.howPacked > this.packAt)
+			if (howPacked > packAt)
 			{
-				this.howPacked = this.packAt;
+				howPacked = packAt;
 			}
-			if (this.howPacked > 0)
+			if (howPacked > 0)
 			{
-				this.howPacked--;
+				howPacked--;
 			}
-			else if(this.howPacked <= (this.packAt) && this.currentTerrain.defName == "TKKN_DirtPath")
+			else if(howPacked <= (packAt) && currentTerrain.defName == "TKKN_DirtPath")
 			{
-				this.changeTerrain(RimWorld.TerrainDefOf.Soil);
+				changeTerrain(RimWorld.TerrainDefOf.Soil);
 			}
-			else if (this.howPacked <= (this.packAt) && this.currentTerrain.defName == "TKKN_SandPath")
+			else if (howPacked <= (packAt) && currentTerrain.defName == "TKKN_SandPath")
 			{
-				this.changeTerrain(RimWorld.TerrainDefOf.Sand);
+				changeTerrain(RimWorld.TerrainDefOf.Sand);
 			}
 		}
 
@@ -283,38 +347,8 @@ namespace TKKN_NPS
 			if (terrain != null && terrain != currentTerrain)
 			{
 				this.map.terrainGrid.SetTerrain(location, terrain);
-				if (terrain.defName != "TKKN_Lava")
-				{
-					this.map.GetComponent<Watcher>().lavaCellsList.Remove(location);
-				}
-				if (terrain.defName == "TKKN_Lava")
-				{
-					this.map.GetComponent<Watcher>().lavaCellsList.Add(location);
-				}
-
-
 			}
 		}
-
-		private void rainSpawns()
-		{
-			//spawn special things when it rains.
-			if (Rand.Value < .009){
-				if (baseTerrain.defName == "TKKN_Lava"){
-					GenSpawn.Spawn(ThingMaker.MakeThing(ThingDefOf.TKKN_LavaRock), location, map);
-				} else if (baseTerrain.defName == "TKKN_SandBeachWetSalt") {
-					Log.Warning("Spawning crab");
-					GenSpawn.Spawn(ThingMaker.MakeThing(ThingDefOf.TKKN_crab), location, map);
-				} else if (currentTerrain.HasTag("TKKN_Wet"))
-				{
-					MoteMaker.MakeWaterSplash(location.ToVector3(), this.map, 1, 1);
-				}
-					
-			} else if (Rand.Value < .04 && currentTerrain.HasTag("Lava"))
-			{
-				MoteMaker.ThrowSmoke(location.ToVector3(), this.map, 5);
-			}
-}
 
 		private void SpawnElement() {
 			if (Rand.Value > .0001f)
@@ -587,6 +621,14 @@ namespace TKKN_NPS
 			{
 				overlayIce.Destroy();
 			}
+		}
+
+		static public TerrainWeatherReactions GetWeatherReactions(TerrainDef terrain) {
+			if (terrain.HasModExtension<TerrainWeatherReactions>())
+			{
+				return terrain.GetModExtension<TerrainWeatherReactions>();
+			}
+			return null;
 		}
 
 	}

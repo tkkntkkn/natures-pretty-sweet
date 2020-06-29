@@ -3,6 +3,7 @@ using RimWorld;
 using RimWorld.Planet;
 using Verse;
 
+/*
 namespace TKKN_NPS.tkkn.HarmonyPatches
 {
 	[HarmonyPatch(typeof(CompTerrainPumpDry))]
@@ -26,3 +27,4 @@ namespace TKKN_NPS.tkkn.HarmonyPatches
 		}
 	}
 }
+*/

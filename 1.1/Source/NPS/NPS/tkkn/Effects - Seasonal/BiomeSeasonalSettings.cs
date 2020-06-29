@@ -7,12 +7,14 @@ namespace TKKN_NPS
 {
 	public class BiomeSeasonalSettings : DefModExtension
 	{
-		public Season lastChanged;
-		public Quadrum lastChangedQ;
+		public Season LastChanged;
+		public Quadrum LastChangedQ;
 
 		public List<BiomePlantRecord> specialPlants;
 
+
 		//weather settings
+		public Dictionary<String, List<WeatherCommonalityRecord>> weatherLookup = new Dictionary<String, List<WeatherCommonalityRecord>>();
 		public List<WeatherCommonalityRecord> springWeathers;
 		public List<WeatherCommonalityRecord> summerWeathers;
 		public List<WeatherCommonalityRecord> fallWeathers;
@@ -25,6 +27,7 @@ namespace TKKN_NPS
 		public List<TKKN_IncidentCommonalityRecord> summerEvents;
 		public List<TKKN_IncidentCommonalityRecord> fallEvents;
 		public List<TKKN_IncidentCommonalityRecord> winterEvents;
+
 
 		//disease settings
 		public List<BiomeDiseaseRecord> springDiseases;
@@ -45,6 +48,13 @@ namespace TKKN_NPS
 		public bool plantCacheUpdated;
 		public bool diseaseCacheUpdated;
 
+		public BiomeSeasonalSettings()
+		{
+			weatherLookup.Add("spring", springWeathers);
+			weatherLookup.Add("summer", summerWeathers);
+			weatherLookup.Add("fall", fallWeathers);
+			weatherLookup.Add("winter", winterWeathers);
+		}
 
 		public bool canPutOnTerrain(IntVec3 c, ThingDef thingDef, Map map)
 		{
@@ -63,47 +73,62 @@ namespace TKKN_NPS
 			return true;
 		}
 
-		public void setWeatherBySeason(Map map, Season season, Quadrum quadrum)
-		{
+		public string GetLookupKey(Season season) {
 			if (Season.Spring == season)
 			{
-				map.Biome.baseWeatherCommonalities = this.springWeathers;
+				return "spring";
 			}
 			else if (Season.Summer == season)
 			{
-				map.Biome.baseWeatherCommonalities = this.summerWeathers;
+				return "summer";
 			}
 			else if (Season.Fall == season)
 			{
-				map.Biome.baseWeatherCommonalities = this.fallWeathers;
+				return "fall";
 			}
 			else if (Season.Winter == season)
 			{
-				map.Biome.baseWeatherCommonalities = this.winterWeathers;
+				return "winter";
 			}
-			else
+			return "spring";
+		}
+
+		public string GetLookupKey(Quadrum quadrum)
+		{
+			if (Quadrum.Aprimay == quadrum)
 			{
-				if (Quadrum.Aprimay == quadrum)
-				{
-					map.Biome.baseWeatherCommonalities = this.springWeathers;
-				}
-				else if (Quadrum.Decembary == quadrum)
-				{
-					map.Biome.baseWeatherCommonalities = this.winterWeathers;
-				}
-				else if (Quadrum.Jugust == quadrum)
-				{
-					map.Biome.baseWeatherCommonalities = this.fallWeathers;
-				}
-				else if (Quadrum.Septober == quadrum)
-				{
-					map.Biome.baseWeatherCommonalities = this.summerWeathers;
-				}
+				return "spring";
+			}
+			else if (Quadrum.Decembary == quadrum)
+			{
+				return "summer";
+			}
+			else if (Quadrum.Jugust == quadrum)
+			{
+				return "fall";
+			}
+			else if (Quadrum.Septober == quadrum)
+			{
+				return "winter";
+			}
+			return "spring";
+		}
+
+		public void SetWeatherBySeason(Map map, Season season, Quadrum quadrum)
+		{
+			List<WeatherCommonalityRecord> setTo = null;
+			setTo = weatherLookup[GetLookupKey(season)];
+
+			if (setTo == null) {
+				setTo = weatherLookup[GetLookupKey(quadrum)];
+			}
+			if (setTo != null) {
+				map.Biome.baseWeatherCommonalities = setTo;
 			}
 			return;
 		}
 
-		public void setDiseaseBySeason(Season season, Quadrum quadrum)
+		public void SetDiseaseBySeason(Season season, Quadrum quadrum)
 		{
 			List<BiomeDiseaseRecord> seasonalDiseases = new List<BiomeDiseaseRecord>();
 			if (Season.Spring == season && this.springDiseases != null)
@@ -152,7 +177,7 @@ namespace TKKN_NPS
 
 		}
 
-		public void setIncidentsBySeason(Season season, Quadrum quadrum)
+		public void SetIncidentsBySeason(Season season, Quadrum quadrum)
 		{
 			List<TKKN_IncidentCommonalityRecord> seasonalIncidents = new List<TKKN_IncidentCommonalityRecord>();
 			if (Season.Spring == season && this.springEvents != null)

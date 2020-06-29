@@ -12,8 +12,9 @@ namespace TKKN_NPS
 
         protected override bool TryExecuteWorker(IncidentParms parms)
         {
+			Log.Error("Running lavaflow");
+
 			Map map = (Map)parms.target;
-			IntVec3 intVec = CellFinder.RandomNotEdgeCell(15, map);
 
 			if (!Settings.allowLavaEruption)
 			{
@@ -23,8 +24,10 @@ namespace TKKN_NPS
 			{
 				return false;
 			}
-            
-            ThingWithComps lava = (ThingWithComps)GenSpawn.Spawn(ThingMaker.MakeThing(TKKN_NPS.ThingDefOf.TKKN_Lava_Spring, null), intVec, map);
+
+			IntVec3 intVec = CellFinder.RandomNotEdgeCell(15, map);
+
+			ThingWithComps lava = (ThingWithComps)GenSpawn.Spawn(ThingMaker.MakeThing(TKKN_NPS.ThingDefOf.TKKN_Lava_Spring, null), intVec, map);
 
 
             string label = "TKKN_NPS_LavaHasEruptedNearby".Translate();

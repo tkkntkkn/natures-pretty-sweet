@@ -3,9 +3,13 @@ using HarmonyLib;
 using RimWorld;
 using System;
 using System.Collections.Generic;
+using TKKN_NPS.Workers;
+using TKKN_NPS.SaveData;
+
+
 namespace TKKN_NPS
 {
-	
+	/*
 	[HarmonyPatch(typeof(Pawn))]
 	[HarmonyPatch("SpawnSetup")]
 	class PatchSpawnSetupPawn
@@ -20,6 +24,8 @@ namespace TKKN_NPS
 			
 		}
 	}
+	*/
+
 	[HarmonyPatch(typeof(Pawn))]
 	[HarmonyPatch("Tick")]
 	class PatchTickPawn
@@ -44,9 +50,20 @@ namespace TKKN_NPS
 			{
 				if (!Find.TickManager.Paused)
 				{
-					PatchTickPawn.MakePaths(__instance);
-					PatchTickPawn.MakeBreath(__instance);
-					PatchTickPawn.MakeWet(__instance);
+					Map map = __instance.Map;
+					Watcher watcher = Worker.GetWatcher(map);
+					watcher.cellWeatherAffects.TryGetValue(__instance.Position, out CellData cell);
+
+					if (cell == null)
+					{
+						return;
+					}
+
+
+
+					PatchTickPawn.MakePaths(__instance, cell);
+					PatchTickPawn.MakeBreath(__instance, cell);
+					PatchTickPawn.MakeWet(__instance, cell);
 					PatchTickPawn.DyingCheck(__instance, terrain);
 				}
 			}
@@ -126,34 +143,30 @@ namespace TKKN_NPS
 
 			}
 		}
-		public static void MakeWet(Pawn pawn)
+
+		public static void MakeWet(Pawn pawn, CellData cell)
 		{
 			HediffDef hediffDef = HediffDefOf.TKKN_Wetness;
 			if (pawn.health.hediffSet.GetFirstHediffOfDef(hediffDef) == null && pawn.RaceProps.Humanlike)
 			{
 				Map map = pawn.MapHeld;
 				IntVec3 c = pawn.Position;
-				if (map == null || !c.IsValid)
-				{
-					return;
-				}
+
 				bool isWet = false;
-				if (map.weatherManager.curWeather.rainRate > .001f)
+		
+				if (TerrainWorker.IsLava(cell.currentTerrain))
 				{
-					Room room = c.GetRoom(map, RegionType.Set_All);
-					bool roofed = map.roofGrid.Roofed(c);
-					bool flag2 = room != null && room.UsesOutdoorTemperature;
-					if (!roofed)
+					//lava should dry them?
+					isWet = false;
+				}
+				else {
+					if (TerrainWorker.IsWaterTerrain(cell.currentTerrain))
 					{
 						isWet = true;
 					}
-
-				}
-				else
-				{
-					TerrainDef currentTerrain = c.GetTerrain(map);
-					if (currentTerrain.HasTag("TKKN_Wet")){
-						isWet = true;
+					else
+					{
+						isWet = WeatherBaseWorker.AdjustWetBy(cell) > 0;
 					}
 				}
 
@@ -174,47 +187,37 @@ namespace TKKN_NPS
 			dinfo.SetBodyRegion(BodyPartHeight.Undefined, BodyPartDepth.Outside);
 			pawn.TakeDamage(dinfo).AssociateWithLog(battleLogEntry_DamageTaken);
 		}
-		public static void MakePaths(Pawn pawn)
+		public static void MakePaths(Pawn pawn, CellData cell)
 		{
 			Map map = pawn.Map;
-			Watcher watcher = map.GetComponent<Watcher>();
-			if (watcher == null)
-			{
-				return;
-			}
 			#region paths
 			if (pawn.Position.InBounds(map) && pawn.RaceProps.Humanlike)
 			{
-				//damage plants and remove snow/frost where they are. This will hopefully generate paths as pawns walk :)
-				if (watcher.CheckIfCold(pawn.Position))
+				//remove snow/frost where they are. This will hopefully generate paths as pawns walk :)
+				if (cell.isCold)
 				{
-					map.GetComponent<FrostGrid>().AddDepth(pawn.Position, (float)-.05);
+					FrostGrid fg = FrostWorker.GetFrostGrid(map);
+					fg.AddDepth(pawn.Position, (float)-.05);
 					map.snowGrid.AddDepth(pawn.Position, (float)-.05);
 				}
 
 				//pack down the soil only if the pawn is moving AND is in our colony
 				if (pawn.pather.MovingNow && pawn.IsColonist)
 				{
-					cellData cell = watcher.cellWeatherAffects[pawn.Position];
 					cell.doPack();
-				}
-				if (Settings.allowPlantEffects)
-				{
-					//this will be handled by the terrain changing in doPack
-			//		watcher.hurtPlants(pawn.Position, true, true);
 				}
 			}
 			#endregion
 		}
 
-		public static void MakeBreath(Pawn pawn)
+		public static void MakeBreath(Pawn pawn, CellData cell)
 		{
 			if (Find.TickManager.TicksGame % 150 == 0)
 			{
 				Map map = pawn.Map;
-				Watcher watcher = map.GetComponent<Watcher>();
 
-				bool isCold = watcher.CheckIfCold(pawn.Position);
+				bool isCold = cell.IsCold;
+
 				if (isCold)
 				{
 					IntVec3 head = pawn.Position;

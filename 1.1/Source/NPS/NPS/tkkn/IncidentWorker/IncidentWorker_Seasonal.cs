@@ -42,6 +42,9 @@ namespace TKKN_NPS
 		}
 		protected override bool TryExecuteWorker(IncidentParms parms)
 		{
+
+			Log.Error("Running herd");
+
 			Map map = (Map)parms.target;
 			PawnKindDef pawnKindDef;
 			if (!this.TryFindAnimalKind(map.Tile, out pawnKindDef))
@@ -122,6 +125,8 @@ namespace TKKN_NPS
 
 		protected override bool TryExecuteWorker(IncidentParms parms)
 		{
+			Log.Error("Running dust devil");
+
 			Map map = (Map)parms.target;
 			CellRect cellRect = CellRect.WholeMap(map).ContractedBy(30);
 			if (cellRect.IsEmpty)
@@ -220,6 +225,9 @@ namespace TKKN_NPS
 				return false;
 			}
 
+			Log.Error("Running Bloom");
+
+
 			Map map = (Map)parms.target;
 			IntVec3 intVec = CellFinder.RandomNotEdgeCell(15, map);
 
@@ -262,11 +270,11 @@ namespace TKKN_NPS
 
 		protected override bool TryExecuteWorker(IncidentParms parms)
 		{
-
 			if (!base.settingsCheck()){
 
 				return false;
 			}
+			Log.Error("Running Drought");
 
 			Map map = (Map)parms.target;
 

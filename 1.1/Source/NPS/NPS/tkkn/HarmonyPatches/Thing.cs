@@ -1,11 +1,10 @@
-﻿using System;
-using Verse;
-using Verse.Noise;
+﻿using Verse;
 using HarmonyLib;
-using System.Reflection;
 using System.Collections.Generic;
-using UnityEngine;
+using System.Linq;
 using RimWorld;
+using TKKN_NPS.SaveData;
+using TKKN_NPS.Workers;
 
 namespace TKKN_NPS
 {
@@ -49,8 +48,10 @@ namespace TKKN_NPS
 		{
 			IntVec3 c = __instance.Position;
 			Map map = __instance.Map;
-			TerrainDef terrain = c.GetTerrain(map);
-			if (terrain != null && terrain.HasTag("Lava"))
+			Watcher watcher = Worker.GetWatcher(map);
+			CellData cell = watcher.GetCell(c);
+
+			if (TerrainWorker.IsLava(cell.currentTerrain))
 			{
 				FireUtility.TryStartFireIn(c, map, 5f);
 

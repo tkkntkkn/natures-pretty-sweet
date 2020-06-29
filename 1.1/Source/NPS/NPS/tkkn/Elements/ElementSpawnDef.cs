@@ -14,6 +14,6 @@ namespace TKKN_NPS
 		public List<string> terrainValidationDisallowed;
 		public List<string> forbiddenBiomes;
 		public List<string> allowedBiomes;
-		
+
 	}
 }

@@ -386,4 +386,16 @@
          </li>
       </value>
    </Operation>
+   <Operation Class="PatchOperationAddModExtension">
+      <xpath>/Defs/ThingDef[defName = "TKKN_PlantBarnacles"]</xpath>
+      <value>
+         <li Class="TKKN_NPS.ThingWeatherReaction">
+			 <allowedTerrains>
+				 <li>TKKN_SandBeachWetSalt</li>
+				 <li>WaterOceanShallow</li>
+			</allowedTerrains>
+			 </li>
+      </value>
+   </Operation>
 </Patch>
+

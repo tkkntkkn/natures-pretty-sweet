@@ -6,32 +6,32 @@ using Verse;
 using RimWorld;
 using HarmonyLib;
 
-namespace TKKN_NPS.HarmonyPatches
+namespace TKKN_NPS
 {
-
-	[HarmonyPatch(typeof(PlantUtility))]
-	[HarmonyPatch("CanEverPlantAt")]
-	class Patch_CanEverPlantAt_PlantUtility
+	//load the extra plant graphics
+	[HarmonyPatch(typeof(PlantUtility), "CanEverPlantAt")]
+	public static class PostLoadCanEverPlantAt
 	{
 		[HarmonyPostfix]
 		public static void Postfix(ThingDef plantDef, IntVec3 c, Map map, ref bool __result)
 		{
 
-			if (__result == true)
+			//verify that the plant can grow on this terrain.
+			TerrainDef terrain = c.GetTerrain(map);
+			ThingWeatherReaction weatherReaction = plantDef.GetModExtension<ThingWeatherReaction>();
+			if (plantDef.defName == "TKKN_PlantBarnacles")
 			{
-				//verify that the plant can grow on this terrain.
-				TerrainDef terrain = c.GetTerrain(map);
-				ThingWeatherReaction weatherReaction = plantDef.GetModExtension<ThingWeatherReaction>();
-				if (weatherReaction != null && weatherReaction.allowedTerrains != null)
+				Log.Error(weatherReaction.ToString());
+			}
+			if (weatherReaction != null && weatherReaction.allowedTerrains != null)
+			{
+				if (!weatherReaction.allowedTerrains.Contains(terrain))
 				{
-					if (!weatherReaction.allowedTerrains.Contains(terrain))
-					{
-						__result = false;
-					}
-					else
-					{
-//						Log.Warning("planting " + plantDef.defName);
-					}
+					__result = false;
+				}
+				else
+				{
+					__result = true;
 				}
 			}
 

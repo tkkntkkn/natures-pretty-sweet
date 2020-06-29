@@ -5,7 +5,7 @@ using Verse;
 
 namespace TKKN_NPS
 {
-	public class springData : IExposable
+	public class SpringData : IExposable
 	{
 		public string springID;
 		public string biomeName;

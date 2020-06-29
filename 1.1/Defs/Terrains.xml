@@ -94,7 +94,7 @@
             <Cleanliness>-2</Cleanliness>
         </statBases>
         <tags>
-            <li>Lava</li>
+            <li>TKKN_Lava</li>
         </tags>
 		<extraNonDraftedPerceivedPathCost>200</extraNonDraftedPerceivedPathCost>
 		<extraDraftedPerceivedPathCost>30</extraDraftedPerceivedPathCost>
@@ -119,7 +119,7 @@
             <Cleanliness>-2</Cleanliness>
         </statBases>
         <tags>
-            <li>Lava</li>
+            <li>TKKN_Lava</li>
         </tags>
     </TerrainDef>
       <TerrainDef ParentName="WaterShallowBase">

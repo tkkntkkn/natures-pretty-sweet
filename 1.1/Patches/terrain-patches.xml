@@ -9,7 +9,6 @@
             <wetTerrain />
             <freezeTerrain />
             <freezeAt />
-			<wetAt></wetAt>
             <isSalty>True</isSalty>
 			<holdFrost>True</holdFrost>
 			<dryTerrain />
@@ -24,7 +23,6 @@
 				<wetTerrain></wetTerrain>
 				<freezeTerrain />
 				<freezeAt />
-				<wetAt>0</wetAt>
 				<isSalty>False</isSalty>
 				<holdFrost>True</holdFrost>
 				<dryTerrain>Soil</dryTerrain>
@@ -39,7 +37,6 @@
             <wetTerrain></wetTerrain>
             <freezeTerrain />
             <freezeAt />
-			<wetAt>0</wetAt>
             <isSalty>False</isSalty>
 			<holdFrost>True</holdFrost>
 		    <dryTerrain>SoilRich</dryTerrain>
@@ -54,7 +51,6 @@
             <wetTerrain>TKKN_SoilWet</wetTerrain>
             <freezeTerrain />
             <freezeAt />
-			<wetAt>0</wetAt>
             <isSalty>False</isSalty>
 			<holdFrost>True</holdFrost>
 			<dryTerrain />
@@ -69,7 +65,6 @@
             <wetTerrain></wetTerrain>
             <freezeTerrain />
             <freezeAt />
-			<wetAt>0</wetAt>
             <isSalty>False</isSalty>
 			<holdFrost>True</holdFrost>
 	        <dryTerrain>Sand</dryTerrain>
@@ -84,7 +79,6 @@
             <wetTerrain>TKKN_SoilWet</wetTerrain>
             <freezeTerrain />
             <freezeAt />
-			<wetAt>0</wetAt>
             <isSalty>False</isSalty>
 			<holdFrost>True</holdFrost>
 			<dryTerrain />
@@ -99,7 +93,6 @@
             <wetTerrain>WaterShallow</wetTerrain>
             <freezeTerrain>TKKN_MuddyIce</freezeTerrain>
             <freezeAt />
-			<wetAt>1</wetAt>
             <isSalty>False</isSalty>
 			<holdFrost>True</holdFrost>
 			<dryTerrain />
@@ -114,7 +107,6 @@
             <wetTerrain>TKKN_SoilWetRich</wetTerrain>
             <freezeTerrain />
             <freezeAt />
-			<wetAt>0</wetAt>
             <isSalty>False</isSalty>
 			<holdFrost>True</holdFrost>
 			<dryTerrain />
@@ -129,7 +121,6 @@
             <wetTerrain>TKKN_SandWet</wetTerrain>
             <freezeTerrain />
             <freezeAt />
-			<wetAt>0</wetAt>
             <isSalty>False</isSalty>
 			<holdFrost>True</holdFrost>
 			<dryTerrain />
@@ -144,7 +135,6 @@
             <wetTerrain>TKKN_LavaRock_RoughHewn</wetTerrain>
             <freezeTerrain>TKKN_LavaRock_RoughHewn</freezeTerrain>
             <freezeAt>4</freezeAt>
-			<wetAt>2</wetAt>
             <isSalty>False</isSalty>
 			<holdFrost>False</holdFrost>
 			<dryTerrain />
@@ -160,7 +150,6 @@
             <wetTerrain></wetTerrain>
             <freezeTerrain></freezeTerrain>
             <freezeAt></freezeAt>
-			<wetAt></wetAt>
             <isSalty>False</isSalty>
 			<holdFrost>False</holdFrost>
 			<dryTerrain />
@@ -176,7 +165,6 @@
             <wetTerrain />
             <freezeTerrain>TKKN_MuddyIce</freezeTerrain>
             <freezeAt>0</freezeAt>
-			<wetAt>0</wetAt>
             <isSalty>False</isSalty>
 			<holdFrost>True</holdFrost>
 			<dryTerrain />
@@ -191,7 +179,6 @@
             <wetTerrain />
             <freezeTerrain />
             <freezeAt />
-			<wetAt></wetAt>
             <isSalty>True</isSalty>
 			<holdFrost>False</holdFrost>
 			<dryTerrain />
@@ -206,7 +193,6 @@
             <wetTerrain></wetTerrain>
             <freezeTerrain>TKKN_MuddyIce</freezeTerrain>
             <freezeAt>0</freezeAt>
-			<wetAt>0</wetAt>
             <isSalty>False</isSalty>
 			<holdFrost>False</holdFrost>
 			<dryTerrain />
@@ -221,7 +207,6 @@
             <wetTerrain></wetTerrain>
             <freezeTerrain>TKKN_MuddyIce</freezeTerrain>
             <freezeAt>0</freezeAt>
-			<wetAt>0</wetAt>
             <isSalty>False</isSalty>
 			<holdFrost>True</holdFrost>
 			<dryTerrain>MossyTerrain</dryTerrain>
@@ -236,7 +221,6 @@
             <wetTerrain />
             <freezeTerrain />
             <freezeAt />
-			<wetAt></wetAt>
             <isSalty>False</isSalty>
 			<holdFrost>True</holdFrost>
 			<dryTerrain />
@@ -251,7 +235,6 @@
             <wetTerrain>TKKN_WetMossyTerrain</wetTerrain>
             <freezeTerrain />
             <freezeAt />
-			<wetAt></wetAt>
             <isSalty>False</isSalty>
 			<holdFrost>True</holdFrost>
 			<dryTerrain />
@@ -266,7 +249,6 @@
             <wetTerrain />
             <freezeTerrain />
             <freezeAt />
-			<wetAt></wetAt>
             <isSalty>False</isSalty>
 			<holdFrost>False</holdFrost>
 			<dryTerrain />
@@ -281,7 +263,6 @@
             <wetTerrain />
             <freezeTerrain />
             <freezeAt />
-			<wetAt></wetAt>
             <isSalty>False</isSalty>
 			<holdFrost>False</holdFrost>
 			<dryTerrain />
@@ -296,7 +277,6 @@
             <wetTerrain />
             <freezeTerrain />
             <freezeAt />
-			<wetAt></wetAt>
             <isSalty>False</isSalty>
 			<holdFrost>False</holdFrost>
 			<dryTerrain />

@@ -32,8 +32,6 @@ namespace TKKN_NPS
 		public static bool affectsWet = true;
 		public static bool affectsHot = true;
 
-
-
 		public static bool showCold = true;
 		public static bool showHot = true;
 		public static bool showRain = true;
@@ -45,6 +43,9 @@ namespace TKKN_NPS
 		public static bool regenCells = false;
 		public static bool doTides = true;
 		public static bool doSeasonalFloods = true;
+		public static bool DoDisasterFloods = true;
+
+		
 		public static bool showDevReadout = false;
 
 		public static bool showUpdateNotes = true;
@@ -158,13 +159,14 @@ namespace TKKN_NPS
 			Scribe_Values.Look(ref Settings.showCold, "showCold", true, true);
 			Scribe_Values.Look(ref Settings.showHot, "allowPlantEffects", true, true);
 			Scribe_Values.Look(ref Settings.showRain, "showRain", true, true);
+			Scribe_Values.Look(ref Settings.affectsWet, "affectsWet", true, true);
 			Scribe_Values.Look(ref Settings.doTides, "doTides", true, true);
 			Scribe_Values.Look(ref Settings.allowPawnsToGetWet, "allowPawnsToGetWet", true, true);
 			Scribe_Values.Look(ref Settings.allowPawnsSwim, "allowPawnsSwim", true, true);
 			Scribe_Values.Look(ref Settings.showDevReadout, "showDevReadout", false, true);
 			Scribe_Values.Look(ref Settings.spawnLavaOnlyInBiome, "spawnLavaOnlyInBiome", false, true);
 			Scribe_Values.Look(ref Settings.allowLavaEruption, "allowLavaEruption", true, true);
-			Scribe_Values.Look(ref Settings.regenCells, "regenCells", false, true);
+			Scribe_Values.Look(ref Settings.regenCells, "regenCells", true, true);
 			
 
 		}

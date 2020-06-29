@@ -152,6 +152,23 @@
    </Operation>
    
    
+   <Operation Class="PatchOperationInsert">
+      <xpath>/Defs/TerrainDef[defName = "WaterOceanShallow"]</xpath>
+      <value>
+		<tags>
+			<li>TKKN_Ocean</li>
+		</tags>
+      </value>
+   </Operation>
+   
+   <Operation Class="PatchOperationInsert">
+      <xpath>/Defs/TerrainDef[defName = "WaterOceanDeep"]</xpath>
+      <value>
+		<tags>
+			<li>TKKN_Ocean</li>
+		</tags>
+      </value>
+   </Operation>
    
    
     <Operation Class="PatchOperationAdd">
@@ -195,22 +212,6 @@
 	  </value>
    </Operation>
   
-   <Operation Class="PatchOperationAdd">
-      <xpath>/Defs/TerrainDef[defName = "WaterOceanShallow"]</xpath>
-      <value>
-		<tags>
-         <li>TKKN_Ocean</li>
-		 </tags>
-      </value>
-   </Operation>
-   <Operation Class="PatchOperationAdd">
-      <xpath>/Defs/TerrainDef[defName = "WaterOceanDeep"]</xpath>
-      <value>
-		<tags>
-         <li>TKKN_Ocean</li>
-		 </tags>
-      </value>
-   </Operation>
 
    <Operation Class="PatchOperationInsert">
       <xpath>/Defs/TerrainDef[defName = "Marsh"]</xpath>

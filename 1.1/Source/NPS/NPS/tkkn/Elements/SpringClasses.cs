@@ -105,7 +105,7 @@ namespace TKKN_NPS
 			this.makeAnotherAt = this.Props.howOftenToChange * 4000;
 			if (respawningAfterLoad)
 			{
-				springData savedData = this.parent.Map.GetComponent<Watcher>().activeSprings[this.getID()];
+				SpringData savedData = this.parent.Map.GetComponent<Watcher>().activeSprings[this.getID()];
 				if (savedData != null)
 				{
 					this.biomeName = savedData.biomeName;
@@ -121,7 +121,7 @@ namespace TKKN_NPS
 				this.biomeName = this.parent.Map.Biome.defName;
 				this.width = this.Props.startingRadius;
 
-				springData savedData = new springData();
+				SpringData savedData = new SpringData();
 				savedData.springID = this.parent.ThingID;
 				savedData.biomeName = this.biomeName;
 				savedData.makeAnotherAt = this.makeAnotherAt;
@@ -267,7 +267,7 @@ namespace TKKN_NPS
 
 		public void saveValues()
 		{
-			springData savedData = this.parent.Map.GetComponent<Watcher>().activeSprings[this.getID()];
+			SpringData savedData = this.parent.Map.GetComponent<Watcher>().activeSprings[this.getID()];
 			if (savedData != null)
 			{
 				savedData.biomeName = this.biomeName;

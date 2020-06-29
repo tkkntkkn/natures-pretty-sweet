@@ -31,7 +31,7 @@ namespace TKKN_NPS
 			if (__instance.AmbientTemperature > 21)
 			{
 				Watcher watcher = map.GetComponent<Watcher>();
-				cellData cell;
+				CellData cell;
 				if (watcher.cellWeatherAffects[__instance.Position] != null)
 				{
 					cell = watcher.cellWeatherAffects[__instance.Position];

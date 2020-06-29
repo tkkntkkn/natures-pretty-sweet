@@ -1,9 +1,11 @@
 ﻿using System;
 using Verse;
 using HarmonyLib;
-using System.Reflection;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using TKKN_NPS.SaveData;
+using TKKN_NPS.Workers;
 
 namespace TKKN_NPS
 {
@@ -50,24 +52,40 @@ namespace TKKN_NPS
 			}
 			if (Settings.showDevReadout)
 			{
-				rect = new Rect(BotLeft.x, (float)UI.screenHeight - BotLeft.y - num, 999f, 999f);
-				string label3 = "C: x-" + c.x.ToString() + " y-" + c.y.ToString() + " z-" + c.z.ToString();
-				Widgets.Label(rect, label3);
-				num += 19f;
-
-				Watcher watcher = map.GetComponent<Watcher>();
-				cellData cell = watcher.cellWeatherAffects[c];
-				if (cell == null)
+				Watcher watcher = Worker.GetWatcher(map);
+				if (!watcher.cellWeatherAffects.TryGetValue(c, out CellData cell))
 				{
 					return;
 				}
+
 				rect = new Rect(BotLeft.x, (float)UI.screenHeight - BotLeft.y - num, 999f, 999f);
-				string label2 = "Temperature: " + cell.temperature + " Rain Rate:" + map.weatherManager.curWeather.rainRate + " Humidity:" + watcher.humidity;
+				string label3 = "C: x-" + c.x.ToString() + " y-" + c.y.ToString() + " z-" + c.z.ToString() + " | Tick -" + Find.TickManager.TicksGame.ToString();
+				Widgets.Label(rect, label3);
+				num += 19f;
+
+				rect = new Rect(BotLeft.x, (float)UI.screenHeight - BotLeft.y - num, 999f, 999f);
+				string label2 = "Temperature: " + cell.temperature + "  |  Humidity:" + Math.Round(cell.humidity, 2);
+
+				//wetness debugging
+				label2 += " | Snow Rate: " + map.weatherManager.curWeather.snowRate.ToString() + " | Rain Rate:" + map.weatherManager.curWeather.rainRate + " | Cell AdjustWet " + WeatherBaseWorker.AdjustWetBy(cell).ToString() + " | Roofed | " + map.roofGrid.Roofed(c).ToString() + " | isWet: " + cell.IsWet.ToString();
+
+				//temperature debugging
+			//	label2 += " | isCold: " + cell.IsCold.ToString();
+
+				//temperature debuggin
+				//				label2 += " | Roofed | " + map.roofGrid.Roofed(c).ToString();
+
+
+				//flood debugging
+				//				label2 += " | Cell's Flood Level: " + String.Join(", ", cell.floodLevel)  + " | Flood Level: " + FloodWorker.GetMaxFlood(FloodWorker.GetFloodType(map, watcher.floodThreat));
+				//tide debugging
+				//				label2 += " | Cell's Tide Level: " + cell.tideStep.ToString() + " | Active Tide Step: " + watcher.tideLevel.ToString();
+
 				Widgets.Label(rect, label2);
 				num += 19f;
 
 				rect = new Rect(BotLeft.x, (float)UI.screenHeight - BotLeft.y - num, 999f, 999f);
-				string label5 = "Cell Info: Base Terrain " + cell.baseTerrain.defName + " Current Terrain " + cell.currentTerrain.defName + " HowWet " + cell.howWet.ToString() + " | How Packed " + cell.howPacked.ToString();
+				string label5 = "Cell Info: Base Terrain: " + cell.baseTerrain.defName;
 
 				if (cell.weather != null)
 				{
@@ -83,6 +101,11 @@ namespace TKKN_NPS
 					{
 						label5 += " | T Freeze " + cell.weather.freezeTerrain.defName;
 					}
+					if (cell.weather.floodTerrain != null)
+					{
+						label5 += " | T Flood " + cell.weather.floodTerrain.defName;
+					}
+					
 				}
 				if (cell.originalTerrain != null)
 				{
@@ -92,7 +115,11 @@ namespace TKKN_NPS
 				num += 19f;
 
 				rect = new Rect(BotLeft.x, (float)UI.screenHeight - BotLeft.y - num, 999f, 999f);
-				string label6 = "TKKN_Wet " + cell.currentTerrain.HasTag("TKKN_Wet") + "TKKN_Swim " + cell.currentTerrain.HasTag("TKKN_Swim");
+				string label6 = "TKKN_Wet: " + cell.currentTerrain.HasTag("TKKN_Wet") + " | HowWet:" + cell.HowWet.ToString() + " | How Packed:" + cell.howPacked.ToString() + " | Orig Terr Fresh" + TerrainWorker.IsFreshWaterTerrain(cell.originalTerrain).ToString();
+
+				label6 += " | TKKN_Lava: " + cell.currentTerrain.HasTag("TKKN_Lava") + " | IsLava: " + TerrainWorker.IsLava(cell.currentTerrain) + " QTY Lava Cells" + (watcher.cellWeatherAffects.Select(key => key.Value).Where(cellTest => TerrainWorker.IsLava(cellTest.currentTerrain) == true).Count().ToString());
+//				label6 += " | TKKN_Swim: " + cell.currentTerrain.HasTag("TKKN_Swim");
+//				label6 += " | TKKN_Ocean: " + cell.currentTerrain.HasTag("TKKN_Ocean");
 				Widgets.Label(rect, label6);
 				num += 19f;
 				
