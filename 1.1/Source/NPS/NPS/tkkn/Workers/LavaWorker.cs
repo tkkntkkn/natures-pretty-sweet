@@ -63,10 +63,14 @@ namespace TKKN_NPS.Workers
 
 		public static void DoLavaEffects(CellData cell)
 		{
+			if (!Settings.DoLavaVisualEffects)
+			{
+				return;
+			}
 			Map map = cell.map;
 			IntVec3 c = cell.location;
 			GenTemperature.PushHeat(c, map, 1);
-			if (Rand.Value < .09f)
+			if (Rand.Value < Settings.LavaVisualEffectChance)
 			{
 				MoteMaker.ThrowHeatGlow(c, map, 5f);
 				if (map.weatherManager.curWeather.rainRate > 1)
@@ -77,6 +81,7 @@ namespace TKKN_NPS.Workers
 			else
 			{
 				/*
+				 * TO DO add ShouldSpawnMotesAt
 				if (Rand.Value < .0001f)
 				{
 
@@ -88,7 +93,7 @@ namespace TKKN_NPS.Workers
 				}
 				else 
 				*/
-				if (Rand.Value < .01f)
+				if (Rand.Value < (Settings.LavaVisualEffectChance/10))
 				{
 					MoteMaker.ThrowSmoke(c.ToVector3(), map, 4f);
 				}
