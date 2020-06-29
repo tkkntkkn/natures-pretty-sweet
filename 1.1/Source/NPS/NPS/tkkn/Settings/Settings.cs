@@ -191,7 +191,7 @@ namespace TKKN_NPS
 		//lava
 		Scribe_Values.Look(ref Settings.spawnLavaOnlyInBiome, "spawnLavaOnlyInBiome", false, true);
 		Scribe_Values.Look(ref Settings.allowLavaEruption, "allowLavaEruption", true, true);
-		Scribe_Values.Look(ref Settings.DoLavaVisualEffects, "DoLavaVisualEffects", false, true);
+		Scribe_Values.Look(ref Settings.DoLavaVisualEffects, "DoLavaVisualEffects", true, true);
 
 		//weather
 		Scribe_Values.Look(ref Settings.showHot, "showWeather", true, true);
