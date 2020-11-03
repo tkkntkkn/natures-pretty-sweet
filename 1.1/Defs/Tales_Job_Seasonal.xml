@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <TaleDef>
+    <defName>TKKN_WildFlowerBloom</defName>
+    <label>wildflower bloom</label>
+    <taleClass>Tale_SinglePawn</taleClass>
+    <type>Volatile</type>
+    <baseInterest>5</baseInterest>
+    <rulePack>
+      <rulesStrings>
+        <li>tale_noun->[pawn_nameShortDef] frolicking through a bloom of wildflowers</li>
+        <li>tale_noun->wildflowers blooming all around [pawn_nameShortDef]'s [community]</li>
+        <li>tale_noun->huge fields of flowers surrounding [pawn_nameShortDef]'s [community]</li>
+        <li>tale_noun->[pawn_nameShortDef]'s [community] flooded with wildflowers</li>
+        <li>image->the landscape covered in blossoms of [color]s and [color]s [circumstance_phrase]</li>
+        <li>image->a huge swatch of [color] blooms [circumstance_phrase]</li>
+        <li>image->an oceans of [color] petals [circumstance_phrase]</li>
+        <li>image->[color] and [color] flowers bloom [circumstance_phrase]</li>
+        <li>image->dancing [color] blossoms [circumstance_group]</li>
+        <li>circumstance_phrase->near a [terrainfeature]</li>
+        <li>circumstance_phrase->in the shade of a [terrainfeature]</li>
+        <li>circumstance_phrase->around the countryside of [community]</li>
+        <li>circumstance_phrase->between [terrainfeature] and a [terrainfeature]</li>
+        <li>desc_sentence->In the fields, [pawn_nameShortDef] plays [game] with a [friendlyadjective] look.</li>
+        <li>desc_sentence->[pawn_nameShortDef] plucks flowers with a look of glee [pawn_possessive] face.</li>
+        <li>desc_sentence->[quantity_adjphrase] [outlander]s watch from below.</li>
+        <li>desc_sentence->[pawn_nameShortDef] sits near a [terrainfeature], smelling flowers.</li>
+        <li>desc_sentence->[quantity_adjphrase] [animal]s wander peacefully through the meadows.</li>
+        <li>desc_sentence->There is no [enemy] in sight.</li>      
+	</rulesStrings>
+    </rulePack>
+  </TaleDef>
+  
+  <TaleDef>
+    <defName>TKKN_Superbloom</defName>
+    <label>superbloom</label>
+    <taleClass>Tale_SinglePawn</taleClass>
+    <type>Volatile</type>
+    <baseInterest>5</baseInterest>
+    <rulePack>
+      <rulesStrings>
+        <li>tale_noun->[pawn_nameShortDef] frolicking through a bloom of wildflowers</li>
+        <li>tale_noun->wildflowers blooming all around [pawn_nameShortDef]'s [community]</li>
+        <li>tale_noun->huge fields of flowers surrounding [pawn_nameShortDef]'s [community]</li>
+        <li>tale_noun->[pawn_nameShortDef]'s [community] flooded with wildflowers</li>
+        <li>image->the landscape covered in blossoms of [color]s and [color]s [circumstance_phrase]</li>
+        <li>image->a huge swatch of [color] blooms [circumstance_phrase]</li>
+        <li>image->an oceans of [color] petals [circumstance_phrase]</li>
+        <li>image->[color] and [color] flowers bloom [circumstance_phrase]</li>
+        <li>image->dancing [color] blossoms [circumstance_group]</li>
+        <li>circumstance_phrase->near a [terrainfeature]</li>
+        <li>circumstance_phrase->in the shade of a [terrainfeature]</li>
+        <li>circumstance_phrase->around the countryside of [community]</li>
+        <li>circumstance_phrase->between [terrainfeature] and a [terrainfeature]</li>
+        <li>desc_sentence->In the fields, [pawn_nameShortDef] plays [game] with a [friendlyadjective] look.</li>
+        <li>desc_sentence->[pawn_nameShortDef] plucks flowers with a look of glee [pawn_possessive] face.</li>
+        <li>desc_sentence->[quantity_adjphrase] [outlander]s watch from below.</li>
+        <li>desc_sentence->[pawn_nameShortDef] sits near a [terrainfeature], smelling flowers.</li>
+        <li>desc_sentence->[quantity_adjphrase] [animal]s wander peacefully through the meadows.</li>
+        <li>desc_sentence->There is no [enemy] in sight.</li>      
+	</rulesStrings>
+    </rulePack>
+  </TaleDef>
+  
+   <TaleDef>
+    <defName>TKKN_Drought</defName>
+    <label>drought</label>
+    <taleClass>Tale_SinglePawn</taleClass>
+    <type>Volatile</type>
+    <baseInterest>5</baseInterest>
+    <rulePack>
+      <rulesStrings>
+        <li>tale_noun->[pawn_nameShortDef] stares at the sky, hoping for rain</li>
+        <li>tale_noun->a dry wind blows around [pawn_nameShortDef]'s [community]</li>
+        <li>tale_noun->the plants are slowing drying out at [pawn_nameShortDef]'s [community]</li>
+        <li>tale_noun->[pawn_nameShortDef]'s [community] stuggles to water their animals</li>
+        <li>image->a dry wind blows [circumstance_phrase]</li>
+        <li>image->a clear sky and merciless sun beats down [circumstance_phrase]</li>
+        <li>image->cracked soil [circumstance_phrase]</li>
+        <li>image->wilting plants [circumstance_phrase]</li>
+        <li>circumstance_phrase->near a [terrainfeature]</li>
+        <li>circumstance_phrase->close to [terrainfeature]</li>
+        <li>circumstance_phrase->around the dying countryside of [community]</li>
+        <li>circumstance_phrase->between [terrainfeature] and a [terrainfeature]</li>
+        <li>desc_sentence->In the dust, [pawn_nameShortDef] plays [game] with a [friendlyadjective] look.</li>
+        <li>desc_sentence->[pawn_nameShortDef] prays for rain, need on [pawn_possessive] face.</li>
+        <li>desc_sentence->[quantity_adjphrase] [outlander]s watch from below.</li>
+        <li>desc_sentence->[pawn_nameShortDef] sits near a [terrainfeature], pouring dried dirt through [pawn_possessive] fingers.</li>
+        <li>desc_sentence->[quantity_adjphrase] [animal]s are leaving the area, or dying of thirst.</li>
+        <li>desc_sentence->There is no [enemy] in sight.</li>      
+	</rulesStrings>
+    </rulePack>
+  </TaleDef>
+
+  
+  
+</Defs>

@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+   <ThingDef ParentName="PlantBase">
+      <defName>TKKN_PlantWildCorn</defName>
+      <label>wild corn plant</label>
+      <description>Wild corn is smaller and hardier than its domestic counterpart. Grows in a variety of soil, but produces small crops.</description>
+      <statBases>
+         <MaxHitPoints>150</MaxHitPoints>
+         <Nutrition>0.3</Nutrition>
+      </statBases>
+      <graphicData>
+         <texPath>Things/Plant/CornPlant</texPath>
+         <graphicClass>Graphic_Random</graphicClass>
+      </graphicData>
+      <selectable>true</selectable>
+      <pathCost>12</pathCost>
+      <ingestible />
+      <plant>
+         <fertilitySensitivity>.7</fertilitySensitivity>
+         <dieIfLeafless>true</dieIfLeafless>
+         <harvestTag>Standard</harvestTag>
+         <harvestedThingDef>RawCorn</harvestedThingDef>
+         <harvestYield>13</harvestYield>
+         <topWindExposure>0.35</topWindExposure>
+         <growDays>11.3</growDays>
+         <immatureGraphicPath>Things/Plant/CornPlant_Immature</immatureGraphicPath>
+         <visualSizeRange>0.3~1.4</visualSizeRange>
+      </plant>
+   </ThingDef>
+   <ThingDef ParentName="PlantBase">
+      <defName>TKKN_PlantCactusBarrel</defName>
+      <label>barrel cactus</label>
+      <description>Cactus that grows towards the sun, causing it to lean and eventually fall over.</description>
+      <statBases>
+         <MaxHitPoints>35</MaxHitPoints>
+		 <Nutrition>0.25</Nutrition>
+      </statBases>
+      <pathCost>18</pathCost>
+      <selectable>true</selectable>
+      <graphicData>
+         <texPath>TKKN_NPS/Things/Plant/CactusBarrel</texPath>
+         <graphicClass>Graphic_Random</graphicClass>
+      </graphicData>
+      <ingestible />
+      <plant>
+         <fertilityMin>0.05</fertilityMin>
+         <fertilitySensitivity>0</fertilitySensitivity>
+         <growDays>5</growDays>
+         <dieIfLeafless>true</dieIfLeafless>
+         <harvestWork>60</harvestWork>
+         <visualSizeRange>0.3~1.4</visualSizeRange>
+         <topWindExposure>0.4</topWindExposure>
+		<wildClusterWeight>8</wildClusterWeight>
+      </plant>
+   </ThingDef>
+   <ThingDef ParentName="PlantBase">
+      <defName>TKKN_PlantCactusSanPedro</defName>
+      <label>san pedro cactus</label>
+      <description>Fast growing cactus that grows in columns</description>
+      <statBases>
+         <MaxHitPoints>100</MaxHitPoints>
+		 <Nutrition>0.25</Nutrition>
+      </statBases>
+      <pathCost>18</pathCost>
+      <graphicData>
+         <texPath>TKKN_NPS/Things/Plant/CactusSanPedro</texPath>
+         <graphicClass>Graphic_Random</graphicClass>
+      </graphicData>
+      <selectable>true</selectable>
+      <ingestible />
+      <plant>
+         <fertilityMin>0.05</fertilityMin>
+         <fertilitySensitivity>0</fertilitySensitivity>
+         <growDays>4</growDays>
+         <dieIfLeafless>true</dieIfLeafless>
+         <harvestWork>60</harvestWork>
+         <visualSizeRange>1~1.8</visualSizeRange>
+		<wildClusterWeight>30</wildClusterWeight>
+         <topWindExposure>0.4</topWindExposure>
+      </plant>
+   </ThingDef>
+   <ThingDef ParentName="PlantBase">
+      <defName>TKKN_PlantCactusPricklyPear</defName>
+      <label>prickly pear cactus</label>
+      <description>Cactus that produces fruit, called "pears".</description>
+      <statBases>
+         <MaxHitPoints>150</MaxHitPoints>
+		 <Nutrition>0.25</Nutrition>
+      </statBases>
+      <pathCost>18</pathCost>
+      <graphicData>
+         <texPath>TKKN_NPS/Things/Plant/VarientHarvestable/CactusPricklyPear</texPath>
+         <graphicClass>Graphic_Random</graphicClass>
+      </graphicData>
+      <ingestible />
+      <selectable>true</selectable>
+      <plant>
+         <fertilityMin>0.3</fertilityMin>
+         <fertilitySensitivity>.2</fertilitySensitivity>
+         <harvestTag>Standard</harvestTag>
+         <harvestedThingDef>TKKN_PricklyPear</harvestedThingDef>
+         <harvestYield>6</harvestYield>
+         <growDays>5</growDays>
+         <dieIfLeafless>true</dieIfLeafless>
+         <harvestWork>60</harvestWork>
+         <visualSizeRange>1~1.5</visualSizeRange>
+		<wildClusterWeight>30</wildClusterWeight>
+         <topWindExposure>0.4</topWindExposure>
+         <immatureGraphicPath>TKKN_NPS/Things/Plant/CactusPricklyPear</immatureGraphicPath>
+      </plant>
+   </ThingDef>
+   <ThingDef ParentName="PlantBase">
+      <defName>TKKN_PlantDesertShrubA</defName>
+      <label>desert shrub</label>
+      <description>Hardy, low lying plant that grows in arid conditions.</description>
+      <statBases>
+         <MaxHitPoints>35</MaxHitPoints>
+		 <Nutrition>0.25</Nutrition>
+      </statBases>
+      <pathCost>18</pathCost>
+      <graphicData>
+         <texPath>TKKN_NPS/Things/Plant/DesertShrubA</texPath>
+         <graphicClass>Graphic_Random</graphicClass>
+      </graphicData>
+      <hideAtSnowDepth>0.2</hideAtSnowDepth>
+      <ingestible />
+      <plant>
+         <fertilityMin>0.10</fertilityMin>
+         <fertilitySensitivity>0</fertilitySensitivity>
+         <growDays>3</growDays>
+         <dieIfLeafless>true</dieIfLeafless>
+         <harvestWork>60</harvestWork>
+         <maxMeshCount>9</maxMeshCount>
+         <visualSizeRange>0.7~0.85</visualSizeRange>
+		<wildClusterWeight>120</wildClusterWeight>
+         <topWindExposure>0.4</topWindExposure>
+      </plant>
+   </ThingDef>
+   <ThingDef ParentName="PlantBase">
+      <defName>TKKN_PlantDesertShrubB</defName>
+      <label>desert shrub</label>
+      <description>Hardy, low lying plant that grows in arid conditions.</description>
+      <statBases>
+         <MaxHitPoints>35</MaxHitPoints>
+		 <Nutrition>0.25</Nutrition>
+      </statBases>
+      <pathCost>18</pathCost>
+      <graphicData>
+         <texPath>TKKN_NPS/Things/Plant/DesertShrubB</texPath>
+         <graphicClass>Graphic_Random</graphicClass>
+      </graphicData>
+      <hideAtSnowDepth>0.2</hideAtSnowDepth>
+      <ingestible />
+      <plant>
+         <fertilityMin>0.10</fertilityMin>
+         <fertilitySensitivity>0</fertilitySensitivity>
+         <growDays>3</growDays>
+         <dieIfLeafless>true</dieIfLeafless>
+         <harvestWork>60</harvestWork>
+         <maxMeshCount>9</maxMeshCount>
+         <visualSizeRange>0.7~0.85</visualSizeRange>
+		<wildClusterWeight>120</wildClusterWeight>
+         <topWindExposure>0.4</topWindExposure>
+      </plant>
+   </ThingDef>
+   <ThingDef ParentName="PlantBase">
+      <defName>TKKN_PlantSucculants</defName>
+      <label>succulant</label>
+      <description>A decorative plant with leaves or petals that are thick and fleshy, to retain water in arid climates.</description>
+      <statBases>
+         <MaxHitPoints>85</MaxHitPoints>
+         <Beauty>14</Beauty>
+		 <Nutrition>0.25</Nutrition>
+      </statBases>
+      <graphicData>
+         <texPath>TKKN_NPS/Things/Plant/CactusSucculants</texPath>
+         <graphicClass>Graphic_Random</graphicClass>
+      </graphicData>
+      <altitudeLayer>Item</altitudeLayer>
+      <selectable>true</selectable>
+      <hideAtSnowDepth>0.1</hideAtSnowDepth>
+      <ingestible />
+      <plant>
+         <fertilityMin>0.03</fertilityMin>
+         <fertilitySensitivity>0</fertilitySensitivity>
+         <dieIfLeafless>true</dieIfLeafless>
+         <harvestTag>Standard</harvestTag>
+         <sowWork>400</sowWork>
+         <sowTags>
+            <li>Ground</li>
+            <li>Decorative</li>
+         </sowTags>
+         <growMinGlow>0.3</growMinGlow>
+         <topWindExposure>0.1</topWindExposure>
+         <growDays>1.5</growDays>
+         <visualSizeRange>0.3~0.8</visualSizeRange>
+      </plant>
+   </ThingDef>
+   <ThingDef ParentName="TreeBase">
+      <defName>TKKN_TreeOcotillo</defName>
+      <label>ocotillo</label>
+      <description>Unusual woody shrub that grows in arid conditions. Can be cut down for a little wood.</description>
+      <statBases>
+         <MaxHitPoints>300</MaxHitPoints>
+      </statBases>
+      <pathCost>18</pathCost>
+      <graphicData>
+         <texPath>TKKN_NPS/Things/Plant/TreeOcotillo</texPath>
+         <graphicClass>Graphic_Random</graphicClass>
+      </graphicData>
+      <plant>
+         <fertilityMin>0.04</fertilityMin>
+         <fertilitySensitivity>0</fertilitySensitivity>
+         <harvestedThingDef>WoodLog</harvestedThingDef>
+         <growDays>300</growDays>
+         <harvestWork>500</harvestWork>
+         <harvestYield>20</harvestYield>
+         <dieIfLeafless>true</dieIfLeafless>
+         <visualSizeRange>0.8~1.5</visualSizeRange>
+		<wildClusterWeight>30</wildClusterWeight>
+        <topWindExposure>0.4</topWindExposure>
+      </plant>
+   </ThingDef>
+</Defs>
