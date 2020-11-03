@@ -145,8 +145,8 @@ namespace TKKN_NPS
 			}
 			//RegisterCondition
 
-				// this.map.GetComponent<FrostGrid>().Regenerate(); 
-				if (TKKN_Holder.modsPatched.ToArray().Count() > 0)
+			// this.map.GetComponent<FrostGrid>().Regenerate(); 
+			if (TKKN_Holder.modsPatched.ToArray().Count() > 0)
 			{
 				Log.Message("TKKN NPS: Loaded patches for: " + string.Join(", ", TKKN_Holder.modsPatched.ToArray()));
 			}
@@ -195,7 +195,7 @@ namespace TKKN_NPS
 
 					//Spawn special elements:
 					SpawnWorker.PostInitSpawnElements(cell);
-					SpawnWorker.SpawnPlants(cell);
+					SpawnWorker.SpawnSpecialPlants(cell);
 
 				}
 

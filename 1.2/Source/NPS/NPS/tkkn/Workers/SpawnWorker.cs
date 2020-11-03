@@ -26,46 +26,92 @@ namespace TKKN_NPS.Workers
 				IntVec3 springSpot = CellFinderLoose.TryFindCentralCell(map, 10, 15, (IntVec3 x) => !x.Roofed(map));
 				Spring spring = (Spring)ThingMaker.MakeThing(ThingDef.Named("TKKN_OasisSpring"), null);
 				GenSpawn.Spawn(spring, springSpot, map);
+				spring.GetComp<SpringComp>().fillBorder();
 			}
-			if (LeaveSomething() < .001f)
+			if (LeaveSomething() < .005f)
 			{
 				SpawnOasis(map);
 			}
 		}
 
-		static public void SpawnPlants(CellData cell)
+		static public void SpawnPlant(IEnumerable<ThingDef> plants, IntVec3 c, Map map)
+		{
+			Watcher watcher = Worker.GetWatcher(map);
+			CellData cell = watcher.GetCell(c);
+			if (cell != null)
+			{
+				SpawnPlant(plants, cell);
+			}
+			else
+			{
+				SpawnPlant(plants, c, map, c.GetTerrain(map));
+			}
+		}
+		static public void SpawnPlant(IEnumerable<ThingDef> plants, CellData cell)
+		{
+			SpawnPlant(plants, cell.location, cell.map, cell.currentTerrain);
+		}
+		static public void SpawnPlant(IEnumerable<ThingDef> plants, IntVec3 c, Map map, TerrainDef terrain)
+		{
+			//currently only used by springs, will need to figure out the leavsomething part if I ever use it for other stuff.
+			float leaveSomething = LeaveSomething();
+
+			if (leaveSomething < 0.5f && c.GetPlant(map) == null)
+			{
+
+				if (!plants.EnumerableNullOrEmpty() && plants.Any<ThingDef>() && c.GetPlant(map) == null)
+				{
+					ThingDef thingDef = plants.RandomElementByWeight((ThingDef x) => PlantChoiceWeight(x, map));
+					if (thingDef != null)
+					{
+						ThingWeatherReaction thingWeather = thingDef.GetModExtension<ThingWeatherReaction>();
+						if (CanSpawn(thingWeather, map, terrain))
+						{
+							DoSpawn(thingDef, c, map);
+						}
+					}
+				}
+			}
+
+		}
+		private static float PlantChoiceWeight(ThingDef def, Map map)
+		{
+			float num = map.Biome.CommonalityOfPlant(def);
+			if (num == 0f)
+			{
+				Watcher watcher = map.GetComponent<Watcher>();
+				num = watcher.biomeSettings.CommonalityOfPlant(def);
+			}
+			if (num == 0f)
+			{
+				num = 1;
+			}
+			return num * def.plant.wildClusterWeight;
+		}
+		static public void SpawnSpecialPlants(IntVec3 c, Map map)
+		{
+			Watcher watcher = Worker.GetWatcher(map);
+			CellData cell = watcher.GetCell(c);
+			float leaveSomething = LeaveSomething();
+			if (cell != null)
+			{
+				SpawnSpecialPlants(leaveSomething, cell);
+			}
+		}
+		static public void SpawnSpecialPlants(CellData cell)
 		{
 			float leaveSomething = LeaveSomething();
-			SpawnPlants(leaveSomething, cell);
+			SpawnSpecialPlants(leaveSomething, cell);
 		}
 
-		static public void SpawnPlants(float leaveSomething, CellData cell)
+		static public void SpawnSpecialPlants(float leaveSomething, CellData cell)
 		{
 			//Grow special plants:
 			if (leaveSomething < 0.005f && cell.location.GetPlant(cell.map) == null && cell.location.GetCover(cell.map) == null)
 			{
 				Watcher watcher = Worker.GetWatcher(cell.map);
-				List<ThingDef> plants = watcher.biomeSettings.specialPlants;
-				if (plants.NullOrEmpty())
-				{
-					return;
-				}
-				foreach (ThingDef plantDef in plants)
-				{
-					if (plantDef.HasModExtension<ThingWeatherReaction>())
-					{
-						if ((cell.map.Biome.plantDensity * leaveSomething) > 1)
-						{
-							TerrainDef terrain = cell.currentTerrain;
-							ThingWeatherReaction thingWeather = plantDef.GetModExtension<ThingWeatherReaction>();
-							if (CanSpawn(thingWeather, cell.map, cell.currentTerrain))
-							{
-								DoSpawn(plantDef, cell.location, cell.map);
-								break;
-							}
-						}
-					}
-				}
+				IEnumerable<ThingDef> plants = watcher.biomeSettings.AllSpecialPlants.ToList<ThingDef>();
+				SpawnPlant(plants, cell);
 			}
 		}
 
@@ -153,10 +199,12 @@ namespace TKKN_NPS.Workers
 		return CanSpawn(thingWeather, map, terrain);
 	}
 
-	private static bool CanSpawn(ThingWeatherReaction thingWeather, Map map, TerrainDef terrain)
+		private static bool CanSpawn(ThingWeatherReaction thingWeather, Map map, TerrainDef terrain)
 		{
-
-
+			if (thingWeather == null)
+			{
+				return false;
+			}
 			if (!thingWeather.forbiddenTerrains.NullOrEmpty() && thingWeather.forbiddenTerrains.Contains(terrain))
 			{
 				return false;
@@ -281,7 +329,7 @@ namespace TKKN_NPS.Workers
 			}
 			else
 			{
-				SpawnPlants(leaveSomething, cell);
+				SpawnSpecialPlants(leaveSomething, cell);
 			}
 
 		}

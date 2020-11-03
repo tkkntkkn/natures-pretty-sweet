@@ -5,6 +5,7 @@ using UnityEngine;
 using RimWorld;
 using Verse;
 using Verse.Noise;
+using TKKN_NPS.Workers;
 
 namespace TKKN_NPS
 {
@@ -365,30 +366,15 @@ namespace TKKN_NPS
 			if (c.GetEdifice(map) == null && c.GetCover(map) == null)
 			{
 				IEnumerable<ThingDef> source = from def in list
-						where def.CanEverPlantAt(c, map)
-						select def;
+											   where def.CanEverPlantAt(c, map)
+											   select def;
 
-				if (source.Any<ThingDef>())
-				{
-
-					ThingDef thingDef = source.RandomElementByWeight((ThingDef x) => this.PlantChoiceWeight(x, map));
-					Plant plant = (Plant)ThingMaker.MakeThing(thingDef, null);
-					plant.Growth = Rand.Range(0.07f, 1f);
-					if (plant.def.plant.LimitedLifespan)
-					{
-						plant.Age = Rand.Range(0, Mathf.Max(plant.def.plant.LifespanTicks - 50, 0));
-					}
-					GenSpawn.Spawn(plant, c, map);
-
-				}
+				SpawnWorker.SpawnSpecialPlants(c, map);
+				SpawnWorker.SpawnPlant(source, c, map);
 			}
 		}
 
-		private float PlantChoiceWeight(ThingDef def, Map map)
-		{
-			float num = map.Biome.CommonalityOfPlant(def);
-			return num * def.plant.wildClusterWeight;
-		}
+
 
 		public void AffectCell(IntVec3 c)
 		{

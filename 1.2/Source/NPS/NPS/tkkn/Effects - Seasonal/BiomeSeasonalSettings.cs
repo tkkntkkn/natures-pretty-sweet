@@ -2,6 +2,7 @@
 using RimWorld;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace TKKN_NPS
 {
@@ -10,7 +11,7 @@ namespace TKKN_NPS
 		public Season LastChanged;
 		public Quadrum LastChangedQ;
 
-		public List<ThingDef> specialPlants;
+		private List<BiomePlantRecord> specialPlants = new List<BiomePlantRecord>();
 
 
 		//weather settings
@@ -47,6 +48,14 @@ namespace TKKN_NPS
 		public bool plantsAdded;
 		public bool plantCacheUpdated;
 		public bool diseaseCacheUpdated;
+
+		[Unsaved(false)]
+		private Dictionary<ThingDef, float> cachedPlantCommonalities;
+		[Unsaved(false)]
+		private List<ThingDef> cachedSpecialPlants;
+		[Unsaved(false)]
+		private float cachedPlantCommonalitiesSum;
+
 
 		public BiomeSeasonalSettings()
 		{
@@ -223,5 +232,69 @@ namespace TKKN_NPS
 			}
 
 		}
+
+
+		#region copied from BiomeDef.cs
+
+		public List<ThingDef> AllSpecialPlants
+		{
+			get
+			{
+				if (this.cachedSpecialPlants == null)
+				{
+					this.cachedSpecialPlants = new List<ThingDef>();
+					foreach (ThingDef item in DefDatabase<ThingDef>.AllDefsListForReading)
+					{
+						if (item.category == ThingCategory.Plant && this.CommonalityOfPlant(item) > 0.0)
+						{
+							this.cachedSpecialPlants.Add(item);
+						}
+					}
+				}
+				return this.cachedSpecialPlants;
+			}
+		}
+
+		public float CommonalityOfPlant(ThingDef plantDef)
+		{
+			this.CachePlantCommonalitiesIfShould();
+			float result = default(float);
+			if (this.cachedPlantCommonalities.TryGetValue(plantDef, out result))
+			{
+				return result;
+			}
+			return 0f;
+		}
+
+		private void CachePlantCommonalitiesIfShould()
+		{
+			if (this.cachedPlantCommonalities == null)
+			{
+				this.cachedPlantCommonalities = new Dictionary<ThingDef, float>();
+				for (int i = 0; i < this.specialPlants.Count; i++)
+				{
+					if (this.specialPlants[i].plant != null)
+					{
+						this.cachedPlantCommonalities.Add(this.specialPlants[i].plant, this.specialPlants[i].commonality);
+					}
+				}
+				foreach (ThingDef allDef in DefDatabase<ThingDef>.AllDefs)
+				{
+					if (allDef.plant != null && allDef.plant.wildBiomes != null)
+					{
+						for (int j = 0; j < allDef.plant.wildBiomes.Count; j++)
+						{
+							if (allDef.plant.wildBiomes[j].biome.GetModExtension<BiomeSeasonalSettings>() == this)
+							{
+								this.cachedPlantCommonalities.Add(allDef, allDef.plant.wildBiomes[j].commonality);
+							}
+						}
+					}
+				}
+				this.cachedPlantCommonalitiesSum = this.cachedPlantCommonalities.Sum((KeyValuePair<ThingDef, float> x) => x.Value);
+			}
+		}
+
+		#endregion copied from BiomeDef.cs
 	}
 }
