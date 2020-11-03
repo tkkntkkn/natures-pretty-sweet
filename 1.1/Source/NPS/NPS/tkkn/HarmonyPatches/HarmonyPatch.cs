@@ -12,8 +12,8 @@ namespace TKKN_NPS
 		static HarmonyMain()
 		{
 			var harmony = new Harmony("com.github.tkkntkkn.Natures-Pretty-Sweet");
+			Harmony.DEBUG = true;
 			harmony.PatchAll(Assembly.GetExecutingAssembly());
-
 		}
 	}
 }

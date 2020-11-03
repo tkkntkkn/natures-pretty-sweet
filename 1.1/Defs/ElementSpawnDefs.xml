@@ -90,8 +90,7 @@
       <defName>TKKN_SpawnColdSprings</defName>
       <thingDef>TKKN_ColdSpring</thingDef>
       <allowOnWater>true</allowOnWater>
-      <terrainValidationDisallowed>
-      </terrainValidationDisallowed>
+      <terrainValidationDisallowed />
       <terrainValidationAllowed>
          <li>WaterShallow</li>
          <li>WaterMovingShallow</li>
@@ -102,6 +101,20 @@
          <li>SeaIce</li>
          <li>Lake</li>
       </forbiddenBiomes>
+      <allowedBiomes/>
+   </TKKN_NPS.ElementSpawnDef>
+   
+   
+   <TKKN_NPS.ElementSpawnDef>
+      <defName>TKKN_SpawnBarnacles</defName>
+      <thingDef>TKKN_PlantBarnacles</thingDef>
+      <allowOnWater>true</allowOnWater>
+      <terrainValidationDisallowed />
+      <terrainValidationAllowed>
+         <li>TKKN_SandBeachWetSalt</li>
+		 <li>WaterOceanShallow</li>
+      </terrainValidationAllowed>
+      <forbiddenBiomes/>
       <allowedBiomes/>
    </TKKN_NPS.ElementSpawnDef>
 </Defs>

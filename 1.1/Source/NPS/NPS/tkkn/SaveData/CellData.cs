@@ -151,14 +151,14 @@ namespace TKKN_NPS.SaveData
 			{
 				if (weather.dryTerrain != null)
 				{
-					this.DoLoot(currentTerrain, weather.dryTerrain);
+					SpawnWorker.DoLoot(this, currentTerrain, weather.dryTerrain);
 					changeTerrain(weather.dryTerrain);
 				}
 				else
 				{
 					if (baseTerrain != currentTerrain)
 					{
-						this.DoLoot(currentTerrain, baseTerrain);
+						SpawnWorker.DoLoot(this, currentTerrain, baseTerrain);
 						changeTerrain(baseTerrain);
 					}
 				}
@@ -199,7 +199,7 @@ namespace TKKN_NPS.SaveData
 				}
 				else
 				{
-					DoLoot(currentTerrain, weather.wetTerrain);
+					SpawnWorker.DoLoot(this, currentTerrain, weather.wetTerrain);
 					changeTerrain(weather.wetTerrain);
 					return true;
 				}
@@ -379,219 +379,7 @@ namespace TKKN_NPS.SaveData
 			}
 		}
 
-		private void DoLoot(TerrainDef currentTerrain, TerrainDef newTerrain)
-		{
-			if (currentTerrain.HasTag("Water") && !newTerrain.HasTag("Water"))
-			{
-				this.leaveLoot();
-			}
-			else
-			{
-				this.clearLoot();
-			}
-
-		}
-
-		private void leaveLoot()
-		{
-			float leaveSomething = Rand.Value;
-			if (leaveSomething < 0.001f)
-			{
-				float leaveWhat = Rand.Value;
-				List<string> allowed = new List<string>();
-				if (leaveWhat > 0.1f)
-				{
-					//leave trash;
-					allowed = new List<string>
-					{
-						"Filth_Slime",
-						"TKKN_FilthShells",
-						"TKKN_FilthPuddle",
-						"TKKN_FilthSeaweed",
-						"TKKN_FilthDriftwood",
-						"TKKN_Sculpture_Shell",
-						"Kibble",
-						"EggRoeFertilized",
-						"EggRoeUnfertilized",
-					};
-				}
-				else if (leaveWhat > 0.05f)
-				{
-					//leave resource;
-					allowed = new List<string>
-					{
-						"Steel",
-						"Cloth",
-						"WoodLog",
-						"Synthread",
-						"Hyperweave",
-						"Kibble",
-						"SimpleProstheticLeg",
-						"MedicineIndustrial",
-						"ComponentIndustrial",
-						"Neutroamine",
-						"Chemfuel",
-						"MealSurvivalPack",
-						"Pemmican",
-					};
-				}
-				else if (leaveWhat > 0.03f)
-				{
-					// leave treasure.
-					allowed = new List<string>
-					{
-						"Silver",
-						"Plasteel",
-						"Gold",
-						"Uranium",
-						"Jade",
-						"Heart",
-						"Lung",
-						"BionicEye",
-						"ScytherBlade",
-						"ElephantTusk",
-					};
-
-					string text = "TKKN_NPS_TreasureWashedUpText".Translate();
-					Messages.Message(text, MessageTypeDefOf.NeutralEvent);
-				}
-				else if (leaveWhat > 0.025f)
-				{
-					//leave ultrarare
-					allowed = new List<string>
-					{
-						"AIPersonaCore",
-						"MechSerumHealer",
-					//	"MechSerumNeurotrainer",
-						"ComponentSpacer",
-						"MedicineUltratech",
-						"ThrumboHorn",
-					};
-					string text = "TKKN_NPS_UltraRareWashedUpText".Translate();
-					Messages.Message(text, MessageTypeDefOf.NeutralEvent);
-
-				}
-				if (allowed.Count > 0)
-				{
-					int leaveWhat2 = Rand.Range(1, allowed.Count) - 1;
-					Thing loot = ThingMaker.MakeThing(ThingDef.Named(allowed[leaveWhat2]), null);
-					if(loot != null){
-						GenSpawn.Spawn(loot, location, this.map);
-					} else {
-					//	Log.Error(allowed[leaveWhat2]);
-					}
-				}
-			} else 
-
-			//grow water and shore plants:
-			if (leaveSomething < 0.002f && location.GetPlant(map) == null && location.GetCover(this.map) == null)
-			{
-				List<ThingDef> plants = this.map.Biome.AllWildPlants;
-				for (int i = plants.Count - 1; i >= 0; i--)
-				{
-					//spawn some water plants:
-					ThingDef plantDef = plants[i];
-					if (plantDef.HasModExtension<ThingWeatherReaction>())
-					{
-						TerrainDef terrain = currentTerrain;
-						ThingWeatherReaction thingWeather = plantDef.GetModExtension<ThingWeatherReaction>();
-						List<TerrainDef> okTerrains = thingWeather.allowedTerrains;
-						if (okTerrains != null && okTerrains.Contains<TerrainDef>(currentTerrain))
-						{
-							Plant plant = (Plant)ThingMaker.MakeThing(plantDef, null);
-							plant.Growth = Rand.Range(0.07f, 1f);
-							if (plant.def.plant.LimitedLifespan)
-							{
-								plant.Age = Rand.Range(0, Mathf.Max(plant.def.plant.LifespanTicks - 50, 0));
-							}
-							GenSpawn.Spawn(plant, location, map);
-							break;
-						}
-					}
-
-
-				}
-			}
-		}
-
-		private void clearLoot()
-		{
-			if (!location.IsValid)
-			{
-				return;
-			}
-			List<Thing> things = location.GetThingList(this.map);
-			List<string> remove = new List<string>(){
-				"FilthSlime",
-				"TKKN_FilthShells",
-				"TKKN_FilthPuddle",
-				"TKKN_FilthSeaweed",
-				"TKKN_FilthDriftwood",
-				"TKKN_Sculpture_Shell",
-				"Kibble",
-				"Steel",
-				"Cloth",
-				"WoodLog",
-				"Synthread",
-				"Hyperweave",
-				"Kibble",
-				"SimpleProstheticLeg",
-				"MedicineIndustrial",
-				"ComponentIndustrial",
-				"Neutroamine",
-				"Chemfuel",
-				"MealSurvivalPack",
-				"Pemmican",
-				"Silver",
-				"Plasteel",
-				"Gold",
-				"Uranium",
-				"Jade",
-				"Heart",
-				"Lung",
-				"BionicEye",
-				"ScytherBlade",
-				"ElephantTusk",
-				"AIPersonaCore",
-				"MechSerumHealer",
-				"MechSerumNeurotrainer",
-				"ComponentSpacer",
-				"MedicineUltratech",
-				"ThrumboHorn",
-			};
-
-			for (int i = things.Count - 1; i >= 0; i--)
-			{
-				if (things[i] == null)
-				{
-					continue;
-				}
-				if (remove.Contains(things[i].def.defName))
-				{
-					things[i].Destroy();
-					continue;
-				}
-/*
-				//remove any plants that might've grown:
-				Plant plant = things[i] as Plant; ;
-				if (plant != null) {
-					if (plant.def.HasModExtension<ThingWeatherReaction>()) {
-						TerrainDef terrain = currentTerrain;
-						ThingWeatherReaction thingWeather = plant.def.GetModExtension<ThingWeatherReaction>();
-						List<TerrainDef> okTerrains = thingWeather.allowedTerrains;
-						if (!okTerrains.Contains<TerrainDef>(currentTerrain))
-						{
-							Log.Warning("Destroying " + plant.def.defName + " at " + location.ToString() + " on " + currentTerrain.defName);
-							plant.Destroy();
-						}
-					} else {
-						plant.Destroy();
-					}
-				}
-				*/
-			}
-		}
-
+		
 
 		public void ExposeData()
 		{

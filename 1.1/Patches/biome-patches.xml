@@ -5,62 +5,38 @@
     <Operation Class="PatchOperationAdd">
         <xpath>/Defs/BiomeDef[defName = "BorealForest"]/wildPlants</xpath>
         <value>
-			<TKKN_PlantCatTails>1.3</TKKN_PlantCatTails>
-			<TKKN_PlantWatercress>1.2</TKKN_PlantWatercress>
-			<TKKN_PlantBarnacles>2</TKKN_PlantBarnacles>
         </value>
     </Operation>
     <Operation Class="PatchOperationAdd">
         <xpath>/Defs/BiomeDef[defName = "Tundra"]/wildPlants</xpath>
         <value>
-			<TKKN_PlantCatTails>1.3</TKKN_PlantCatTails>
-			<TKKN_PlantWatercress>1.2</TKKN_PlantWatercress>
-			<TKKN_PlantBarnacles>2</TKKN_PlantBarnacles>
         </value>
     </Operation>
     <Operation Class="PatchOperationAdd">
         <xpath>/Defs/BiomeDef[defName = "ColdBog"]/wildPlants</xpath>
         <value>
-			<TKKN_PlantCatTails>1.6</TKKN_PlantCatTails>
-			<TKKN_PlantWatercress>1.6</TKKN_PlantWatercress>
-			<TKKN_PlantBarnacles>2</TKKN_PlantBarnacles>
         </value>
     </Operation>
     <!-- temperate -->
     <Operation Class="PatchOperationAdd">
         <xpath>/Defs/BiomeDef[defName = "TemperateForest"]/wildPlants</xpath>
         <value>
-			<TKKN_PlantCatTails>1.3</TKKN_PlantCatTails>
-			<TKKN_PlantWildRice>1.2</TKKN_PlantWildRice>
-			<TKKN_PlantBarnacles>2</TKKN_PlantBarnacles>
         </value>
     </Operation>
     <Operation Class="PatchOperationAdd">
         <xpath>/Defs/BiomeDef[defName = "TemperateSwamp"]/wildPlants</xpath>
         <value>
-			<TKKN_PlantWildRice>1.4</TKKN_PlantWildRice>
-			<TKKN_PlantCatTails>1.6</TKKN_PlantCatTails>
-			<TKKN_PlantLilypad>1.4</TKKN_PlantLilypad>
-			<TKKN_PlantBarnacles>2</TKKN_PlantBarnacles>
         </value>
     </Operation>
     <!-- warm -->
     <Operation Class="PatchOperationAdd">
         <xpath>/Defs/BiomeDef[defName = "TropicalRainforest"]/wildPlants</xpath>
         <value>
-			<TKKN_PlantWildRice>1.4</TKKN_PlantWildRice>
-			<TKKN_PlantCatTails>1.6</TKKN_PlantCatTails>
-			<TKKN_PlantLilypad>1.4</TKKN_PlantLilypad>
-			<TKKN_PlantBarnacles>2</TKKN_PlantBarnacles>
         </value>
     </Operation>
     <Operation Class="PatchOperationAdd">
         <xpath>/Defs/BiomeDef[defName = "TropicalSwamp"]/wildPlants</xpath>
         <value>
-			<TKKN_PlantWildRice>1.8</TKKN_PlantWildRice>
-			<TKKN_PlantCatTails>2</TKKN_PlantCatTails>
-			<TKKN_PlantLilypad>1.8</TKKN_PlantLilypad>
-			<TKKN_PlantBarnacles>2</TKKN_PlantBarnacles>
         </value>
     </Operation>
 
@@ -68,9 +44,6 @@
     <Operation Class="PatchOperationAdd">
         <xpath>/Defs/BiomeDef[defName = "AridShrubland"]/wildPlants</xpath>
         <value>
-			<TKKN_PlantCatTails>1.2</TKKN_PlantCatTails>
-			<TKKN_PlantLilypad>1.2</TKKN_PlantLilypad>
-			<TKKN_PlantBarnacles>1.4</TKKN_PlantBarnacles>
 			<TKKN_PlantCactusPricklyPear>.1</TKKN_PlantCactusPricklyPear>
 			<TKKN_PlantCactusSanPedro>.1</TKKN_PlantCactusSanPedro>
 			<TKKN_PlantCactusBarrel>.1</TKKN_PlantCactusBarrel>
@@ -84,9 +57,6 @@
     <Operation Class="PatchOperationAdd">
         <xpath>/Defs/BiomeDef[defName = "Desert"]/wildPlants</xpath>
         <value>
-			<TKKN_PlantCatTails>1</TKKN_PlantCatTails>
-			<TKKN_PlantLilypad>1</TKKN_PlantLilypad>
-			<TKKN_PlantBarnacles>1.4</TKKN_PlantBarnacles>
 			<TKKN_PlantCactusPricklyPear>.1</TKKN_PlantCactusPricklyPear>
 			<TKKN_PlantCactusSanPedro>.1</TKKN_PlantCactusSanPedro>
 			<TKKN_PlantCactusBarrel>.1</TKKN_PlantCactusBarrel>
@@ -100,23 +70,12 @@
     <Operation Class="PatchOperationAdd">
         <xpath>/Defs/BiomeDef[defName = "ExtremeDesert"]/wildPlants</xpath>
         <value>
-			<TKKN_PlantCatTails>.8</TKKN_PlantCatTails>
-			<TKKN_PlantLilypad>.8</TKKN_PlantLilypad>
-			<TKKN_PlantBarnacles>1.4</TKKN_PlantBarnacles>
 			<TKKN_PlantCactusPricklyPear>.05</TKKN_PlantCactusPricklyPear>
 			<TKKN_PlantCactusSanPedro>.05</TKKN_PlantCactusSanPedro>
 			<TKKN_PlantCactusBarrel>.05</TKKN_PlantCactusBarrel>
 			<TKKN_TreeOcotillo>.05</TKKN_TreeOcotillo>
         </value>
     </Operation>
-    <Operation Class="PatchOperationAdd">
-        <xpath>/Defs/BiomeDef[defName = "TKKN_Desert"]/wildPlants</xpath>
-        <value>
-			<TKKN_SaltCrystal>2</TKKN_SaltCrystal>
-        </value>
-    </Operation>
-	
-	
     <!-- end add new plants -->
 
     <!-- add new animals -->

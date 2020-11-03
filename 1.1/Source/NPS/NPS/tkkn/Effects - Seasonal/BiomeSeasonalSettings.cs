@@ -10,7 +10,7 @@ namespace TKKN_NPS
 		public Season LastChanged;
 		public Quadrum LastChangedQ;
 
-		public List<BiomePlantRecord> specialPlants;
+		public List<ThingDef> specialPlants;
 
 
 		//weather settings

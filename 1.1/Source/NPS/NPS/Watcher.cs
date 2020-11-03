@@ -131,12 +131,6 @@ namespace TKKN_NPS
 
 		public override void FinalizeInit()
 		{
-			/*
-			List<ThingDef> plants = map.Biome.AllWildPlants;
-			foreach(ThingDef plant in plants ){
-				Log.Warning("Wild plant: " + plant.defName);
-			}
-			*/
 
 			base.FinalizeInit();
 			biomeSettings = map.Biome.GetModExtension<BiomeSeasonalSettings>();
@@ -201,10 +195,10 @@ namespace TKKN_NPS
 
 					//Spawn special elements:
 					SpawnWorker.PostInitSpawnElements(cell);
+					SpawnWorker.SpawnPlants(cell);
 
 				}
 
-				
 				regenCellLists = false;
 			}
 

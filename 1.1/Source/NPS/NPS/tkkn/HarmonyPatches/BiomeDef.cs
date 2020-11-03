@@ -8,6 +8,30 @@ using Verse;
 
 namespace TKKN_NPS
 {
+	/*
+	[HarmonyPatch(typeof(BiomeDef))]
+	[HarmonyPatch("AllWildPlants")]
+	public static class PatchAllWildPlants
+	{
+		[HarmonyPostfix]
+		public static void Postfix(BiomeDef __instance, List<ThingDef> __result)
+		{
+			if (cachedWildPlants == null)
+			{
+				cachedWildPlants = new List<ThingDef>();
+				foreach (ThingDef item in DefDatabase<ThingDef>.AllDefsListForReading)
+				{
+					if (item.category == ThingCategory.Plant && CommonalityOfPlant(item) > 0f)
+					{
+						cachedWildPlants.Add(item);
+					}
+				}
+			}
+		}
+	}
+	
+	*/
+
 	[HarmonyPatch(typeof(BiomeDef))]
 	[HarmonyPatch("CommonalityOfDisease")]
 	public static class PatchCommonalityOfDisease

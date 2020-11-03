@@ -67,19 +67,19 @@ namespace TKKN_NPS
 				string label2 = "Temperature: " + cell.temperature + "  |  Humidity:" + Math.Round(cell.humidity, 2);
 
 				//wetness debugging
-				label2 += " | Snow Rate: " + map.weatherManager.curWeather.snowRate.ToString() + " | Rain Rate:" + map.weatherManager.curWeather.rainRate + " | Cell AdjustWet " + WeatherBaseWorker.AdjustWetBy(cell).ToString() + " | Roofed | " + map.roofGrid.Roofed(c).ToString() + " | isWet: " + cell.IsWet.ToString();
+				// label2 += " | Snow Rate: " + map.weatherManager.curWeather.snowRate.ToString() + " | Rain Rate:" + map.weatherManager.curWeather.rainRate + " | Cell AdjustWet " + WeatherBaseWorker.AdjustWetBy(cell).ToString() + " | Roofed | " + map.roofGrid.Roofed(c).ToString() + " | isWet: " + cell.IsWet.ToString();
 
 				//temperature debugging
-			//	label2 += " | isCold: " + cell.IsCold.ToString();
+				// label2 += " | isCold: " + cell.IsCold.ToString();
 
 				//temperature debuggin
 				//				label2 += " | Roofed | " + map.roofGrid.Roofed(c).ToString();
 
 
 				//flood debugging
-				//				label2 += " | Cell's Flood Level: " + String.Join(", ", cell.floodLevel)  + " | Flood Level: " + FloodWorker.GetMaxFlood(FloodWorker.GetFloodType(map, watcher.floodThreat));
+								label2 += " | Cell's Flood Level: " + String.Join(", ", cell.floodLevel)  + " | Flood Level: " + FloodWorker.GetMaxFlood(FloodWorker.GetFloodType(map, watcher.floodThreat), FloodWorker.howManyFloodSteps);
 				//tide debugging
-				//				label2 += " | Cell's Tide Level: " + cell.tideStep.ToString() + " | Active Tide Step: " + watcher.tideLevel.ToString();
+								label2 += " | Cell's Tide Step: " + cell.tideStep.ToString() + " | Active Tide Step: " + watcher.tideLevel.ToString();
 
 				Widgets.Label(rect, label2);
 				num += 19f;
@@ -117,7 +117,7 @@ namespace TKKN_NPS
 				rect = new Rect(BotLeft.x, (float)UI.screenHeight - BotLeft.y - num, 999f, 999f);
 				string label6 = "TKKN_Wet: " + cell.currentTerrain.HasTag("TKKN_Wet") + " | HowWet:" + cell.HowWet.ToString() + " | How Packed:" + cell.howPacked.ToString() + " | Orig Terr Fresh" + TerrainWorker.IsFreshWaterTerrain(cell.originalTerrain).ToString();
 
-				label6 += " | TKKN_Lava: " + cell.currentTerrain.HasTag("TKKN_Lava") + " | IsLava: " + TerrainWorker.IsLava(cell.currentTerrain) + " QTY Lava Cells" + (watcher.cellWeatherAffects.Select(key => key.Value).Where(cellTest => TerrainWorker.IsLava(cellTest.currentTerrain) == true).Count().ToString());
+		//		label6 += " | TKKN_Lava: " + cell.currentTerrain.HasTag("TKKN_Lava") + " | IsLava: " + TerrainWorker.IsLava(cell.currentTerrain) + " QTY Lava Cells" + (watcher.cellWeatherAffects.Select(key => key.Value).Where(cellTest => TerrainWorker.IsLava(cellTest.currentTerrain) == true).Count().ToString());
 //				label6 += " | TKKN_Swim: " + cell.currentTerrain.HasTag("TKKN_Swim");
 //				label6 += " | TKKN_Ocean: " + cell.currentTerrain.HasTag("TKKN_Ocean");
 				Widgets.Label(rect, label6);
