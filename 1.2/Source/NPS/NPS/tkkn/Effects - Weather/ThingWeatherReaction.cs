@@ -14,6 +14,7 @@ namespace TKKN_NPS
 		public Graphic frostGraphicData;
 
 		public List<TerrainDef> allowedTerrains;
-		
+		public List<TerrainDef> forbiddenTerrains;
+
 	}
 }

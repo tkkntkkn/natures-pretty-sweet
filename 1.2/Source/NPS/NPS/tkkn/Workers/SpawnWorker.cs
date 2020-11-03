@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Verse;
 using TKKN_NPS.SaveData;
 using RimWorld;
@@ -17,7 +18,6 @@ namespace TKKN_NPS.Workers
 		static private int maxSprings = 3;
 		static private float springSpawnChance = .8f;
 
-
 		static public void SpawnOasis(Map map)
 		{
 			if (map.Biome.defName == "TKKN_Oasis")
@@ -27,12 +27,12 @@ namespace TKKN_NPS.Workers
 				Spring spring = (Spring)ThingMaker.MakeThing(ThingDef.Named("TKKN_OasisSpring"), null);
 				GenSpawn.Spawn(spring, springSpot, map);
 			}
-			if (Rand.Value < .001f)
+			if (LeaveSomething() < .001f)
 			{
-				//make another one
 				SpawnOasis(map);
 			}
 		}
+
 		static public void SpawnPlants(CellData cell)
 		{
 			float leaveSomething = LeaveSomething();
@@ -80,89 +80,84 @@ namespace TKKN_NPS.Workers
 			Map map = cell.map;
 			IntVec3 c = cell.location;
 			TerrainDef terrain = c.GetTerrain(map);
-
 			Watcher watcher = GetWatcher(map);
 
+			foreach (ElementSpawnDef element in DefDatabase<ElementSpawnDef>.AllDefs)
+			{
+				if (CanSpawnSpring(element, map, terrain, watcher)) {
+					DoSpawn(element.thingDef, c, map);
+				}
+				else if (CanSpawnElement(element, map, terrain)) {
+					DoSpawn(element.thingDef, c, map);
+				} 
+				continue;
+			}
+		}
+
+		private static void DoSpawn(ThingDef thingDef, IntVec3 c, Map map)
+		{
+			Thing thing = (Thing)ThingMaker.MakeThing(thingDef, null);
+			GenSpawn.Spawn(thing, c, map);
+
+		}
+
+		private static bool CanSpawnSpring(ElementSpawnDef element, Map map, TerrainDef terrain, Watcher watcher)
+		{
 			if (watcher.biomeSettings != null)
 			{
 				maxSprings = watcher.biomeSettings.maxSprings;
 				springSpawnChance = watcher.biomeSettings.springSpawnChance;
 			}
+			bool isSpring = element.thingDef.defName.Contains("Spring");
 
-			foreach (ElementSpawnDef element in DefDatabase<ElementSpawnDef>.AllDefs)
+			if (!isSpring || (isSpring && maxSprings <= watcher.totalSprings))
 			{
-				bool canSpawn = false;
-				bool isSpring = element.thingDef.defName.Contains("Spring");
-
-				// spawn at least one spring in water.
-
-
-
-				if (isSpring && maxSprings <= watcher.totalSprings)
-				{
-					canSpawn = false;
-				}
-
-				if (element.thingDef.defName == "TKKN_PlantBarnacles") {
-					if (element.forbiddenBiomes.Contains(map.Biome.defName)){
-						Log.Error("A");
-					}
-
-					if (!element.allowedBiomes.NullOrEmpty() || !element.allowedBiomes.Contains(map.Biome.defName)) {
-						Log.Error("B");
-
-					}
-
-					if (!element.terrainValidationAllowed.Contains(terrain.defName)){
-						Log.Error("C");
-
-					}
-
-					if (!element.terrainValidationDisallowed.Intersect(terrain.tags).Any())
-					{
-						Log.Error("D");
-					}
-				}
-				if (element.forbiddenBiomes.Contains(map.Biome.defName) ||
-					(!element.allowedBiomes.NullOrEmpty() || !element.allowedBiomes.Contains(map.Biome.defName)) ||
-					!element.terrainValidationAllowed.Contains(terrain.defName) ||
-					!element.terrainValidationDisallowed.Intersect(terrain.tags).Any()
-					)
-				{
-					continue;
-				}
-
-				Log.Error("spawning " + element.thingDef.defName);
-
-				if (isSpring && canSpawn && Rand.Value < springSpawnChance)
-				{
-					Thing thing = (Thing)ThingMaker.MakeThing(element.thingDef, null);
-					GenSpawn.Spawn(thing, c, map);
-					watcher.totalSprings++;
-				}
-
-				if (!isSpring && canSpawn && Rand.Value < .0001f)
-				{
-					Thing thing = (Thing)ThingMaker.MakeThing(element.thingDef, null);
-					GenSpawn.Spawn(thing, c, map);
-				}
-
+				return false;
 			}
+
+			if (CanSpawn(element, map, terrain))
+			{
+				if (LeaveSomething() < springSpawnChance) {
+					watcher.totalSprings++;
+					return true;
+				}
+			}
+			return false;
 		}
-		public static void spawnSpring(CellData cell, bool makeHot = false)
+
+		private static bool CanSpawnElement(ElementSpawnDef element, Map map, TerrainDef terrain)
 		{
-			Watcher watcher = GetWatcher(cell.map);
-			spawnSpring(cell, watcher, makeHot);
+			return CanSpawn(element, map, terrain) && LeaveSomething() < .001f* element.commonality;
 		}
 
-		public static void spawnSpring(CellData cell, Watcher watcher, bool makeHot = false)
+		private static bool CanSpawn(ElementSpawnDef element, Map map, TerrainDef terrain)
 		{
-			string name = makeHot ? "TKKN_HotSpring" : "TKKN_ColdSpring";
+			if (!element.allowedBiomes.NullOrEmpty() && element.forbiddenBiomes.Contains(map.Biome.defName))
+			{
+				return false;
+			}
+			if (!element.allowedBiomes.NullOrEmpty() && !element.allowedBiomes.Contains(map.Biome.defName))
+			{
+				return false;
+			}
 
-			Thing thing = (Thing)ThingMaker.MakeThing(ThingDef.Named(name), null);
-			GenSpawn.Spawn(thing, cell.location, cell.map);
-			watcher.totalSprings++;
+			return true;
+			ThingWeatherReaction thingWeather = element.thingDef.GetModExtension<ThingWeatherReaction>();
+			if (thingWeather == null)
+			{
+				return true;
+			}
 
+			if (!thingWeather.allowedTerrains.NullOrEmpty() && thingWeather.forbiddenTerrains.Contains(terrain))
+			{
+				return false;
+			}
+
+			if (!thingWeather.allowedTerrains.NullOrEmpty() && !thingWeather.allowedTerrains.Contains(terrain))
+			{
+				return false;
+			}			
+			return true;
 		}
 
 		public static void DoLoot(CellData cell, TerrainDef currentTerrain, TerrainDef newTerrain)
@@ -175,7 +170,6 @@ namespace TKKN_NPS.Workers
 			{
 				ClearLoot(cell);
 			}
-
 		}
 
 		public static float LeaveSomething()
@@ -206,7 +200,7 @@ namespace TKKN_NPS.Workers
 						"EggRoeUnfertilized",
 					};
 				}
-				else if (leaveWhat > 0.05f)
+				else if (leaveWhat > 0.07f)
 				{
 					//leave resource;
 					allowed = new List<string>
@@ -226,7 +220,7 @@ namespace TKKN_NPS.Workers
 						"Pemmican",
 					};
 				}
-				else if (leaveWhat > 0.03f)
+				else if (leaveWhat > 0.06f)
 				{
 					// leave treasure.
 					allowed = new List<string>
@@ -239,14 +233,14 @@ namespace TKKN_NPS.Workers
 						"Heart",
 						"Lung",
 						"BionicEye",
-						"ScytherBlade",
+					//	"ScytherBlade",
 						"ElephantTusk",
 					};
 
 					string text = "TKKN_NPS_TreasureWashedUpText".Translate();
 					Messages.Message(text, MessageTypeDefOf.NeutralEvent);
 				}
-				else if (leaveWhat > 0.125f)
+				else if (leaveWhat > 0.55f)
 				{
 					//leave ultrarare
 					allowed = new List<string>
@@ -319,7 +313,7 @@ namespace TKKN_NPS.Workers
 				"Heart",
 				"Lung",
 				"BionicEye",
-				"ScytherBlade",
+				//"ScytherBlade",
 				"ElephantTusk",
 				"AIPersonaCore",
 				"MechSerumHealer",

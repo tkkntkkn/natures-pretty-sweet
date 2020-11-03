@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Patch>
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>/Defs/ThingDef[defName = "TKKN_PlantBarnacles"]</xpath>
+		<value>
+			<li Class="TKKN_NPS.ThingWeatherReaction">
+				<allowedTerrains>
+					<li>TKKN_SandBeachWetSalt</li>
+					<li>WaterOceanShallow</li>
+				</allowedTerrains>
+			</li>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>/Defs/ThingDef[defName = "TKKN_RedwoodDead"]</xpath>
+		<value>
+			<li Class="TKKN_NPS.ThingWeatherReaction">
+				<allowedTerrains>
+					<li>Soil</li>
+				</allowedTerrains>
+			</li>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>/Defs/ThingDef[defName = "TKKN_SaltCrystal"]</xpath>
+		<value>
+			<li Class="TKKN_NPS.ThingWeatherReaction">
+				<allowedTerrains>
+					<li>TKKN_SaltField</li>
+					<li>TKKN_SandBeachWetSalt</li>
+				</allowedTerrains>
+			</li>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>/Defs/ThingDef[defName = "TKKN_HotSpring"]</xpath>
+		<value>
+			<li Class="TKKN_NPS.ThingWeatherReaction">
+				<allowedTerrains>
+					<li>WaterShallow</li>
+					<li>WaterMovingShallow</li>
+				</allowedTerrains>
+			</li>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>/Defs/ThingDef[defName = "TKKN_ColdSpring"]</xpath>
+		<value>
+			<li Class="TKKN_NPS.ThingWeatherReaction">
+				<allowedTerrains>
+					<li>WaterShallow</li>
+					<li>WaterMovingShallow</li>
+				</allowedTerrains>
+			</li>
+		</value>
+	</Operation>
+</Patch>

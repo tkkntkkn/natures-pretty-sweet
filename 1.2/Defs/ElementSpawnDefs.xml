@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
+  <TKKN_NPS.ElementSpawnDef Name="ElementSpawnBase" Abstract="True">
+		<!-- if terrains aren't set, the terrains under ThingWeatherReaction will be used -->
+      <forbiddenBiomes/>
+      <allowedBiomes/>
+	  <commonality>1</commonality>
+  </TKKN_NPS.ElementSpawnDef>
+  
    <!-- TKKN_NPS.ElementSpawnDef>
       <defName>TKKN_SpawnLavaSprings</defName>
       <thingDef>TKKN_Lava_Pool</thingDef>
-      <allowOnWater>false</allowOnWater>
-      <terrainValidationAllowed>
+      <allowedTerrains>
          <li>TKKN_LavaRock_RoughHewn</li>
-      </terrainValidationAllowed>
-      <terrainValidationDisallowed>
-      </terrainValidationDisallowed>
+      </allowedTerrains>
+      <forbiddenTerrains>
+      </forbiddenTerrains>
       <forbiddenBiomes>
          <li>TKKN_Desert</li>
          <li>TKKN_Oasis</li>
@@ -24,31 +30,18 @@
          <li>AridShrubland</li>
       </forbiddenBiomes>
    </TKKN_NPS.ElementSpawnDef -->
-   <TKKN_NPS.ElementSpawnDef>
+   <TKKN_NPS.ElementSpawnDef ParentName="ElementSpawnBase">
       <defName>TKKN_SpawnDeadRedwoods</defName>
       <thingDef>TKKN_RedwoodDead</thingDef>
-      <allowOnWater>false</allowOnWater>
-      <terrainValidationDisallowed/>
-      <terrainValidationAllowed>
-         <li>Soil</li>
-      </terrainValidationAllowed>
-      <forbiddenBiomes/>
       <allowedBiomes>
          <li>TKKN_RedwoodForest</li>
       </allowedBiomes>
    </TKKN_NPS.ElementSpawnDef>
 
    
-     <TKKN_NPS.ElementSpawnDef>
+   <TKKN_NPS.ElementSpawnDef ParentName="ElementSpawnBase">
       <defName>TKKN_SpawnSaltCrystals</defName>
       <thingDef>TKKN_SaltCrystal</thingDef>
-      <allowOnWater>false</allowOnWater>
-      <terrainValidationDisallowed>
-      </terrainValidationDisallowed>
-      <terrainValidationAllowed>
-         <li>TKKN_SaltField</li>
-		 <li>TKKN_SandBeachWetSalt</li>
-      </terrainValidationAllowed>
       <forbiddenBiomes>
          <li>TKKN_Oasis</li>
          <li>NPS_BiomeWorker_Sequioa</li>
@@ -64,57 +57,34 @@
          <li>TropicalRainforest</li>
          <li>AridShrubland</li>
       </forbiddenBiomes>
-      <allowedBiomes/>
    </TKKN_NPS.ElementSpawnDef>
    
-   <TKKN_NPS.ElementSpawnDef>
+   <TKKN_NPS.ElementSpawnDef ParentName="ElementSpawnBase">
       <defName>TKKN_SpawnHotSprings</defName>
       <thingDef>TKKN_HotSpring</thingDef>
-      <allowOnWater>true</allowOnWater>
-      <terrainValidationDisallowed>
-      </terrainValidationDisallowed>
-      <terrainValidationAllowed>
-         <li>WaterShallow</li>
-         <li>WaterMovingShallow</li>
-      </terrainValidationAllowed>
       <forbiddenBiomes>
          <li>Ocean</li>
          <li>SeaIce</li>
-         <li>Lakes</li>
+         <li>TKKN_Lakes</li>
       </forbiddenBiomes>
-      <allowedBiomes/>
    </TKKN_NPS.ElementSpawnDef>
    
    
-   <TKKN_NPS.ElementSpawnDef>
+   <TKKN_NPS.ElementSpawnDef ParentName="ElementSpawnBase">
       <defName>TKKN_SpawnColdSprings</defName>
       <thingDef>TKKN_ColdSpring</thingDef>
-      <allowOnWater>true</allowOnWater>
-      <terrainValidationDisallowed />
-      <terrainValidationAllowed>
-         <li>WaterShallow</li>
-         <li>WaterMovingShallow</li>
-      </terrainValidationAllowed>
       <forbiddenBiomes>
          <li>TKKN_VolcanicFlow</li>
          <li>Ocean</li>
          <li>SeaIce</li>
-         <li>Lake</li>
+         <li>TKKN_Lakes</li>
       </forbiddenBiomes>
-      <allowedBiomes/>
    </TKKN_NPS.ElementSpawnDef>
    
    
-   <TKKN_NPS.ElementSpawnDef>
+   <TKKN_NPS.ElementSpawnDef ParentName="ElementSpawnBase">
       <defName>TKKN_SpawnBarnacles</defName>
       <thingDef>TKKN_PlantBarnacles</thingDef>
-      <allowOnWater>true</allowOnWater>
-      <terrainValidationDisallowed />
-      <terrainValidationAllowed>
-         <li>TKKN_SandBeachWetSalt</li>
-		 <li>WaterOceanShallow</li>
-      </terrainValidationAllowed>
-      <forbiddenBiomes/>
-      <allowedBiomes/>
+	  <commonality>2</commonality>
    </TKKN_NPS.ElementSpawnDef>
 </Defs>
