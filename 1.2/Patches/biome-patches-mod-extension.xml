@@ -977,7 +977,6 @@ Winter: wet.
 					<li>TKKN_PlantCatTails</li>
 					<li>TKKN_PlantLilypad</li>
 					<li>TKKN_PlantWildRice</li>			
-
 				</specialPlants>
 				<springEvents>
 					<TKKN_WildFlowerBloom>.5</TKKN_WildFlowerBloom>
@@ -2538,7 +2537,7 @@ Winter: wet.
 			<li Class="TKKN_NPS.BiomeSeasonalSettings">
 				<!-- springSettings -->
 				<maxSprings>
-					4
+					3
 				</maxSprings>
 				<springSpawnChance>
 					.7

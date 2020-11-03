@@ -16,7 +16,7 @@ namespace TKKN_NPS.Workers
 	class SpawnWorker : Worker
 	{
 		static private int maxSprings = 3;
-		static private float springSpawnChance = .8f;
+		static private float springSpawnChance = 1f;
 
 		static public void SpawnOasis(Map map)
 		{
@@ -46,31 +46,25 @@ namespace TKKN_NPS.Workers
 			{
 				Watcher watcher = Worker.GetWatcher(cell.map);
 				List<ThingDef> plants = watcher.biomeSettings.specialPlants;
-				// plantDensity
+				if (plants.NullOrEmpty())
+				{
+					return;
+				}
 				foreach (ThingDef plantDef in plants)
 				{
 					if (plantDef.HasModExtension<ThingWeatherReaction>())
 					{
-						TerrainDef terrain = cell.currentTerrain;
-						ThingWeatherReaction thingWeather = plantDef.GetModExtension<ThingWeatherReaction>();
-						List<TerrainDef> okTerrains = thingWeather.allowedTerrains;
-						if (okTerrains != null && okTerrains.Contains<TerrainDef>(cell.currentTerrain))
+						if ((cell.map.Biome.plantDensity * leaveSomething) > 1)
 						{
-							if (cell.map.Biome.plantDensity * Rand.Value > 2)
+							TerrainDef terrain = cell.currentTerrain;
+							ThingWeatherReaction thingWeather = plantDef.GetModExtension<ThingWeatherReaction>();
+							if (CanSpawn(thingWeather, cell.map, cell.currentTerrain))
 							{
-								Plant plant = (Plant)ThingMaker.MakeThing(plantDef, null);
-								plant.Growth = Rand.Range(0.07f, 1f);
-								if (plant.def.plant.LimitedLifespan)
-								{
-									plant.Age = Rand.Range(0, Mathf.Max(plant.def.plant.LifespanTicks - 50, 0));
-								}
-								GenSpawn.Spawn(plant, cell.location, cell.map);
+								DoSpawn(plantDef, cell.location, cell.map);
 								break;
 							}
 						}
 					}
-
-
 				}
 			}
 		}
@@ -80,11 +74,10 @@ namespace TKKN_NPS.Workers
 			Map map = cell.map;
 			IntVec3 c = cell.location;
 			TerrainDef terrain = c.GetTerrain(map);
-			Watcher watcher = GetWatcher(map);
 
 			foreach (ElementSpawnDef element in DefDatabase<ElementSpawnDef>.AllDefs)
 			{
-				if (CanSpawnSpring(element, map, terrain, watcher)) {
+				if (CanSpawnSpring(element, map, terrain)) {
 					DoSpawn(element.thingDef, c, map);
 				}
 				else if (CanSpawnElement(element, map, terrain)) {
@@ -96,13 +89,28 @@ namespace TKKN_NPS.Workers
 
 		private static void DoSpawn(ThingDef thingDef, IntVec3 c, Map map)
 		{
-			Thing thing = (Thing)ThingMaker.MakeThing(thingDef, null);
-			GenSpawn.Spawn(thing, c, map);
+			if (thingDef.category == ThingCategory.Plant)
+			{
+				Plant plant = (Plant)ThingMaker.MakeThing(thingDef, null);
+				plant.Growth = Rand.Range(0.07f, 1f);
+				if (plant.def.plant.LimitedLifespan)
+				{
+					plant.Age = Rand.Range(0, Mathf.Max(plant.def.plant.LifespanTicks - 50, 0));
+				}
+				GenSpawn.Spawn(plant, c, map);
+			}
+			else
+			{
 
+				Thing thing = (Thing)ThingMaker.MakeThing(thingDef, null);
+				GenSpawn.Spawn(thing, c, map);
+			}
 		}
 
-		private static bool CanSpawnSpring(ElementSpawnDef element, Map map, TerrainDef terrain, Watcher watcher)
+		private static bool CanSpawnSpring(ElementSpawnDef element, Map map, TerrainDef terrain)
 		{
+			Watcher watcher = Worker.GetWatcher(map);
+
 			if (watcher.biomeSettings != null)
 			{
 				maxSprings = watcher.biomeSettings.maxSprings;
@@ -110,7 +118,7 @@ namespace TKKN_NPS.Workers
 			}
 			bool isSpring = element.thingDef.defName.Contains("Spring");
 
-			if (!isSpring || (isSpring && maxSprings <= watcher.totalSprings))
+			if (!isSpring || maxSprings <= watcher.totalSprings)
 			{
 				return false;
 			}
@@ -141,14 +149,15 @@ namespace TKKN_NPS.Workers
 				return false;
 			}
 
-			return true;
 			ThingWeatherReaction thingWeather = element.thingDef.GetModExtension<ThingWeatherReaction>();
-			if (thingWeather == null)
-			{
-				return true;
-			}
+		return CanSpawn(thingWeather, map, terrain);
+	}
 
-			if (!thingWeather.allowedTerrains.NullOrEmpty() && thingWeather.forbiddenTerrains.Contains(terrain))
+	private static bool CanSpawn(ThingWeatherReaction thingWeather, Map map, TerrainDef terrain)
+		{
+
+
+			if (!thingWeather.forbiddenTerrains.NullOrEmpty() && thingWeather.forbiddenTerrains.Contains(terrain))
 			{
 				return false;
 			}

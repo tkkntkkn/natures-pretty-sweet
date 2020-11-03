@@ -36,6 +36,7 @@
       <allowedBiomes>
          <li>TKKN_RedwoodForest</li>
       </allowedBiomes>
+	  <commonality>2.5</commonality>
    </TKKN_NPS.ElementSpawnDef>
 
    
