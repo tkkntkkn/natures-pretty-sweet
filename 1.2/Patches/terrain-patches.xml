@@ -12,6 +12,7 @@
             <isSalty>True</isSalty>
 			<holdFrost>True</holdFrost>
 			<dryTerrain />
+			<packTo/>
          </li>
       </value>
    </Operation>
@@ -54,6 +55,7 @@
             <isSalty>False</isSalty>
 			<holdFrost>True</holdFrost>
 			<dryTerrain />
+				<packTo>TKKN_DirtPath</packTo>
          </li>
       </value>
    </Operation>
@@ -68,20 +70,7 @@
             <isSalty>False</isSalty>
 			<holdFrost>True</holdFrost>
 	        <dryTerrain>Sand</dryTerrain>
-         </li>
-      </value>
-   </Operation>
-   <Operation Class="PatchOperationAddModExtension">
-      <xpath>*/TerrainDef[defName = "Soil"]</xpath>
-      <value>
-         <li Class="TKKN_NPS.TerrainWeatherReactions">
-            <floodTerrain />
-            <wetTerrain>TKKN_SoilWet</wetTerrain>
-            <freezeTerrain />
-            <freezeAt />
-            <isSalty>False</isSalty>
-			<holdFrost>True</holdFrost>
-			<dryTerrain />
+			<packTo></packTo>
          </li>
       </value>
    </Operation>
@@ -124,6 +113,7 @@
             <isSalty>False</isSalty>
 			<holdFrost>True</holdFrost>
 			<dryTerrain />
+     		<packTo>TKKN_SandPath</packTo>
          </li>
       </value>
    </Operation>

@@ -304,42 +304,46 @@ namespace TKKN_NPS.SaveData
 			{
 				return;
 			}
+			//don't pack if there's a growing zone.
 			Zone_Growing zone = this.map.zoneManager.ZoneAt(this.location) as Zone_Growing;
-			if (zone != null && (currentTerrain.defName != "TKKN_DirtPath" || currentTerrain.defName != "TKKN_SandPath"))
+			if (zone != null)
 			{
 				return;
-			}           
-			//don't pack if there's a growing zone.
-			if (baseTerrain.defName == "Soil" || baseTerrain.defName == "Sand" || baseTerrain.texturePath == "Terrain/Surfaces/RoughStone") {
+			}
+
+			if (weather != null)
+			{
+				TerrainDef packTo = weather.packTo;
+				if (packTo == null)
+				{
+					return;
+				}
+
 				this.howPacked++;
+				if (this.howPacked > this.packAt && packTo != null)
+				{
+					this.changeTerrain(packTo);
+					this.baseTerrain = packTo;
+				}
+
+
 			}
 
-			if (this.howPacked > this.packAt)
+			bool isStone = baseTerrain.affordances.Contains(TerrainAffordanceDefOf.SmoothableStone);
+			if (isStone)
 			{
-			//	this.howPacked = this.packAt;
-				if (baseTerrain.defName == "Soil")
+				this.howPacked++;
+				if (this.howPacked > this.packAt * 10)
 				{
-					TerrainDef packed = TerrainDef.Named("TKKN_DirtPath");
+					string thisName = baseTerrain.defName;
+					thisName.Replace("_Rough", "_Smooth");
+					thisName.Replace("_SmoothHewn", "_Smooth");
+					TerrainDef packed = TerrainDef.Named(thisName);
 					this.changeTerrain(packed);
 					this.baseTerrain = packed;
 				}
-				if (baseTerrain.defName == "Sand")
-				{
-					TerrainDef packed = TerrainDef.Named("TKKN_SandPath");
-					this.changeTerrain(packed);
-					this.baseTerrain = packed;
-				}
 			}
 
-			if (baseTerrain.texturePath == "Terrain/Surfaces/RoughStone" && this.howPacked > this.packAt * 10)
-			{
-				string thisName = baseTerrain.defName;
-				thisName.Replace("_Rough", "_Smooth");
-				thisName.Replace("_SmoothHewn", "_Smooth");
-				TerrainDef packed = TerrainDef.Named(thisName);
-				this.changeTerrain(packed);
-				this.baseTerrain = packed;
-			}
 
 		}
 

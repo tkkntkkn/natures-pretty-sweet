@@ -187,10 +187,10 @@ namespace TKKN_NPS
 			dinfo.SetBodyRegion(BodyPartHeight.Undefined, BodyPartDepth.Outside);
 			pawn.TakeDamage(dinfo).AssociateWithLog(battleLogEntry_DamageTaken);
 		}
+		#region paths
 		public static void MakePaths(Pawn pawn, CellData cell)
 		{
 			Map map = pawn.Map;
-			#region paths
 			if (pawn.Position.InBounds(map) && pawn.RaceProps.Humanlike)
 			{
 				//remove snow/frost where they are. This will hopefully generate paths as pawns walk :)
@@ -207,8 +207,8 @@ namespace TKKN_NPS
 					cell.doPack();
 				}
 			}
-			#endregion
 		}
+		#endregion
 
 		public static void MakeBreath(Pawn pawn, CellData cell)
 		{
