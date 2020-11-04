@@ -63,13 +63,15 @@ namespace TKKN_NPS.Workers
 
 		public static void DoLavaEffects(CellData cell)
 		{
+			Map map = cell.map;
+			IntVec3 c = cell.location;
+			GenTemperature.PushHeat(c, map, 100);
+
+
 			if (!Settings.DoLavaVisualEffects)
 			{
 				return;
 			}
-			Map map = cell.map;
-			IntVec3 c = cell.location;
-			GenTemperature.PushHeat(c, map, 1);
 			if (Rand.Value < Settings.LavaVisualEffectChance)
 			{
 				MoteMaker.ThrowHeatGlow(c, map, 5f);

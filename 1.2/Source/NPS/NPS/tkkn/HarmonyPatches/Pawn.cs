@@ -58,9 +58,6 @@ namespace TKKN_NPS
 					{
 						return;
 					}
-
-
-
 					PatchTickPawn.MakePaths(__instance, cell);
 					PatchTickPawn.MakeBreath(__instance, cell);
 					PatchTickPawn.MakeWet(__instance, cell);
@@ -146,6 +143,10 @@ namespace TKKN_NPS
 
 		public static void MakeWet(Pawn pawn, CellData cell)
 		{
+			if (!Settings.allowPawnsToGetWet)
+			{
+				return;
+			}
 			HediffDef hediffDef = HediffDefOf.TKKN_Wetness;
 			if (pawn.health.hediffSet.GetFirstHediffOfDef(hediffDef) == null && pawn.RaceProps.Humanlike)
 			{
@@ -190,6 +191,10 @@ namespace TKKN_NPS
 		#region paths
 		public static void MakePaths(Pawn pawn, CellData cell)
 		{
+			if (!Settings.doDirtPath)
+			{
+				return;
+			}
 			Map map = pawn.Map;
 			if (pawn.Position.InBounds(map) && pawn.RaceProps.Humanlike)
 			{
@@ -209,9 +214,12 @@ namespace TKKN_NPS
 			}
 		}
 		#endregion
-
 		public static void MakeBreath(Pawn pawn, CellData cell)
 		{
+			if (!Settings.showCold)
+			{
+				return;
+			}
 			if (Find.TickManager.TicksGame % 150 == 0)
 			{
 				Map map = pawn.Map;

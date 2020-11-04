@@ -12,6 +12,10 @@ namespace TKKN_NPS
 
         protected override bool TryExecuteWorker(IncidentParms parms)
         {
+			if (!Settings.allowLavaEruption)
+			{
+				return false;
+			}
 			Log.Error("Running lavaflow");
 
 			Map map = (Map)parms.target;
