@@ -235,7 +235,7 @@
         </tags>
         <generatedFilth>Filth_Sand</generatedFilth>
 		<filthAcceptanceMask/>
-        <fertility>2</fertility>
+        <fertility>1.5</fertility>
         <takeFootprints>True</takeFootprints>
         <avoidWander>True</avoidWander>
         <driesTo>Sand</driesTo>
