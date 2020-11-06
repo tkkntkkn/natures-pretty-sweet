@@ -27,6 +27,7 @@ namespace TKKN_NPS
 		public static bool spawnLavaOnlyInBiome = true;
 		public static bool allowLavaEruption = true;
 		public static bool DoLavaVisualEffects = true;
+		public static bool DoLavaDamagingEffects = true;
 		public static float LavaVisualEffectChance = .009f;
 		private static string LavaVisualEffectChanceBuffer;
 
@@ -145,6 +146,10 @@ namespace TKKN_NPS
 				"TKKN_spawnLavaOnlyInBiome_title".Translate(),
 				ref Settings.spawnLavaOnlyInBiome,
 				"TKKN_spawnLavaOnlyInBiome_text".Translate());
+			list.CheckboxLabeled(
+				"TKKN_DoLavaDamagingEffects_title".Translate(),
+				ref Settings.DoLavaDamagingEffects,
+				"TKKN_DoLavaDamagingEffects_text".Translate());
 
 			list.Gap(4f);
 			list.Label("Plants");
@@ -192,6 +197,9 @@ namespace TKKN_NPS
 		Scribe_Values.Look(ref Settings.spawnLavaOnlyInBiome, "spawnLavaOnlyInBiome", false, true);
 		Scribe_Values.Look(ref Settings.allowLavaEruption, "allowLavaEruption", true, true);
 		Scribe_Values.Look(ref Settings.DoLavaVisualEffects, "DoLavaVisualEffects", true, true);
+		Scribe_Values.Look(ref Settings.DoLavaDamagingEffects, "DoLavaDamagingEffects", true, true);
+		Scribe_Values.Look(ref Settings.LavaVisualEffectChance, "LavaVisualEffectChance", 0.009f, true);
+			
 
 		//weather
 		Scribe_Values.Look(ref Settings.showHot, "showWeather", true, true);

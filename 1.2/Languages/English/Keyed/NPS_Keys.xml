@@ -37,8 +37,11 @@
 	<TKKN_spawnLavaOnlyInBiome_text>Allow lava to erupt in almost every biome. Uncheck to make it so lava is only in the Volcanic Fields biome</TKKN_spawnLavaOnlyInBiome_text>
 	<TKKN_allowLavaEruption_title>Lava can erupt</TKKN_allowLavaEruption_title>
 	<TKKN_allowLavaEruption_text>Allow lava to erupt. Uncheck to remove the random eruption incidents</TKKN_allowLavaEruption_text>
+	<TKKN_DoLavaDamagingEffects_text>Lava damage effects</TKKN_DoLavaDamagingEffects_text>
+	<TKKN_DoLavaDamagingEffects_title>Lava damages pawns and items, and pushes a high temperature out that can be harmful in contained spaces. Uncheck to stop this.</TKKN_DoLavaDamagingEffects_title>
 	<TKKN_DoLavaVisualEffects_text>Lava visual effects</TKKN_DoLavaVisualEffects_text>
 	<TKKN_DoLavaVisualEffects_title>Lava glows and throws smoke, uncheck or see below to stop this.</TKKN_DoLavaVisualEffects_title>
+	
 	<TKKN_LavaVisualEffectChance_title>Chance to do visual effects</TKKN_LavaVisualEffectChance_title>
 	<TKKN_LavaVisualEffectChance_text>Reduce this number to have less visual effects. Default: .009</TKKN_LavaVisualEffectChance_text>
 	<!-- Weather -->
