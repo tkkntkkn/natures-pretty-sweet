@@ -3,12 +3,8 @@ using HarmonyLib;
 using RimWorld;
 using System.Collections.Generic;
 
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using Verse;
-using RimWorld;
 
 namespace TKKN_NPS.HarmonyPatches
 {

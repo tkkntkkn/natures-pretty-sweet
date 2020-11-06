@@ -60,17 +60,17 @@ namespace TKKN_NPS
 	public class JobGiver_GoSwimming : JobGiver_Wander
 	{
 
-		protected float wanderRadius;
+		protected new float wanderRadius;
 
 		private static List<IntVec3> swimmingSpots = new List<IntVec3>();
 
-		protected Func<Pawn, IntVec3, IntVec3, bool> wanderDestValidator;
+		protected new Func<Pawn, IntVec3, IntVec3, bool> wanderDestValidator;
 
-		protected IntRange ticksBetweenWandersRange = new IntRange(20, 100);
+		protected new IntRange ticksBetweenWandersRange = new IntRange(20, 100);
 
-		protected LocomotionUrgency locomotionUrgency = LocomotionUrgency.Walk;
+		protected new LocomotionUrgency locomotionUrgency = LocomotionUrgency.Walk;
 
-		protected Danger maxDanger = Danger.None;
+		protected new Danger maxDanger = Danger.None;
 
 		protected override Job TryGiveJob(Pawn pawn)
 		{
@@ -118,7 +118,7 @@ namespace TKKN_NPS
 					return IntVec3.Invalid;
 				}
 
-				if (c2 is IntVec3 && c2.IsValid){
+				if (c2.IsValid){
 					TerrainDef terrain = c2.GetTerrain(pawn.Map);
 					if (terrain.HasTag("TKKN_Swim"))
 					{
@@ -160,7 +160,7 @@ namespace TKKN_NPS
 {
 	public class JobGiver_RelaxInSpring : ThinkNode_JobGiver
 	{
-		private float radius = 30f;
+		// private float radius = 30f;
 
 		protected override Job TryGiveJob(Pawn pawn)
 		{

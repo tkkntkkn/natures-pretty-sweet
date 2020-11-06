@@ -7,7 +7,7 @@ namespace TKKN_NPS
 {
 	class PatchOperationFindModByName : PatchOperation
 	{
-		private string mod;
+		private string mod = null;
 
 		protected override bool ApplyWorker(XmlDocument xml)
 		{

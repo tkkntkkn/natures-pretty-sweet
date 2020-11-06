@@ -32,14 +32,14 @@ namespace TKKN_NPS
 {
 	public class GameCondition_WildFlowerBloom : GameCondition_TKKNBlooms
 	{
-		public float howManyBlooms = 1.5f;
+		public new float howManyBlooms = 1.5f;
 	} 
 }
 namespace TKKN_NPS
 {
 	public class GameCondition_Superbloom : GameCondition_TKKNBlooms
 	{
-		public float howManyBlooms = 3;
+		public new float howManyBlooms = 3;
 	}
 }
 namespace TKKN_NPS

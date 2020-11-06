@@ -119,8 +119,8 @@ namespace TKKN_NPS
 		{
 
 			return false;
-			Map map = (Map)parms.target;
-			return map.weatherManager.CurWindSpeedFactor >= 1f;
+			//Map map = (Map)parms.target;
+			//return map.weatherManager.CurWindSpeedFactor >= 1f;
 		}
 
 		protected override bool TryExecuteWorker(IncidentParms parms)
@@ -189,9 +189,9 @@ namespace TKKN_NPS
 
 	public class IncidentWorker_WildFlowerBloom : IncidentWorker_Bloom
 	{
-		public string label = "TKKN_NPS_WildFlowerBloomLbl".Translate();
-		public string text = "TKKN_NPS_WildFlowerBloomTxt".Translate();
-		public ThingDef thingDef;
+		public new string label = "TKKN_NPS_WildFlowerBloomLbl".Translate();
+		public new string text = "TKKN_NPS_WildFlowerBloomTxt".Translate();
+		public new ThingDef thingDef;
 		
 	}
 }
@@ -201,9 +201,9 @@ namespace TKKN_NPS
 	public class IncidentWorker_Superbloom : IncidentWorker_Bloom
 	{
 
-		public string label = "TKKN_NPS_SuperbloomLbl".Translate();
-		public string text = "TKKN_NPS_SuperbloomTxt".Translate();
-		public ThingDef thingDef;
+		public new string label = "TKKN_NPS_SuperbloomLbl".Translate();
+		public new string text = "TKKN_NPS_SuperbloomTxt".Translate();
+		public new ThingDef thingDef;
 
 	
 	}
@@ -213,7 +213,7 @@ namespace TKKN_NPS
 
 	public class IncidentWorker_Bloom : IncidentWorker_TKKN_Weather
 	{
-		public ThingDef thingDef;
+		public new ThingDef thingDef;
 		bool relevantSetting = Settings.allowPlantEffects;
 
 		protected override bool TryExecuteWorker(IncidentParms parms)
@@ -264,9 +264,9 @@ namespace TKKN_NPS
 
 	public class IncidentWorker_Drought : IncidentWorker_TKKN_Weather
 	{
-		public string label;
-		public string text;
-		public ThingDef thingDef;
+		public new string label;
+		public new string text;
+		public new ThingDef thingDef;
 
 		protected override bool TryExecuteWorker(IncidentParms parms)
 		{
