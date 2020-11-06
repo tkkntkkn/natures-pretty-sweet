@@ -18,6 +18,13 @@ namespace TKKN_NPS.Workers
 			return cellWeatherAffects.Select(key => key.Value).Where(cell => cell.floodLevel.Any());
 		}
 
+		static public int GetMaxFlood(CellData cell)
+		{
+			Watcher watcher = GetWatcher(cell.map);
+			Dictionary<IntVec3, CellData> cellWeatherAffects = watcher.cellWeatherAffects;
+			string type = GetFloodType(cell.map, watcher.floodThreat);
+			return GetMaxFlood(type, howManyFloodSteps);
+		}
 
 		static public int GetMaxFlood(string type, int howManySteps)
 		{
@@ -111,6 +118,38 @@ namespace TKKN_NPS.Workers
 			}
 		}
 
+		static public bool WaitingToFlood(CellData cell)
+		{
+			Watcher watcher = GetWatcher(cell.map);
+			int max = GetMaxFlood(cell);
+
+			return WaitingToFlood(watcher.floodLevel, max);
+		}
+
+		static public bool WaitingToFlood(int floodLevel, int max)
+		{
+			if (floodLevel < max)
+			{
+				return true;
+			}
+			return false;
+		}
+		static public bool ShouldFlood(CellData cell)
+		{
+			int max = GetMaxFlood(cell);
+			return ShouldFlood(cell.floodLevel, max);
+		}
+
+
+		static public bool ShouldFlood(HashSet<int> floodLevel, int max)
+		{
+			if (floodLevel.Where(level => level < max).Any())
+			{
+				return false;
+			}
+			return true;
+		}
+
 		static public void DoFloods(Map map)
 		{
 			if (!Settings.doSeasonalFloods)
@@ -119,10 +158,10 @@ namespace TKKN_NPS.Workers
 			}
 			Watcher watcher = GetWatcher(map);
 			Dictionary<IntVec3, CellData> cellWeatherAffects = watcher.cellWeatherAffects;
-
 			string floodType = GetFloodType(map, watcher.floodThreat);
 			int max = GetMaxFlood(floodType, howManyFloodSteps);
-			if (watcher.floodLevel < max)
+
+			if (WaitingToFlood(watcher.floodLevel, max))
 			{
 				watcher.floodLevel++;
 			}
@@ -133,7 +172,7 @@ namespace TKKN_NPS.Workers
 
 			foreach (CellData cell in GetFloodableCells(watcher.floodLevel, cellWeatherAffects))
 			{
-				if (cell.floodLevel.Where(level => level < max).Any())
+				if (ShouldFlood(cell))
 				{
 					cell.SetFlooded();
 				}

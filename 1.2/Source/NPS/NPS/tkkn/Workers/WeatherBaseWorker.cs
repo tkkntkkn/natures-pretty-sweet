@@ -117,7 +117,7 @@ namespace TKKN_NPS.Workers
 			}
 
 
-			if (Settings.showRain && !TerrainWorker.IsWaterTerrain(cell.currentTerrain) && cell.tideStep == -1)
+			if (Settings.affectsWet && !TerrainWorker.IsWaterTerrain(cell.currentTerrain) && cell.tideStep == -1)
 			{
 				float adjustWetness = AdjustWetBy(cell);
 				cell.HowWet += adjustWetness;
@@ -158,11 +158,14 @@ namespace TKKN_NPS.Workers
 			if (cell.IsFlooded)
 			{
 				//flood cells should wet/dry slower
-				adjustWetness = adjustWetness / 2.5f;
+				adjustWetness = adjustWetness / 1.5f;
+			} else if (FloodWorker.WaitingToFlood(cell) && adjustWetness > 0 && !FloodWorker.ShouldFlood(cell)) {
+				//if it's waiting to flood, let the lower levels flood first for a better visual effect
+				return 0;
 			} else if (!cell.IsWet && adjustWetness > 0)
 			{
 				//dry cells should wet faster (to help the soil affect show up in a reasonable time)
-				adjustWetness = adjustWetness * 1.25f;
+				adjustWetness = adjustWetness * 1.1f;
 			}
 
 			return adjustWetness;
@@ -176,6 +179,10 @@ namespace TKKN_NPS.Workers
 				return;
 			}
 
+			if (!Settings.showRain)
+			{
+				return;
+			}
 			Watcher watcher = GetWatcher(cell.map);
 			IntVec3 c = cell.location;
 			Thing puddle = (Thing)(from t in c.GetThingList(cell.map)
@@ -196,7 +203,6 @@ namespace TKKN_NPS.Workers
 				watcher.totalPuddles--;
 			}
 
-			return;
 			// TO DO - set this up to be configurable through defs.
 			//spawn special things when it rains.
 			if (Rand.Value < .0009)
