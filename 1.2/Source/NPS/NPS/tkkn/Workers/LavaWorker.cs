@@ -11,25 +11,34 @@ namespace TKKN_NPS.Workers
 {
 	class LavaWorker : Worker
 	{
-/*
-		public static bool spawnLavaOnlyInBiome = true;
-		public static bool allowLavaEruption = true;
-*/
+		/*
+				public static bool spawnLavaOnlyInBiome = true;
+				public static bool allowLavaEruption = true;
+		*/
+		/// <summary>
+		/// Makes sure the langing area isn't lava
+		/// </summary>
 		public static void FixLava(Map map)
 		{
 			//set so the area pawns land in will most likely not be lava, and so they have somewhere to build.
 			IntVec3 centerSpot = CellFinderLoose.TryFindCentralCell(map, 10, 15, (IntVec3 x) => !x.Roofed(map));
 			int num = GenRadial.NumCellsInRadius(23);
+			Watcher watcher = GetWatcher(map);
+
 			for (int i = 0; i < num; i++)
 			{
 				IntVec3 spot = centerSpot + GenRadial.RadialPattern[i];
-				if (spot.GetTerrain(map).HasTag("TKKN_Lava"))
+				if (TerrainWorker.IsLava(spot, map))
 				{
-					map.terrainGrid.SetTerrain(centerSpot + GenRadial.RadialPattern[i], TerrainDefOf.TKKN_LavaRock_RoughHewn);
+					map.terrainGrid.SetTerrain(spot, TerrainDefOf.TKKN_LavaRock_RoughHewn);
+					watcher.AddToCellList(spot, TerrainDefOf.TKKN_LavaRock_RoughHewn);
 				}
 			}
 		}
 
+		/// <summary>
+		/// Force non-edge lava to be deep lava
+		/// </summary>
 		public static void SetDeepLava(ref CellData cell)
 		{
 			if (TerrainWorker.IsLava(cell))
@@ -61,12 +70,33 @@ namespace TKKN_NPS.Workers
 			}
 		}
 
+		/// <summary>
+		/// Do Lava effects (on cell weather effect)
+		/// </summary>
+		public static void DoLava(Map map)
+		{
+			Watcher watcher = GetWatcher(map);
+			Dictionary<IntVec3, CellData> cellWeatherAffects = watcher.cellWeatherAffects;
+
+			IEnumerable<CellData> updateList = cellWeatherAffects.Select(key => key.Value).Where(cell => TerrainWorker.IsLava(cell.currentTerrain) == true);
+			foreach (CellData cell in updateList.ToList().InRandomOrder().Take(updateList.Count()/3))
+			{
+				DoLavaEffects(cell);
+			}
+		}
+
+		/// <summary>
+		/// Visual effects for lava
+		/// </summary>
 		public static void DoLavaEffects(CellData cell)
 		{
 			Map map = cell.map;
 			IntVec3 c = cell.location;
-			GenTemperature.PushHeat(c, map, 100);
 
+			if (Settings.DoLavaDamagingEffects)
+			{
+				GenTemperature.PushHeat(c, map, 100);
+			}
 
 			if (!Settings.DoLavaVisualEffects)
 			{
@@ -95,23 +125,73 @@ namespace TKKN_NPS.Workers
 				}
 				else 
 				*/
-				if (Rand.Value < (Settings.LavaVisualEffectChance/10))
+				if (Rand.Value < (Settings.LavaVisualEffectChance / 10))
 				{
 					MoteMaker.ThrowSmoke(c.ToVector3(), map, 4f);
 				}
 			}
 		}
 
-		public static void DoLava(Map map)
-			{
-				Watcher watcher = GetWatcher(map);
-				Dictionary<IntVec3, CellData> cellWeatherAffects = watcher.cellWeatherAffects;
+		/// <summary>
+		/// Lava damages pawns
+		/// </summary>
+		public static void HurtWithLava(Pawn pawn)
+		{
+			if (CanHurtThingWithLava(pawn)){
+				IntVec3 c = pawn.Position;
+				Map map = pawn.MapHeld;
+				FireUtility.TryAttachFire(pawn, .5f);
+			}
+		}
 
-				IEnumerable<CellData> updateList = cellWeatherAffects.Select(key => key.Value).Where(cell => TerrainWorker.IsLava(cell.currentTerrain) == true);
-				foreach (CellData cell in updateList.ToList().InRandomOrder().Take(updateList.Count()/3))
+		/// <summary>
+		/// Lava damages/destroys items
+		/// </summary>
+		public static void HurtWithLava(Thing thing)
+		{
+			IntVec3 c = thing.Position;
+			Map map = thing.MapHeld;
+			if (CanHurtThingWithLava(thing))
+			{
+				FireUtility.TryStartFireIn(c, map, 5f);
+				DoDestruction(thing);
+			}
+		}
+
+		/// <summary>
+		/// Checks if we should do lava damage.
+		/// </summary>
+		private static bool CanHurtThingWithLava(Thing thing)
+		{
+			if (!Settings.DoLavaDamagingEffects)
+			{
+				return false;
+			}
+			IntVec3 c = thing.Position;
+			Map map = thing.MapHeld;
+			if (TerrainWorker.IsLava(c, map))
+			{
+				return true;
+			}
+			return false;
+		}
+
+	
+
+		/// <summary>
+		/// Destroys inflammable items
+		/// </summary>
+		public static void DoDestruction(Thing thing)
+		{
+			float statValue = thing.GetStatValue(StatDefOf.Flammability, true);
+			bool alt = thing.def.altitudeLayer == AltitudeLayer.Item;
+			if (statValue == 0f && alt == true)
+			{
+				if (!thing.Destroyed && thing.def.destroyable)
 				{
-					DoLavaEffects(cell);
+					thing.Destroy(DestroyMode.Vanish);
 				}
 			}
 		}
+	}
 }

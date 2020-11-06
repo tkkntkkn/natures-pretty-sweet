@@ -19,7 +19,17 @@ namespace TKKN_NPS.Workers
 
 		static public bool IsLava(CellData cell)
 		{
-			return IsLava(cell.currentTerrain);
+			return cell != null && IsLava(cell.currentTerrain);
+		}
+
+		/// <summary>
+		/// Checks if the terrain is lava
+		/// </summary>
+
+		static public bool IsLava(IntVec3 c, Map map)
+		{
+			TerrainDef terrain = c.GetTerrain(map);
+			return IsLava(terrain);
 		}
 
 		/// <summary>

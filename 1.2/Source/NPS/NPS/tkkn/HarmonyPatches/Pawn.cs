@@ -37,30 +37,31 @@ namespace TKKN_NPS
 			{
 				return;
 			}
-
-			TerrainDef terrain = __instance.Position.GetTerrain(__instance.MapHeld);
+			Map map = __instance.MapHeld;
+			TerrainDef terrain = __instance.Position.GetTerrain(map);
 			if ((terrain.defName == "TKKN_SaltField" || terrain.defName == "TKKN_Salted_Earth") && __instance.def.defName == "TKKN_giantsnail")
 			{
 				PatchTickPawn.BurnSnails(__instance);
 				return;
 			}
 
-
 			if (!__instance.Dead)
 			{
 				if (!Find.TickManager.Paused)
 				{
-					Map map = __instance.Map;
+					IntVec3 c = __instance.Position;
 					Watcher watcher = Worker.GetWatcher(map);
-					watcher.cellWeatherAffects.TryGetValue(__instance.Position, out CellData cell);
+					CellData cell = watcher.GetCell(__instance.Position);
 
 					if (cell == null)
 					{
 						return;
 					}
+
 					PatchTickPawn.MakePaths(__instance, cell);
 					PatchTickPawn.MakeBreath(__instance, cell);
 					PatchTickPawn.MakeWet(__instance, cell);
+					LavaWorker.HurtWithLava(__instance);
 					PatchTickPawn.DyingCheck(__instance, terrain);
 				}
 			}

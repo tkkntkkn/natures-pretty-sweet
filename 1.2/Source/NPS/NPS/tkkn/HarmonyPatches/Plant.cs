@@ -3,7 +3,7 @@ using System;
 using UnityEngine;
 using Verse;
 using HarmonyLib;
-/*
+using TKKN_NPS.SaveData;
 namespace TKKN_NPS
 {
 	//swap out plant graphics based on seasonal effects
@@ -42,13 +42,13 @@ namespace TKKN_NPS
 					float minWetnessToFlower = (__instance.def.plant.fertilityMin * 5) + (__instance.def.plant.fertilitySensitivity * 3f);
 
 
-					if (!String.IsNullOrEmpty(mod.floweringGraphicPath) && ((cell.howWet > minWetnessToFlower) || season == Season.Spring))
+					if (!String.IsNullOrEmpty(mod.floweringGraphicPath) && ((cell.HowWet > minWetnessToFlower) || season == Season.Spring))
 					{
 						id += "flowering";
 						path = mod.floweringGraphicPath;
 					}
 
-					if (cell.howWet < minWetnessToLive){
+					if (cell.HowWet < minWetnessToLive){
 						id += "drought";
 						if (!String.IsNullOrEmpty(mod.droughtGraphicPath))
 						{
@@ -135,4 +135,3 @@ namespace TKKN_NPS
 	}
 
 }
-*/
