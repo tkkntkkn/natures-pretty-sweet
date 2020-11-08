@@ -80,7 +80,13 @@ namespace TKKN_NPS
 				//get snow graphic
 				if (map.snowGrid.GetDepth(__instance.Position) >= 0.5f)
 				{
-					if (!String.IsNullOrEmpty(mod.snowGraphicPath))
+					if (__instance.def.plant.leaflessGraphic == __result && !String.IsNullOrEmpty(mod.snowLeaflessGraphicPath))
+					{
+						id += "snowleafless";
+						path = mod.snowLeaflessGraphicPath;
+
+					}
+					else if (!String.IsNullOrEmpty(mod.snowGraphicPath))
 					{
 						id += "snow";
 						path = mod.snowGraphicPath;
@@ -88,7 +94,13 @@ namespace TKKN_NPS
 				}
 				else if (map.GetComponent<FrostGrid>().GetDepth(__instance.Position) >= 0.6f)
 				{
-					if (!String.IsNullOrEmpty(mod.frostGraphicPath))
+					if (__instance.def.plant.leaflessGraphic == __result && !String.IsNullOrEmpty(mod.frostLeaflessGraphicPath))
+					{
+						id += "frostleafless";
+						path = mod.frostLeaflessGraphicPath;
+
+					}
+					else if (!String.IsNullOrEmpty(mod.frostGraphicPath))
 					{
 						id += "frost";
 						path = mod.frostGraphicPath;
@@ -100,17 +112,10 @@ namespace TKKN_NPS
 					return;
 				}
 				//if it's leafless
-				if (__instance.def.plant.leaflessGraphic == __result)
-				{
-					id += "leafless";
-					path = path.Replace("Frosted", "Frosted/Leafless");
-					path = path.Replace("Snow", "Snow/Leafless");
-					path += "_Leafless";
-				}
-				else if (__instance.def.blockWind)
+				if (__instance.def.plant.leaflessGraphic != __result && __instance.def.blockWind)
 				{
 					//make it so snow doesn't fall under the tree until it's leafless.
-					//	map.snowGrid.AddDepth(__instance.Position, -.05f);
+					map.snowGrid.AddDepth(__instance.Position, -.05f);
 
 				}
 			}

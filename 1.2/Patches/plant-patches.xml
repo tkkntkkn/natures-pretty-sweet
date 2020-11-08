@@ -151,6 +151,7 @@
          <li Class="TKKN_NPS.ThingWeatherReaction">
             <frostGraphicPath>TKKN_NPS/Things/Plant/VarientFrosted/Grass</frostGraphicPath>
             <droughtGraphicPath>TKKN_NPS/Things/Plant/VarientDrought/Grass</droughtGraphicPath>
+            <frostLeaflessGraphicPath>TKKN_NPS/Things/Plant/VarientFrosted/Leafless/Grass_Leafless</frostLeaflessGraphicPath>
          </li>
       </value>
    </Operation>
@@ -175,6 +176,8 @@
          <li Class="TKKN_NPS.ThingWeatherReaction">
             <frostGraphicPath>TKKN_NPS/Things/Plant/VarientFrosted/Brambles</frostGraphicPath>
             <snowGraphicPath>TKKN_NPS/Things/Plant/VarientSnow/Brambles</snowGraphicPath>
+            <snowLeaflessGraphicPath>TKKN_NPS/Things/Plant/VarientSnow/Leafless/Brambles_Leafless</snowLeaflessGraphicPath>
+            <frostLeaflessGraphicPath>TKKN_NPS/Things/Plant/VarientFrosted/Leafless/Brambles_Leafless</frostLeaflessGraphicPath>
          </li>
       </value>
    </Operation>
@@ -184,7 +187,9 @@
          <li Class="TKKN_NPS.ThingWeatherReaction">
             <!-- frostGraphicPath>TKKN_NPS/Things/Plant/VarientFrosted/TreeMaple</frostGraphicPath -->
             <snowGraphicPath>TKKN_NPS/Things/Plant/VarientSnow/TreeMaple</snowGraphicPath>
-         </li>
+            <snowLeaflessGraphicPath>TKKN_NPS/Things/Plant/VarientSnow/Leafless/TreeMaple_Leafless</snowLeaflessGraphicPath>
+            <frostLeaflessGraphicPath>TKKN_NPS/Things/Plant/VarientFrosted/Leafless/TreeMaple_Leafless</frostLeaflessGraphicPath>        
+		</li>
       </value>
    </Operation>
    <Operation Class="PatchOperationAddModExtension">
@@ -202,6 +207,8 @@
          <li Class="TKKN_NPS.ThingWeatherReaction">
             <!-- frostGraphicPath>TKKN_NPS/Things/Plant/VarientFrosted/TreeCypress</frostGraphicPath -->
             <snowGraphicPath>TKKN_NPS/Things/Plant/VarientSnow/TreeCypress</snowGraphicPath>
+            <snowLeaflessGraphicPath>TKKN_NPS/Things/Plant/VarientSnow/Leafless/TreeCypress_Leafless</snowLeaflessGraphicPath>
+            <frostLeaflessGraphicPath>TKKN_NPS/Things/Plant/VarientFrosted/Leafless/TreeCypress_Leafless</frostLeaflessGraphicPath>		
          </li>
       </value>
    </Operation>
@@ -220,6 +227,8 @@
          <li Class="TKKN_NPS.ThingWeatherReaction">
             <!-- frostGraphicPath>TKKN_NPS/Things/Plant/VarientFrosted/TreeBirch</frostGraphicPath -->
             <snowGraphicPath>TKKN_NPS/Things/Plant/VarientSnow/TreeBirch</snowGraphicPath>
+            <snowLeaflessGraphicPath>TKKN_NPS/Things/Plant/VarientSnow/Leafless/TreeBirch_Leafless</snowLeaflessGraphicPath>
+            <frostLeaflessGraphicPath>TKKN_NPS/Things/Plant/VarientFrosted/Leafless/TreeBirch_Leafless</frostLeaflessGraphicPath>		
          </li>
       </value>
    </Operation>
@@ -247,6 +256,8 @@
          <li Class="TKKN_NPS.ThingWeatherReaction">
             <frostGraphicPath>TKKN_NPS/Things/Plant/VarientFrosted/Bush</frostGraphicPath>
             <snowGraphicPath>TKKN_NPS/Things/Plant/VarientSnow/Bush</snowGraphicPath>
+            <snowLeaflessGraphicPath>TKKN_NPS/Things/Plant/VarientSnow/Leafless/Bush_Leafless</snowLeaflessGraphicPath>
+            <frostLeaflessGraphicPath>TKKN_NPS/Things/Plant/VarientFrosted/Leafless/Bush_Leafless</frostLeaflessGraphicPath>
          </li>
       </value>
    </Operation>
@@ -256,6 +267,8 @@
          <li Class="TKKN_NPS.ThingWeatherReaction">
             <!-- frostGraphicPath>TKKN_NPS/Things/Plant/VarientFrosted/TreeOak</frostGraphicPath -->
             <snowGraphicPath>TKKN_NPS/Things/Plant/VarientSnow/TreeOak</snowGraphicPath>
+            <snowLeaflessGraphicPath>TKKN_NPS/Things/Plant/VarientSnow/Leafless/TreeOak_Leafless</snowLeaflessGraphicPath>
+			            <frostLeaflessGraphicPath>TKKN_NPS/Things/Plant/VarientFrosted/Leafless/TreeOak_Leafless</frostLeaflessGraphicPath>
          </li>
       </value>
    </Operation>
@@ -283,6 +296,8 @@
          <li Class="TKKN_NPS.ThingWeatherReaction">
             <!-- frostGraphicPath>TKKN_NPS/Things/Plant/VarientFrosted/TreeWillow</frostGraphicPath -->
             <snowGraphicPath>TKKN_NPS/Things/Plant/VarientSnow/TreeWillow</snowGraphicPath>
+            <snowLeaflessGraphicPath>TKKN_NPS/Things/Plant/VarientSnow/Leafless/TreeWillow_Leafless</snowLeaflessGraphicPath>
+			<frostLeaflessGraphicPath>TKKN_NPS/Things/Plant/VarientFrosted/Leafless/TreePoplar_Leafless</frostLeaflessGraphicPath>
          </li>
       </value>
    </Operation>
@@ -301,6 +316,8 @@
          <li Class="TKKN_NPS.ThingWeatherReaction">
             <!-- frostGraphicPath>TKKN_NPS/Things/Plant/VarientFrosted/TreePoplar</frostGraphicPath -->
             <snowGraphicPath>TKKN_NPS/Things/Plant/VarientSnow/TreePoplar</snowGraphicPath>
+            <snowLeaflessGraphicPath>TKKN_NPS/Things/Plant/VarientSnow/Leafless/TreePoplar_Leafless</snowLeaflessGraphicPath>
+			<frostLeaflessGraphicPath>TKKN_NPS/Things/Plant/VarientFrosted/Leafless/TreePoplar_Leafless</frostLeaflessGraphicPath>
          </li>
       </value>
    </Operation>
@@ -355,6 +372,8 @@
          <li Class="TKKN_NPS.ThingWeatherReaction">
             <!-- frostGraphicPath>TKKN_NPS/Things/Plant/VarientFrosted/HazelOldGrowth</frostGraphicPath -->
             <snowGraphicPath>TKKN_NPS/Things/Plant/VarientSnow/TreeOldGrowthHazel</snowGraphicPath>
+            <snowLeaflessGraphicPath>TKKN_NPS/Things/Plant/VarientSnow/Leafless/TreeOldGrowthHazel_Leafless</snowLeaflessGraphicPath>
+            <frostLeaflessGraphicPath>TKKN_NPS/Things/Plant/VarientFrosted/Leafless/TreeOldGrowthHazel_Leafless</frostLeaflessGraphicPath>
          </li>
       </value>
    </Operation>
@@ -364,6 +383,8 @@
          <li Class="TKKN_NPS.ThingWeatherReaction">
             <!-- frostGraphicPath>TKKN_NPS/Things/Plant/VarientFrosted/Hazels</frostGraphicPath -->
             <snowGraphicPath>TKKN_NPS/Things/Plant/VarientSnow/TreeHazel</snowGraphicPath>
+            <snowLeaflessGraphicPath>TKKN_NPS/Things/Plant/VarientSnow/Leafless/TreeHazel_Leafless</snowLeaflessGraphicPath>
+            <frostLeaflessGraphicPath>TKKN_NPS/Things/Plant/VarientFrosted/Leafless/TreeHazel_Leafless</frostLeaflessGraphicPath>		
          </li>
       </value>
    </Operation>
