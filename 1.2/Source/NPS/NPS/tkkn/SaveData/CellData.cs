@@ -105,6 +105,22 @@ namespace TKKN_NPS.SaveData
 			}
 		}
 
+
+		public TerrainWeatherReactions weatherCurr
+		{
+			get
+			{
+				if (currentTerrain.HasModExtension<TerrainWeatherReactions>())
+				{
+					return currentTerrain.GetModExtension<TerrainWeatherReactions>();
+				}
+				else
+				{
+					return null;
+				}
+			}
+		}
+
 		public TerrainDef currentTerrain
 		{
 			get { return this.location.GetTerrain(this.map); }
@@ -128,7 +144,7 @@ namespace TKKN_NPS.SaveData
 				return;
 			}
 
-
+			//update wetness levels first
 			if (IsFlooded)
 			{
 				if (!SetFloodedTerrain())
@@ -140,13 +156,6 @@ namespace TKKN_NPS.SaveData
 			else if (IsWet)
 			{
 				SetWetTerrain();
-			}
-			else if (IsCold)
-			{
-				if (weather.freezeTerrain != null)
-				{
-					ChangeTerrain(weather.freezeTerrain);
-				}
 			}
 			else 
 			{
@@ -164,25 +173,24 @@ namespace TKKN_NPS.SaveData
 					}
 				}
 			}
+
+
+			//update temperature levels next
+			if (IsCold)
+			{
+				if (weatherCurr != null && weatherCurr.freezeTerrain != null)
+				{
+					ChangeTerrain(weatherCurr.freezeTerrain);
+				}
+			}
 		}
 
 		public bool SetFloodedTerrain()
 		{
-
 			if (weather.floodTerrain != null)
 			{
-				if (IsCold)
-				{
-					//set to the frozen version of the flooded terrain.
-
-					ChangeTerrain(weather.floodTerrain.GetModExtension<TerrainWeatherReactions>().freezeTerrain);
-					return true;
-				}
-				else
-				{
-					ChangeTerrain(weather.floodTerrain);
-					return true;
-				}
+				ChangeTerrain(weather.floodTerrain);
+				return true;
 			}
 			return false;
 		}
@@ -191,19 +199,9 @@ namespace TKKN_NPS.SaveData
 		{
 			if (weather.wetTerrain != null)
 			{
-				if (IsCold)
-				{
-					//set to the frozen version of the wet terrain
-					ChangeTerrain(weather.wetTerrain.GetModExtension<TerrainWeatherReactions>().freezeTerrain);
-
-					return true;
-				}
-				else
-				{
-					SpawnWorker.DoLoot(this, currentTerrain, weather.wetTerrain);
-					ChangeTerrain(weather.wetTerrain);
-					return true;
-				}
+				SpawnWorker.DoLoot(this, currentTerrain, weather.wetTerrain);
+				ChangeTerrain(weather.wetTerrain);
+				return true;
 			}
 			return false;
 		}
