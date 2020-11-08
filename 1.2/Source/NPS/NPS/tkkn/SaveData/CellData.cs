@@ -5,6 +5,7 @@ using Verse;
 using Verse.Noise;
 using System.Linq;
 using TKKN_NPS.Workers;
+using System;
 
 namespace TKKN_NPS.SaveData
 {
@@ -144,7 +145,7 @@ namespace TKKN_NPS.SaveData
 			{
 				if (weather.freezeTerrain != null)
 				{
-					changeTerrain(weather.freezeTerrain);
+					ChangeTerrain(weather.freezeTerrain);
 				}
 			}
 			else 
@@ -152,14 +153,14 @@ namespace TKKN_NPS.SaveData
 				if (weather.dryTerrain != null)
 				{
 					SpawnWorker.DoLoot(this, currentTerrain, weather.dryTerrain);
-					changeTerrain(weather.dryTerrain);
+					ChangeTerrain(weather.dryTerrain);
 				}
 				else
 				{
 					if (baseTerrain != currentTerrain)
 					{
 						SpawnWorker.DoLoot(this, currentTerrain, baseTerrain);
-						changeTerrain(baseTerrain);
+						ChangeTerrain(baseTerrain);
 					}
 				}
 			}
@@ -174,12 +175,12 @@ namespace TKKN_NPS.SaveData
 				{
 					//set to the frozen version of the flooded terrain.
 
-					changeTerrain(weather.floodTerrain.GetModExtension<TerrainWeatherReactions>().freezeTerrain);
+					ChangeTerrain(weather.floodTerrain.GetModExtension<TerrainWeatherReactions>().freezeTerrain);
 					return true;
 				}
 				else
 				{
-					changeTerrain(weather.floodTerrain);
+					ChangeTerrain(weather.floodTerrain);
 					return true;
 				}
 			}
@@ -193,14 +194,14 @@ namespace TKKN_NPS.SaveData
 				if (IsCold)
 				{
 					//set to the frozen version of the wet terrain
-					changeTerrain(weather.wetTerrain.GetModExtension<TerrainWeatherReactions>().freezeTerrain);
+					ChangeTerrain(weather.wetTerrain.GetModExtension<TerrainWeatherReactions>().freezeTerrain);
 
 					return true;
 				}
 				else
 				{
 					SpawnWorker.DoLoot(this, currentTerrain, weather.wetTerrain);
-					changeTerrain(weather.wetTerrain);
+					ChangeTerrain(weather.wetTerrain);
 					return true;
 				}
 			}
@@ -271,13 +272,11 @@ namespace TKKN_NPS.SaveData
 		{
 			if (!Settings.doDirtPath)
 			{
-				if (currentTerrain.defName == "TKKN_DirtPath") {
-					changeTerrain(RimWorld.TerrainDefOf.Soil);
-				}
-				if (currentTerrain.defName == "TKKN_SandPath")
+				if (weather != null && currentTerrain == weather.packTo)
 				{
-					changeTerrain(RimWorld.TerrainDefOf.Sand);
+					ChangeTerrain(originalTerrain);
 				}
+
 				return;
 			}
 			if (howPacked > packAt)
@@ -288,19 +287,16 @@ namespace TKKN_NPS.SaveData
 			{
 				howPacked--;
 			}
-			else if(howPacked <= (packAt) && currentTerrain.defName == "TKKN_DirtPath")
+			else if (howPacked <= (packAt/2) && weather != null && currentTerrain != weather.packTo)
 			{
-				changeTerrain(RimWorld.TerrainDefOf.Soil);
+				ChangeTerrain(originalTerrain);
 			}
-			else if (howPacked <= (packAt) && currentTerrain.defName == "TKKN_SandPath")
-			{
-				changeTerrain(RimWorld.TerrainDefOf.Sand);
-			}
+
 		}
 
-		public void doPack()
+		public void DoPack()
 		{
-			if (!Settings.doDirtPath)
+			if (!Settings.doDirtPath || weather == null)
 			{
 				return;
 			}
@@ -311,22 +307,18 @@ namespace TKKN_NPS.SaveData
 				return;
 			}
 
-			if (weather != null)
+			TerrainDef packTo = weather.packTo;
+			if (packTo == null)
 			{
-				TerrainDef packTo = weather.packTo;
-				if (packTo == null)
-				{
-					return;
-				}
+				return;
+			}
 
-				this.howPacked++;
-				if (this.howPacked > this.packAt && packTo != null)
-				{
-					this.changeTerrain(packTo);
-					this.baseTerrain = packTo;
-				}
-
-
+			this.howPacked++;
+			if (this.howPacked > this.packAt && packTo != null)
+			{
+				this.ChangeTerrain(packTo);
+				this.baseTerrain = packTo;
+				this.howPacked = (int) Math.Round((float)(howPacked - (howPacked / 5))); //so if the path is removed immediately, it isn't also immediately repacked.
 			}
 
 			bool isStone = baseTerrain.affordances.Contains(TerrainAffordanceDefOf.SmoothableStone);
@@ -339,7 +331,7 @@ namespace TKKN_NPS.SaveData
 					thisName.Replace("_Rough", "_Smooth");
 					thisName.Replace("_SmoothHewn", "_Smooth");
 					TerrainDef packed = TerrainDef.Named(thisName);
-					this.changeTerrain(packed);
+					this.ChangeTerrain(packed);
 					this.baseTerrain = packed;
 				}
 			}
@@ -347,7 +339,7 @@ namespace TKKN_NPS.SaveData
 
 		}
 
-		private void changeTerrain(TerrainDef terrain)
+		private void ChangeTerrain(TerrainDef terrain)
 		{
 			if (terrain != null && terrain != currentTerrain)
 			{
