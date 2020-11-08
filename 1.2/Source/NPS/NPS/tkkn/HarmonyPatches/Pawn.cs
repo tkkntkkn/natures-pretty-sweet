@@ -210,7 +210,7 @@ namespace TKKN_NPS
 				//pack down the soil only if the pawn is moving AND is in our colony
 				if (pawn.pather.MovingNow && pawn.IsColonist)
 				{
-					cell.doPack();
+					cell.DoPack();
 				}
 			}
 		}
