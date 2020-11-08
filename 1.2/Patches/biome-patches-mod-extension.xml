@@ -335,8 +335,8 @@ Winter: wet.
 				<!-- /springSettings -->
 				<wetPlantStart>30</wetPlantStart>
 				<specialPlants>
-					<TKKN_PlantCatTails>.3</TKKN_PlantCatTails>
-					<TKKN_PlantLilypad>.2</TKKN_PlantLilypad>
+					<TKKN_PlantCatTails>.5</TKKN_PlantCatTails>
+					<TKKN_PlantLilypad>.4</TKKN_PlantLilypad>
 				</specialPlants>
 				<bloomPlants>
 					<li>Plant_Agave</li>
@@ -537,8 +537,8 @@ Winter: wet.
 				</springsSurviveSummer>
 				<!-- /springSettings -->
 				<specialPlants>
-					<TKKN_PlantCatTails>.1</TKKN_PlantCatTails>
-					<TKKN_PlantLilypad>.1</TKKN_PlantLilypad>
+					<TKKN_PlantCatTails>.2</TKKN_PlantCatTails>
+					<TKKN_PlantLilypad>.2</TKKN_PlantLilypad>
 				</specialPlants>
 				<wetPlantStart>30</wetPlantStart>
 				<bloomPlants>
@@ -663,8 +663,8 @@ Winter: wet.
 				<!-- /springSettings -->
 				<wetPlantStart>30</wetPlantStart>
 				<specialPlants>
-					<TKKN_PlantCatTails>.1</TKKN_PlantCatTails>
-					<TKKN_PlantLilypad>.3</TKKN_PlantLilypad>
+					<TKKN_PlantCatTails>.2</TKKN_PlantCatTails>
+					<TKKN_PlantLilypad>.4</TKKN_PlantLilypad>
 				</specialPlants>				
 				<bloomPlants>
 					<li>Plant_PincushionCactus</li>
@@ -837,9 +837,9 @@ Winter: wet.
 				</springsSurviveSummer>
 				<!-- /springSettings -->
 				<specialPlants>
-					<TKKN_PlantCatTails>.1</TKKN_PlantCatTails>
-					<TKKN_PlantLilypad>.3</TKKN_PlantLilypad>
-					<TKKN_PlantWildRice>.3</TKKN_PlantWildRice>
+					<TKKN_PlantCatTails>.3</TKKN_PlantCatTails>
+					<TKKN_PlantLilypad>.5</TKKN_PlantLilypad>
+					<TKKN_PlantWildRice>.5</TKKN_PlantWildRice>
 				</specialPlants>				
 				<wetPlantStart>50</wetPlantStart>
 				<bloomPlants>
@@ -973,9 +973,9 @@ Winter: wet.
 					<li>TKKN_PlantWildRice</li>
 				</bloomPlants>
 				<specialPlants>
-					<TKKN_PlantCatTails>.5</TKKN_PlantCatTails>
-					<TKKN_PlantLilypad>.8</TKKN_PlantLilypad>
-					<TKKN_PlantWildRice>.5</TKKN_PlantWildRice>
+					<TKKN_PlantCatTails>.7</TKKN_PlantCatTails>
+					<TKKN_PlantLilypad>.10</TKKN_PlantLilypad>
+					<TKKN_PlantWildRice>.7</TKKN_PlantWildRice>
 				</specialPlants>				
 				<springEvents>
 					<TKKN_WildFlowerBloom>.5</TKKN_WildFlowerBloom>
@@ -1243,9 +1243,9 @@ Winter: wet.
 				</springsSurviveSummer>
 				<!-- /springSettings -->
 				<specialPlants>
-					<TKKN_PlantCatTails>.5</TKKN_PlantCatTails>
-					<TKKN_PlantLilypad>.8</TKKN_PlantLilypad>
-					<TKKN_PlantWildRice>.5</TKKN_PlantWildRice>
+					<TKKN_PlantCatTails>.7</TKKN_PlantCatTails>
+					<TKKN_PlantLilypad>.10</TKKN_PlantLilypad>
+					<TKKN_PlantWildRice>.7</TKKN_PlantWildRice>
 				</specialPlants>				
 				<wetPlantStart>50</wetPlantStart>
 				<bloomPlants>
@@ -1529,9 +1529,9 @@ Winter: wet.
 					<li>TKKN_PlantWildflowers</li>
 				</bloomPlants>
 				<specialPlants>
-					<TKKN_PlantCatTails>.3</TKKN_PlantCatTails>
-					<TKKN_PlantLilypad>.5</TKKN_PlantLilypad>
-					<TKKN_PlantWildRice>.1</TKKN_PlantWildRice>
+					<TKKN_PlantCatTails>.5</TKKN_PlantCatTails>
+					<TKKN_PlantLilypad>.7</TKKN_PlantLilypad>
+					<TKKN_PlantWildRice>.3</TKKN_PlantWildRice>
 				</specialPlants>				
 				<specialHerds>
 					<li>Muffalo</li>
@@ -1789,9 +1789,9 @@ Winter: wet.
 				<!-- /springSettings -->
 				<wetPlantStart>50</wetPlantStart>
 				<specialPlants>
-					<TKKN_PlantCatTails>.3</TKKN_PlantCatTails>
-					<TKKN_PlantLilypad>.5</TKKN_PlantLilypad>
-					<TKKN_PlantWildRice>.1</TKKN_PlantWildRice>
+					<TKKN_PlantCatTails>.5</TKKN_PlantCatTails>
+					<TKKN_PlantLilypad>.7</TKKN_PlantLilypad>
+					<TKKN_PlantWildRice>.2</TKKN_PlantWildRice>
 				</specialPlants>				
 				<bloomPlants>
 					<li>Plant_Moss</li>
@@ -2038,8 +2038,8 @@ Winter: wet.
 				</springsSurviveSummer>
 				<!-- /springSettings -->
 				<specialPlants>
-					<TKKN_PlantCatTails>.3</TKKN_PlantCatTails>
-					<TKKN_PlantWildRice>.1</TKKN_PlantWildRice>
+					<TKKN_PlantCatTails>.5</TKKN_PlantCatTails>
+					<TKKN_PlantWildRice>.3</TKKN_PlantWildRice>
 				</specialPlants>				
 				<wetPlantStart>50</wetPlantStart>
 				<bloomPlants>
@@ -2296,9 +2296,9 @@ Winter: wet.
 				</springsSurviveSummer>
 				<!-- /springSettings -->
 				<specialPlants>
-					<TKKN_PlantCatTails>.3</TKKN_PlantCatTails>
-					<TKKN_PlantWildRice>.1</TKKN_PlantWildRice>
-					<TKKN_PlantLilypad>.3</TKKN_PlantLilypad>
+					<TKKN_PlantCatTails>.5</TKKN_PlantCatTails>
+					<TKKN_PlantWildRice>.3</TKKN_PlantWildRice>
+					<TKKN_PlantLilypad>.5</TKKN_PlantLilypad>
 				</specialPlants>				
 				<wetPlantStart>70</wetPlantStart>
 				<bloomPlants>
@@ -2797,8 +2797,8 @@ Winter: wet.
 				<!-- /springSettings -->
 				<wetPlantStart>50</wetPlantStart>
 				<specialPlants>
-					<TKKN_PlantCatTails>.5</TKKN_PlantCatTails>
-					<TKKN_PlantWatercress>.2</TKKN_PlantWatercress>
+					<TKKN_PlantCatTails>.7</TKKN_PlantCatTails>
+					<TKKN_PlantWatercress>.4</TKKN_PlantWatercress>
 				</specialPlants>
 				<bloomPlants>
 					<li>Plant_Moss</li>
@@ -3296,8 +3296,8 @@ Winter: wet.
 				</springsSurviveSummer>
 				<!-- /springSettings -->
 				<specialPlants>
-					<TKKN_PlantCatTails>.3</TKKN_PlantCatTails>
-					<TKKN_PlantWatercress>.1</TKKN_PlantWatercress>
+					<TKKN_PlantCatTails>.5</TKKN_PlantCatTails>
+					<TKKN_PlantWatercress>.2</TKKN_PlantWatercress>
 				</specialPlants>
 				<wetPlantStart>70</wetPlantStart>
 				<bloomPlants>
