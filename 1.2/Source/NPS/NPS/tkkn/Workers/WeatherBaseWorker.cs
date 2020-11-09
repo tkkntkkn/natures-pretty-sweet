@@ -117,7 +117,7 @@ namespace TKKN_NPS.Workers
 			}
 
 
-			if (Settings.affectsWet && !TerrainWorker.IsWaterTerrain(cell.currentTerrain) && cell.tideStep == -1)
+			if (Settings.affectsWet && !TerrainWorker.IsWaterTerrain(cell.CurrentTerrain) && cell.tideStep == -1)
 			{
 				float adjustWetness = AdjustWetBy(cell);
 				cell.HowWet += adjustWetness;
@@ -189,13 +189,10 @@ namespace TKKN_NPS.Workers
 								   where t.def.defName == "TKKN_FilthPuddle"
 								   select t).FirstOrDefault<Thing>();
 
-			if (cell.IsWet && !cell.IsCold && watcher.MaxPuddles > watcher.totalPuddles)
+			if (cell.IsWet && !cell.IsCold && watcher.MaxPuddles > watcher.totalPuddles && puddle == null)
 			{
-				if (puddle == null)
-				{
-					FilthMaker.TryMakeFilth(c, cell.map, ThingDef.Named("TKKN_FilthPuddle"), 1);
-					watcher.totalPuddles++;
-				}
+				FilthMaker.TryMakeFilth(c, cell.map, ThingDef.Named("TKKN_FilthPuddle"), 1);
+				watcher.totalPuddles++;
 			}
 			else if (!cell.IsWet && puddle != null)
 			{
@@ -207,13 +204,14 @@ namespace TKKN_NPS.Workers
 			//spawn special things when it rains.
 			if (Rand.Value < .0009)
 			{
-				if (TerrainWorker.IsLava(cell.currentTerrain))
+				if (TerrainWorker.IsLava(cell.CurrentTerrain))
 				{
 					GenSpawn.Spawn(ThingMaker.MakeThing(ThingDefOf.TKKN_LavaRock), cell.location, cell.map);
 				}
 				else if (TerrainWorker.IsSandTerrain(cell.baseTerrain) && cell.IsWet)
 				{
-					GenSpawn.Spawn(ThingMaker.MakeThing(ThingDefOf.TKKN_crab), cell.location, cell.map);
+					Pawn pawn = PawnGenerator.GeneratePawn(TKKN_NPS.PawnKindDefOf.TKKN_crab, null);
+					GenSpawn.Spawn(pawn, cell.location, cell.map, WipeMode.Vanish);
 				}
 				else if (cell.IsFlooded)
 				{

@@ -396,17 +396,17 @@ namespace TKKN_NPS.Workers
 
 		public static void FixSpecialSpawns(Map map)
 		{
-			foreach (Thing allThing in map.listerThings.AllThings)
+			foreach (Thing thing in map.listerThings.AllThings.ToList())
 			{
-				if (allThing.def.HasModExtension<ThingWeatherReaction>())
+				if (thing.def.HasModExtension<ThingWeatherReaction>())
 				{
-					Log.Error(allThing.def.defName);
+					Log.Error(thing.def.defName);
 
-					ThingWeatherReaction thingWeather = allThing.def.GetModExtension<ThingWeatherReaction>();
-					TerrainDef terrain = map.terrainGrid.TerrainAt(allThing.Position);
+					ThingWeatherReaction thingWeather = thing.def.GetModExtension<ThingWeatherReaction>();
+					TerrainDef terrain = map.terrainGrid.TerrainAt(thing.Position);
 					if (!CanSpawn(thingWeather, map, terrain))
 					{
-						allThing.Destroy();
+						thing.Destroy();
 					}
 				}
 			}
