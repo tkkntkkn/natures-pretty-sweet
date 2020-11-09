@@ -19,7 +19,7 @@ namespace TKKN_NPS.Workers
 
 		static public bool IsLava(CellData cell)
 		{
-			return cell != null && IsLava(cell.currentTerrain);
+			return cell != null && IsLava(cell.CurrentTerrain);
 		}
 
 		/// <summary>

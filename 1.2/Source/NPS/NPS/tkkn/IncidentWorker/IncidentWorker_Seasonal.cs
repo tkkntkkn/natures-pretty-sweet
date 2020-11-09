@@ -43,7 +43,7 @@ namespace TKKN_NPS
 		protected override bool TryExecuteWorker(IncidentParms parms)
 		{
 
-			Log.Error("Running herd");
+//			Log.Error("Running herd");
 
 			Map map = (Map)parms.target;
 			PawnKindDef pawnKindDef;

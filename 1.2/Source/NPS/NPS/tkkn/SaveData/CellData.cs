@@ -11,6 +11,8 @@ namespace TKKN_NPS.SaveData
 {
 	public class CellData : IExposable
 	{
+		private float SaveUpdatedTo = 0f;
+
 		public IntVec3 location;
 		public Map map;
 		public int howPacked = 0;
@@ -62,12 +64,20 @@ namespace TKKN_NPS.SaveData
 		//how flooded the cell is. Cells can be affected by different floodlevels, so include them all here.
 		public HashSet<int> floodLevel = new HashSet<int>();
 
+		public CellData()
+		{
+		}
+		public CellData(Map map)
+		{
+			this.map = map;
+		}
 		public CellData(Map map, TerrainDef terrain, IntVec3 c)
 		{
-			this.location = c;
 			this.map = map;
+			this.location = c;
 			this.baseTerrain = terrain;
 			this.originalTerrain = terrain;
+
 
 			SetWetLevel();
 			/*
@@ -77,6 +87,8 @@ namespace TKKN_NPS.SaveData
 			WeatherBaseWorker.CalculateTemperature(this, room);
 */
 		}
+
+
 
 		public TerrainWeatherReactions weather
 		{
@@ -110,9 +122,9 @@ namespace TKKN_NPS.SaveData
 		{
 			get
 			{
-				if (currentTerrain.HasModExtension<TerrainWeatherReactions>())
+				if (CurrentTerrain.HasModExtension<TerrainWeatherReactions>())
 				{
-					return currentTerrain.GetModExtension<TerrainWeatherReactions>();
+					return CurrentTerrain.GetModExtension<TerrainWeatherReactions>();
 				}
 				else
 				{
@@ -121,22 +133,28 @@ namespace TKKN_NPS.SaveData
 			}
 		}
 
-		public TerrainDef currentTerrain
+		public TerrainDef CurrentTerrain
 		{
-			get { return this.location.GetTerrain(this.map); }
+			get {
+				if (map == null)
+				{
+					Log.Error("Map is Null");
+				}
+				return location.GetTerrain(map);
+			}
 		}
 
 
 		public void SetTerrain() {
 
 			// Make sure it hasn't been made a floor or a floor hasn't been removed.
-			if (!currentTerrain.HasModExtension<TerrainWeatherReactions>())
+			if (!CurrentTerrain.HasModExtension<TerrainWeatherReactions>())
 			{
-				this.baseTerrain = currentTerrain;
+				this.baseTerrain = CurrentTerrain;
 			}
-			else if (!baseTerrain.HasModExtension<TerrainWeatherReactions>() && this.baseTerrain != currentTerrain)
+			else if (!baseTerrain.HasModExtension<TerrainWeatherReactions>() && this.baseTerrain != CurrentTerrain)
 			{
-				this.baseTerrain = currentTerrain;
+				this.baseTerrain = CurrentTerrain;
 			}
 
 			if (weather == null)
@@ -161,14 +179,14 @@ namespace TKKN_NPS.SaveData
 			{
 				if (weather.dryTerrain != null)
 				{
-					SpawnWorker.DoLoot(this, currentTerrain, weather.dryTerrain);
+					SpawnWorker.DoLoot(this, CurrentTerrain, weather.dryTerrain);
 					ChangeTerrain(weather.dryTerrain);
 				}
 				else
 				{
-					if (baseTerrain != currentTerrain)
+					if (baseTerrain != CurrentTerrain)
 					{
-						SpawnWorker.DoLoot(this, currentTerrain, baseTerrain);
+						SpawnWorker.DoLoot(this, CurrentTerrain, baseTerrain);
 						ChangeTerrain(baseTerrain);
 					}
 				}
@@ -199,7 +217,7 @@ namespace TKKN_NPS.SaveData
 		{
 			if (weather.wetTerrain != null)
 			{
-				SpawnWorker.DoLoot(this, currentTerrain, weather.wetTerrain);
+				SpawnWorker.DoLoot(this, CurrentTerrain, weather.wetTerrain);
 				ChangeTerrain(weather.wetTerrain);
 				return true;
 			}
@@ -218,7 +236,7 @@ namespace TKKN_NPS.SaveData
 
 		public void SetWetLevel()
 		{
-			if (TerrainWorker.IsWaterTerrain(currentTerrain))
+			if (TerrainWorker.IsWaterTerrain(CurrentTerrain))
 			{
 				SetFlooded();
 				return;
@@ -252,17 +270,17 @@ namespace TKKN_NPS.SaveData
 		}
 
 
-		public void DoCellSteadyEffects(TerrainDef currentTerrain)
+		public void DoCellSteadyEffects()
 		{
 
 			//unpack soil so paths are not permenant
 			Unpack();
 			
 			//check if the terrain has been floored
-			DesignationCategoryDef cats = currentTerrain.designationCategory;
+			DesignationCategoryDef cats = CurrentTerrain.designationCategory;
 			if (cats != null && cats.defName == "Floors")
 			{
-				baseTerrain = currentTerrain;
+				baseTerrain = CurrentTerrain;
 			}
 		}
 
@@ -270,7 +288,7 @@ namespace TKKN_NPS.SaveData
 		{
 			if (!Settings.doDirtPath)
 			{
-				if (weather != null && currentTerrain == weather.packTo)
+				if (weather != null && CurrentTerrain == weather.packTo)
 				{
 					ChangeTerrain(originalTerrain);
 				}
@@ -285,7 +303,7 @@ namespace TKKN_NPS.SaveData
 			{
 				howPacked--;
 			}
-			else if (howPacked <= (packAt/2) && weather != null && currentTerrain != weather.packTo)
+			else if (howPacked <= (packAt/2) && weather != null && CurrentTerrain != weather.packTo)
 			{
 				ChangeTerrain(originalTerrain);
 			}
@@ -339,7 +357,7 @@ namespace TKKN_NPS.SaveData
 
 		private void ChangeTerrain(TerrainDef terrain)
 		{
-			if (terrain != null && terrain != currentTerrain)
+			if (terrain != null && terrain != CurrentTerrain)
 			{
 				this.map.terrainGrid.SetTerrain(location, terrain);
 			}
@@ -351,11 +369,11 @@ namespace TKKN_NPS.SaveData
 				return;
 			}
 			string defName = "";
-			if (currentTerrain.defName == "TKKN_Lava")
+			if (CurrentTerrain.defName == "TKKN_Lava")
 			{
 				defName = "TKKN_LavaRock";
 			}
-			else if (currentTerrain.defName == "TKKN_LavaRock_RoughHewn" && this.map.Biome.defName == "TKKN_VolcanicFlow")
+			else if (CurrentTerrain.defName == "TKKN_LavaRock_RoughHewn" && this.map.Biome.defName == "TKKN_VolcanicFlow")
 			{
 				defName = "TKKN_SteamVent";
 			}
@@ -384,10 +402,17 @@ namespace TKKN_NPS.SaveData
 			Scribe_Values.Look<float>(ref this.howWet, "howWet", this.howWet, true);
 			Scribe_Values.Look<float>(ref this.frostLevel, "frostLevel", this.frostLevel, true);
 			Scribe_Values.Look<string>(ref this.overrideType, "overrideType", this.overrideType, true);
-			Scribe_Values.Look<IntVec3>(ref this.location, "location", this.location, true);
+			Scribe_Values.Look<IntVec3>(ref location, "location", location, true);
 			Scribe_Values.Look<float>(ref this.temperature, "temperature", 0, true);
 			Scribe_Defs.Look<TerrainDef>(ref this.baseTerrain, "baseTerrain");
 			Scribe_Defs.Look<TerrainDef>(ref this.originalTerrain, "originalTerrain");
+
+
+			//convert data from old saves
+			if (Scribe.mode == LoadSaveMode.LoadingVars && SaveUpdatedTo != 1.2f)
+			{
+				Scribe_Values.Look<float>(ref this.howWet, "howWetPlants");
+			}
 		}
 
 		public void doFrostOverlay(string action)

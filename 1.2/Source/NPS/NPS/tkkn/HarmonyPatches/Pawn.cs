@@ -156,13 +156,13 @@ namespace TKKN_NPS
 
 				bool isWet = false;
 		
-				if (TerrainWorker.IsLava(cell.currentTerrain))
+				if (TerrainWorker.IsLava(cell.CurrentTerrain))
 				{
 					//lava should dry them?
 					isWet = false;
 				}
 				else {
-					if (TerrainWorker.IsWaterTerrain(cell.currentTerrain))
+					if (TerrainWorker.IsWaterTerrain(cell.CurrentTerrain))
 					{
 						isWet = true;
 					}

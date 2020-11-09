@@ -31,10 +31,9 @@ namespace TKKN_NPS
 			if (__instance.AmbientTemperature > 21)
 			{
 				Watcher watcher = map.GetComponent<Watcher>();
-				CellData cell;
-				if (watcher.cellWeatherAffects[__instance.Position] != null)
+				CellData cell = watcher.GetCell(__instance.Position);
+				if (cell != null)
 				{
-					cell = watcher.cellWeatherAffects[__instance.Position];
 					Vector2 location = Find.WorldGrid.LongLatOf(__instance.MapHeld.Tile);
 					Season season = GenDate.Season((long)Find.TickManager.TicksAbs, location);
 

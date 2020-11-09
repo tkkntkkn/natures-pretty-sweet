@@ -125,9 +125,34 @@ namespace TKKN_NPS
 			Scribe_Values.Look<int>(ref floodThreat, "floodThreat", 0, true);
 			Scribe_Values.Look<int>(ref tideLevel, "tideLevel", 0, true);
 			Scribe_Values.Look<int>(ref totalPuddles, "totalPuddles", this.totalPuddles, true);
-			Scribe_Values.Look<bool>(ref bugFixFrostIsRemoved, "bugFixFrostIsRemoved", this.bugFixFrostIsRemoved, true);
 			Scribe_Collections.Look<IntVec3, CellData>(ref cellWeatherAffects, "cellWeatherAffects", LookMode.Value, LookMode.Deep);
+
+			//backwards compatible:
+
+			Scribe_Collections.Look<int, SpringData>(ref this.activeSprings, "TKKN_activeSprings", LookMode.Value, LookMode.Deep);
+			Scribe_Collections.Look<IntVec3>(ref this.lavaCellsList, "lavaCellsList", LookMode.Value);
+//			Scribe_Values.Look<int>(ref this.ticks, "ticks", 0, true);
+			Scribe_Values.Look<int>(ref this.totalPuddles, "totalPuddles", this.totalPuddles, true);
+			Scribe_Values.Look<bool>(ref this.bugFixFrostIsRemoved, "bugFixFrostIsRemoved", this.bugFixFrostIsRemoved, true);
+
+
+			if (Scribe.mode == LoadSaveMode.LoadingVars)
+			{
+				//found an issue where plants were spawning all wrong in 1.2, this is a fix for saves with that bug
+				SpawnWorker.FixSpecialSpawns(this.map);
+
+				IEnumerable<CellData> updateList = cellWeatherAffects.Select(key => key.Value).Where(cell => cell.map == null);
+				foreach (CellData cell in updateList.ToList())
+				{
+					if (cell.map == null)
+					{
+						//tmp fix for the map not being passed in anymore
+						cellWeatherAffects[cell.location].map = map;
+					}
+				}
+			}
 		}
+
 
 		public override void FinalizeInit()
 		{
@@ -235,12 +260,17 @@ namespace TKKN_NPS
 				return null;
 			}
 
-			if (!c.InBounds(this.map))
+			if (!c.InBounds(map))
 			{
 				return null;
 			}
-
-			return this.cellWeatherAffects[c];
+			CellData cell = this.cellWeatherAffects[c];
+			if (cell.map == null)
+			{
+				//tmp fix for the map not being passed in anymore
+				cell.map = map;
+			}
+			return cell;
 		}
 
 		public void DoCellEnvironment(IntVec3 c)
@@ -259,8 +289,7 @@ namespace TKKN_NPS
 
 		public void DoCellEnvironment(ref CellData cell, IntVec3 c){
 
-			TerrainDef currentTerrain = c.GetTerrain(map);
-			cell.DoCellSteadyEffects(currentTerrain);
+			cell.DoCellSteadyEffects();
 
 			Room room = c.GetRoom(map, RegionType.Set_All);
 

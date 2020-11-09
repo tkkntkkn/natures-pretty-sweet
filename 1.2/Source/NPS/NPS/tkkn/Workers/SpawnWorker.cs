@@ -47,7 +47,7 @@ namespace TKKN_NPS.Workers
 		}
 		static public void SpawnPlant(IEnumerable<ThingDef> plants, CellData cell)
 		{
-			SpawnPlant(plants, cell.location, cell.map, cell.currentTerrain);
+			SpawnPlant(plants, cell.location, cell.map, cell.CurrentTerrain);
 		}
 		static public void SpawnPlant(IEnumerable<ThingDef> plants, IntVec3 c, Map map, TerrainDef terrain)
 		{
@@ -390,6 +390,25 @@ namespace TKKN_NPS.Workers
 					continue;
 				}
 
+			}
+		}
+
+
+		public static void FixSpecialSpawns(Map map)
+		{
+			foreach (Thing allThing in map.listerThings.AllThings)
+			{
+				if (allThing.def.HasModExtension<ThingWeatherReaction>())
+				{
+					Log.Error(allThing.def.defName);
+
+					ThingWeatherReaction thingWeather = allThing.def.GetModExtension<ThingWeatherReaction>();
+					TerrainDef terrain = map.terrainGrid.TerrainAt(allThing.Position);
+					if (!CanSpawn(thingWeather, map, terrain))
+					{
+						allThing.Destroy();
+					}
+				}
 			}
 		}
 	}

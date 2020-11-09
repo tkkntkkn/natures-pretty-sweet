@@ -78,7 +78,7 @@ namespace TKKN_NPS.Workers
 			Watcher watcher = GetWatcher(map);
 			Dictionary<IntVec3, CellData> cellWeatherAffects = watcher.cellWeatherAffects;
 
-			IEnumerable<CellData> updateList = cellWeatherAffects.Select(key => key.Value).Where(cell => TerrainWorker.IsLava(cell.currentTerrain) == true);
+			IEnumerable<CellData> updateList = cellWeatherAffects.Select(key => key.Value).Where(cell => TerrainWorker.IsLava(cell.CurrentTerrain) == true);
 			foreach (CellData cell in updateList.ToList().InRandomOrder().Take(updateList.Count()/3))
 			{
 				DoLavaEffects(cell);
