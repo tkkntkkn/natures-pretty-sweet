@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <ModMetaData>
 	<name>Nature's Pretty Sweet</name>
 	<author>tkkntkkn</author>
-	<packageId>tkkntkkn.nps.nps_dev</packageId>
-	<supportedVersions>
-		<li>1.0</li>
-		<li>1.1</li>
-		<li>1.2</li>
-	</supportedVersions>
-	<description>
+   <supportedVersions>
+      <li>1.0</li>
+      <li>1.1</li>
+      <li>1.2</li>
+   </supportedVersions>
+   <packageId>tkkntkkn.nps_dev</packageId>
+	<description>			
 TKKNTKKN's Nature's Pretty Sweet adds additional terrain elements, weather and biomes. It also updates the map in response to weather, giving a more wild, untamed and alive feeling to the world.
 
 Requires a new save. Some of the weather affects might cause a little bit of lag (at high speeds or if you're really zoomed out) but you can turn them off in the options.
@@ -133,6 +134,6 @@ Future Plans: (in no particular order)
 	Additions: Cave formations inspired by Colossal Cave in New Mexico, Florida Caverns in Florida, and Carlsbad caverns in New Mexico. Natural sculptures that are incredibly beautiful and valuable.
 	Additions: White Gypsum from White Sands, New Mexico - spawns in scrublands. Watching the sunrise and sunset here gives "unreal sunset" and "unreal sunrise" bonus.	
 	Additions : Fossils, river washes, harvestable ice for coolers, more mood bonuses and take aways, etc. 
-				
+			
 	</description>
 </ModMetaData>
