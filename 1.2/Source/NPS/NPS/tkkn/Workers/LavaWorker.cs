@@ -121,7 +121,7 @@ namespace TKKN_NPS.Workers
 					moteThrown.Scale = Rand.Range(2f, 4f) * 2;
 					moteThrown.exactPosition = c.ToVector3();
 					moteThrown.SetVelocity(Rand.Bool ? -90 : 90, 0.12f);
-					GenSpawn.Spawn(moteThrown, c, this.map);
+					GenSpawn.Spawn(moteThrown, c, map);
 				}
 				else 
 				*/

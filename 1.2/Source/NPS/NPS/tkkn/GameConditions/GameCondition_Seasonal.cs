@@ -101,7 +101,7 @@ namespace TKKN_NPS
 				return;
 			}
 
-			if (Rand.Value < 0.65f * base.SingleMap.fertilityGrid.FertilityAt(c) * this.howManyBlooms)
+			if (Rand.Value < 0.65f * base.SingleMap.fertilityGrid.FertilityAt(c) * howManyBlooms)
 			{
 				IEnumerable<ThingDef> source = from def in bloomPlants
 												where def.CanEverPlantAt(c, base.SingleMap)

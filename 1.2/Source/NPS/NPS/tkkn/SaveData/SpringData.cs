@@ -17,12 +17,12 @@ namespace TKKN_NPS
 
 		public void ExposeData()
 		{
-			Scribe_Values.Look<string>(ref this.springID, "springID", "", true);
-			Scribe_Values.Look<string>(ref this.biomeName, "biomeName", "", true);
-			Scribe_Values.Look<int>(ref this.makeAnotherAt, "makeAnotherAt", 0, true);
-			Scribe_Values.Look<int>(ref this.age, "age", 0, true);
-			Scribe_Values.Look<string>(ref this.status, "status", "", true);
-			Scribe_Values.Look<float>(ref this.width, "width", 0, true);
+			Scribe_Values.Look<string>(ref springID, "springID", "", true);
+			Scribe_Values.Look<string>(ref biomeName, "biomeName", "", true);
+			Scribe_Values.Look<int>(ref makeAnotherAt, "makeAnotherAt", 0, true);
+			Scribe_Values.Look<int>(ref age, "age", 0, true);
+			Scribe_Values.Look<string>(ref status, "status", "", true);
+			Scribe_Values.Look<float>(ref width, "width", 0, true);
 		}
 
 	}

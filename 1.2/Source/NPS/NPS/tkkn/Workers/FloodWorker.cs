@@ -11,7 +11,7 @@ namespace TKKN_NPS.Workers
 	class FloodWorker : Worker
 	{
 		static public readonly int howManyFloodSteps = 5;
-		static readonly private int middleStep = 3; //if howManyFloodSteps changes, change this.
+		static readonly private int middleStep = 3; //if howManyFloodSteps changes, change 
 
 		static private IEnumerable<CellData> GetFloodableCells(int floodLevel, Dictionary<IntVec3, CellData> cellWeatherAffects)
 		{

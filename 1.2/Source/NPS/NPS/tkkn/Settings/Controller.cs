@@ -11,7 +11,7 @@ namespace TKKN_NPS
 		public Controller(ModContentPack content)
 			: base(content)
 		{
-			settings = this.GetSettings<Settings>();
+			settings = GetSettings<Settings>();
 		}
 
 		public override void DoSettingsWindowContents(Rect inRect)

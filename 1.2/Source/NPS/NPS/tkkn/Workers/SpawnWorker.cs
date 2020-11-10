@@ -24,7 +24,7 @@ namespace TKKN_NPS.Workers
 				IntVec3 springSpot = CellFinderLoose.TryFindCentralCell(map, 10, 15, (IntVec3 x) => !x.Roofed(map));
 				Spring spring = (Spring)ThingMaker.MakeThing(ThingDef.Named("TKKN_OasisSpring"), null);
 				GenSpawn.Spawn(spring, springSpot, map);
-				spring.GetComp<SpringComp>().fillBorder();
+				spring.GetComp<SpringComp>().FillBorder();
 			}
 			if (LeaveSomething() < .005f)
 			{

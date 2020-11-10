@@ -107,27 +107,27 @@ namespace TKKN_NPS
 					rect = new Rect(BotLeft.x, (float)UI.screenHeight - BotLeft.y - num, 999f, 999f);
 					string label5 = "Cell Info: Base Terrain: " + cell.baseTerrain.defName;
 
-					if (cell.weather != null)
+					if (cell.Weather != null)
 					{
-						if (cell.weather.wetTerrain != null)
+						if (cell.Weather.wetTerrain != null)
 						{
-							label5 += " ___ T Wet " + cell.weather.wetTerrain.defName;
+							label5 += " ___ T Wet " + cell.Weather.wetTerrain.defName;
 						}
-						if (cell.weather.dryTerrain != null)
+						if (cell.Weather.dryTerrain != null)
 						{
-							label5 += " ___ T Dry " + cell.weather.dryTerrain.defName;
+							label5 += " ___ T Dry " + cell.Weather.dryTerrain.defName;
 						}
-						if (cell.weather.freezeTerrain != null)
+						if (cell.Weather.freezeTerrain != null)
 						{
-							label5 += " ___ T Freeze " + cell.weather.freezeTerrain.defName;
+							label5 += " ___ T Freeze " + cell.Weather.freezeTerrain.defName;
 						}
-						if (cell.weather.floodTerrain != null)
+						if (cell.Weather.floodTerrain != null)
 						{
-							label5 += " ___ T Flood " + cell.weather.floodTerrain.defName;
+							label5 += " ___ T Flood " + cell.Weather.floodTerrain.defName;
 						}
-						if (cell.weather.packTo != null)
+						if (cell.Weather.packTo != null)
 						{
-							label5 += " ___ T Pack " + cell.weather.packTo.defName;
+							label5 += " ___ T Pack " + cell.Weather.packTo.defName;
 						}
 
 					}

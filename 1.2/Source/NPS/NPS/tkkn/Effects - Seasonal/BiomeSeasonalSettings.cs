@@ -65,7 +65,7 @@ namespace TKKN_NPS
 			weatherLookup.Add("winter", winterWeathers);
 		}
 
-		public bool canPutOnTerrain(IntVec3 c, ThingDef thingDef, Map map)
+		public bool CanPutOnTerrain(IntVec3 c, ThingDef thingDef, Map map)
 		{
 			TerrainDef terrain = c.GetTerrain(map);
 
@@ -140,39 +140,39 @@ namespace TKKN_NPS
 		public void SetDiseaseBySeason(Season season, Quadrum quadrum)
 		{
 			List<BiomeDiseaseRecord> seasonalDiseases = new List<BiomeDiseaseRecord>();
-			if (Season.Spring == season && this.springDiseases != null)
+			if (Season.Spring == season && springDiseases != null)
 			{
-				seasonalDiseases = this.springDiseases;
+				seasonalDiseases = springDiseases;
 			}
-			else if (Season.Summer == season && this.summerDiseases != null)
+			else if (Season.Summer == season && summerDiseases != null)
 			{
-				seasonalDiseases = this.summerDiseases;
+				seasonalDiseases = summerDiseases;
 			}
-			else if (Season.Fall == season && this.fallDiseases != null)
+			else if (Season.Fall == season && fallDiseases != null)
 			{
-				seasonalDiseases = this.fallDiseases;
+				seasonalDiseases = fallDiseases;
 			}
-			else if (Season.Winter == season && this.winterDiseases != null)
+			else if (Season.Winter == season && winterDiseases != null)
 			{
-				seasonalDiseases = this.winterDiseases;
+				seasonalDiseases = winterDiseases;
 			}
 			else
 			{
-				if (Quadrum.Aprimay == quadrum && this.springDiseases != null)
+				if (Quadrum.Aprimay == quadrum && springDiseases != null)
 				{
-					seasonalDiseases = this.springDiseases;
+					seasonalDiseases = springDiseases;
 				}
-				else if (Quadrum.Decembary == quadrum && this.winterDiseases != null)
+				else if (Quadrum.Decembary == quadrum && winterDiseases != null)
 				{
-					seasonalDiseases = this.winterDiseases;
+					seasonalDiseases = winterDiseases;
 				}
-				else if (Quadrum.Jugust == quadrum && this.summerDiseases != null)
+				else if (Quadrum.Jugust == quadrum && summerDiseases != null)
 				{
-					seasonalDiseases = this.summerDiseases;
+					seasonalDiseases = summerDiseases;
 				}
-				else if (Quadrum.Septober == quadrum && this.fallDiseases != null)
+				else if (Quadrum.Septober == quadrum && fallDiseases != null)
 				{
-					seasonalDiseases = this.fallDiseases;
+					seasonalDiseases = fallDiseases;
 				}
 			}
 
@@ -189,39 +189,39 @@ namespace TKKN_NPS
 		public void SetIncidentsBySeason(Season season, Quadrum quadrum)
 		{
 			List<TKKN_IncidentCommonalityRecord> seasonalIncidents = new List<TKKN_IncidentCommonalityRecord>();
-			if (Season.Spring == season && this.springEvents != null)
+			if (Season.Spring == season && springEvents != null)
 			{
-				seasonalIncidents = this.springEvents;
+				seasonalIncidents = springEvents;
 			}
-			else if (Season.Summer == season && this.summerEvents != null)
+			else if (Season.Summer == season && summerEvents != null)
 			{
-				seasonalIncidents = this.summerEvents;
+				seasonalIncidents = summerEvents;
 			}
-			else if (Season.Fall == season && this.fallEvents != null)
+			else if (Season.Fall == season && fallEvents != null)
 			{
-				seasonalIncidents = this.fallEvents;
+				seasonalIncidents = fallEvents;
 			}
-			else if (Season.Winter == season && this.winterEvents != null)
+			else if (Season.Winter == season && winterEvents != null)
 			{
-				seasonalIncidents = this.winterEvents;
+				seasonalIncidents = winterEvents;
 			}
 			else
 			{
-				if (Quadrum.Aprimay == quadrum && this.springEvents != null)
+				if (Quadrum.Aprimay == quadrum && springEvents != null)
 				{
-					seasonalIncidents = this.springEvents;
+					seasonalIncidents = springEvents;
 				}
-				else if (Quadrum.Decembary == quadrum && this.winterEvents != null)
+				else if (Quadrum.Decembary == quadrum && winterEvents != null)
 				{
-					seasonalIncidents = this.winterEvents;
+					seasonalIncidents = winterEvents;
 				}
-				else if (Quadrum.Jugust == quadrum && this.summerEvents != null)
+				else if (Quadrum.Jugust == quadrum && summerEvents != null)
 				{
-					seasonalIncidents = this.summerEvents;
+					seasonalIncidents = summerEvents;
 				}
-				else if (Quadrum.Septober == quadrum && this.fallEvents != null)
+				else if (Quadrum.Septober == quadrum && fallEvents != null)
 				{
-					seasonalIncidents = this.fallEvents;
+					seasonalIncidents = fallEvents;
 				}
 			}
 
@@ -240,26 +240,25 @@ namespace TKKN_NPS
 		{
 			get
 			{
-				if (this.cachedSpecialPlants == null)
+				if (cachedSpecialPlants == null)
 				{
-					this.cachedSpecialPlants = new List<ThingDef>();
+					cachedSpecialPlants = new List<ThingDef>();
 					foreach (ThingDef item in DefDatabase<ThingDef>.AllDefsListForReading)
 					{
-						if (item.category == ThingCategory.Plant && this.CommonalityOfPlant(item) > 0.0)
+						if (item.category == ThingCategory.Plant && CommonalityOfPlant(item) > 0.0)
 						{
-							this.cachedSpecialPlants.Add(item);
+							cachedSpecialPlants.Add(item);
 						}
 					}
 				}
-				return this.cachedSpecialPlants;
+				return cachedSpecialPlants;
 			}
 		}
 
 		public float CommonalityOfPlant(ThingDef plantDef)
 		{
-			this.CachePlantCommonalitiesIfShould();
-			float result = default(float);
-			if (this.cachedPlantCommonalities.TryGetValue(plantDef, out result))
+			CachePlantCommonalitiesIfShould();
+			if (cachedPlantCommonalities.TryGetValue(plantDef, out float result))
 			{
 				return result;
 			}
@@ -268,14 +267,14 @@ namespace TKKN_NPS
 
 		private void CachePlantCommonalitiesIfShould()
 		{
-			if (this.cachedPlantCommonalities == null)
+			if (cachedPlantCommonalities == null)
 			{
-				this.cachedPlantCommonalities = new Dictionary<ThingDef, float>();
-				for (int i = 0; i < this.specialPlants.Count; i++)
+				cachedPlantCommonalities = new Dictionary<ThingDef, float>();
+				for (int i = 0; i < specialPlants.Count; i++)
 				{
-					if (this.specialPlants[i].plant != null)
+					if (specialPlants[i].plant != null)
 					{
-						this.cachedPlantCommonalities.Add(this.specialPlants[i].plant, this.specialPlants[i].commonality);
+						cachedPlantCommonalities.Add(specialPlants[i].plant, specialPlants[i].commonality);
 					}
 				}
 				foreach (ThingDef allDef in DefDatabase<ThingDef>.AllDefs)
@@ -286,12 +285,12 @@ namespace TKKN_NPS
 						{
 							if (allDef.plant.wildBiomes[j].biome.GetModExtension<BiomeSeasonalSettings>() == this)
 							{
-								this.cachedPlantCommonalities.Add(allDef, allDef.plant.wildBiomes[j].commonality);
+								cachedPlantCommonalities.Add(allDef, allDef.plant.wildBiomes[j].commonality);
 							}
 						}
 					}
 				}
-				this.cachedPlantCommonalitiesSum = this.cachedPlantCommonalities.Sum((KeyValuePair<ThingDef, float> x) => x.Value);
+				cachedPlantCommonalitiesSum = cachedPlantCommonalities.Sum((KeyValuePair<ThingDef, float> x) => x.Value);
 			}
 		}
 

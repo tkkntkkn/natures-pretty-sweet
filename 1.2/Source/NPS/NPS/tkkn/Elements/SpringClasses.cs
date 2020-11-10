@@ -32,7 +32,7 @@ namespace TKKN_NPS
     {
         public CompProperties_SpringWater()
         {
-            this.compClass = typeof(SpringComp);
+            compClass = typeof(SpringComp);
 		}
 	}
 
@@ -41,7 +41,7 @@ namespace TKKN_NPS
         public CompProperties_SpringLava()
         {
 
-			this.compClass = typeof(LavaComp);
+			compClass = typeof(LavaComp);
 		}
     }
 
@@ -51,17 +51,17 @@ namespace TKKN_NPS
 	{
 
 		public bool specialFX = false;
-		public abstract void specialCellAffects(IntVec3 c);
-		public abstract void springTerrain(IntVec3 c);
-		public abstract bool doBorder(IntVec3 c);
+		public abstract void SpecialCellAffects(IntVec3 c);
+		public abstract void SpringTerrain(IntVec3 c);
+		public abstract bool DoBorder(IntVec3 c);
 
-		public abstract void fillBorder();
+		public abstract void FillBorder();
 
-		public virtual void specialFXAffect(IntVec3 c)
+		public virtual void SpecialFXAffect(IntVec3 c)
 		{
-			this.springTerrain(c);
-			bool FX = this.specialFX;
-			this.specialFX = false;
+			SpringTerrain(c);
+			bool FX = specialFX;
+			specialFX = false;
 			if (!FX)
 			{
 				return;
@@ -82,158 +82,154 @@ namespace TKKN_NPS
 		public string status = "spawning";
 		public float width = 0;
 
-		public CompProperties_Springs Props
-		{
-			get
-			{
-				return (CompProperties_Springs)this.props;
-			}
-		}
+		public CompProperties_Springs Props => (CompProperties_Springs)props;
 
 		private List<IntVec3> affectableCells = new List<IntVec3>();
 		private List<IntVec3> boundaryCells = new List<IntVec3>();
 		private List<IntVec3> boundaryCellsRough = new List<IntVec3>();
 		private List<IntVec3> affectableCellsAtmosphere = new List<IntVec3>();
 
-		public int getID()
+		public int GetID()
 		{
-			string numOnly = this.parent.ThingID.Replace(this.parent.def.defName, "");
+			string numOnly = parent.ThingID.Replace(parent.def.defName, "");
 			return Int32.Parse(numOnly);
 		}
 		public override void PostSpawnSetup(bool respawningAfterLoad)
 		{
 			base.PostSpawnSetup(respawningAfterLoad);
-			this.makeAnotherAt = this.Props.howOftenToChange * 4000;
+			makeAnotherAt = Props.howOftenToChange * 4000;
 			if (respawningAfterLoad)
 			{
-				SpringData savedData = this.parent.Map.GetComponent<Watcher>().activeSprings[this.getID()];
+				SpringData savedData = parent.Map.GetComponent<Watcher>().activeSprings[GetID()];
 				if (savedData != null)
 				{
-					this.biomeName = savedData.biomeName;
-					this.makeAnotherAt = savedData.makeAnotherAt;
-					this.age = savedData.age;
-					this.status = savedData.status;
-					this.width = savedData.width;
+					biomeName = savedData.biomeName;
+					makeAnotherAt = savedData.makeAnotherAt;
+					age = savedData.age;
+					status = savedData.status;
+					width = savedData.width;
 				}
 			}
 			else
 			{
-				this.status = "spawning";
-				this.biomeName = this.parent.Map.Biome.defName;
-				this.width = this.Props.startingRadius;
+				status = "spawning";
+				biomeName = parent.Map.Biome.defName;
+				width = Props.startingRadius;
 
-				SpringData savedData = new SpringData();
-				savedData.springID = this.parent.ThingID;
-				savedData.biomeName = this.biomeName;
-				savedData.makeAnotherAt = this.makeAnotherAt;
-				savedData.age = this.age;
-				savedData.status = this.status;
-				savedData.width = this.width;
+				SpringData savedData = new SpringData
+				{
+					springID = parent.ThingID,
+					biomeName = biomeName,
+					makeAnotherAt = makeAnotherAt,
+					age = age,
+					status = status,
+					width = width
+				};
 
-				this.parent.Map.GetComponent<Watcher>().activeSprings.Add(this.getID(), savedData);
+				parent.Map.GetComponent<Watcher>().activeSprings.Add(GetID(), savedData);
 			}
-			this.changeShape();
-			this.CompTickRare();
+			ChangeShape();
+			CompTickRare();
 			if (!respawningAfterLoad) {
-				this.fillBorder();
+				FillBorder();
 			}
 		}
 
 		public override void CompTickRare()
 		{
 			base.CompTickRare();
-			this.spawnThings = false;
-			this.age += 250;
+			spawnThings = false;
+			age += 250;
 
-			if (this.Props.howOftenToChange > 0 && this.age > this.Props.howOftenToChange && this.age % this.Props.howOftenToChange == 0)
+			if (Props.howOftenToChange > 0 && age > Props.howOftenToChange && age % Props.howOftenToChange == 0)
 			{
-				this.changeShape();
+				ChangeShape();
 			}
 
-			float radius = this.Props.radius;
-			if (this.status == "spawning")
+			float radius = Props.radius;
+			if (status == "spawning")
 			{
-				radius = this.width;
-				this.width += .5f;
-				if (radius == this.Props.radius)
+				radius = width;
+				width += .5f;
+				if (radius == Props.radius)
 				{
-					this.status = "stable";
+					status = "stable";
 				}
 			}
 
-			float makeAnother = (this.age/6000)/1000;
-			if (this.Props.canReproduce && Rand.Value + makeAnother > .01f)
+			float makeAnother = (age/6000)/1000;
+			if (Props.canReproduce && Rand.Value + makeAnother > .01f)
 			{
 				//see if we're going to add another spring spawner.
-				this.status = "expand";
-				this.makeAnotherAt += this.Props.weight;
+				status = "expand";
+				makeAnotherAt += Props.weight;
 			}
 
-			if (this.status != "despawn")
+			if (status != "despawn")
 			{
-				if (this.status != "stable")
+				if (status != "stable")
 				{
-					this.setCellsToAffect();
-					foreach (IntVec3 cell in this.affectableCells)
+					SetCellsToAffect();
+					foreach (IntVec3 cell in affectableCells)
 					{
-						this.terrainType = "wet";
-						this.AffectCell(cell);
-						this.specialFXAffect(cell);
+						terrainType = "wet";
+						AffectCell(cell);
+						SpecialFXAffect(cell);
 					}
-					foreach (IntVec3 cell in this.boundaryCellsRough) {						
-						this.AffectCell(cell);
-						this.specialFXAffect(cell);
+					foreach (IntVec3 cell in boundaryCellsRough) {						
+						AffectCell(cell);
+						SpecialFXAffect(cell);
 					}
-					foreach (IntVec3 cell in this.boundaryCells)
+					foreach (IntVec3 cell in boundaryCells)
 					{
 						if (Rand.Value > .1)
 						{
-							this.terrainType = "dry";
-							this.AffectCell(cell);
+							terrainType = "dry";
+							AffectCell(cell);
 						}
 					}
 				}
 				else
 				{
-					foreach (IntVec3 cell in this.affectableCells)
+					foreach (IntVec3 cell in affectableCells)
 					{
-						this.specialFXAffect(cell);
+						SpecialFXAffect(cell);
 					}
 
 				}
-				foreach (IntVec3 cell in this.affectableCellsAtmosphere)
+				foreach (IntVec3 cell in affectableCellsAtmosphere)
 				{
-					this.atmosphereAffectCell(cell);
+					AtmosphereAffectCell(cell);
 				}
 			}
 
-			if (this.Props.canReproduce && this.status == "despawn")
+			if (Props.canReproduce && status == "despawn")
 			{
-				this.parent.Map.GetComponent<Watcher>().activeSprings.Remove(this.getID());
-				this.parent.Destroy();
+				parent.Map.GetComponent<Watcher>().activeSprings.Remove(GetID());
+				parent.Destroy();
 				return;
 			}
-			this.checkIfDespawn();
-			this.saveValues();
+			CheckIfDespawn();
+			SaveValues();
 		}
 
-		public void setCellsToAffect()
+		public void SetCellsToAffect()
 		{
-			if (this.status == "stable")
+			if (status == "stable")
 			{
 				return;
 			}
-			IntVec3 pos = this.parent.Position;
-			Map map = this.parent.Map;
-			this.affectableCells.Clear();
-			this.boundaryCellsRough.Clear();
-			this.boundaryCells.Clear();
-			this.affectableCellsAtmosphere.Clear();
+			IntVec3 pos = parent.Position;
+			Map map = parent.Map;
+			affectableCells.Clear();
+			boundaryCellsRough.Clear();
+			boundaryCells.Clear();
+			affectableCellsAtmosphere.Clear();
 			if (!pos.InBounds(map))
 			{
 				return;
 			}
-			int maxArea = (int) Math.Round(this.width + this.Props.borderSize + 5);
+			int maxArea = (int) Math.Round(width + Props.borderSize + 5);
 
 			Region region = pos.GetRegion(map, RegionType.Set_Passable);
 			if (region == null)
@@ -244,21 +240,21 @@ namespace TKKN_NPS
 			{
 				foreach (IntVec3 current in r.Cells)
 				{
-					if (current.InHorDistOf(pos, this.width))
+					if (current.InHorDistOf(pos, width))
 					{
-						this.affectableCells.Add(current);
+						affectableCells.Add(current);
 					}
-					else if (current.InHorDistOf(pos, this.width + 2))
+					else if (current.InHorDistOf(pos, width + 2))
 					{
-						this.boundaryCellsRough.Add(current);
+						boundaryCellsRough.Add(current);
 					}
-					else if (current.InHorDistOf(pos, this.width + this.Props.borderSize + 1))
+					else if (current.InHorDistOf(pos, width + Props.borderSize + 1))
 					{
-						this.boundaryCells.Add(current);
+						boundaryCells.Add(current);
 					}
-					else if (current.InHorDistOf(pos, this.width + this.Props.borderSize + 5))
+					else if (current.InHorDistOf(pos, width + Props.borderSize + 5))
 					{
-						this.affectableCellsAtmosphere.Add(current);
+						affectableCellsAtmosphere.Add(current);
 					}
 				}
 				return false;
@@ -266,102 +262,102 @@ namespace TKKN_NPS
 			return;
 		}
 
-		public void saveValues()
+		public void SaveValues()
 		{
-			SpringData savedData = this.parent.Map.GetComponent<Watcher>().activeSprings[this.getID()];
+			SpringData savedData = parent.Map.GetComponent<Watcher>().activeSprings[GetID()];
 			if (savedData != null)
 			{
-				savedData.biomeName = this.biomeName;
-				savedData.makeAnotherAt = this.makeAnotherAt;
-				savedData.age = this.age;
-				savedData.status = this.status;
-				savedData.width = this.width;
+				savedData.biomeName = biomeName;
+				savedData.makeAnotherAt = makeAnotherAt;
+				savedData.age = age;
+				savedData.status = status;
+				savedData.width = width;
 			}
 		}
 
-		public void changeShape()
+		public void ChangeShape()
 		{
-			if (this.Props.howOftenToChange == 0)
+			if (Props.howOftenToChange == 0)
 			{
 				return;
 			}
-			ModuleBase moduleBase = new Perlin(1.1, 1, 5, 3, this.Props.radius, QualityMode.Medium);
+			ModuleBase moduleBase = new Perlin(1.1, 1, 5, 3, Props.radius, QualityMode.Medium);
 			moduleBase = new ScaleBias(0.2, 0.2, moduleBase);
 
 			ModuleBase moduleBase2 = new DistFromAxis(2);
 			moduleBase2 = new ScaleBias(.2, .2, moduleBase2);
 			moduleBase2 = new Clamp(0, 1, moduleBase2);
 
-			this.terrainNoise = new Add(moduleBase, moduleBase2);
+			terrainNoise = new Add(moduleBase, moduleBase2);
 
 		}
 
-		public override void springTerrain(IntVec3 loc)
+		public override void SpringTerrain(IntVec3 loc)
 		{
-			if (this.terrainNoise == null)
+			if (terrainNoise == null)
 			{
-				this.terrainType = "dry";
+				terrainType = "dry";
 				return;
 			}
-			float value = this.terrainNoise.GetValue(loc);
-			value = value / this.Props.radius;
+			float value = terrainNoise.GetValue(loc);
+			value = value / Props.radius;
 			int dif = (int) Math.Floor(value);
 			value = value - dif;
 
 
 			if (value < .1)
 			{
-				this.specialFX = true;
+				specialFX = true;
 			}
 			if (value < .8f)
 			{
-				this.terrainType = "wet";
+				terrainType = "wet";
 				return;
 			}
 
 			if (value < .85f)
 			{
-				this.spawnThings = true;
+				spawnThings = true;
 			}
 
-			this.terrainType = "dry";
+			terrainType = "dry";
 		}
 
-		public void checkIfDespawn()
+		public void CheckIfDespawn()
 		{
-			if (this.biomeName == this.Props.commonBiome)
+			if (biomeName == Props.commonBiome)
 			{
 				if (Rand.Value < .0001f)
 				{
-					this.status = "despawn";
+					status = "despawn";
 				}
 			}
 			else
 			{
 				if (Rand.Value < .001f)
 				{
-					this.status = "despawn";
+					status = "despawn";
 				}
 			}
 		}
 
-		public override void fillBorder()
+		public override void FillBorder()
 		{
-			Map map = this.parent.Map;
+			Map map = parent.Map;
 			List<ThingDef> list = map.Biome.AllWildPlants.ToList<ThingDef>();
-			list.Add(this.Props.spawnProp);
+			list.Add(Props.spawnProp);
 			float num = map.Biome.plantDensity;
-			foreach (IntVec3 c in this.boundaryCellsRough.InRandomOrder(null))
+			foreach (IntVec3 c in boundaryCellsRough.InRandomOrder(null))
 			{
-				this.genPlants(c, map, list);
+				GenPlants(c, map, list);
 			}
-			foreach (IntVec3 c in this.boundaryCells.InRandomOrder(null))
+			foreach (IntVec3 c in boundaryCells.InRandomOrder(null))
 			{
-				this.genPlants(c, map, list);
+				GenPlants(c, map, list);
 			}
 		}
 
-		private void genPlants(IntVec3 c, Map map, List<ThingDef> list)
+		private void GenPlants(IntVec3 c, Map map, List<ThingDef> list)
 		{
 			if (c.GetEdifice(map) == null && c.GetCover(map) == null)
 			{
@@ -379,72 +375,72 @@ namespace TKKN_NPS
 		public void AffectCell(IntVec3 c)
 		{
 			bool isSpawnCell = false;
-			if (!c.InBounds(this.parent.Map))
+			if (!c.InBounds(parent.Map))
 			{
 				return;
 			}
-			if (this.terrainType == "")
+			if (terrainType == "")
 			{
-				this.springTerrain(c);
+				SpringTerrain(c);
 			}
 
-			if (this.status != "despawn")
+			if (status != "despawn")
 			{
-				if (c == this.parent.Position)
+				if (c == parent.Position)
 				{
 					isSpawnCell = true;
-					this.terrainType = "wet";
+					terrainType = "wet";
 				}
 				//double check we're not adding a border into another instance.
-				if (this.terrainType == "dry")
+				if (terrainType == "dry")
 				{
 					
-					if (!this.doBorder(c))
+					if (!DoBorder(c))
 					{
-						this.terrainType = "wet";
+						terrainType = "wet";
 					}
 				}
 
 			}
 
-			if (this.terrainType == "dry")
+			if (terrainType == "dry")
 			{
-				int num = c.GetThingList(this.parent.Map).Count;
+				int num = c.GetThingList(parent.Map).Count;
 				//spawn whatever special items surround this thing.
-				this.parent.Map.terrainGrid.SetTerrain(c, this.Props.dryTile);
+				parent.Map.terrainGrid.SetTerrain(c, Props.dryTile);
 
-				if (num == 0 && this.spawnThings == true && this.Props.spawnProp != null)
+				if (num == 0 && spawnThings == true && Props.spawnProp != null)
 				{
-					ThingDef def = this.Props.spawnProp;
-					GenSpawn.Spawn(def, c, this.parent.Map);
+					ThingDef def = Props.spawnProp;
+					GenSpawn.Spawn(def, c, parent.Map);
 				}
-				this.spawnThings = false;
+				spawnThings = false;
 			}
 			else
 			{
-				this.specialCellAffects(c);
+				SpecialCellAffects(c);
 			}
-			if (this.status == "expand")
+			if (status == "expand")
 			{
 				if (!isSpawnCell)
 				{
-					ThingWithComps anotherSpring = (ThingWithComps)GenSpawn.Spawn(ThingMaker.MakeThing(this.parent.def, null), c, this.parent.Map);
+					ThingWithComps anotherSpring = (ThingWithComps)GenSpawn.Spawn(ThingMaker.MakeThing(parent.def, null), c, parent.Map);
 				}
-				this.status = "stable";
+				status = "stable";
 			}
 
-			if (this.parent.Map.GetComponent<Watcher>().cellWeatherAffects.ContainsKey(c))
+			if (parent.Map.GetComponent<Watcher>().cellWeatherAffects.ContainsKey(c))
 			{
-				this.parent.Map.GetComponent<Watcher>().cellWeatherAffects[c].baseTerrain = c.GetTerrain(this.parent.Map);
+				parent.Map.GetComponent<Watcher>().cellWeatherAffects[c].baseTerrain = c.GetTerrain(parent.Map);
 			}
 
-			this.terrainType = "";
+			terrainType = "";
 		}
 
-		public override bool doBorder(IntVec3 c)
+		public override bool DoBorder(IntVec3 c)
 		{
-			TerrainDef currentTerrain = c.GetTerrain(this.parent.Map);
-			if (currentTerrain == this.Props.wetTile) {
+			TerrainDef currentTerrain = c.GetTerrain(parent.Map);
+			if (currentTerrain == Props.wetTile) {
 				return false;
 			}
 			if (currentTerrain.HasTag("TKKN_Wet"))
@@ -454,42 +450,41 @@ namespace TKKN_NPS
 			return true;
 		}
 
-		protected void atmosphereAffectCell(IntVec3 c)
+		protected void AtmosphereAffectCell(IntVec3 c)
 		{
-			GenTemperature.PushHeat(this.parent, this.Props.temperature);			
+			GenTemperature.PushHeat(parent, Props.temperature);			
 		}
 
 		public void AffectPawns(IntVec3 c)
 		{
-			List<Thing> pawns = c.GetThingList(this.parent.Map);
+			List<Thing> pawns = c.GetThingList(parent.Map);
 			for (int i = 0; i < pawns.Count(); i++)
 			{
 
-				Pawn pawn = pawns[i] as Pawn;
-				if (pawn != null)
+				if (pawns[i] is Pawn pawn)
 				{
 					//    pawn.needs.mood.thoughts.memories.TryGainMemory(ThoughtDefOf.NearNPS, null);
 				}
 			}
 		}
 
-		public override void specialCellAffects(IntVec3 c)
+		public override void SpecialCellAffects(IntVec3 c)
 		{
 			//set terrain
-			if (this.terrainType == "wet")
+			if (terrainType == "wet")
 			{
-				this.parent.Map.terrainGrid.SetTerrain(c, this.Props.wetTile);
+				parent.Map.terrainGrid.SetTerrain(c, Props.wetTile);
 			}
-			else if (this.terrainType == "deep")
+			else if (terrainType == "deep")
 			{
-				this.parent.Map.terrainGrid.SetTerrain(c, this.Props.deepTile);
+				parent.Map.terrainGrid.SetTerrain(c, Props.deepTile);
 			}
-			FilthMaker.RemoveAllFilth(c, this.parent.Map);
+			FilthMaker.RemoveAllFilth(c, parent.Map);
 		}
 
-		public override void specialFXAffect(IntVec3 c)
+		public override void SpecialFXAffect(IntVec3 c)
 		{
-			base.specialFXAffect(c);
+			base.SpecialFXAffect(c);
 		}
 
 
@@ -497,41 +492,41 @@ namespace TKKN_NPS
 
 	public class LavaComp : SpringComp
 	{
-		public override void specialCellAffects(IntVec3 c)
+		public override void SpecialCellAffects(IntVec3 c)
 		{
-			base.specialCellAffects(c);
-			if (this.terrainType == "wet")
+			base.SpecialCellAffects(c);
+			if (terrainType == "wet")
 			{
-				this.parent.Map.GetComponent<Watcher>().lavaCellsList.Add(c);
+				parent.Map.GetComponent<Watcher>().lavaCellsList.Add(c);
 			}
 			else
 			{
-				this.parent.Map.GetComponent<Watcher>().lavaCellsList.Remove(c);
+				parent.Map.GetComponent<Watcher>().lavaCellsList.Remove(c);
 
 			}
 		}
 
-		public override void fillBorder()
+		public override void FillBorder()
 		{
 		}
 
-		public new void changeShape()
+		public new void ChangeShape()
 		{
-			ModuleBase moduleBase = new Perlin(1.1, 2, 0.5, 2, Rand.Range(0, this.Props.radius), QualityMode.Medium);
+			ModuleBase moduleBase = new Perlin(1.1, 2, 0.5, 2, Rand.Range(0, Props.radius), QualityMode.Medium);
 			moduleBase = new ScaleBias(0.2, 0.2, moduleBase);
 
-			ModuleBase moduleBase2 = new DistFromAxis(new FloatRange(0, this.Props.radius).RandomInRange);
+			ModuleBase moduleBase2 = new DistFromAxis(new FloatRange(0, Props.radius).RandomInRange);
 			moduleBase2 = new ScaleBias(.2, .2, moduleBase2);
 			moduleBase2 = new Clamp(0, 1, moduleBase2);
 
-			this.terrainNoise = new Add(moduleBase, moduleBase2);
+			terrainNoise = new Add(moduleBase, moduleBase2);
 
 		}
 
-		public override bool doBorder(IntVec3 c)
+		public override bool DoBorder(IntVec3 c)
 		{
-			TerrainDef currentTerrain = c.GetTerrain(this.parent.Map);
-			if (currentTerrain == this.Props.wetTile)
+			TerrainDef currentTerrain = c.GetTerrain(parent.Map);
+			if (currentTerrain == Props.wetTile)
 			{
 				return false;
 			}
@@ -554,7 +549,7 @@ namespace TKKN_NPS
 		public override void SpawnSetup(Map map, bool respawningAfterLoad)
 		{
 			base.SpawnSetup(map, respawningAfterLoad);
-			Map map2 = this.Map;
+			Map map2 = Map;
 			BiomeDef biome = map.Biome;
 		}
 

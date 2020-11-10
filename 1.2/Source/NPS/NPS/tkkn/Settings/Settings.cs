@@ -64,13 +64,9 @@ namespace TKKN_NPS
 		//floods
 		public static bool doSeasonalFloods = true;
 		public static bool DoDisasterFloods = true;
-		
 
-		public static bool showTempOverlay {
-			get {
-				return Settings.showCold && Settings.showHot;
-			}
-		}
+
+		public static bool showTempOverlay => Settings.showCold && Settings.showHot;
 		static Settings()
 		{
 			

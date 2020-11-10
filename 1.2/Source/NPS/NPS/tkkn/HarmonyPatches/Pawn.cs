@@ -200,7 +200,7 @@ namespace TKKN_NPS
 			if (pawn.Position.InBounds(map) && pawn.RaceProps.Humanlike)
 			{
 				//remove snow/frost where they are. This will hopefully generate paths as pawns walk :)
-				if (cell.isCold)
+				if (cell.IsCold)
 				{
 					FrostGrid fg = FrostWorker.GetFrostGrid(map);
 					fg.AddDepth(pawn.Position, (float)-.05);

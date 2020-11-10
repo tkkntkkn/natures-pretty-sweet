@@ -82,8 +82,8 @@ namespace TKKN_NPS
 		{
 			get
 			{
-				float a = Mathf.Clamp01((float)(Find.TickManager.TicksGame - this.spawnTick) / 120f);
-				float b = (this.leftFadeOutTicks >= 0) ? Mathf.Min((float)this.leftFadeOutTicks / 120f, 1f) : 1f;
+				float a = Mathf.Clamp01((float)(Find.TickManager.TicksGame - spawnTick) / 120f);
+				float b = (leftFadeOutTicks >= 0) ? Mathf.Min((float)leftFadeOutTicks / 120f, 1f) : 1f;
 				return Mathf.Min(a, b);
 			}
 		}
@@ -91,11 +91,11 @@ namespace TKKN_NPS
 		public override void ExposeData()
 		{
 			base.ExposeData();
-			Scribe_Values.Look<Vector2>(ref this.realPosition, "realPosition", default(Vector2), false);
-			Scribe_Values.Look<float>(ref this.direction, "direction", 0f, false);
-			Scribe_Values.Look<int>(ref this.spawnTick, "spawnTick", 0, false);
-			Scribe_Values.Look<int>(ref this.leftFadeOutTicks, "leftFadeOutTicks", 0, false);
-			Scribe_Values.Look<int>(ref this.ticksLeftToDisappear, "ticksLeftToDisappear", 0, false);
+			Scribe_Values.Look<Vector2>(ref realPosition, "realPosition", default(Vector2), false);
+			Scribe_Values.Look<float>(ref direction, "direction", 0f, false);
+			Scribe_Values.Look<int>(ref spawnTick, "spawnTick", 0, false);
+			Scribe_Values.Look<int>(ref leftFadeOutTicks, "leftFadeOutTicks", 0, false);
+			Scribe_Values.Look<int>(ref ticksLeftToDisappear, "ticksLeftToDisappear", 0, false);
 		}
 
 		public override void SpawnSetup(Map map, bool respawningAfterLoad)
@@ -104,33 +104,33 @@ namespace TKKN_NPS
 			if (!respawningAfterLoad)
 			{
 				Vector3 vector = base.Position.ToVector3Shifted();
-				this.realPosition = new Vector2(vector.x, vector.z);
-				this.direction = Rand.Range(0f, 360f);
-				this.spawnTick = Find.TickManager.TicksGame;
-				this.leftFadeOutTicks = -1;
-				this.ticksLeftToDisappear = DustDevil.DurationTicks.RandomInRange;
+				realPosition = new Vector2(vector.x, vector.z);
+				direction = Rand.Range(0f, 360f);
+				spawnTick = Find.TickManager.TicksGame;
+				leftFadeOutTicks = -1;
+				ticksLeftToDisappear = DustDevil.DurationTicks.RandomInRange;
 			}
-			this.CreateSustainer();
+			CreateSustainer();
 		}
 
 		public override void Tick()
 		{
 			if (base.Spawned)
 			{
-				if (this.sustainer == null)
+				if (sustainer == null)
 				{
 					Log.Error("DustDevil sustainer is null.");
-					this.CreateSustainer();
+					CreateSustainer();
 				}
-				this.sustainer.Maintain();
-				this.UpdateSustainerVolume();
-				base.GetComp<CompWindSource>().wind = 5f * this.FadeInOutFactor;
-				if (this.leftFadeOutTicks > 0)
+				sustainer.Maintain();
+				UpdateSustainerVolume();
+				base.GetComp<CompWindSource>().wind = 5f * FadeInOutFactor;
+				if (leftFadeOutTicks > 0)
 				{
-					this.leftFadeOutTicks--;
-					if (this.leftFadeOutTicks == 0)
+					leftFadeOutTicks--;
+					if (leftFadeOutTicks == 0)
 					{
-						this.Destroy(DestroyMode.Vanish);
+						Destroy(DestroyMode.Vanish);
 					}
 				}
 				else
@@ -139,33 +139,33 @@ namespace TKKN_NPS
 					{
 						DustDevil.directionNoise = new Perlin(0.0020000000949949026, 2.0, 0.5, 4, 1948573612, QualityMode.Medium);
 					}
-					this.direction += (float)DustDevil.directionNoise.GetValue((double)Find.TickManager.TicksAbs, (double)((float)(this.thingIDNumber % 500) * 1000f), 0.0) * 0.78f;
-					this.realPosition = this.realPosition.Moved(this.direction, 0.0283333343f);
-					IntVec3 intVec = new Vector3(this.realPosition.x, 0f, this.realPosition.y).ToIntVec3();
+					direction += (float)DustDevil.directionNoise.GetValue((double)Find.TickManager.TicksAbs, (double)((float)(thingIDNumber % 500) * 1000f), 0.0) * 0.78f;
+					realPosition = realPosition.Moved(direction, 0.0283333343f);
+					IntVec3 intVec = new Vector3(realPosition.x, 0f, realPosition.y).ToIntVec3();
 					if (intVec.InBounds(base.Map))
 					{
 						base.Position = intVec;
 						if (this.IsHashIntervalTick(15))
 						{
-							this.DamageCloseThings();
+							DamageCloseThings();
 						}
 						if (Rand.MTBEventOccurs(15f, 1f, 1f))
 						{
-							this.DamageFarThings();
+							DamageFarThings();
 						}
-						if (this.ticksLeftToDisappear > 0)
+						if (ticksLeftToDisappear > 0)
 						{
-							this.ticksLeftToDisappear--;
-							if (this.ticksLeftToDisappear == 0)
+							ticksLeftToDisappear--;
+							if (ticksLeftToDisappear == 0)
 							{
-								this.leftFadeOutTicks = 120;
+								leftFadeOutTicks = 120;
 								Messages.Message("MessageDustDevilDissipated".Translate(), new TargetInfo(base.Position, base.Map, false), MessageTypeDefOf.PositiveEvent);
 							}
 						}
-						if (this.IsHashIntervalTick(4) && !this.CellImmuneToDamage(base.Position))
+						if (this.IsHashIntervalTick(4) && !CellImmuneToDamage(base.Position))
 						{
 							float num = Rand.Range(0.6f, 1f);
-							MoteMaker.ThrowTornadoDustPuff(new Vector3(this.realPosition.x, 0f, this.realPosition.y)
+							MoteMaker.ThrowTornadoDustPuff(new Vector3(realPosition.x, 0f, realPosition.y)
 							{
 								y = Altitudes.AltitudeFor(AltitudeLayer.MoteOverhead)
 							} + Vector3Utility.RandomHorizontalOffset(1.5f), base.Map, Rand.Range(1.5f, 3f), new Color(num, num, num));
@@ -173,7 +173,7 @@ namespace TKKN_NPS
 					}
 					else
 					{
-						this.leftFadeOutTicks = 120;
+						leftFadeOutTicks = 120;
 						Messages.Message("MessageDustDevilLeftMap".Translate(), new TargetInfo(base.Position, base.Map, false), MessageTypeDefOf.PositiveEvent);
 					}
 				}
@@ -183,10 +183,10 @@ namespace TKKN_NPS
 		public override void Draw()
 		{
 			Rand.PushState();
-			Rand.Seed = this.thingIDNumber;
+			Rand.Seed = thingIDNumber;
 			for (int i = 0; i < 180; i++)
 			{
-				this.DrawDustDevilPart(DustDevil.PartsDistanceFromCenter.RandomInRange, Rand.Range(0f, 360f), Rand.Range(0.9f, 1.1f), Rand.Range(0.52f, 0.88f));
+				DrawDustDevilPart(DustDevil.PartsDistanceFromCenter.RandomInRange, Rand.Range(0f, 360f), Rand.Range(0.9f, 1.1f), Rand.Range(0.52f, 0.88f));
 			}
 			Rand.PopState();
 		}
@@ -197,7 +197,7 @@ namespace TKKN_NPS
 			float num = 1f / distanceFromCenter;
 			float num2 = 25f * speedMultiplier * num;
 			float num3 = (initialAngle + (float)ticksGame * num2) % 360f;
-			Vector2 vector = this.realPosition.Moved(num3, this.AdjustedDistanceFromCenter(distanceFromCenter));
+			Vector2 vector = realPosition.Moved(num3, AdjustedDistanceFromCenter(distanceFromCenter));
 			vector.y += distanceFromCenter * 4f;
 			vector.y += DustDevil.ZOffsetBias;
 			Vector3 vector2 = new Vector3(vector.x, Altitudes.AltitudeFor(AltitudeLayer.Weather) + 0.046875f * Rand.Range(0f, 1f), vector.y);
@@ -213,9 +213,9 @@ namespace TKKN_NPS
 			}
 			float num6 = Mathf.Min(distanceFromCenter / (DustDevil.PartsDistanceFromCenter.max + 2f), 1f);
 			float d = Mathf.InverseLerp(0.18f, 0.4f, num6);
-			Vector3 a = new Vector3(Mathf.Sin((float)ticksGame / 1000f + (float)(this.thingIDNumber * 10)) * 2f, 0f, 0f);
+			Vector3 a = new Vector3(Mathf.Sin((float)ticksGame / 1000f + (float)(thingIDNumber * 10)) * 2f, 0f, 0f);
 			vector2 += a * d;
-			float a2 = Mathf.Max(1f - num6, 0f) * num5 * this.FadeInOutFactor;
+			float a2 = Mathf.Max(1f - num6, 0f) * num5 * FadeInOutFactor;
 			Color value = new Color(colorMultiplier, colorMultiplier, colorMultiplier, a2);
 			DustDevil.matPropertyBlock.SetColor(ShaderPropertyIDs.Color, value);
 			Matrix4x4 matrix = Matrix4x4.TRS(vector2, Quaternion.Euler(0f, num3, 0f), new Vector3(num4, 1f, num4));
@@ -231,7 +231,7 @@ namespace TKKN_NPS
 
 		private void UpdateSustainerVolume()
 		{
-			this.sustainer.info.volumeFactor = this.FadeInOutFactor;
+			sustainer.info.volumeFactor = FadeInOutFactor;
 		}
 
 		private void CreateSustainer()
@@ -239,8 +239,8 @@ namespace TKKN_NPS
 			LongEventHandler.ExecuteWhenFinished(delegate
 			{
 				SoundDef soundDef = SoundDef.Named("Tornado");
-				this.sustainer = soundDef.TrySpawnSustainer(SoundInfo.InMap(this, MaintenanceType.PerTick));
-				this.UpdateSustainerVolume();
+				sustainer = soundDef.TrySpawnSustainer(SoundInfo.InMap(this, MaintenanceType.PerTick));
+				UpdateSustainerVolume();
 			});
 		}
 
@@ -250,13 +250,13 @@ namespace TKKN_NPS
 			for (int i = 0; i < num; i++)
 			{
 				IntVec3 intVec = base.Position + GenRadial.RadialPattern[i];
-				if (intVec.InBounds(base.Map) && !this.CellImmuneToDamage(intVec))
+				if (intVec.InBounds(base.Map) && !CellImmuneToDamage(intVec))
 				{
 					Pawn firstPawn = intVec.GetFirstPawn(base.Map);
 					if (firstPawn == null || !firstPawn.Downed || !Rand.Bool)
 					{
 						float damageFactor = GenMath.LerpDouble(0f, 3f, 1f, 0.2f, intVec.DistanceTo(base.Position));
-						this.DoDamage(intVec, damageFactor);
+						DoDamage(intVec, damageFactor);
 					}
 				}
 			}
@@ -267,11 +267,11 @@ namespace TKKN_NPS
 			IntVec3 c = (from x in GenRadial.RadialCellsAround(base.Position, 8f, true)
 						 where x.InBounds(base.Map)
 						 select x).RandomElement<IntVec3>();
-			if (this.CellImmuneToDamage(c))
+			if (CellImmuneToDamage(c))
 			{
 				return;
 			}
-			this.DoDamage(c, 0.5f);
+			DoDamage(c, 0.5f);
 		}
 
 		private bool CellImmuneToDamage(IntVec3 c)
@@ -290,7 +290,7 @@ namespace TKKN_NPS
 			DustDevil.tmpThings.AddRange(c.GetThingList(base.Map));
 			Vector3 vector = c.ToVector3Shifted();
 			Vector2 b = new Vector2(vector.x, vector.z);
-			float angle = -this.realPosition.AngleTo(b) + 180f;
+			float angle = -realPosition.AngleTo(b) + 180f;
 			for (int i = 0; i < DustDevil.tmpThings.Count; i++)
 			{
 				BattleLogEntry_DamageTaken battleLogEntry_DamageTaken = null;

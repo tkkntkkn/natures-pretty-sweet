@@ -39,44 +39,44 @@ namespace TKKN_NPS
 		public override void SpawnSetup(Map map, bool respawningAfterLoad)
 		{
 			base.SpawnSetup(map, respawningAfterLoad);
-            this.steamSprayer = new IntermittentSteamSprayer(this);
-            this.steamSprayer.startSprayCallback = this.StartSpray;
-            this.steamSprayer.endSprayCallback = this.EndSpray;
+            steamSprayer = new IntermittentSteamSprayer(this);
+            steamSprayer.startSprayCallback = StartSpray;
+            steamSprayer.endSprayCallback = EndSpray;
         }
 
         private void StartSpray()
         {
             SnowUtility.AddSnowRadial(this.OccupiedRect().RandomCell, base.Map, 4f, -0.06f);
-            this.spraySustainer = SoundDefOf.GeyserSpray.TrySpawnSustainer(new TargetInfo(base.Position, base.Map, false));
-            this.spraySustainerStartTick = Find.TickManager.TicksGame;
+            spraySustainer = SoundDefOf.GeyserSpray.TrySpawnSustainer(new TargetInfo(base.Position, base.Map, false));
+            spraySustainerStartTick = Find.TickManager.TicksGame;
         }
 
         private void EndSpray()
         {
-            if (this.spraySustainer != null)
+            if (spraySustainer != null)
             {
-                this.spraySustainer.End();
-                this.spraySustainer = null;
+                spraySustainer.End();
+                spraySustainer = null;
             }
         }
 
         public override void Tick()
         {
             age++;
-            if (this.harvester == null)
+            if (harvester == null)
             {
-                this.steamSprayer.SteamSprayerTick();
+                steamSprayer.SteamSprayerTick();
             }
-            if (this.spraySustainer != null && Find.TickManager.TicksGame > this.spraySustainerStartTick + 1000)
+            if (spraySustainer != null && Find.TickManager.TicksGame > spraySustainerStartTick + 1000)
             {
                 Log.Message("Geyser spray sustainer still playing after 1000 ticks. Force-ending.");
-                this.spraySustainer.End();
-                this.spraySustainer = null;
+                spraySustainer.End();
+                spraySustainer = null;
             }
 
             
             if (Rand.Value < .000001f){
-				this.DeSpawn();
+				DeSpawn();
             }
 
         }

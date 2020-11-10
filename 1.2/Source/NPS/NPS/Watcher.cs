@@ -118,22 +118,22 @@ namespace TKKN_NPS
 		public override void ExposeData()
 		{
 			base.ExposeData();
-			Scribe_Values.Look<bool>(ref this.regenCellLists, "regenCellLists", true, true);
+			Scribe_Values.Look<bool>(ref regenCellLists, "regenCellLists", true, true);
 
 			Scribe_Collections.Look<int, SpringData>(ref activeSprings, "TKKN_activeSprings", LookMode.Value, LookMode.Deep);
 			Scribe_Values.Look<bool>(ref doCoast, "doCoast", true, true);
 			Scribe_Values.Look<int>(ref floodThreat, "floodThreat", 0, true);
 			Scribe_Values.Look<int>(ref tideLevel, "tideLevel", 0, true);
-			Scribe_Values.Look<int>(ref totalPuddles, "totalPuddles", this.totalPuddles, true);
+			Scribe_Values.Look<int>(ref totalPuddles, "totalPuddles", totalPuddles, true);
 			Scribe_Collections.Look<IntVec3, CellData>(ref cellWeatherAffects, "cellWeatherAffects", LookMode.Value, LookMode.Deep);
 
 			//backwards compatible:
 
-			Scribe_Collections.Look<int, SpringData>(ref this.activeSprings, "TKKN_activeSprings", LookMode.Value, LookMode.Deep);
-			Scribe_Collections.Look<IntVec3>(ref this.lavaCellsList, "lavaCellsList", LookMode.Value);
-//			Scribe_Values.Look<int>(ref this.ticks, "ticks", 0, true);
-			Scribe_Values.Look<int>(ref this.totalPuddles, "totalPuddles", this.totalPuddles, true);
-			Scribe_Values.Look<bool>(ref this.bugFixFrostIsRemoved, "bugFixFrostIsRemoved", this.bugFixFrostIsRemoved, true);
+			Scribe_Collections.Look<int, SpringData>(ref activeSprings, "TKKN_activeSprings", LookMode.Value, LookMode.Deep);
+			Scribe_Collections.Look<IntVec3>(ref lavaCellsList, "lavaCellsList", LookMode.Value);
+//			Scribe_Values.Look<int>(ref ticks, "ticks", 0, true);
+			Scribe_Values.Look<int>(ref totalPuddles, "totalPuddles", totalPuddles, true);
+			Scribe_Values.Look<bool>(ref bugFixFrostIsRemoved, "bugFixFrostIsRemoved", bugFixFrostIsRemoved, true);
 
 
 			if (Scribe.mode == LoadSaveMode.LoadingVars)
@@ -167,14 +167,14 @@ namespace TKKN_NPS
 			}
 			//RegisterCondition
 
-			// this.map.GetComponent<FrostGrid>().Regenerate(); 
+			// map.GetComponent<FrostGrid>().Regenerate(); 
 			if (TKKN_Holder.modsPatched.ToArray().Count() > 0)
 			{
 				Log.Message("TKKN NPS: Loaded patches for: " + string.Join(", ", TKKN_Holder.modsPatched.ToArray()));
 			}
 
 			//found an issue where plants were spawning all wrong in 1.2, this is a fix for saves with that bug, may keep for cleanup if it doesn't cause issues.
-			SpawnWorker.FixSpecialSpawns(this.map);
+			SpawnWorker.FixSpecialSpawns(map);
 
 		}
 
@@ -186,7 +186,7 @@ namespace TKKN_NPS
 			
 			/*
 			#region devonly
-			this.regenCellLists = true;
+			regenCellLists = true;
 			Log.Error("TKKN DEV STUFF IS ON");
 			#endregion
 			*/
@@ -256,7 +256,7 @@ namespace TKKN_NPS
 
 		public CellData GetCell(IntVec3 c)
 		{
-			if (!this.cellWeatherAffects.ContainsKey(c))
+			if (!cellWeatherAffects.ContainsKey(c))
 			{
 				return null;
 			}
@@ -265,7 +265,7 @@ namespace TKKN_NPS
 			{
 				return null;
 			}
-			CellData cell = this.cellWeatherAffects[c];
+			CellData cell = cellWeatherAffects[c];
 			if (cell.map == null)
 			{
 				//tmp fix for the map not being passed in anymore
@@ -276,7 +276,7 @@ namespace TKKN_NPS
 
 		public void DoCellEnvironment(IntVec3 c)
 		{
-			CellData cell = this.GetCell(c);
+			CellData cell = GetCell(c);
 			if (cell == null)
 			{
 				return;
@@ -302,7 +302,7 @@ namespace TKKN_NPS
 
 			FrostWorker.DoFrost(cell);
 			//damage plants
-			this.HurtPlants(cell, c, false, true);
+			HurtPlants(cell, c, false, true);
 			WeatherBaseWorker.SpawnWetThings(cell);
 		}
 
@@ -315,12 +315,12 @@ namespace TKKN_NPS
 			}
 
 			//don't hurt plants in growing zone
-			if (this.map.zoneManager.ZoneAt(c) is Zone_Growing zone)
+			if (map.zoneManager.ZoneAt(c) is Zone_Growing zone)
 			{
 				return;
 			}
 
-			List<Thing> things = c.GetThingList(this.map).Where(key => key.def.category.ToString() == "Plant").ToList();
+			List<Thing> things = c.GetThingList(map).Where(key => key.def.category.ToString() == "Plant").ToList();
 			foreach (Plant plant in things)
 			{
 				//see if the plant can survive here:

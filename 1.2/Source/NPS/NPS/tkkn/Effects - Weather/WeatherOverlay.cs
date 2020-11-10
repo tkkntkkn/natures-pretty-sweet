@@ -13,12 +13,12 @@ namespace TKKN_NPS
 		public WeatherOverlay_ThickFog()
         {
 			
-			this.worldOverlayMat = WeatherOverlay_ThickFog.FogOverlayWorld;
+			worldOverlayMat = WeatherOverlay_ThickFog.FogOverlayWorld;
 
-			this.worldOverlayPanSpeed1 = 0.0003f;
-            this.worldOverlayPanSpeed2 = 0.0001f;
-            this.worldPanDir1 = new Vector2(1f, 1f);
-            this.worldPanDir2 = new Vector2(1f, -1f);
+			worldOverlayPanSpeed1 = 0.0003f;
+            worldOverlayPanSpeed2 = 0.0001f;
+            worldPanDir1 = new Vector2(1f, 1f);
+            worldPanDir2 = new Vector2(1f, -1f);
 
         }
     }
@@ -31,13 +31,13 @@ namespace TKKN_NPS
 		public WeatherOverlay_DustStorm()
 		{
 
-			this.worldOverlayMat = WeatherOverlay_DustStorm.material;
-			this.OverlayColor = new Color(0.57f, 0.34f, 0.10f);
+			worldOverlayMat = WeatherOverlay_DustStorm.material;
+			OverlayColor = new Color(0.57f, 0.34f, 0.10f);
 
-			this.worldOverlayPanSpeed1 = 0.0003f;
-			this.worldOverlayPanSpeed2 = 0.0001f;
-			this.worldPanDir1 = new Vector2(1f, 1f);
-			this.worldPanDir2 = new Vector2(1f, -1f);
+			worldOverlayPanSpeed1 = 0.0003f;
+			worldOverlayPanSpeed2 = 0.0001f;
+			worldPanDir1 = new Vector2(1f, 1f);
+			worldPanDir2 = new Vector2(1f, -1f);
 
 		}
 	}
@@ -54,17 +54,17 @@ namespace TKKN_NPS
 
 		public WeatherOverlay_DustStormHeavy()
 		{
-			this.worldOverlayMat = WeatherOverlay_DustStormHeavy.material;
+			worldOverlayMat = WeatherOverlay_DustStormHeavy.material;
 
-			this.OverlayColor = new Color(0.57f, 0.34f, 0.10f);
+			OverlayColor = new Color(0.57f, 0.34f, 0.10f);
 
-			this.worldOverlayPanSpeed1 = 0.018f;
-			this.worldPanDir1 = new Vector2(-1f, -0.26f);
-			this.worldPanDir1.Normalize();
+			worldOverlayPanSpeed1 = 0.018f;
+			worldPanDir1 = new Vector2(-1f, -0.26f);
+			worldPanDir1.Normalize();
 
-			this.worldOverlayPanSpeed2 = 0.022f;
-			this.worldPanDir2 = new Vector2(-1f, -0.24f);
-			this.worldPanDir2.Normalize();
+			worldOverlayPanSpeed2 = 0.022f;
+			worldPanDir2 = new Vector2(-1f, -0.24f);
+			worldPanDir2.Normalize();
 		}
 	}
 
@@ -76,13 +76,13 @@ namespace TKKN_NPS
 
 		public WeatherOverlay_LavaSmoke()
 		{
-			this.worldOverlayMat = WeatherOverlay_LavaSmoke.material;
-			this.OverlayColor = new Color(0.64f, 0.35f, 0.26f);
+			worldOverlayMat = WeatherOverlay_LavaSmoke.material;
+			OverlayColor = new Color(0.64f, 0.35f, 0.26f);
 
-			this.worldOverlayPanSpeed1 = 0.0003f; 
-			this.worldOverlayPanSpeed2 = 0.0001f;
-			this.worldPanDir1 = new Vector2(1f, 1f);
-			this.worldPanDir2 = new Vector2(1f, -1f);
+			worldOverlayPanSpeed1 = 0.0003f; 
+			worldOverlayPanSpeed2 = 0.0001f;
+			worldPanDir1 = new Vector2(1f, 1f);
+			worldPanDir2 = new Vector2(1f, -1f);
 		}
 	}
 	

@@ -14,7 +14,7 @@ namespace TKKN_NPS
 	{
 		public CompProperties_GraphicRotator()
 		{
-			this.compClass = typeof(Comp_GraphicRotator);
+			compClass = typeof(Comp_GraphicRotator);
 		}
 	}
 	public class Comp_GraphicRotator : ThingComp
@@ -23,30 +23,24 @@ namespace TKKN_NPS
 		public int curAngle = 0;
 		public int turnDegree = 0;
 
-		public CompProperties_GraphicRotator Props
-		{
-			get
-			{
-				return (CompProperties_GraphicRotator)this.props;
-			}
-		}
+		public CompProperties_GraphicRotator Props => (CompProperties_GraphicRotator)props;
 
 		public override void CompTick()
 		{
-			this.ticks++;
-			if (this.ticks % this.Props.howOften != 0)
+			ticks++;
+			if (ticks % Props.howOften != 0)
 			{
-				this.turnDegree = 0;
+				turnDegree = 0;
 			}
 			else
 			{
-				this.turnDegree = this.Props.howManyDegrees;
+				turnDegree = Props.howManyDegrees;
 			}
 		}
 
 			public float getCurrentAngle()
 		{
-			Pawn pawn = this.parent as Pawn;
+			Pawn pawn = parent as Pawn;
 			if (Find.TickManager.Paused)
 			{
 				return curAngle;
@@ -100,29 +94,23 @@ namespace TKKN_NPS
 	{
         public CompProperties_Heater()
         {
-            this.compClass = typeof(Comp_Heater);
+            compClass = typeof(Comp_Heater);
         }
     }
     public class Comp_Heater : ThingComp
     {
         public int ticks = 0;
 
-        public CompProperties_Heater Props
-        {
-            get
-            {
-                return (CompProperties_Heater)this.props;
-            }
-        }
+		public CompProperties_Heater Props => (CompProperties_Heater)props;
 
-        public override void CompTick()
+		public override void CompTick()
         {
-            this.ticks++;
-            if (this.ticks % this.Props.howOften == 0)
+            ticks++;
+            if (ticks % Props.howOften == 0)
             {
-                GenTemperature.PushHeat(this.parent, this.Props.temperature);
-                MoteMaker.ThrowFireGlow(this.parent.Position, this.parent.Map, 1);
-                MoteMaker.ThrowSmoke(this.parent.Position.ToVector3(), this.parent.Map, 1);
+                GenTemperature.PushHeat(parent, Props.temperature);
+                MoteMaker.ThrowFireGlow(parent.Position, parent.Map, 1);
+                MoteMaker.ThrowSmoke(parent.Position.ToVector3(), parent.Map, 1);
 
             }
         }

@@ -13,38 +13,38 @@ namespace TKKN_NPS
 		public override void ExposeData()
 		{
 			base.ExposeData();
-			Scribe_Values.Look<float>(ref this.wetnessLevel, "wetnessLevel", 0f, false);
-			Scribe_Values.Look<int>(ref this.timeDrying, "timeDrying", 0, false);
+			Scribe_Values.Look<float>(ref wetnessLevel, "wetnessLevel", 0f, false);
+			Scribe_Values.Look<int>(ref timeDrying, "timeDrying", 0, false);
 		}
 
 		public override void Tick()
 		{
 			base.Tick();
 			
-			if (!Settings.allowPawnsToGetWet || !this.pawn.Position.IsValid || this.pawn.MapHeld == null || !this.pawn.Position.InBounds(this.pawn.MapHeld))
+			if (!Settings.allowPawnsToGetWet || !pawn.Position.IsValid || pawn.MapHeld == null || !pawn.Position.InBounds(pawn.MapHeld))
 			{
 				return; 
 			}
 
-			float wetness = this.wetnessRate();
+			float wetness = wetnessRate();
 			if (wetness > 0)
 			{
-				this.Severity += wetness / 1000;
-				this.wetnessLevel += wetness;
-				if (this.wetnessLevel < 0)
+				Severity += wetness / 1000;
+				wetnessLevel += wetness;
+				if (wetnessLevel < 0)
 				{
-					this.wetnessLevel = 0;
+					wetnessLevel = 0;
 				}
-				if (this.Severity > .62 && (this.ageTicks % 1000 == 0))
+				if (Severity > .62 && (ageTicks % 1000 == 0))
 				{
-					FilthMaker.TryMakeFilth(this.pawn.Position, this.pawn.MapHeld, ThingDef.Named("TKKN_FilthPuddle"), 1);
-					this.Severity -= .3f;
+					FilthMaker.TryMakeFilth(pawn.Position, pawn.MapHeld, ThingDef.Named("TKKN_FilthPuddle"), 1);
+					Severity -= .3f;
 				}
 
 			}
 			else
 			{
-				this.Severity += wetness / 1000;
+				Severity += wetness / 1000;
 
 			}
 		}
@@ -53,14 +53,14 @@ namespace TKKN_NPS
 		{
 			float rate = 0f;
 			//check if the pawn is in water
-			TerrainDef terrain = this.pawn.Position.GetTerrain(this.pawn.MapHeld);
+			TerrainDef terrain = pawn.Position.GetTerrain(pawn.MapHeld);
 			if (terrain != null && terrain.HasTag("TKKN_Wet")){
 				//deep water gets them soaked.
 				if (terrain.HasTag("TKKN_Swim"))
 				{
-					if (this.Severity < .65f)
+					if (Severity < .65f)
 					{
-						this.Severity = .65f;
+						Severity = .65f;
 					}
 					rate = .3f;
 					return rate;
@@ -74,14 +74,14 @@ namespace TKKN_NPS
 
 
 			//check if the pawn is wet from the weather
-			bool roofed = this.pawn.MapHeld.roofGrid.Roofed(this.pawn.Position);
-			if (!roofed && this.pawn.MapHeld.weatherManager.curWeather.rainRate > .001f)
+			bool roofed = pawn.MapHeld.roofGrid.Roofed(pawn.Position);
+			if (!roofed && pawn.MapHeld.weatherManager.curWeather.rainRate > .001f)
 			{
-				rate = this.pawn.MapHeld.weatherManager.curWeather.rainRate / 10;
+				rate = pawn.MapHeld.weatherManager.curWeather.rainRate / 10;
 			}
-			if (!roofed && this.pawn.MapHeld.weatherManager.curWeather.snowRate > .001f)
+			if (!roofed && pawn.MapHeld.weatherManager.curWeather.snowRate > .001f)
 			{
-				rate = this.pawn.MapHeld.weatherManager.curWeather.snowRate / 100;
+				rate = pawn.MapHeld.weatherManager.curWeather.snowRate / 100;
 			}
 
 			if (rate == 0f)

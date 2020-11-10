@@ -47,17 +47,10 @@ namespace TKKN_NPS.SaveData
 		private readonly int wetFlood = 90;
 		private readonly int wetWet = 60;
 		public readonly int packAt = 750;
-		private float WetCap
-		{
-			get { return (float)(wetFlood * 1.25); }
-		}
+		private float WetCap => (float)(wetFlood * 1.25);
 
 		public string overrideType = "";
-
-		public bool isCold {
-			get { return temperature< 0; }
-		}
-
+		
 		//wet overrides - these are used for cells near large bodies of water that will flood them periodically.
 		//what step of the tide this is
 		public int tideStep = -1;
@@ -74,9 +67,9 @@ namespace TKKN_NPS.SaveData
 		public CellData(Map map, TerrainDef terrain, IntVec3 c)
 		{
 			this.map = map;
-			this.location = c;
-			this.baseTerrain = terrain;
-			this.originalTerrain = terrain;
+			location = c;
+			baseTerrain = terrain;
+			originalTerrain = terrain;
 
 
 			SetWetLevel();
@@ -90,7 +83,7 @@ namespace TKKN_NPS.SaveData
 
 
 
-		public TerrainWeatherReactions weather
+		public TerrainWeatherReactions Weather
 		{
 			get
 			{
@@ -102,7 +95,7 @@ namespace TKKN_NPS.SaveData
 			}
 		}
 
-		public TerrainWeatherReactions weatherOrig
+		public TerrainWeatherReactions WeatherOrig
 		{
 			get
 			{
@@ -118,7 +111,7 @@ namespace TKKN_NPS.SaveData
 		}
 
 
-		public TerrainWeatherReactions weatherCurr
+		public TerrainWeatherReactions WeatherCurr
 		{
 			get
 			{
@@ -150,14 +143,14 @@ namespace TKKN_NPS.SaveData
 			// Make sure it hasn't been made a floor or a floor hasn't been removed.
 			if (!CurrentTerrain.HasModExtension<TerrainWeatherReactions>())
 			{
-				this.baseTerrain = CurrentTerrain;
+				baseTerrain = CurrentTerrain;
 			}
-			else if (!baseTerrain.HasModExtension<TerrainWeatherReactions>() && this.baseTerrain != CurrentTerrain)
+			else if (!baseTerrain.HasModExtension<TerrainWeatherReactions>() && baseTerrain != CurrentTerrain)
 			{
-				this.baseTerrain = CurrentTerrain;
+				baseTerrain = CurrentTerrain;
 			}
 
-			if (weather == null)
+			if (Weather == null)
 			{
 				return;
 			}
@@ -177,10 +170,10 @@ namespace TKKN_NPS.SaveData
 			}
 			else 
 			{
-				if (weather.dryTerrain != null)
+				if (Weather.dryTerrain != null)
 				{
-					SpawnWorker.DoLoot(this, CurrentTerrain, weather.dryTerrain);
-					ChangeTerrain(weather.dryTerrain);
+					SpawnWorker.DoLoot(this, CurrentTerrain, Weather.dryTerrain);
+					ChangeTerrain(Weather.dryTerrain);
 				}
 				else
 				{
@@ -196,18 +189,18 @@ namespace TKKN_NPS.SaveData
 			//update temperature levels next
 			if (IsCold)
 			{
-				if (weatherCurr != null && weatherCurr.freezeTerrain != null)
+				if (WeatherCurr != null && WeatherCurr.freezeTerrain != null)
 				{
-					ChangeTerrain(weatherCurr.freezeTerrain);
+					ChangeTerrain(WeatherCurr.freezeTerrain);
 				}
 			}
 		}
 
 		public bool SetFloodedTerrain()
 		{
-			if (weather.floodTerrain != null)
+			if (Weather.floodTerrain != null)
 			{
-				ChangeTerrain(weather.floodTerrain);
+				ChangeTerrain(Weather.floodTerrain);
 				return true;
 			}
 			return false;
@@ -215,10 +208,10 @@ namespace TKKN_NPS.SaveData
 
 		public bool SetWetTerrain()
 		{
-			if (weather.wetTerrain != null)
+			if (Weather.wetTerrain != null)
 			{
-				SpawnWorker.DoLoot(this, CurrentTerrain, weather.wetTerrain);
-				ChangeTerrain(weather.wetTerrain);
+				SpawnWorker.DoLoot(this, CurrentTerrain, Weather.wetTerrain);
+				ChangeTerrain(Weather.wetTerrain);
 				return true;
 			}
 			return false;
@@ -254,20 +247,12 @@ namespace TKKN_NPS.SaveData
 			HowWet = level;
 		}
 
-		public bool IsWet {
-			get { return weather != null ? HowWet > wetWet : false; }
-		}
+		public bool IsWet => Weather != null ? HowWet > wetWet : false;
 
-		public bool IsFlooded
-		{
-			get { return HowWet >= wetFlood; }
-		}
+		public bool IsFlooded => HowWet >= wetFlood;
 
 
-		public bool IsCold
-		{
-			get { return temperature < 0 && Settings.affectsCold; }
-		}
+		public bool IsCold => temperature < 0 && Settings.affectsCold;
 
 
 		public void DoCellSteadyEffects()
@@ -288,7 +273,7 @@ namespace TKKN_NPS.SaveData
 		{
 			if (!Settings.doDirtPath)
 			{
-				if (weather != null && CurrentTerrain == weather.packTo)
+				if (Weather != null && CurrentTerrain == Weather.packTo)
 				{
 					ChangeTerrain(originalTerrain);
 				}
@@ -303,7 +288,7 @@ namespace TKKN_NPS.SaveData
 			{
 				howPacked--;
 			}
-			else if (howPacked <= (packAt/2) && weather != null && CurrentTerrain != weather.packTo)
+			else if (howPacked <= (packAt/2) && Weather != null && CurrentTerrain != Weather.packTo)
 			{
 				ChangeTerrain(originalTerrain);
 			}
@@ -312,43 +297,42 @@ namespace TKKN_NPS.SaveData
 
 		public void DoPack()
 		{
-			if (!Settings.doDirtPath || weather == null)
+			if (!Settings.doDirtPath || Weather == null)
 			{
 				return;
 			}
 			//don't pack if there's a growing zone.
-			Zone_Growing zone = this.map.zoneManager.ZoneAt(this.location) as Zone_Growing;
-			if (zone != null)
+			if (map.zoneManager.ZoneAt(location) is Zone_Growing zone)
 			{
 				return;
 			}
 
-			TerrainDef packTo = weather.packTo;
+			TerrainDef packTo = Weather.packTo;
 			if (packTo == null)
 			{
 				return;
 			}
 
-			this.howPacked++;
-			if (this.howPacked > this.packAt && packTo != null)
+			howPacked++;
+			if (howPacked > packAt && packTo != null)
 			{
-				this.ChangeTerrain(packTo);
-				this.baseTerrain = packTo;
-				this.howPacked = (int) Math.Round((float)(howPacked - (howPacked / 5))); //so if the path is removed immediately, it isn't also immediately repacked.
+				ChangeTerrain(packTo);
+				baseTerrain = packTo;
+				howPacked = (int) Math.Round((float)(howPacked - (howPacked / 5))); //so if the path is removed immediately, it isn't also immediately repacked.
 			}
 
 			bool isStone = baseTerrain.affordances.Contains(TerrainAffordanceDefOf.SmoothableStone);
 			if (isStone)
 			{
-				this.howPacked++;
-				if (this.howPacked > this.packAt * 10)
+				howPacked++;
+				if (howPacked > packAt * 10)
 				{
 					string thisName = baseTerrain.defName;
 					thisName.Replace("_Rough", "_Smooth");
 					thisName.Replace("_SmoothHewn", "_Smooth");
 					TerrainDef packed = TerrainDef.Named(thisName);
-					this.ChangeTerrain(packed);
-					this.baseTerrain = packed;
+					ChangeTerrain(packed);
+					baseTerrain = packed;
 				}
 			}
 
@@ -359,7 +343,7 @@ namespace TKKN_NPS.SaveData
 		{
 			if (terrain != null && terrain != CurrentTerrain)
 			{
-				this.map.terrainGrid.SetTerrain(location, terrain);
+				map.terrainGrid.SetTerrain(location, terrain);
 			}
 		}
 
@@ -373,14 +357,14 @@ namespace TKKN_NPS.SaveData
 			{
 				defName = "TKKN_LavaRock";
 			}
-			else if (CurrentTerrain.defName == "TKKN_LavaRock_RoughHewn" && this.map.Biome.defName == "TKKN_VolcanicFlow")
+			else if (CurrentTerrain.defName == "TKKN_LavaRock_RoughHewn" && map.Biome.defName == "TKKN_VolcanicFlow")
 			{
 				defName = "TKKN_SteamVent";
 			}
 
 			if (defName != "")
 			{
-				Thing check = (Thing)(from t in location.GetThingList(this.map)
+				Thing check = (Thing)(from t in location.GetThingList(map)
 									  where t.def.defName == defName
 									  select t).FirstOrDefault<Thing>();
 				if (check == null)
@@ -396,36 +380,36 @@ namespace TKKN_NPS.SaveData
 		public void ExposeData()
 		{
 			
-			Scribe_Values.Look<int>(ref this.tideStep, "tideStep", this.tideStep, true);
-			Scribe_Collections.Look<int>(ref this.floodLevel, "floodLevel", LookMode.Value);
-			Scribe_Values.Look<int>(ref this.howPacked, "howPacked", this.howPacked, true);
-			Scribe_Values.Look<float>(ref this.howWet, "howWet", this.howWet, true);
-			Scribe_Values.Look<float>(ref this.frostLevel, "frostLevel", this.frostLevel, true);
-			Scribe_Values.Look<string>(ref this.overrideType, "overrideType", this.overrideType, true);
+			Scribe_Values.Look<int>(ref tideStep, "tideStep", tideStep, true);
+			Scribe_Collections.Look<int>(ref floodLevel, "floodLevel", LookMode.Value);
+			Scribe_Values.Look<int>(ref howPacked, "howPacked", howPacked, true);
+			Scribe_Values.Look<float>(ref howWet, "howWet", howWet, true);
+			Scribe_Values.Look<float>(ref frostLevel, "frostLevel", frostLevel, true);
+			Scribe_Values.Look<string>(ref overrideType, "overrideType", overrideType, true);
 			Scribe_Values.Look<IntVec3>(ref location, "location", location, true);
-			Scribe_Values.Look<float>(ref this.temperature, "temperature", 0, true);
-			Scribe_Defs.Look<TerrainDef>(ref this.baseTerrain, "baseTerrain");
-			Scribe_Defs.Look<TerrainDef>(ref this.originalTerrain, "originalTerrain");
+			Scribe_Values.Look<float>(ref temperature, "temperature", 0, true);
+			Scribe_Defs.Look<TerrainDef>(ref baseTerrain, "baseTerrain");
+			Scribe_Defs.Look<TerrainDef>(ref originalTerrain, "originalTerrain");
 
-			Scribe_Values.Look<float>(ref this.SaveUpdatedTo, "SaveUpdatedTo");
+			Scribe_Values.Look<float>(ref SaveUpdatedTo, "SaveUpdatedTo");
 
 			//convert data from old saves
 			if (Scribe.mode == LoadSaveMode.LoadingVars && SaveUpdatedTo != 1.2f)
 			{
-				Scribe_Values.Look<float>(ref this.howWet, "howWetPlants", this.howWet);
-				Scribe_Values.Look<int>(ref this.tideStep, "tideLevel", this.tideStep);
+				Scribe_Values.Look<float>(ref howWet, "howWetPlants", howWet);
+				Scribe_Values.Look<int>(ref tideStep, "tideLevel", tideStep);
 				
 			}
 		}
 
-		public void doFrostOverlay(string action)
+		public void DoFrostOverlay(string action)
 		{
-			if (!location.InBounds(this.map))
+			if (!location.InBounds(map))
 			{
 				return;
 			}
 			//KEEPING TO REMOVE OLD WAY OF DOING FROST
-			Thing overlayIce = (Thing)(from t in location.GetThingList(this.map)
+			Thing overlayIce = (Thing)(from t in location.GetThingList(map)
 									   where t.def.defName == "TKKN_IceOverlay"
 									   select t).FirstOrDefault<Thing>();
 			if (overlayIce != null)

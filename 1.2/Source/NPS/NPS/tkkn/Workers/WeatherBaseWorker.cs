@@ -62,7 +62,7 @@ namespace TKKN_NPS.Workers
 			else
 			{
 				// amplify humidity from interior water sources
-				if (!cell.isCold)
+				if (!cell.IsCold)
 				{
 					currentHumidity = currentHumidity * 1.5f;
 				}
@@ -149,7 +149,7 @@ namespace TKKN_NPS.Workers
 
 			//evaporate wetness
 			adjustWetness -= 2.5f;
-			if (!cell.isCold)
+			if (!cell.IsCold)
 			{
 				//if it's not cold/dry, make things dry faster
 				adjustWetness -= (int)Math.Floor((cell.temperature / (cell.humidity + 1) ));

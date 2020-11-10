@@ -28,7 +28,7 @@ namespace TKKN_NPS
 				{
 					return false;
 				}
-				return this.TryFindAnimalKind(map.Tile, out pawnKindDef) && this.TryFindStartAndEndCells(map, out intVec, out intVec2);
+				return TryFindAnimalKind(map.Tile, out pawnKindDef) && TryFindStartAndEndCells(map, out intVec, out intVec2);
 			}
 			return false;
 		}
@@ -47,18 +47,18 @@ namespace TKKN_NPS
 
 			Map map = (Map)parms.target;
 			PawnKindDef pawnKindDef;
-			if (!this.TryFindAnimalKind(map.Tile, out pawnKindDef))
+			if (!TryFindAnimalKind(map.Tile, out pawnKindDef))
 			{
 				return false;
 			}
 			IntVec3 intVec;
 			IntVec3 near;
-			if (!this.TryFindStartAndEndCells(map, out intVec, out near))
+			if (!TryFindStartAndEndCells(map, out intVec, out near))
 			{
 				return false;
 			}
 			Rot4 rot = Rot4.FromAngleFlat((map.Center - intVec).AngleFlat);
-			List<Pawn> list = this.GenerateAnimals(pawnKindDef, map.Tile);
+			List<Pawn> list = GenerateAnimals(pawnKindDef, map.Tile);
 			for (int i = 0; i < list.Count; i++)
 			{
 				Pawn newThing = list[i];
@@ -66,9 +66,9 @@ namespace TKKN_NPS
 				GenSpawn.Spawn(newThing, loc, map, rot, WipeMode.Vanish, false);
 			}
 			LordMaker.MakeNewLord(null, new LordJob_ExitMapNear(near, LocomotionUrgency.Jog, 0f, false, false), map, list);
-			string text = string.Format(this.def.letterText, pawnKindDef.GetLabelPlural(-1)).CapitalizeFirst();
-			string label = string.Format(this.def.letterLabel, pawnKindDef.GetLabelPlural(-1).CapitalizeFirst());
-			Find.LetterStack.ReceiveLetter(label, text, this.def.letterDef, list[0], null);
+			string text = string.Format(def.letterText, pawnKindDef.GetLabelPlural(-1)).CapitalizeFirst();
+			string label = string.Format(def.letterLabel, pawnKindDef.GetLabelPlural(-1).CapitalizeFirst());
+			Find.LetterStack.ReceiveLetter(label, text, def.letterDef, list[0], null);
 			return true;
 		}
 		private bool TryFindStartAndEndCells(Map map, out IntVec3 start, out IntVec3 end)
@@ -137,7 +137,7 @@ namespace TKKN_NPS
 			int randomInRange = devils.RandomInRange;
 			for (int i = 0; i < randomInRange; i++) {
 				IntVec3 loc;
-				if (!CellFinder.TryFindRandomCellInsideWith(cellRect, (IntVec3 x) => this.CanSpawnDustDevilAt(x, map), out loc))
+				if (!CellFinder.TryFindRandomCellInsideWith(cellRect, (IntVec3 x) => CanSpawnDustDevilAt(x, map), out loc))
 				{
 					return false;
 				}
@@ -160,7 +160,7 @@ namespace TKKN_NPS
 				IntVec3 c2 = c + GenRadial.RadialPattern[i];
 				if (c2.InBounds(map))
 				{
-					if (this.AnyPawnOfPlayerFactionAt(c2, map))
+					if (AnyPawnOfPlayerFactionAt(c2, map))
 					{
 						return false;
 					}
@@ -251,7 +251,7 @@ namespace TKKN_NPS
 
 			
 
-			Find.LetterStack.ReceiveLetter(this.def.letterLabel.Translate(), this.def.letterText.Translate(), this.def.letterDef);
+			Find.LetterStack.ReceiveLetter(def.letterLabel.Translate(), def.letterText.Translate(), def.letterDef);
 
 
 			return true;
@@ -282,7 +282,7 @@ namespace TKKN_NPS
 				return false;
 			}
 
-			Find.LetterStack.ReceiveLetter(this.def.letterLabel.Translate(), this.def.letterText.Translate(), this.def.letterDef);
+			Find.LetterStack.ReceiveLetter(def.letterLabel.Translate(), def.letterText.Translate(), def.letterDef);
 
 
 			return true;

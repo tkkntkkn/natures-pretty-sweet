@@ -24,7 +24,7 @@ namespace TKKN_NPS
 				return null;
 			}
 
-			IntVec3 c = this.getDryCell(pawn);
+			IntVec3 c = getDryCell(pawn);
 
 			Job job = new Job(JobDefOf.TKKN_DryOff, c);
 			pawn.Map.pawnDestinationReservationManager.Reserve(pawn, job, c);
@@ -84,12 +84,12 @@ namespace TKKN_NPS
 			{
 				return new Job(RimWorld.JobDefOf.Wait_Wander)
 				{
-					expiryInterval = this.ticksBetweenWandersRange.RandomInRange
+					expiryInterval = ticksBetweenWandersRange.RandomInRange
 				};
 			}
 
 
-			IntVec3 c = this.getSwimmingCell(pawn);
+			IntVec3 c = getSwimmingCell(pawn);
 			if (!c.IsValid)
 			{
 				pawn.mindState.nextMoveOrderIsWait = false;
@@ -98,14 +98,14 @@ namespace TKKN_NPS
 
 			Job job = new Job(JobDefOf.TKKN_GoSwimming, c);
 			pawn.Map.pawnDestinationReservationManager.Reserve(pawn, job, c);
-			job.locomotionUrgency = this.locomotionUrgency;
+			job.locomotionUrgency = locomotionUrgency;
 			return job;
 		}
 
 		private IntVec3 getSwimmingCell(Pawn pawn)
 		{
-			IntVec3 wanderRoot = this.GetWanderRoot(pawn);
-			IntVec3 c = RCellFinder.RandomWanderDestFor(pawn, wanderRoot, this.wanderRadius, this.wanderDestValidator, PawnUtility.ResolveMaxDanger(pawn, this.maxDanger));
+			IntVec3 wanderRoot = GetWanderRoot(pawn);
+			IntVec3 c = RCellFinder.RandomWanderDestFor(pawn, wanderRoot, wanderRadius, wanderDestValidator, PawnUtility.ResolveMaxDanger(pawn, maxDanger));
 			for (int i = 0; i < 20; i++)
 			{
 				IntVec3 c2 = c + GenAdj.AdjacentCellsAndInside[i];
@@ -189,12 +189,12 @@ namespace TKKN_NPS
 				Thing spring = GenClosest.ClosestThingReachable(pawn.GetLord().CurLordToil.FlagLoc, pawn.Map, ThingRequest.ForDef(TKKN_NPS.ThingDefOf.TKKN_ColdSpring), PathEndMode.Touch, TraverseParms.For(pawn, Danger.Deadly, TraverseMode.ByPawn, false), -1f, validator, null, 0, -1, false, RegionType.Set_Passable, false);
 				if (spring != null)
 				{
-					return new Job(RimWorld.JobDefOf.GotoSafeTemperature, this.getSpringCell(spring));
+					return new Job(RimWorld.JobDefOf.GotoSafeTemperature, getSpringCell(spring));
 				}
 			}
 			else
 			{
-				return new Job(RimWorld.JobDefOf.GotoSafeTemperature, this.getSpringCell(hotSpring));
+				return new Job(RimWorld.JobDefOf.GotoSafeTemperature, getSpringCell(hotSpring));
 			}
 			return null;
 		}
