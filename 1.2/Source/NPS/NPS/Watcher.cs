@@ -138,9 +138,6 @@ namespace TKKN_NPS
 
 			if (Scribe.mode == LoadSaveMode.LoadingVars)
 			{
-				//found an issue where plants were spawning all wrong in 1.2, this is a fix for saves with that bug
-				SpawnWorker.FixSpecialSpawns(this.map);
-
 				IEnumerable<CellData> updateList = cellWeatherAffects.Select(key => key.Value).Where(cell => cell.map == null);
 				foreach (CellData cell in updateList.ToList())
 				{
@@ -175,6 +172,10 @@ namespace TKKN_NPS
 			{
 				Log.Message("TKKN NPS: Loaded patches for: " + string.Join(", ", TKKN_Holder.modsPatched.ToArray()));
 			}
+
+			//found an issue where plants were spawning all wrong in 1.2, this is a fix for saves with that bug, may keep for cleanup if it doesn't cause issues.
+			SpawnWorker.FixSpecialSpawns(this.map);
+
 		}
 
 

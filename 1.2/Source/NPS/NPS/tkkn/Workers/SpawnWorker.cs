@@ -393,15 +393,13 @@ namespace TKKN_NPS.Workers
 			}
 		}
 
-
 		public static void FixSpecialSpawns(Map map)
 		{
-			foreach (Thing thing in map.listerThings.AllThings.ToList())
+			List<Thing> things = map.spawnedThings.ToList<Thing>();
+			foreach (Thing thing in things)
 			{
 				if (thing.def.HasModExtension<ThingWeatherReaction>())
 				{
-					Log.Error(thing.def.defName);
-
 					ThingWeatherReaction thingWeather = thing.def.GetModExtension<ThingWeatherReaction>();
 					TerrainDef terrain = map.terrainGrid.TerrainAt(thing.Position);
 					if (!CanSpawn(thingWeather, map, terrain))

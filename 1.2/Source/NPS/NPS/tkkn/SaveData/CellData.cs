@@ -407,11 +407,14 @@ namespace TKKN_NPS.SaveData
 			Scribe_Defs.Look<TerrainDef>(ref this.baseTerrain, "baseTerrain");
 			Scribe_Defs.Look<TerrainDef>(ref this.originalTerrain, "originalTerrain");
 
+			Scribe_Values.Look<float>(ref this.SaveUpdatedTo, "SaveUpdatedTo");
 
 			//convert data from old saves
 			if (Scribe.mode == LoadSaveMode.LoadingVars && SaveUpdatedTo != 1.2f)
 			{
-				Scribe_Values.Look<float>(ref this.howWet, "howWetPlants");
+				Scribe_Values.Look<float>(ref this.howWet, "howWetPlants", this.howWet);
+				Scribe_Values.Look<int>(ref this.tideStep, "tideLevel", this.tideStep);
+				
 			}
 		}
 
